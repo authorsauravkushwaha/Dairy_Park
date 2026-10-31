@@ -121,6 +121,7 @@
       phone: '<path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
       arrow: '<path d="M5 12h13m-5.5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
       camera: '<path d="M4 8.5h3l1.5-2h7l1.5 2h3v10H4v-10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+      check: '<path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>',
       star: '<path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z" fill="currentColor"/>',
       pin: '<path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/>',
       info: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
@@ -175,11 +176,16 @@
   }
 
   function renderFacilities() {
+    var facilities = (C.business && C.business.facilities) || [];
     els('#facilityList').forEach(function (list) {
       list.textContent = '';
-      ((C.business && C.business.facilities) || []).forEach(function (facility) {
+      facilities.forEach(function (facility) {
         list.appendChild(el('li', { text: tx(facility) }));
       });
+    });
+    els('[data-bind="facilityCount"]').forEach(function (node) {
+      node.dataset.count = String(facilities.length);
+      node.textContent = num(facilities.length);
     });
   }
 
@@ -302,9 +308,24 @@
       decoding: 'async'
     });
     media.appendChild(img);
+    media.appendChild(el('span', { class: 'dish__veil' }));
 
+    // Steam wisps over the plate — purely decorative
+    var steam = el('span', { class: 'dish__steam' });
+    steam.setAttribute('aria-hidden', 'true');
+    steam.appendChild(el('i'));
+    steam.appendChild(el('i'));
+    steam.appendChild(el('i'));
+    media.appendChild(steam);
+
+    if (item.tag) {
+      media.appendChild(el('span', { class: 'dish__tag', text: tx(item.tag) }));
+    }
     if (item.highlight) {
       media.appendChild(el('span', { class: 'dish__badge', text: t('menu.highlight') }));
+    }
+    if (hasPrice) {
+      media.appendChild(el('span', { class: 'dish__price', text: localizeDigits(item.price) }));
     }
     var note = el('span', { class: 'dish__note' });
     note.appendChild(icon('camera'));
@@ -326,13 +347,32 @@
     var description = tx(item.desc);
     if (description) bodyEl.appendChild(el('p', { class: 'dish__desc', text: description }));
 
+    // Optional ticked fact list — stays empty until the owner fills it in
+    if (Array.isArray(item.badges) && item.badges.length) {
+      var facts = el('ul', { class: 'dish__facts' });
+      item.badges.forEach(function (badge) {
+        facts.appendChild(el('li', { class: 'dish__fact' }, [icon('check'), el('span', { text: tx(badge) })]));
+      });
+      bodyEl.appendChild(facts);
+    }
+
     var meta = el('div', { class: 'dish__meta' });
     meta.appendChild(el('span', {
-      class: 'pill' + (hasPrice ? '' : ' pill--muted'),
+      class: 'pill' + (hasPrice ? '' : ' pill--ask'),
       text: dishPriceText(item)
     }));
-    if (item.veg === true) meta.appendChild(el('span', { class: 'pill pill--veg', text: t('menu.veg') }));
-    if (item.veg === false) meta.appendChild(el('span', { class: 'pill pill--nonveg', text: t('menu.nonveg') }));
+    if (item.veg === true) {
+      var vegPill = el('span', { class: 'pill pill--veg' });
+      vegPill.appendChild(el('span', { class: 'dot dot--veg' }));
+      vegPill.appendChild(el('span', { text: t('menu.veg') }));
+      meta.appendChild(vegPill);
+    }
+    if (item.veg === false) {
+      var nonVegPill = el('span', { class: 'pill pill--nonveg' });
+      nonVegPill.appendChild(el('span', { class: 'dot dot--nonveg' }));
+      nonVegPill.appendChild(el('span', { text: t('menu.nonveg') }));
+      meta.appendChild(nonVegPill);
+    }
     meta.appendChild(el('span', {
       class: 'pill ' + (available ? 'pill--ok' : ''),
       text: available ? t('menu.available') : t('menu.unavailable')
@@ -468,6 +508,129 @@
     dishDialog.addEventListener('click', function (event) {
       if (event.target === dishDialog) closeDishDialog();
     });
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* Home page extras: hero dish peeks, "order both" strip, count-up numbers      */
+  /* --------------------------------------------------------------------------- */
+  var heroPicks = [];
+
+  function renderHeroPicks() {
+    var host = $('#heroPicks');
+    if (!host) return;
+
+    if (!heroPicks.length) {
+      ((C.menu) || []).filter(function (item) { return item && item.photo; }).slice(0, 3)
+        .forEach(function (item) {
+          var pick = el('span', { class: 'hero__pick' });
+          var img = el('img', {
+            src: BASE + 'assets/img/placeholder-dish.svg',
+            alt: tx(item.name),
+            width: '120',
+            height: '120',
+            loading: 'lazy',
+            decoding: 'async'
+          });
+          var name = el('span', { class: 'hero__pick-name', text: tx(item.name) });
+          pick.appendChild(img);
+          pick.appendChild(name);
+          host.appendChild(pick);
+          heroPicks.push({ item: item, img: img, name: name, pick: pick });
+
+          findPhoto(item.photo).then(function (url) {
+            if (!url) { pick.hidden = true; return; }
+            img.src = url;
+            pick.classList.add('is-real');
+            host.hidden = false;
+          });
+        });
+    }
+
+    heroPicks.forEach(function (entry) {
+      var text = tx(entry.item.name);
+      entry.name.textContent = text;
+      entry.img.alt = text;
+    });
+  }
+
+  function renderPairing() {
+    var strip = $('#pairing');
+    if (!strip) return;
+    var data = C.pairing || {};
+
+    strip.hidden = data.show === false;
+    setText('[data-bind="pairingEyebrow"]', tx(data.eyebrow));
+    setText('[data-bind="pairingTitle"]', tx(data.title));
+    setText('[data-bind="pairingDesc"]', tx(data.desc));
+    setText('[data-bind="pairingCta"]', tx(data.cta));
+
+    // The two plates follow the menu photos
+    $$('[data-pairing-photo]').forEach(function (img) {
+      var item = ((C.menu) || []).filter(function (entry) {
+        return entry && entry.id === img.dataset.pairingPhoto;
+      })[0];
+      var plate = closest(img, '.pairing__plate');
+      if (!item) { if (plate) plate.remove(); return; }
+      findPhoto(item.photo).then(function (url) {
+        if (url) img.src = url;
+        else if (plate) plate.remove();
+      });
+    });
+  }
+
+  /* Numbers in the trust band count up the first time they scroll into view.
+     Switching language re-writes them in Bengali numerals instead. */
+  var counterTokens = new WeakMap();
+
+  function writeCounter(node, value) {
+    var decimals = Number(node.dataset.decimals || 0);
+    node.textContent = localizeDigits(Number(value).toFixed(decimals));
+  }
+
+  function countUp(node) {
+    var target = Number(node.dataset.count);
+    if (!isFinite(target)) return;
+
+    // Bumping the token cancels any animation already running for this node
+    var token = (counterTokens.get(node) || 0) + 1;
+    counterTokens.set(node, token);
+
+    if (reducedMotion || !window.requestAnimationFrame) { writeCounter(node, target); return; }
+
+    var duration = 1100;
+    var step = function (now, from) {
+      if (counterTokens.get(node) !== token) return;
+      var progress = Math.min(1, (now - from) / duration);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      writeCounter(node, target * eased);
+      if (progress < 1) window.requestAnimationFrame(function (t) { step(t, from); });
+    };
+    window.requestAnimationFrame(function (now) { step(now, now); });
+  }
+
+  function syncCounters() {
+    $$('[data-count]').forEach(function (node) {
+      counterTokens.set(node, (counterTokens.get(node) || 0) + 1);
+      writeCounter(node, node.dataset.count);
+    });
+  }
+
+  function initCounters() {
+    var nodes = $$('[data-count]');
+    if (!nodes.length) return;
+    if (!('IntersectionObserver' in window)) {
+      nodes.forEach(function (node) { writeCounter(node, node.dataset.count); });
+      return;
+    }
+    var seen = new WeakSet();
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || seen.has(entry.target)) return;
+        seen.add(entry.target);
+        countUp(entry.target);
+      });
+    }, { threshold: 0.4 });
+    nodes.forEach(function (node) { observer.observe(node); });
   }
 
   /* --------------------------------------------------------------------------- */
@@ -902,6 +1065,12 @@
 
     setText('[data-bind="rating"]', ratingText);
     setText('[data-bind="reviewCount"]', countText);
+    els('[data-bind="rating"][data-count]').forEach(function (node) {
+      node.dataset.count = isFinite(rating) ? String(rating) : node.dataset.count;
+    });
+    els('[data-bind="reviewCount"][data-count]').forEach(function (node) {
+      node.dataset.count = String(count);
+    });
 
     els('.rating-ring').forEach(function (ring) {
       var rating = Number(reviews.rating);
@@ -1040,10 +1209,13 @@
     renderFooterNote();
     renderReviews();
     renderHomeMenu();
+    renderHeroPicks();
+    renderPairing();
     renderGalleryPreview();
     renderGalleryPage();
     renderOffersPage();
     initFoodPage();
+    syncCounters();
 
     var heroImg = $('#heroPhoto');
     if (heroImg) heroImg.alt = heroAlt();
@@ -1431,6 +1603,7 @@
     initReveals();
     initTilt();
     initScroll();
+    initCounters();
 
     revealInView();
     window.addEventListener('load', revealInView);
