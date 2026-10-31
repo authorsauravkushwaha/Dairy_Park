@@ -86,7 +86,8 @@ expect(document.querySelector('#offers').hidden === true, 'offers section stays 
 expect(document.querySelector('#shop').hidden === true, 'shop gallery stays hidden without photos');
 expect(document.querySelectorAll('[data-tilt]').length >= 2, '3D tilt cards are initialised');
 expect(document.querySelectorAll('.reveal.is-in').length > 0, 'scroll reveals activate');
-expect(document.querySelector('#heroPhoto').getAttribute('src').includes('placeholder-hero'), 'hero falls back to the designed placeholder');
+expect(document.querySelector('#ownerPortrait').hidden, 'owner portrait stays hidden until a real photo is uploaded');
+expect(document.querySelector('.hero__bg img').getAttribute('src').includes('placeholder-hero'), 'decorative hero background uses the designed placeholder');
 expect([...document.querySelectorAll('[data-offers-link]')].every((node) => node.hidden), 'offers nav links stay hidden');
 
 const hoursText = document.querySelector('[data-bind="hours"]').textContent;
@@ -137,6 +138,40 @@ expect(toggle.getAttribute('aria-expanded') === 'false', 'Escape closes the draw
 /* --- Analytics stays private --------------------------------------------- */
 expect(document.querySelector('#consent').hidden === true, 'no consent banner while analytics is disabled');
 expect(typeof window.dataLayer !== 'undefined', 'analytics event layer is ready');
+
+/* --- Uploaded owner photo ------------------------------------------------- */
+const photoDom = new JSDOM(html, {
+  url: 'https://authorsauravkushwaha.github.io/Dairy_Park/',
+  runScripts: 'outside-only',
+  pretendToBeVisual: true
+});
+const photoWindow = photoDom.window;
+photoWindow.matchMedia = window.matchMedia;
+photoWindow.IntersectionObserver = window.IntersectionObserver;
+photoWindow.requestAnimationFrame = window.requestAnimationFrame.bind(photoWindow);
+photoWindow.cancelAnimationFrame = window.cancelAnimationFrame.bind(photoWindow);
+photoWindow.Element.prototype.scrollIntoView = function () {};
+photoWindow.scrollTo = () => {};
+photoWindow.Image = class {
+  constructor() { this.onload = null; this.onerror = null; this.naturalWidth = 900; }
+  set src(value) {
+    photoWindow.setTimeout(() => {
+      if (value.includes('/owner.webp')) this.onload?.();
+      else this.onerror?.();
+    }, 0);
+  }
+};
+for (const file of ['content.js', 'assets/js/i18n.js', 'assets/js/app.min.js']) {
+  photoWindow.eval(await readFile(path.join(dist, file), 'utf8'));
+}
+await new Promise((resolve) => photoWindow.setTimeout(resolve, 120));
+const portrait = photoWindow.document.querySelector('#ownerPortrait');
+expect(portrait.hidden === false, 'uploaded owner portrait becomes visible');
+expect(photoWindow.document.querySelector('#heroPhoto').getAttribute('src').endsWith('/owner.webp'), 'portrait uses the uploaded owner photo');
+expect(photoWindow.document.querySelector('.hero').classList.contains('has-owner-photo'), 'decorative stage gives way to the owner photo');
+photoWindow.document.querySelector('[data-lang="bn"]').click();
+expect(portrait.querySelector('figcaption').textContent === 'ডেয়ারি পার্কের মালিককে চিনুন', 'owner caption translates to Bengali');
+photoWindow.close();
 
 /* --- Report --------------------------------------------------------------- */
 for (const message of pass) console.log(`  ✓ ${message}`);

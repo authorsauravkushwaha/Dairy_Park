@@ -145,7 +145,7 @@
   /* ---------------------------------------------------------------------------
      Content rendering
      --------------------------------------------------------------------------- */
-  var heroHasPhoto = false;
+
 
   function renderAddress() {
     var lines = (C.business && C.business.addressLines) || {};
@@ -401,27 +401,24 @@
     return promise;
   }
 
-  function heroAlt() {
-    return heroHasPhoto ? t('hero.photoAlt') : t('hero.photoSoon');
-  }
-
   function initPhotos() {
     var photos = C.photos || {};
     var hero = $('.hero');
     var heroImg = $('#heroPhoto');
+    var portrait = $('#ownerPortrait');
 
-    if (heroImg) {
+    if (heroImg && portrait) {
       findPhoto(photos.owner).then(function (url) {
-        heroHasPhoto = !!url;
         if (url) {
           heroImg.src = url;
-          heroImg.classList.add('is-real');
-          if (hero) hero.classList.remove('is-nophoto');
+          heroImg.alt = t('hero.photoAlt');
+          portrait.hidden = false;
+          if (hero) hero.classList.add('has-owner-photo');
         } else {
-          heroImg.src = 'assets/img/placeholder-hero.svg';
-          if (hero) hero.classList.add('is-nophoto');
+          portrait.hidden = true;
+          heroImg.removeAttribute('src');
+          if (hero) hero.classList.remove('has-owner-photo');
         }
-        heroImg.alt = heroAlt();
       });
     }
 
@@ -502,7 +499,7 @@
     renderPromos();
 
     var heroImg = $('#heroPhoto');
-    if (heroImg) heroImg.alt = heroAlt();
+    if (heroImg) heroImg.alt = t('hero.photoAlt');
     $$('[data-shop-photo]').forEach(function (img) {
       if (img.getAttribute('src') && img.getAttribute('src').indexOf('placeholder') === -1) img.alt = t('shop.alt');
     });

@@ -163,7 +163,7 @@ window.DP_CONTENT = {
      Until a photo is uploaded, a designed placeholder is shown instead.
      --------------------------------------------------------------------- */
   photos: {
-    owner: "assets/img/photos/owner", // owner photo — hero background
+    owner: "assets/img/photos/owner", // owner photo — prominent hero portrait
     shop: "assets/img/photos/shop", // shop / storefront photo
     shopAlt: "assets/img/photos/shop-2" // optional second shop photo
   },

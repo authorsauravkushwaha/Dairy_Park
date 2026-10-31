@@ -13,7 +13,7 @@ itself automatically (about a minute).
 
 | File name | Where it shows |
 | --- | --- |
-| `owner.jpg` (or `.webp` / `.png`) | Full-screen background of the homepage |
+| `owner.jpg` (or `.webp` / `.png`) | Large, unobstructed portrait beside the homepage introduction (above it on phones) |
 | `shop.jpg` | “Inside Dairy Park” gallery |
 | `shop-2.jpg` | Second gallery photo (optional) |
 | `dahi-vada.jpg` | Dahi Vada menu card |
@@ -23,8 +23,9 @@ The site detects the file automatically — `.jpg`, `.jpeg`, `.png`, `.webp` and
 `.avif` all work. Until a photo exists, a designed placeholder is shown, so
 nothing ever breaks.
 
-**Tip:** crop the owner photo landscape (or at least 1600 px wide) and keep each
-file under ~400 kB so phones load it quickly.
+**Tip:** use a clear, well-lit portrait of the actual owner, with their face near
+the upper centre and some room around it for cropping on phones. Aim for at least
+900 px wide and keep each file under ~400 kB so phones load it quickly.
 
 ---
 
@@ -135,7 +136,7 @@ Run `npm test` locally if you want to see the same checks before publishing.
 
 ## Before you go live — owner checklist
 
-- [ ] Upload `owner.jpg` (homepage background) and `shop.jpg`.
+- [ ] Upload `owner.jpg` (prominent homepage portrait) and `shop.jpg`.
 - [ ] Confirm the Google rating is still 4.0 from 204 reviews (or update it).
 - [ ] Confirm the full opening hours and set `hours.verified = true` only then.
 - [ ] Confirm the phone number is still +91 99324 52124.
