@@ -6,7 +6,7 @@ no code changes needed. File names must match exactly (the extension can be
 
 | File name        | Where it appears                        |
 | ---------------- | --------------------------------------- |
-| `owner.*`        | Full-screen background of the homepage  |
+| `owner.*`        | Large owner portrait in the homepage hero (also a soft blurred backdrop) |
 | `shop.*`         | "Inside Dairy Park" photo gallery       |
 | `shop-2.*`       | Optional second gallery photo            |
 | `counter-snacks.jpeg` | Snack display photo                   |

@@ -44,6 +44,8 @@ window.DP_I18N = {
     "hero.chipDrive": "Drive-through",
     "hero.photoAlt": "The owner of Dairy Park at the restaurant in Kolaghat",
     "hero.photoSoon": "Owner photo will appear here once it is uploaded",
+    "hero.ownerKicker": "Meet the owner",
+    "hero.ownerRole": "Owner, Dairy Park",
     "hero.scroll": "Scroll to explore",
     "hero.budgetLabel": "Typical spend",
 
@@ -187,6 +189,8 @@ window.DP_I18N = {
     "hero.chipDrive": "ড্রাইভ-থ্রু",
     "hero.photoAlt": "কোলাঘাটের রেস্তোরাঁয় ডেয়ারি পার্কের মালিক",
     "hero.photoSoon": "ছবি আপলোড করা হলে মালিকের ছবি এখানে দেখা যাবে",
+    "hero.ownerKicker": "মালিকের সাথে পরিচিত হন",
+    "hero.ownerRole": "মালিক, ডেয়ারি পার্ক",
     "hero.scroll": "নিচে স্ক্রল করুন",
     "hero.budgetLabel": "সাধারণ খরচ",
 

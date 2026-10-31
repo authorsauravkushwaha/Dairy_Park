@@ -413,6 +413,7 @@
     var photos = C.photos || {};
     var hero = $('.hero');
     var heroImg = $('#heroPhoto');
+    var portrait = $('#ownerPortrait');
 
     if (heroImg) {
       findPhoto(photos.owner).then(function (url) {
@@ -420,6 +421,11 @@
         if (url) {
           heroImg.src = url;
           heroImg.classList.add('is-real');
+          // The owner is the star: show the photo as a large portrait, too
+          if (portrait) {
+            portrait.src = url;
+            if (hero) hero.classList.add('has-owner');
+          }
           if (hero) hero.classList.remove('is-nophoto');
         } else {
           heroImg.src = 'assets/img/placeholder-hero.svg';
@@ -507,6 +513,8 @@
 
     var heroImg = $('#heroPhoto');
     if (heroImg) heroImg.alt = heroAlt();
+    var ownerImg = $('#ownerPortrait');
+    if (ownerImg) ownerImg.alt = t('hero.photoAlt');
     $$('[data-shop-photo]').forEach(function (img) {
       if (img.getAttribute('src') && img.getAttribute('src').indexOf('placeholder') === -1) img.alt = t('shop.alt');
     });
