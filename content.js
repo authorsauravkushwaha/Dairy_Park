@@ -102,7 +102,9 @@ window.DP_CONTENT = {
      they have changed. Set show:false to hide the rating block entirely.
      --------------------------------------------------------------------- */
   reviews: {
-    show: true,
+    // Disabled until the live Google listing has been checked by the owner.
+    // Set show: true only after verifying the rating and review count.
+    show: false,
     rating: 4.0,
     count: 204,
     sourceLabel: "Google Maps"
@@ -143,10 +145,8 @@ window.DP_CONTENT = {
     {
       id: "dahi-vada",
       name: { en: "Dahi Vada", bn: "দই বড়া" },
-      desc: {
-        en: "A classic Indian chaat — soft lentil dumplings served in whisked curd.",
-        bn: "ক্লাসিক ভারতীয় চাট — নরম ডালের বড়া, ফেটানো দইয়ের সঙ্গে।"
-      },
+      // Keep descriptions blank until the owner confirms ingredients/details.
+      desc: { en: "", bn: "" },
       category: "special",
       price: null,
       veg: null,
@@ -157,10 +157,8 @@ window.DP_CONTENT = {
     {
       id: "steam-momo",
       name: { en: "Steam Momo", bn: "স্টিম মোমো" },
-      desc: {
-        en: "Steamed dumplings served hot — a favourite street-food snack.",
-        bn: "গরম গরম স্টিম করা মোমো — জনপ্রিয় স্ট্রিট-ফুড।"
-      },
+      // Keep descriptions blank until the owner confirms ingredients/details.
+      desc: { en: "", bn: "" },
       category: "momos",
       price: null,
       veg: null,
@@ -206,7 +204,29 @@ window.DP_CONTENT = {
        alt: { en: "Dairy Park shop front on Kolaghat – Jashar Road",
               bn: "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের সামনের দৃশ্য" } }
      --------------------------------------------------------------------- */
-  gallery: [],
+  gallery: [
+    { section: "interior",
+      base: "assets/img/photos/shop",
+      alt: { en: "Dairy Park shop interior", bn: "ডেয়ারি পার্কের দোকানের ভিতর" } },
+    { section: "food",
+      base: "assets/img/photos/menu-spread-1",
+      alt: { en: "A spread from the Dairy Park counter", bn: "ডেয়ারি পার্ক কাউন্টারের খাবারের ছড়া" } },
+    { section: "food",
+      base: "assets/img/photos/menu-spread-2",
+      alt: { en: "More from the Dairy Park menu counter", bn: "ডেয়ারি পার্কের মেনু কাউন্টার থেকে আরও" } },
+    { section: "food",
+      base: "assets/img/photos/menu-drinks",
+      alt: { en: "Drinks at Dairy Park", bn: "ডেয়ারি পার্কের পানীয়" } },
+    { section: "products",
+      base: "assets/img/photos/counter-snacks",
+      alt: { en: "Snacks at the counter", bn: "কাউন্টারের স্ন্যাকস" } },
+    { section: "products",
+      base: "assets/img/photos/ice-cream-freezer",
+      alt: { en: "Ice-cream freezer", bn: "আইসক্রিমের ফ্রিজার" } },
+    { section: "products",
+      base: "assets/img/photos/chocolate-freezer",
+      alt: { en: "Chocolate selection", bn: "চকলেটের সংগ্রহ" } }
+  ],
 
   /* ---------------------------------------------------------------------
      9. PHOTOS (single-photo slots)
@@ -215,9 +235,11 @@ window.DP_CONTENT = {
      Until a photo is uploaded, a designed placeholder is shown instead.
      --------------------------------------------------------------------- */
   photos: {
-    owner: "assets/img/photos/owner", // owner photo — hero background
-    shop: "assets/img/photos/shop", // shop / storefront photo
-    shopAlt: "assets/img/photos/shop-2" // optional second shop photo
+    owner: "assets/img/photos/owner", // real owner portrait — homepage hero
+    shop: "assets/img/photos/shop", // real shop interior — About page
+    shopAlt: "assets/img/photos/counter-snacks", // snacks at the counter
+    freezer: "assets/img/photos/ice-cream-freezer",
+    chocolate: "assets/img/photos/chocolate-freezer"
   },
 
   /* ---------------------------------------------------------------------

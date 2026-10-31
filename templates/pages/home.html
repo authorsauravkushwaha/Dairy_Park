@@ -9,11 +9,21 @@
     <!-- ================= HERO ================= -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero__bg">
-        <img id="heroPhoto" src="assets/img/placeholder-hero.svg" alt="Owner photo of Dairy Park will appear here" data-i18n-alt="hero.photoSoon" width="1600" height="1000" fetchpriority="high" decoding="async">
+        <img id="heroPhoto" src="assets/img/photos/owner.jpeg" alt="The owner of Dairy Park at the restaurant in Kolaghat" data-i18n-alt="hero.photoAlt" width="960" height="1280" fetchpriority="high" decoding="async">
       </div>
       <div class="hero__scrim" aria-hidden="true"></div>
 
       <div class="hero__inner">
+        <figure class="hero__owner" id="heroOwner">
+          <div class="hero__owner-frame">
+            <img id="ownerPortrait" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="The owner of Dairy Park" data-i18n-alt="hero.photoAlt" width="960" height="1280" decoding="async">
+          </div>
+          <figcaption class="hero__owner-cap">
+            <span class="hero__owner-kicker" data-i18n="hero.ownerKicker">Meet the owner</span>
+            <span class="hero__owner-role" data-i18n="hero.ownerRole">Owner, Dairy Park</span>
+          </figcaption>
+        </figure>
+
         <div class="hero__content">
           <p class="eyebrow hero__eyebrow">
             <span class="eyebrow__dot" aria-hidden="true"></span>
@@ -43,7 +53,7 @@
           </div>
 
           <div class="hero__badges">
-            <span class="chip chip--glass">
+            <span class="chip chip--glass" data-review-summary hidden>
               <svg class="icon icon--star" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z" fill="currentColor"/></svg>
               <span data-bind="rating">4.0</span>
               <span class="chip__muted"><span data-bind="reviewCount">204</span> <span data-i18n="reviews.word">reviews</span></span>
@@ -54,7 +64,7 @@
         </div>
 
         <div class="hero__stage" aria-hidden="true">
-          <div class="float-card float-card--rating" data-depth="1.4">
+          <div class="float-card float-card--rating" data-depth="1.4" data-review-summary hidden>
             <div class="float-card__stars" data-bind-stars>
               <svg viewBox="0 0 24 24" class="star-fill"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z"/></svg>
               <svg viewBox="0 0 24 24" class="star-fill"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z"/></svg>
@@ -261,7 +271,7 @@
     </section>
 
     <!-- ================= REVIEWS PREVIEW ================= -->
-    <section class="section section--cream reviews" id="reviews" aria-labelledby="reviews-title">
+    <section class="section section--cream reviews" id="reviews" aria-labelledby="reviews-title" hidden>
       <div class="container">
         <div class="review-card reveal" data-reveal="zoom">
           <div class="rating-ring" id="ratingRing">

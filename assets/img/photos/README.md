@@ -1,37 +1,33 @@
 # Owner photos
 
-Upload the real photographs here. The website picks them up automatically —
-no code changes needed for the single-photo slots. File names must match
-exactly (the extension can be `.webp`, `.avif`, `.jpg`, `.jpeg` or `.png`):
+The genuine Dairy Park photographs below are **already uploaded and wired up**
+(hero, About page, Gallery) — the website picks them up automatically.
+
+## Single-photo slots (`assets/img/photos/`)
+
+File names must match exactly (extension can be `.webp`, `.avif`, `.jpg`,
+`.jpeg` or `.png`):
 
 | File name        | Where it appears                                  |
 | ---------------- | ------------------------------------------------- |
-| `owner.*`        | Homepage hero background + About page inset       |
-| `shop.*`         | About page main photograph                        |
-| `shop-2.*`       | Spare second shop slot (optional)                 |
-| `dahi-vada.*`    | Dahi Vada menu cards                              |
-| `steam-momo.*`   | Steam Momo menu cards                             |
-| `offer-combo.*`  | Offer cards (when a promo references this name)   |
+| `owner.*`        | **Supplied** — hero portrait frame + blurred hero backdrop + About inset |
+| `shop.*`         | **Supplied** — shop interior (About + Gallery)    |
+| `counter-snacks.*` | **Supplied** — snacks at the counter (Gallery)  |
+| `ice-cream-freezer.*` | **Supplied** — ice-cream freezer (Gallery)    |
+| `chocolate-freezer.*` | **Supplied** — chocolate selection (Gallery)  |
+| `menu-spread-1.*`, `menu-spread-2.*` | **Supplied** — menu-counter shots (Gallery) |
+| `menu-drinks.*`  | **Supplied** — drinks (Gallery)                   |
+| `dahi-vada.*`    | Dahi Vada menu card (not yet supplied)            |
+| `steam-momo.*`   | Steam Momo menu card (not yet supplied)           |
 
-## Gallery photographs
+## New gallery photographs
 
-Create a `gallery/` sub-folder for the Gallery page:
-
-```
-photos/gallery/exterior-1.jpg
-photos/gallery/interior-1.jpg
-photos/gallery/food-1.jpg
-photos/gallery/products-1.jpg
-```
-
-Then list each file in `content.js → gallery` with its section
-(`exterior`, `interior`, `food`, `products`) and bilingual alt text — see
-OWNER-GUIDE.md for the exact snippet. Gallery entries only appear once listed
-in `content.js`; single-photo slots appear as soon as the file exists.
+Create a `gallery/` sub-folder, drop the file in with any name, then list it in
+`content.js → gallery` with its section (`exterior`, `interior`, `food`,
+`products`) and bilingual alt text — see OWNER-GUIDE.md for the exact snippet.
 
 If a file is missing, the site shows a designed placeholder instead — nothing
-breaks, and no fake photograph of Dairy Park is ever used. Recommended: at
-least 1600 px wide for `owner.*`, 1200 px for the rest, and compress to under
-~400 kB each (squoosh.app or similar).
+breaks, and no fake photograph of Dairy Park is ever used. For replacements,
+keep files around ~400 kB so phones load them quickly.
 
 Please upload only genuine photos of the restaurant, the owner and the food.

@@ -52,12 +52,24 @@ async function loadPage(outFile, urlPath) {
   window.Element.prototype.scrollIntoView = function () {};
   window.scrollTo = () => {};
 
-  // Simulate "no owner photos uploaded yet": every image probe fails.
+  // Simulate the owner-supplied photos loading (menu-item photos stay absent
+  // so the designed placeholder path is exercised too).
+  const suppliedPhotos = new Set([
+    'owner.jpeg', 'owner.jpg', 'shop.jpeg', 'counter-snacks.jpeg',
+    'ice-cream-freezer.jpeg', 'chocolate-freezer.jpeg',
+    'menu-drinks.jpeg', 'menu-spread-1.jpeg', 'menu-spread-2.jpeg'
+  ]);
   window.Image = class {
     constructor() { this.onload = null; this.onerror = null; this.naturalWidth = 0; }
     set src(value) {
       this._src = value;
-      window.setTimeout(() => { if (this.onerror) this.onerror(); }, 0);
+      window.setTimeout(() => {
+        const found = [...suppliedPhotos].some((name) => value.endsWith(name));
+        if (found) {
+          this.naturalWidth = 960;
+          if (this.onload) this.onload();
+        } else if (this.onerror) this.onerror();
+      }, 0);
     }
     get src() { return this._src; }
   };
@@ -90,7 +102,9 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelectorAll('#facilityList li').length === 2, 'home: facilities render');
   expect(document.querySelector('#offers, #offersActive') === null, 'home: no offers section leaks onto the homepage');
   expect(!!document.querySelector('#galleryPreview'), 'home: gallery preview container exists');
-  expect(document.querySelector('#galleryPreview .gallery-preview__empty') !== null, 'home: honest gallery empty panel without photos');
+  expect(document.querySelectorAll('#galleryPreview .gallery-preview__tile.has-photo').length >= 3, 'home: gallery preview shows the supplied photographs');
+  expect(document.querySelector('.hero.has-owner') !== null, 'home: owner portrait appears in the hero with the supplied photo');
+  expect(/owner\.(webp|avif|jpe?g|png)$/.test(document.querySelector('#ownerPortrait').getAttribute('src')), 'home: portrait uses the real owner photo');
   expect(document.querySelector('.closing') !== null, 'home: closing CTA exists');
   expect(document.querySelectorAll('.welcome-card').length === 4, 'home: welcome cards render');
 
@@ -102,8 +116,13 @@ async function loadPage(outFile, urlPath) {
   expect([...document.querySelectorAll('a[href^="tel:"]')].every((a) => a.getAttribute('href') === 'tel:+919932452124'), 'home: every call link uses the verified number');
   expect(document.querySelector('a[href="food/"]') !== null, 'home: Explore-Our-Food CTA points at /food/');
   expect(document.querySelector('a[href="gallery/"]') !== null, 'home: View-Full-Gallery CTA points at /gallery/');
-  expect(document.querySelector('a[href="reviews/"]') !== null, 'home: Read-More-Reviews CTA points at /reviews/');
   expect(document.querySelector('a[href="visit/"]') !== null, 'home: location preview links to /visit/');
+
+  // Reviews stay hidden until the owner re-verifies the Google listing
+  expect(document.querySelector('#reviews').hidden === true, 'home: unverified reviews section stays hidden');
+  expect([...document.querySelectorAll('[data-review-summary]')].every((node) => node.hidden), 'home: unverified rating chips stay hidden');
+  expect([...document.querySelectorAll('[data-review-link]')].every((node) => node.hidden), 'home: review nav links stay hidden');
+  expect(document.querySelector('.nav [data-nav="reviews"]').hidden === true, 'home: Reviews nav item hides while unverified');
 
   // Language switch keeps the visitor on the same page
   document.querySelector('[data-lang="bn"]').click();
@@ -112,7 +131,7 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelector('[data-i18n="nav.menu"]').textContent === 'খাবার ও মেনু', 'home: navigation is translated');
   expect(document.title.includes('ডেয়ারি পার্ক'), 'home: page title is translated');
   expect(window.location.pathname === '/Dairy_Park/', 'home: language switch keeps the current page');
-  expect(document.querySelector('[data-bind="rating"]').textContent === '৪.০', 'home: rating uses Bengali numerals');
+  expect(document.querySelector('#reviews').hidden === true, 'home: reviews stay hidden after switching language');
   expect(document.querySelectorAll('[data-dish-id]').length === 2, 'home: menu re-renders in Bengali');
   expect(window.localStorage.getItem('dp-lang') === 'bn', 'home: language choice is remembered');
 
@@ -179,13 +198,25 @@ async function loadPage(outFile, urlPath) {
 /* GALLERY                                                                    */
 /* ========================================================================== */
 {
-  const { document, runtimeErrors } = await loadPage('gallery/index.html', 'gallery/');
+  const { document, window, runtimeErrors } = await loadPage('gallery/index.html', 'gallery/');
   expect(runtimeErrors.length === 0, `gallery: no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
   expect(document.querySelectorAll('.gallery-section').length === 4, 'gallery: four sections render');
-  expect(document.querySelectorAll('.masonry__item--placeholder').length === 4, 'gallery: each empty section shows one designed placeholder');
+  expect(document.querySelectorAll('.masonry__item--ready').length === 7, 'gallery: all seven supplied photographs load');
+  expect(document.querySelectorAll('.masonry__item--placeholder').length === 1, 'gallery: exterior shows one designed placeholder (no photo yet)');
   expect(document.querySelector('#lightbox').hidden === true, 'gallery: lightbox starts closed');
   const titles = [...document.querySelectorAll('.gallery-section__title')].map((n) => n.textContent);
   expect(titles.join('|').includes('Restaurant Exterior') && titles.join('|').includes('Food & Menu'), 'gallery: section titles are present');
+
+  // Lightbox with real photos
+  document.querySelector('.masonry__item--ready').click();
+  await sleep(60);
+  expect(document.querySelector('#lightbox').hidden === false, 'gallery: clicking a photo opens the lightbox');
+  expect(document.querySelector('#lightboxImg').getAttribute('src').includes('photos/'), 'gallery: lightbox shows the real image');
+  document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowRight' }));
+  await sleep(40);
+  document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape' }));
+  await sleep(40);
+  expect(document.querySelector('#lightbox').hidden === true, 'gallery: Escape closes the lightbox');
 }
 
 /* ========================================================================== */
@@ -205,15 +236,15 @@ async function loadPage(outFile, urlPath) {
 {
   const { document, window, runtimeErrors } = await loadPage('reviews/index.html', 'reviews/');
   expect(runtimeErrors.length === 0, `reviews: no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
-  expect(document.querySelector('[data-bind="rating"]').textContent === '4.0', 'reviews: rating shows as listed');
-  expect(document.querySelector('[data-bind="reviewsLead"]').textContent.includes('204'), 'reviews: review count shows as listed');
-  expect(document.querySelectorAll('[data-bind-stars] .star-fill').length === 4, 'reviews: four filled stars for a 4.0 rating');
+  expect(document.querySelector('[data-review-summary]').hidden === true, 'reviews: unverified rating summary stays hidden');
+  expect(document.querySelector('[data-bind="rating"]').textContent === '4.0', 'reviews: figures kept in the source but not shown');
+  expect(document.querySelector('.reviews-honest').hidden === false, 'reviews: honesty band still explains where reviews live');
   const googleLinks = [...document.querySelectorAll('a[href*="google.com/maps/place"]')];
-  expect(googleLinks.length >= 2, 'reviews: links to the original Google reviews');
+  expect(googleLinks.length >= 1, 'reviews: links to the original Google reviews');
   document.querySelector('[data-lang="bn"]').click();
   await sleep(80);
   expect(window.location.pathname === '/Dairy_Park/reviews/', 'reviews: language switch stays on the reviews page');
-  expect(document.querySelector('[data-bind="rating"]').textContent === '৪.০', 'reviews: Bengali numerals after switch');
+  expect(document.querySelector('[data-review-summary]').hidden === true, 'reviews: summary stays hidden after switching language');
 }
 
 /* ========================================================================== */

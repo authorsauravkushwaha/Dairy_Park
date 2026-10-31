@@ -16,15 +16,21 @@ ever used.
 
 | File name | Where it shows |
 | --- | --- |
-| `photos/owner.*` | Homepage hero background + About page inset |
-| `photos/shop.*` | About page main photo |
-| `photos/shop-2.*` | (optional, spare slot) |
-| `photos/dahi-vada.*` | Dahi Vada cards on Home + Food & Menu |
-| `photos/steam-momo.*` | Steam Momo cards on Home + Food & Menu |
+| `photos/owner.*` | **Supplied** — large portrait in the homepage hero + About page inset |
+| `photos/shop.*` | **Supplied** — shop interior (About page + Gallery) |
+| `photos/counter-snacks.*` | **Supplied** — snacks at the counter (Gallery) |
+| `photos/ice-cream-freezer.*` | **Supplied** — ice-cream freezer (Gallery) |
+| `photos/chocolate-freezer.*` | **Supplied** — chocolate selection (Gallery) |
+| `photos/menu-spread-1.*`, `menu-spread-2.*` | **Supplied** — menu-counter shots (Gallery) |
+| `photos/menu-drinks.*` | **Supplied** — drinks (Gallery) |
+| `photos/dahi-vada.*` | Dahi Vada cards on Home + Food & Menu (not yet supplied) |
+| `photos/steam-momo.*` | Steam Momo cards on Home + Food & Menu (not yet supplied) |
 | `photos/offer-combo.*` | Offer cards (when you add a promo with a photo) |
 
-Gallery photographs live in `assets/img/photos/gallery/` and are listed in
-`content.js → gallery`. Add a line for each uploaded file:
+The seven supplied photographs are already wired up in `content.js → gallery`,
+so the About page and Gallery show real photos today. For **new** gallery
+photos, drop the file into `assets/img/photos/gallery/` (any name) and add a
+line in `content.js → gallery`:
 
 ```js
 gallery: [
@@ -39,8 +45,9 @@ gallery: [
 four headings on the Gallery page. Sections without photos show a designed
 “photograph coming soon” tile.
 
-**Tip:** crop photos landscape (at least 1200 px wide, 1600 px for the hero)
-and keep each file under ~400 kB so phones load them quickly.
+**Tip:** the supplied owner portrait works as the hero backdrop and the large
+portrait frame (portrait orientation suits it). For replacements, keep files
+around ~400 kB or less so phones load them quickly.
 
 ## 2. Change the menu (`content.js`)
 
@@ -117,16 +124,19 @@ true. When the offer ends, set `active: false` or delete the block.
 
 ## 5. Reviews (`content.js → reviews`)
 
-The rating and review count came from the supplied Google listing. **Check the
-live Google listing before publishing** and update:
+The rating and review count are **hidden by default** because the live Google
+listing has not yet been re-checked. **Check the live Google listing before
+publishing** and update:
 
 ```js
 reviews: { show: true, rating: 4.0, count: 204, sourceLabel: "Google Maps" }
 ```
 
-If you would rather not display a rating, set `show: false` — the rating
-blocks disappear. The Reviews page never copies customer quotes; it links to
-the real reviews on Google. Ratings are deliberately **not** put into the
+Leave `show: false` until verified. Once confirmed, set `show: true` — the
+rating cards, hero chips and the Reviews navigation links all appear
+automatically. Setting it back to `false` hides every rating block, summary
+and review link again. The Reviews page never copies customer quotes; it links
+to the real reviews on Google. Ratings are deliberately **not** put into the
 structured data (machine-readable SEO) because Google requires verified review
 data there.
 
@@ -172,10 +182,12 @@ Run `npm test` locally if you want to see the same checks before publishing.
 
 ## Before you go live — owner checklist
 
-- [ ] Upload `owner.jpg` (homepage background) and `shop.jpg`.
-- [ ] Add real Gallery photographs to `assets/img/photos/gallery/` and list
-      them in `content.js → gallery` (exterior, interior, food, products).
-- [ ] Confirm the Google rating is still 4.0 from 204 reviews (or update it).
+- [ ] The owner portrait and six gallery photographs are already supplied —
+      add an exterior photo when one is taken (`gallery/` section `exterior`).
+- [ ] Confirm the Google rating and review count on the live listing, then set
+      `reviews.show = true` only after checking (currently hidden).
+- [ ] Add Dahi Vada / Steam Momo photographs (`photos/dahi-vada.*`,
+      `photos/steam-momo.*`) and their confirmed descriptions.
 - [ ] Confirm the full opening hours and set `hours.verified = true` only then.
 - [ ] Confirm the phone number is still +91 99324 52124.
 - [ ] Add prices only if you want them public.

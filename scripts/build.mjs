@@ -164,6 +164,9 @@ async function assemblePage(page, ctx) {
     home: homeHref,
     page: page.id,
     bodyClass: page.id === 'home' ? '' : 'subpage',
+    headExtra: page.id === 'home'
+      ? '  <link rel="preload" href="assets/img/photos/owner.jpeg" as="image" fetchpriority="high">'
+      : '',
     jsonld,
     jsonldHash,
     cssVer: cssVersion,

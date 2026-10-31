@@ -257,6 +257,13 @@
       if (url) {
         heroImg.src = url;
         heroImg.classList.add('is-real');
+        // The owner is the star: show the photo as a large portrait, too
+        var portrait = $('#ownerPortrait');
+        if (portrait) {
+          portrait.src = url;
+          portrait.classList.add('is-real');
+          if (hero) hero.classList.add('has-owner');
+        }
         if (hero) hero.classList.remove('is-nophoto');
       } else {
         heroImg.src = BASE + 'assets/img/placeholder-hero.svg';
@@ -316,7 +323,8 @@
       }));
     }
     bodyEl.appendChild(heading);
-    bodyEl.appendChild(el('p', { class: 'dish__desc', text: tx(item.desc) }));
+    var description = tx(item.desc);
+    if (description) bodyEl.appendChild(el('p', { class: 'dish__desc', text: description }));
 
     var meta = el('div', { class: 'dish__meta' });
     meta.appendChild(el('span', {
@@ -415,7 +423,8 @@
       }));
     }
     info.appendChild(heading);
-    info.appendChild(el('p', { class: 'dish-dialog__desc', text: tx(item.desc) }));
+    var dialogDesc = tx(item.desc);
+    if (dialogDesc) info.appendChild(el('p', { class: 'dish-dialog__desc', text: dialogDesc }));
 
     var meta = el('div', { class: 'dish__meta' });
     meta.appendChild(el('span', { class: 'pill' + (hasPrice ? '' : ' pill--muted'), text: dishPriceText(item) }));
@@ -879,10 +888,14 @@
   /* --------------------------------------------------------------------------- */
   function renderReviews() {
     var reviews = C.reviews || {};
-    if (reviews.show === false) {
-      els('#reviews, .reviews-page').forEach(function (node) { node.hidden = true; });
-      return;
-    }
+    var verified = reviews.show !== false;
+
+    // Ratings stay hidden everywhere until the owner re-verifies the listing
+    els('[data-review-summary]').forEach(function (node) { node.hidden = !verified; });
+    els('[data-review-link]').forEach(function (node) { node.hidden = !verified; });
+    var homeSection = $('#reviews');
+    if (homeSection) homeSection.hidden = !verified;
+    if (!verified) return;
 
     var ratingText = formatRating(Number(reviews.rating));
     var countText = num(reviews.count);
@@ -1034,6 +1047,8 @@
 
     var heroImg = $('#heroPhoto');
     if (heroImg) heroImg.alt = heroAlt();
+    var ownerImg = $('#ownerPortrait');
+    if (ownerImg && ownerImg.classList.contains('is-real')) ownerImg.alt = t('hero.photoAlt');
 
     updateToggleLabel();
 

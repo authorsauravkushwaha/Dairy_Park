@@ -28,7 +28,7 @@ window.DP_I18N = {
     "meta.offers.title": "Special Offers | Dairy Park Kolaghat – Combos & Seasonal Deals",
     "meta.offers.desc":
       "Current special offers at Dairy Park, Kolaghat. Combo offers, festival promotions and seasonal specials — confirmed offers only, on Kolaghat – Jashar Road.",
-    "meta.reviews.title": "Customer Reviews | Dairy Park Kolaghat – 4.0★ on Google Maps",
+    "meta.reviews.title": "Customer Reviews | Dairy Park Kolaghat – Google Reviews",
     "meta.reviews.desc":
       "See what customers say about Dairy Park, Kolaghat. Read genuine Google reviews of our fast food restaurant on Kolaghat – Jashar Road.",
     "meta.visit.title": "Visit Us | Dairy Park, Kolaghat – Jashar Road – Directions & Hours",
@@ -84,6 +84,8 @@ window.DP_I18N = {
     "hero.chipDrive": "Drive-through",
     "hero.photoAlt": "The owner of Dairy Park at the restaurant in Kolaghat",
     "hero.photoSoon": "Owner photo will appear here once it is uploaded",
+    "hero.ownerKicker": "Meet the owner",
+    "hero.ownerRole": "Owner, Dairy Park",
     "hero.scroll": "Scroll to explore",
 
     "dish.dahiVada": "Dahi Vada",
@@ -157,9 +159,9 @@ window.DP_I18N = {
     "why.lead":
       "Just the facts from our Google listing — plus two dishes worth pulling over for.",
     "fact.dine.title": "Dine-in",
-    "fact.dine.desc": "Sit down and eat at the restaurant.",
+    "fact.dine.desc": "Dine-in is listed as an available facility.",
     "fact.drive.title": "Drive-through",
-    "fact.drive.desc": "Order and collect from your vehicle.",
+    "fact.drive.desc": "Drive-through is listed as an available facility.",
     "fact.place.title": "Easy to find in Kolaghat",
     "fact.place.desc": "Right on Kolaghat – Jashar Road, Kolaghat 721134.",
     "fact.budget.desc": "Typical spend range shown on our Google listing.",
@@ -371,7 +373,7 @@ window.DP_I18N = {
     "meta.offers.title": "বিশেষ অফার | ডেয়ারি পার্ক কোলাঘাট – কম্বো ও সিজনাল অফার",
     "meta.offers.desc":
       "কোলাঘাটে ডেয়ারি পার্কের চলমান বিশেষ অফার। কম্বো অফার, উৎসবের প্রচার ও সিজনাল অফার — শুধু নিশ্চিত অফার, কোলাঘাট–যশোর রোডে।",
-    "meta.reviews.title": "গ্রাহক রিভিউ | ডেয়ারি পার্ক কোলাঘাট – গুগল ম্যাপে ৪.০★",
+    "meta.reviews.title": "গ্রাহক রিভিউ | ডেয়ারি পার্ক কোলাঘাট – গুগল রিভিউ",
     "meta.reviews.desc":
       "কোলাঘাটের ডেয়ারি পার্ক সম্পর্কে গ্রাহকদের মতামত দেখুন। কোলাঘাট–যশোর রোডের আমাদের ফাস্ট-ফুড রেস্তোরাঁর আসল গুগল রিভিউ পড়ুন।",
     "meta.visit.title": "ভিজিট করুন | ডেয়ারি পার্ক, কোলাঘাট – যশোর রোড – পথনির্দেশ ও সময়",
@@ -427,6 +429,8 @@ window.DP_I18N = {
     "hero.chipDrive": "ড্রাইভ-থ্রু",
     "hero.photoAlt": "কোলাঘাটের রেস্তোরাঁয় ডেয়ারি পার্কের মালিক",
     "hero.photoSoon": "ছবি আপলোড করা হলে মালিকের ছবি এখানে দেখা যাবে",
+    "hero.ownerKicker": "মালিকের সাথে পরিচিত হন",
+    "hero.ownerRole": "মালিক, ডেয়ারি পার্ক",
     "hero.scroll": "নিচে স্ক্রল করুন",
 
     "dish.dahiVada": "দই বড়া",
@@ -500,9 +504,9 @@ window.DP_I18N = {
     "why.lead":
       "আমাদের গুগল লিস্টিংয়ে যা দেওয়া আছে, ঠিক তাই — সঙ্গে দুটি পদ, যার জন্য গাড়ি থামাবেনই।",
     "fact.dine.title": "ডাইন-ইন",
-    "fact.dine.desc": "রেস্তোরাঁয় বসে খাওয়ার সুবিধা।",
+    "fact.dine.desc": "ডাইন-ইন সুবিধা তালিকাভুক্ত রয়েছে।",
     "fact.drive.title": "ড্রাইভ-থ্রু",
-    "fact.drive.desc": "গাড়ি থেকে অর্ডার করে নিয়ে যান।",
+    "fact.drive.desc": "ড্রাইভ-থ্রু সুবিধা তালিকাভুক্ত রয়েছে।",
     "fact.place.title": "কোলাঘাটে সহজে খুঁজে পান",
     "fact.place.desc": "কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ।",
     "fact.budget.desc": "গুগল লিস্টিংয়ে দেখানো সাধারণ খরচের রেঞ্জ।",
