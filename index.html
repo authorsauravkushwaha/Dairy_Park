@@ -35,6 +35,7 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
 
+  <link rel="preload" href="assets/img/photos/owner.jpeg" as="image" fetchpriority="high">
   <link rel="preload" href="assets/fonts/fraunces-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/main.min.css">
@@ -122,7 +123,7 @@
         <a class="nav__link" href="#menu" data-i18n="nav.menu">Menu</a>
         <a class="nav__link" href="#why" data-i18n="nav.why">Why visit</a>
         <a class="nav__link" href="#offers" data-i18n="nav.offers" data-offers-link hidden>Offers</a>
-        <a class="nav__link" href="#reviews" data-i18n="nav.reviews">Reviews</a>
+        <a class="nav__link" href="#reviews" data-i18n="nav.reviews" data-review-link hidden>Reviews</a>
         <a class="nav__link" href="#location" data-i18n="nav.find">Find us</a>
       </nav>
 
@@ -150,7 +151,7 @@
         <a href="#menu"><span class="drawer__num" aria-hidden="true">01</span><span data-i18n="nav.menu">Menu</span></a>
         <a href="#why"><span class="drawer__num" aria-hidden="true">02</span><span data-i18n="nav.why">Why visit</span></a>
         <a href="#offers" data-offers-link hidden><span class="drawer__num" aria-hidden="true">03</span><span data-i18n="nav.offers">Offers</span></a>
-        <a href="#reviews"><span class="drawer__num" aria-hidden="true">04</span><span data-i18n="nav.reviews">Reviews</span></a>
+        <a href="#reviews" data-review-link hidden><span class="drawer__num" aria-hidden="true">04</span><span data-i18n="nav.reviews">Reviews</span></a>
         <a href="#location"><span class="drawer__num" aria-hidden="true">05</span><span data-i18n="nav.find">Find us</span></a>
       </nav>
       <div class="drawer__contact">
@@ -175,7 +176,7 @@
     <!-- ================= HERO ================= -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero__bg">
-        <img id="heroPhoto" src="assets/img/placeholder-hero.svg" alt="Owner photo of Dairy Park will appear here" data-i18n-alt="hero.photoSoon" width="1600" height="1000" fetchpriority="high" decoding="async">
+        <img id="heroPhoto" src="assets/img/photos/owner.jpeg" alt="The owner of Dairy Park at the restaurant in Kolaghat" width="960" height="1280" fetchpriority="high" decoding="async">
       </div>
       <div class="hero__scrim" aria-hidden="true"></div>
 
@@ -205,7 +206,7 @@
           </div>
 
           <div class="hero__badges">
-            <span class="chip chip--glass">
+            <span class="chip chip--glass" data-review-summary hidden>
               <svg class="icon icon--star" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z" fill="currentColor"/></svg>
               <span data-bind="rating">4.0</span>
               <span class="chip__muted"><span data-bind="reviewCount">204</span> <span data-i18n="reviews.word">reviews</span></span>
@@ -216,7 +217,7 @@
         </div>
 
         <div class="hero__stage" aria-hidden="true">
-          <div class="float-card float-card--rating" data-depth="1.4">
+          <div class="float-card float-card--rating" data-depth="1.4" data-review-summary hidden>
             <div class="float-card__stars" data-bind-stars>
               <svg viewBox="0 0 24 24" class="star-fill"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z"/></svg>
               <svg viewBox="0 0 24 24" class="star-fill"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z"/></svg>
@@ -362,19 +363,27 @@
         </div>
         <div class="shop__grid">
           <figure class="shop__card reveal" data-reveal="left" hidden>
-            <img data-shop-photo="shop" src="assets/img/placeholder-shop.svg" alt="Dairy Park shop front" width="900" height="700" loading="lazy" decoding="async">
-            <figcaption data-i18n="shop.caption1">Our shop on Kolaghat – Jashar Road</figcaption>
+            <img data-shop-photo="shop" src="assets/img/placeholder-shop.svg" alt="Dairy Park shop interior" width="900" height="700" loading="lazy" decoding="async">
+            <figcaption data-i18n="shop.caption1">Dairy Park shop interior</figcaption>
           </figure>
           <figure class="shop__card reveal" data-reveal="right" hidden>
-            <img data-shop-photo="shopAlt" src="assets/img/placeholder-shop.svg" alt="At Dairy Park" width="900" height="700" loading="lazy" decoding="async">
-            <figcaption data-i18n="shop.caption2">At Dairy Park</figcaption>
+            <img data-shop-photo="shopAlt" src="assets/img/placeholder-shop.svg" alt="Snacks at Dairy Park" width="900" height="700" loading="lazy" decoding="async">
+            <figcaption data-i18n="shop.caption2">Snacks at the counter</figcaption>
+          </figure>
+          <figure class="shop__card reveal" data-reveal="left" hidden>
+            <img data-shop-photo="freezer" src="assets/img/placeholder-shop.svg" alt="Ice-cream freezer at Dairy Park" width="900" height="700" loading="lazy" decoding="async">
+            <figcaption data-i18n="shop.caption3">Ice-cream freezer</figcaption>
+          </figure>
+          <figure class="shop__card reveal" data-reveal="right" hidden>
+            <img data-shop-photo="chocolate" src="assets/img/placeholder-shop.svg" alt="Chocolate freezer at Dairy Park" width="900" height="700" loading="lazy" decoding="async">
+            <figcaption data-i18n="shop.caption4">Chocolate selection</figcaption>
           </figure>
         </div>
       </div>
     </section>
 
     <!-- ================= REVIEWS ================= -->
-    <section class="section section--cream reviews" id="reviews" aria-labelledby="reviews-title">
+    <section class="section section--cream reviews" id="reviews" aria-labelledby="reviews-title" hidden>
       <div class="container">
         <div class="review-card reveal" data-reveal="zoom">
           <div class="rating-ring" id="ratingRing">
@@ -514,7 +523,7 @@
         <a href="#menu" data-i18n="nav.menu">Menu</a>
         <a href="#why" data-i18n="nav.why">Why visit</a>
         <a href="#offers" data-offers-link hidden data-i18n="nav.offers">Offers</a>
-        <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
+        <a href="#reviews" data-i18n="nav.reviews" data-review-link hidden>Reviews</a>
         <a href="#location" data-i18n="nav.find">Find us</a>
       </nav>
 

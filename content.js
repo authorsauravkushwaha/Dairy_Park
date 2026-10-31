@@ -93,7 +93,8 @@ window.DP_CONTENT = {
      they have changed. Set show:false to hide the rating block entirely.
      --------------------------------------------------------------------- */
   reviews: {
-    show: true,
+    // Disabled until the live Google listing has been checked by the owner.
+    show: false,
     rating: 4.0,
     count: 204,
     sourceLabel: "Google Maps"
@@ -113,10 +114,8 @@ window.DP_CONTENT = {
     {
       id: "dahi-vada",
       name: { en: "Dahi Vada", bn: "দই বড়া" },
-      desc: {
-        en: "A classic Indian chaat — soft lentil dumplings served in whisked curd.",
-        bn: "ক্লাসিক ভারতীয় চাট — নরম ডালের বড়া, ফেটানো দইয়ের সঙ্গে।"
-      },
+      // Keep descriptions blank until the owner confirms ingredients/details.
+      desc: { en: "", bn: "" },
       price: null,
       veg: null,
       available: true,
@@ -126,10 +125,8 @@ window.DP_CONTENT = {
     {
       id: "steam-momo",
       name: { en: "Steam Momo", bn: "স্টিম মোমো" },
-      desc: {
-        en: "Steamed dumplings served hot — a favourite street-food snack.",
-        bn: "গরম গরম স্টিম করা মোমো — জনপ্রিয় স্ট্রিট-ফুড।"
-      },
+      // Keep descriptions blank until the owner confirms ingredients/details.
+      desc: { en: "", bn: "" },
       price: null,
       veg: null,
       available: true,
@@ -163,9 +160,11 @@ window.DP_CONTENT = {
      Until a photo is uploaded, a designed placeholder is shown instead.
      --------------------------------------------------------------------- */
   photos: {
-    owner: "assets/img/photos/owner", // owner photo — hero background
-    shop: "assets/img/photos/shop", // shop / storefront photo
-    shopAlt: "assets/img/photos/shop-2" // optional second shop photo
+    owner: "assets/img/photos/owner", // real owner portrait — homepage background
+    shop: "assets/img/photos/shop", // real shop interior
+    shopAlt: "assets/img/photos/counter-snacks",
+    freezer: "assets/img/photos/ice-cream-freezer",
+    chocolate: "assets/img/photos/chocolate-freezer"
   },
 
   /* ---------------------------------------------------------------------
