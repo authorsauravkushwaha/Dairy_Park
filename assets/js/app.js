@@ -247,7 +247,8 @@
       }));
     }
     body.appendChild(heading);
-    body.appendChild(el('p', { class: 'dish__desc', text: tx(item.desc) }));
+    var description = tx(item.desc);
+    if (description) body.appendChild(el('p', { class: 'dish__desc', text: description }));
 
     var meta = el('div', { class: 'dish__meta' });
     meta.appendChild(el('span', {
@@ -342,7 +343,10 @@
     var rating = Number(reviews.rating);
     var count = reviews.count;
 
-    if (section && reviews.show === false) {
+    var verifiedReviews = reviews.show !== false;
+    els('[data-review-summary]').forEach(function (node) { node.hidden = !verifiedReviews; });
+    els('[data-review-link]').forEach(function (node) { node.hidden = !verifiedReviews; });
+    if (section && !verifiedReviews) {
       section.hidden = true;
       return;
     }

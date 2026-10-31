@@ -4,7 +4,7 @@ Marketing website for **Dairy Park (ডেয়ারি পার্ক)**, a 
 Kolaghat – Jashar Road, Kolaghat, West Bengal 721134.
 
 - Live site: **https://authorsauravkushwaha.github.io/Dairy_Park/**
-- Phone: +91 99324 52124 · Google rating shown: 4.0 (204 reviews, as supplied)
+- Phone: +91 99324 52124 · Google rating is hidden until the live listing is re-checked
 - Facilities: dine-in, drive-through · Typical spend ₹1–200 per person
 
 The site is a **hand-built static site** (HTML + one CSS file + vanilla JS) with
@@ -21,8 +21,8 @@ the owner needs to edit in plain, commented files.
 | Marquee strip | Verified facts repeated on scroll | Recall |
 | Menu highlights | Dahi Vada, Steam Momo (editable) | “Ask About Our Menu” (call) |
 | Why visit | Dine-in, drive-through, location, spend | Trust |
-| Shop gallery | Real shop photos (hidden until uploaded) | Trust |
-| Reviews | 4.0 ★ / 204 Google reviews | “Read Customer Reviews” |
+| Shop gallery | Owner-supplied shop and product photos | Trust |
+| Reviews | Hidden pending a current Google listing check | Google Maps link remains available |
 | Offers | Hidden until a real offer is added | Repeat visits |
 | Location | Map, address, phone, facilities | Directions / call |
 | Sticky mobile bar | Always-visible call + directions | Enquiries |

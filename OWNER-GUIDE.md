@@ -14,8 +14,8 @@ itself automatically (about a minute).
 | File name | Where it shows |
 | --- | --- |
 | `owner.jpg` (or `.webp` / `.png`) | Full-screen background of the homepage |
-| `shop.jpg` | “Inside Dairy Park” gallery |
-| `shop-2.jpg` | Second gallery photo (optional) |
+| `shop.jpeg` | “Inside Dairy Park” gallery |
+| `counter-snacks.jpeg`, `ice-cream-freezer.jpeg`, `chocolate-freezer.jpeg` | Other owner-supplied gallery photos |
 | `dahi-vada.jpg` | Dahi Vada menu card |
 | `steam-momo.jpg` | Steam Momo menu card |
 
@@ -23,8 +23,9 @@ The site detects the file automatically — `.jpg`, `.jpeg`, `.png`, `.webp` and
 `.avif` all work. Until a photo exists, a designed placeholder is shown, so
 nothing ever breaks.
 
-**Tip:** crop the owner photo landscape (or at least 1600 px wide) and keep each
-file under ~400 kB so phones load it quickly.
+**Tip:** the supplied owner portrait is already used as the home-page background.
+For replacements, keep images compressed (around 400 kB or less) so phones load
+quickly; portrait orientation works well on mobile.
 
 ---
 
@@ -82,15 +83,16 @@ true. When the offer ends, set `active: false` or delete the block.
 
 ## 5. Reviews (`content.js → reviews`)
 
-The rating and review count came from the supplied Google listing. **Check the
-live Google listing before publishing** and update:
+The rating and review count are hidden by default because the live listing has
+not yet been re-checked. **Check the live Google listing before publishing**
+and update:
 
 ```js
 reviews: { show: true, rating: 4.0, count: 204, sourceLabel: "Google Maps" }
 ```
 
-If you would rather not display a rating, set `show: false` — the whole section
-disappears. Ratings are deliberately **not** put into the structured data
+Leave `show: false` until verified. Once confirmed, set `show: true`; setting it
+back to `false` hides the entire reviews block, summaries and navigation links. Ratings are deliberately **not** put into the structured data
 (machine-readable SEO) because Google requires verified review data there.
 
 ## 6. Contact details (`content.js → business`)

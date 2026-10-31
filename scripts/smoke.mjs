@@ -2,8 +2,8 @@
 /**
  * Headless smoke test: loads dist/index.html in jsdom, runs the real scripts,
  * and checks that rendering, bilingual switching and navigation work without
- * runtime errors. Images are simulated as "not uploaded" so the placeholder
- * path is exercised too.
+ * runtime errors. Supplied shop photos load; menu-item photos exercise their
+ * safe placeholder path until genuine item photos are added.
  */
 import { JSDOM } from 'jsdom';
 import { readFile } from 'node:fs/promises';
@@ -51,12 +51,23 @@ window.cancelAnimationFrame = (id) => window.clearTimeout(id);
 window.Element.prototype.scrollIntoView = function () {};
 window.scrollTo = () => {};
 
-// Simulate "no owner photos uploaded yet": every image probe fails.
+// Simulate the owner-supplied photos existing (and unsupported menu-item
+// photos remaining absent so the designed placeholder is exercised).
+const suppliedPhotos = new Set([
+  'owner.jpeg', 'shop.jpeg', 'counter-snacks.jpeg',
+  'ice-cream-freezer.jpeg', 'chocolate-freezer.jpeg'
+]);
 window.Image = class {
   constructor() { this.onload = null; this.onerror = null; this.naturalWidth = 0; }
   set src(value) {
     this._src = value;
-    window.setTimeout(() => { if (this.onerror) this.onerror(); }, 0);
+    window.setTimeout(() => {
+      const found = [...suppliedPhotos].some((name) => value.endsWith(name));
+      if (found) {
+        this.naturalWidth = 960;
+        if (this.onload) this.onload();
+      } else if (this.onerror) this.onerror();
+    }, 0);
   }
   get src() { return this._src; }
 };
@@ -81,12 +92,14 @@ expect(document.documentElement.getAttribute('lang') === 'en', 'document languag
 expect(document.title.includes('Dairy Park'), 'document title is set');
 expect(document.querySelectorAll('[data-dish-id]').length === 2, 'both menu items render');
 expect(document.querySelectorAll('#facilityList li').length === 2, 'facilities render from content.js');
-expect(document.querySelector('#reviews').hidden === false, 'reviews section is visible');
+expect(document.querySelector('#reviews').hidden === true, 'unverified reviews section stays hidden');
+expect([...document.querySelectorAll('[data-review-summary], [data-review-link]')].every((node) => node.hidden), 'unverified ratings and review links stay hidden');
 expect(document.querySelector('#offers').hidden === true, 'offers section stays hidden without a promotion');
-expect(document.querySelector('#shop').hidden === true, 'shop gallery stays hidden without photos');
+expect(document.querySelector('#shop').hidden === false, 'shop gallery appears when supplied photos load');
+expect(document.querySelectorAll('[data-shop-photo]:not([src*="placeholder"])').length === 4, 'all four real shop gallery images load');
 expect(document.querySelectorAll('[data-tilt]').length >= 2, '3D tilt cards are initialised');
 expect(document.querySelectorAll('.reveal.is-in').length > 0, 'scroll reveals activate');
-expect(document.querySelector('#heroPhoto').getAttribute('src').includes('placeholder-hero'), 'hero falls back to the designed placeholder');
+expect(document.querySelector('#heroPhoto').getAttribute('src').endsWith('owner.jpeg'), 'owner portrait loads as the homepage hero background');
 expect([...document.querySelectorAll('[data-offers-link]')].every((node) => node.hidden), 'offers nav links stay hidden');
 
 const hoursText = document.querySelector('[data-bind="hours"]').textContent;
@@ -112,8 +125,8 @@ expect(document.title.includes('ডেয়ারি পার্ক'), 'page t
 expect(document.querySelector('[data-i18n="hero.cta1"]').textContent === 'পথনির্দেশ পান', 'hero CTA is translated');
 expect(document.querySelector('.sticky-bar__btn--call span').textContent === 'কল করুন', 'sticky call button is translated');
 expect(document.querySelectorAll('[data-dish-id]').length === 2, 'menu re-renders in Bengali');
-expect(document.querySelector('[data-bind="rating"]').textContent === '৪.০', 'rating uses Bengali numerals');
-expect(document.querySelector('[data-bind="reviewCount"]').textContent === '২০৪', 'review count uses Bengali numerals');
+expect(document.querySelector('#reviews').hidden === true, 'unverified review figures remain hidden in Bengali');
+expect([...document.querySelectorAll('[data-review-summary], [data-review-link]')].every((node) => node.hidden), 'unverified rating summaries remain hidden in Bengali');
 expect(document.querySelector('[data-bind="hours"]').textContent.includes('১০:৩০'), 'closing time is localised');
 expect(window.localStorage.getItem('dp-lang') === 'bn', 'language choice is remembered');
 
