@@ -48,3 +48,238 @@ Pages, Netlify, Vercel), move the CSP into the response header and add
 If you spot a security or privacy problem, call the restaurant on
 +91 99324 52124 and open an issue in this repository. Please do not publicly
 post exploitable details before they are fixed.
+
+---
+
+## Security topic checklist
+
+Each topic below says what the risk is, how to prevent it, and what that means
+for **this** site today. Status key:
+
+- ✅ **Not applicable / in place** — the site has no code path for this risk.
+- 🟡 **Applies later** — becomes relevant if a feature is added (noted in the text).
+- 🔍 **Check during review** — review this when editing content or the build.
+
+Item 11 is written as “NoSQL / SQL injection” (the list said “No SQL”, which
+is read here as NoSQL, the database family that has the same injection risk).
+
+### 1. Rate limiting — 🟡
+
+**Risk:** one client sends thousands of requests (brute force, scraping,
+flooding an API or a form).
+**Prevent:** limit requests per IP / user / key on the server or at the edge
+(e.g. Cloudflare, API gateway), return `429 Too Many Requests` with
+`Retry-After`, and put the strictest limits on login and contact endpoints.
+**Dairy Park:** GitHub Pages serves static files and has no app endpoints, so
+nothing to limit. Any future form or API must be rate-limited server-side.
+
+### 2. Input validation — 🟡
+
+**Risk:** untrusted data (length, type, format, characters) reaches code,
+databases or the browser and causes bugs or attacks.
+**Prevent:** use an allow-list (expected type, length, range, format) on the
+**server**, reject invalid data early, and encode on output. Client-side checks
+are for usability only.
+**Dairy Park:** no forms or inputs. Owner content in `content.js` is inserted
+with `textContent`, so it is not parsed as HTML. Any future form needs
+server-side validation.
+
+### 3. Authentication ≠ Authorization — 🔍
+
+**Authentication** answers *“who are you?”* (login, passwords, MFA).
+**Authorization** answers *“are you allowed to do this?”* (roles, ownership
+checks). Passing login does not grant access to every resource.
+**Prevent:** check permissions on every request, on the server, for the specific
+object (see topic 15). Use MFA for admin accounts.
+**Dairy Park:** no visitor accounts. Editing the site requires write access to
+this GitHub repository, so enable **2FA on GitHub**, limit collaborators, and
+protect the `main` branch (require reviews/checks before merge).
+
+### 4. Secret management — 🔍
+
+**Risk:** API keys, tokens or passwords stored in code, config files or logs.
+**Prevent:** keep secrets in a secret store or the platform's encrypted
+environment variables, load them at runtime, rotate them when exposed, and
+give each one the least privilege it needs.
+**Dairy Park:** no secrets in the repository. Google Analytics is an optional
+public measurement ID, not a secret. `.env` files are git-ignored.
+
+### 5. File upload security — 🟡
+
+**Risk:** malicious files (scripts disguised as images, SVGs with JavaScript,
+zip bombs, huge files, path tricks like `../`) are stored or served to others.
+**Prevent:** allow-list the extensions **and** check the file content (magic
+bytes), rename files on the server, store uploads outside the web root or in a
+separate domain, cap the size, and never execute uploaded files. Serve with
+`Content-Type` and `X-Content-Type-Options: nosniff`.
+**Dairy Park:** visitors cannot upload anything. The owner adds photos through
+git into `assets/img/photos/`, using jpg, png, webp or avif. **Do not allow
+SVG uploads** (SVG can contain scripts).
+
+### 6. Error handling and information leakage — ✅
+
+**Risk:** stack traces, file paths, database errors, versions or debug pages
+tell attackers how the system works.
+**Prevent:** show generic error pages to users, log details on the server only,
+turn debug mode off in production, and hide server banners.
+**Dairy Park:** the site is static. `404.html` is a generic page, and no stack
+traces or debug output are shipped. Keep `console.*` output free of sensitive
+data.
+
+### 7. Server-side template injection (SSTI) — 🟡
+
+**Risk:** user input is treated as template code (for example, Jinja2,
+Handlebars or Twig), which can lead to remote code execution.
+**Prevent:** never build templates from user input; pass user data only as
+variables; use auto-escaping; sandbox any template engine that handles
+untrusted content.
+**Dairy Park:** no server-side templating. The build (`scripts/build.mjs`)
+only replaces known placeholders such as the JSON-LD hash. Do not add a
+template engine that renders owner or visitor text as template code.
+
+### 8. ReDoS (Regular Expression Denial of Service) — 🔍
+
+**Risk:** a regex with nested or overlapping quantifiers (e.g. `(a+)+$`) takes
+exponential time on crafted input and freezes the server or the browser.
+**Prevent:** avoid nested quantifiers, prefer simple patterns, limit input
+length before matching, and use a linear-time engine or a tested library for
+complex validation.
+**Dairy Park:** the page does not run regexes on visitor input. Review any
+regex added to `app.js` or the build scripts.
+
+### 9. Long password DoS attack — 🟡
+
+**Risk:** an attacker submits a very long password; hashing it costs CPU time
+and can overload the server. bcrypt also ignores bytes after 72.
+**Prevent:** enforce a maximum length (for example 64–128 characters) before
+hashing, use a slow hash such as Argon2id or scrypt, and rate-limit login
+attempts.
+**Dairy Park:** there are no passwords. If a login is ever added, follow this
+rule.
+
+### 10. Secret key leaks — 🔍
+
+**Risk:** private keys, tokens or passwords are pushed to a public repo, shipped
+in front-end JavaScript, or left in old commits, and bots find them within
+minutes.
+**Prevent:** enable GitHub **secret scanning and push protection**, scan history
+with a tool such as `gitleaks`, rotate any key that was exposed (deleting it
+from the latest commit is not enough), and never put server keys in browser
+code.
+**Dairy Park:** the repository should contain no secrets. Turn on push
+protection, and never paste keys into `content.js` or any other file.
+
+### 11. NoSQL / SQL injection — 🟡
+
+**Risk:** user input changes a database query (`' OR 1=1 --` in SQL, or
+`{"$ne": null}` in MongoDB), which can leak or change data.
+**Prevent:** use parameterised queries or an ORM, never concatenate input into
+queries, validate types (reject objects where a string is expected), and use
+a least-privilege database account.
+**Dairy Park:** no database. Required if orders, bookings or reviews are ever
+stored.
+
+### 12. Clipboard attack — 🟡
+
+**Risk:** a page silently changes what is copied (for example, a payment or
+crypto address swapped by malware or a script), or reads the clipboard without
+permission.
+**Prevent:** only copy text the user asked for (on a click), never read the
+clipboard without consent, show the copied text, and do not put sensitive data
+on the clipboard.
+**Dairy Park:** the site does not read or write the clipboard. If a
+“copy address” or “copy phone” button is added, copy only the fixed text and
+show a confirmation.
+
+### 13. Replay attack — 🟡
+
+**Risk:** a valid request (login token, signed webhook, payment callback) is
+captured and sent again to repeat an action.
+**Prevent:** use short-lived tokens, a timestamp window, a unique nonce or
+request ID stored and checked once, idempotency keys for orders and payments,
+and HMAC signatures on webhooks. Use HTTPS everywhere.
+**Dairy Park:** no tokens or webhooks. If online ordering or payment callbacks
+are added, they must reject repeated and expired requests.
+
+### 14. Cross-site scripting (XSS) — ✅ / 🔍
+
+**Risk:** attacker-controlled text runs as script in a visitor's browser.
+**Prevent:** encode output (or use `textContent`), keep a strict Content-Security-
+Policy, avoid `innerHTML` with untrusted data, and sanitise any rich text.
+**Dairy Park:** the homepage ships a strict CSP `<meta>` tag, and owner text uses
+`textContent`. `app.js` uses `innerHTML` for hard-coded SVG and for the
+`html` option in `el()` — only ever pass trusted, hard-coded strings there.
+
+### 15. Broken access control / IDOR — 🟡
+
+**Risk:** a user changes an ID in a URL (`/orders/1042` → `/orders/1043`) and
+sees someone else's data.
+**Prevent:** check ownership or permission for every object on the server,
+use unguessable IDs where useful, and deny by default.
+**Dairy Park:** no per-user data. Applies if accounts or orders are added.
+
+### 16. Cross-site request forgery (CSRF) — 🟡
+
+**Risk:** a logged-in user's browser is tricked into sending an unwanted state-
+changing request to another site.
+**Prevent:** use anti-CSRF tokens, `SameSite` cookies (`Lax` or `Strict`),
+check the `Origin` header, and use only POST/PUT/DELETE for changes.
+**Dairy Park:** no cookies or sessions beyond the consent choice stored in
+`localStorage`, and no state-changing endpoints. Applies if a form or
+account is added.
+
+### 17. Clickjacking — 🟡
+
+**Risk:** the site is loaded in a hidden iframe and the user is tricked into
+clicking on it.
+**Prevent:** send `frame-ancestors` (CSP) or `X-Frame-Options: DENY` as an HTTP
+header.
+**Dairy Park:** GitHub Pages cannot send custom headers, so the protection is
+limited (see “Limits worth knowing” above). A header-capable host is the fix.
+
+### 18. Security misconfiguration — 🔍
+
+**Risk:** default passwords, open admin pages, directory listings, verbose
+errors, or missing security headers.
+**Prevent:** use a repeatable hardened setup, remove unused features, review
+headers and permissions, and check settings after each change.
+**Dairy Park:** `npm run check` verifies security-related HTML and every local
+asset link. Review it after changing the build or the host.
+
+### 19. Vulnerable and outdated components / supply chain — 🔍
+
+**Risk:** outdated libraries or a compromised package run in your build.
+**Prevent:** commit lock files, keep dependencies up to date, run
+`npm audit`, and pin GitHub Actions to a version.
+**Dairy Park:** `package-lock.json` is committed, and Dependabot checks npm and
+GitHub Actions. Run `npm audit` before releases.
+
+### 20. Brute force and credential stuffing — 🟡
+
+**Risk:** automated guessing of passwords, or reuse of leaked username/password
+pairs from other sites.
+**Prevent:** rate limits and lockouts (topic 1), MFA, breached-password
+checks, and generic login error messages.
+**Dairy Park:** no login. Applies to any future admin or account system.
+
+### 21. Open redirect — 🔍
+
+**Risk:** a link such as `?next=https://evil.example` sends users to a malicious
+site, which helps phishing.
+**Prevent:** allow-list redirect targets or use relative paths only.
+**Dairy Park:** the site has no redirect parameters. Keep any link generated
+from content on known domains.
+
+### 22. Logging and monitoring — 🟡
+
+**Risk:** attacks go unnoticed because there are no logs or alerts, or logs
+store passwords and personal data.
+**Prevent:** log security events (failed logins, access denials, errors) without
+secrets or personal data, keep logs for a set period, and set up alerts.
+**Dairy Park:** GitHub Pages and GitHub Actions keep build and deploy logs.
+Uptime and error monitoring can be added if the site moves to a server.
+
+---
+
+**Review cadence:** check this list when a new feature (form, account, upload,
+payment, API) is added, and at least once a year.
