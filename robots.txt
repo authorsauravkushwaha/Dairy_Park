@@ -1,0 +1,5 @@
+# Dairy Park — Kolaghat, West Bengal
+User-agent: *
+Allow: /
+
+Sitemap: https://authorsauravkushwaha.github.io/Dairy_Park/sitemap.xml

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Dish photo coming soon">
+  <defs>
+    <linearGradient id="d1" x1="0" y1="0" x2="800" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fbf0dd"/>
+      <stop offset=".6" stop-color="#f3e0c6"/>
+      <stop offset="1" stop-color="#e9d2b4"/>
+    </linearGradient>
+    <radialGradient id="d2" cx="0" cy="0" r="1" gradientTransform="translate(520 180) scale(420 340)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe6c2" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#ffe6c2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#d1)"/>
+  <rect width="800" height="600" fill="url(#d2)"/>
+  <g fill="none" stroke="#b8330f" stroke-opacity=".28" stroke-width="3" stroke-linecap="round">
+    <path d="M300 268h200a100 100 0 0 1-200 0Z" stroke-opacity=".42"/>
+    <path d="M352 226c0-20 20-24 20-44M400 226c0-20 20-24 20-44M448 226c0-20 20-24 20-44" stroke-opacity=".3"/>
+    <circle cx="400" cy="350" r="122" stroke-dasharray="2 12" stroke-opacity=".28"/>
+  </g>
+  <g fill="#b8330f" fill-opacity=".22">
+    <circle cx="238" cy="196" r="5"/>
+    <circle cx="566" cy="420" r="4"/>
+    <circle cx="530" cy="156" r="3"/>
+  </g>
+  <rect width="800" height="600" fill="none" stroke="#b8330f" stroke-opacity=".12"/>
+</svg>

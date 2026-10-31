@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="900" height="700" role="img" aria-label="Shop photo coming soon">
+  <defs>
+    <linearGradient id="s1" x1="0" y1="0" x2="900" y2="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7e8d3"/>
+      <stop offset="1" stop-color="#e6cdae"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="700" fill="url(#s1)"/>
+  <g fill="none" stroke="#b8330f" stroke-opacity=".3" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M250 300h400v260H250z"/>
+    <path d="M232 300h436l-26-74H258z"/>
+    <path d="M232 300h436v26H232z" stroke-opacity=".2"/>
+    <path d="M258 226l-26 74M330 226l-12 74M410 226l0 74M490 226l12 74M562 226l26 74" stroke-opacity=".22"/>
+    <path d="M300 560v-118h88v118" />
+    <path d="M440 340h150v110H440z" stroke-opacity=".42"/>
+    <path d="M440 395h150" stroke-opacity=".22"/>
+    <path d="M380 200c0-18 18-22 18-40M420 200c0-18 18-22 18-40" stroke-opacity=".28"/>
+  </g>
+  <g fill="#b8330f" fill-opacity=".2">
+    <circle cx="196" cy="590" r="6"/>
+    <circle cx="722" cy="170" r="5"/>
+    <circle cx="700" cy="600" r="4"/>
+  </g>
+  <rect width="900" height="700" fill="none" stroke="#b8330f" stroke-opacity=".12"/>
+</svg>
