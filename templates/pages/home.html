@@ -9,7 +9,7 @@
     <!-- ================= HERO ================= -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero__bg">
-        <img id="heroPhoto" src="assets/img/photos/owner.jpeg" alt="The owner of Dairy Park at the restaurant in Kolaghat" data-i18n-alt="hero.photoAlt" width="960" height="1280" fetchpriority="high" decoding="async">
+        <img id="heroPhoto" src="assets/img/photos/owner.webp" alt="The owner of Dairy Park at the restaurant in Kolaghat" data-i18n-alt="hero.photoAlt" width="960" height="1280" fetchpriority="high" decoding="async">
       </div>
       <div class="hero__scrim" aria-hidden="true"></div>
 
@@ -36,6 +36,10 @@
           </h1>
 
           <p class="hero__sub" data-i18n="hero.sub">Dairy Park is a fast-food stop in Kolaghat, with dine-in and drive-through. Pull in for our menu highlights — or call before you come.</p>
+
+          <a class="hero__picks" id="heroPicks" href="food/" data-i18n-aria="hero.picksAria" hidden>
+            <span class="hero__picks-label" data-i18n="hero.picksLabel">Worth trying</span>
+          </a>
 
           <div class="hero__actions">
             <a class="btn btn--primary btn--lg" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="hero">
@@ -114,6 +118,31 @@
       </div>
     </div>
 
+    <!-- ================= TRUST / STATS BAND ================= -->
+    <section class="trust" id="trust" aria-labelledby="trust-title">
+      <div class="container">
+        <h2 class="sr-only" id="trust-title" data-i18n="trust.title">Dairy Park at a glance</h2>
+        <ul class="trust__list">
+          <li class="trust__item reveal" data-reveal="up" data-review-summary hidden>
+            <span class="trust__num"><span data-count="4" data-decimals="1" data-bind="rating">4.0</span></span>
+            <span class="trust__label" data-i18n="trust.rating">Google rating</span>
+          </li>
+          <li class="trust__item reveal" data-reveal="up" data-review-summary hidden>
+            <span class="trust__num"><span data-count="204" data-bind="reviewCount">204</span></span>
+            <span class="trust__label" data-i18n="trust.reviews">Google reviews</span>
+          </li>
+          <li class="trust__item reveal" data-reveal="up">
+            <span class="trust__num"><span data-bind="spend">₹1–200</span></span>
+            <span class="trust__label" data-i18n="trust.spend">Typical spend per person</span>
+          </li>
+          <li class="trust__item reveal" data-reveal="up">
+            <span class="trust__num"><span data-count="2" data-bind="facilityCount">2</span></span>
+            <span class="trust__label" data-i18n="trust.ways">Ways to visit — dine-in &amp; drive-through</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <!-- ================= WELCOME ================= -->
     <section class="section section--cream welcome" id="welcome" aria-labelledby="welcome-title">
       <div class="container">
@@ -170,6 +199,25 @@
         </div>
 
         <div class="dish-grid" id="dishGrid"></div>
+
+        <!-- "Order both" nudge -->
+        <aside class="pairing reveal" id="pairing" data-reveal="up" aria-labelledby="pairing-title">
+          <span class="pairing__glow" aria-hidden="true"></span>
+          <div class="pairing__plates" aria-hidden="true">
+            <span class="pairing__plate pairing__plate--a"><img src="assets/img/placeholder-dish.svg" alt="" width="200" height="200" loading="lazy" decoding="async" data-pairing-photo="dahi-vada"></span>
+            <span class="pairing__plus">+</span>
+            <span class="pairing__plate pairing__plate--b"><img src="assets/img/placeholder-dish.svg" alt="" width="200" height="200" loading="lazy" decoding="async" data-pairing-photo="steam-momo"></span>
+          </div>
+          <div class="pairing__text">
+            <p class="eyebrow" data-bind="pairingEyebrow">The regular's order</p>
+            <h3 class="pairing__title" id="pairing-title" data-bind="pairingTitle">One plate each. Share the table.</h3>
+            <p class="pairing__desc" data-bind="pairingDesc">Dahi Vada for the cool bite, Steam Momo for the hot one. Plenty of people order both — ask for them together at the counter.</p>
+          </div>
+          <a class="btn btn--primary btn--lg pairing__cta" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="pairing">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span data-bind="pairingCta">Call to order both</span>
+          </a>
+        </aside>
 
         <noscript>
           <div class="menu__noscript">

@@ -6,7 +6,7 @@
  * Image probes fail on purpose so the placeholder paths are exercised.
  */
 import { JSDOM } from 'jsdom';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -18,6 +18,21 @@ const pass = [];
 const expect = (condition, message) => (condition ? pass.push(message) : failures.push(message));
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/** Photo files actually shipped in dist — mirrored here so the image probes in
+ *  jsdom resolve the same way they do in a real browser. The two featured-dish
+ *  photos are deliberately excluded so the placeholder path stays covered. */
+let shippedPhotoCache = null;
+async function shippedPhotos() {
+  if (shippedPhotoCache) return shippedPhotoCache;
+  const files = await readdir(path.join(dist, 'assets/img/photos')).catch(() => []);
+  shippedPhotoCache = new Set(
+    files
+      .filter((f) => /\.(webp|avif|jpe?g|png)$/i.test(f))
+      .filter((f) => !/^(dahi-vada|steam-momo)\./.test(f))
+  );
+  return shippedPhotoCache;
+}
 
 async function loadPage(outFile, urlPath) {
   const html = await readFile(path.join(dist, outFile), 'utf8');
@@ -52,13 +67,10 @@ async function loadPage(outFile, urlPath) {
   window.Element.prototype.scrollIntoView = function () {};
   window.scrollTo = () => {};
 
-  // Simulate the owner-supplied photos loading (menu-item photos stay absent
-  // so the designed placeholder path is exercised too).
-  const suppliedPhotos = new Set([
-    'owner.jpeg', 'owner.jpg', 'shop.jpeg', 'counter-snacks.jpeg',
-    'ice-cream-freezer.jpeg', 'chocolate-freezer.jpeg',
-    'menu-drinks.jpeg', 'menu-spread-1.jpeg', 'menu-spread-2.jpeg'
-  ]);
+  // Simulate the photos that are actually shipped in dist/assets/img/photos/.
+  // The two featured-dish photos are deliberately left out so the designed
+  // placeholder path stays covered by the tests below.
+  const suppliedPhotos = await shippedPhotos();
   window.Image = class {
     constructor() { this.onload = null; this.onerror = null; this.naturalWidth = 0; }
     set src(value) {
@@ -123,6 +135,20 @@ async function loadPage(outFile, urlPath) {
   expect([...document.querySelectorAll('[data-review-summary]')].every((node) => node.hidden), 'home: unverified rating chips stay hidden');
   expect([...document.querySelectorAll('[data-review-link]')].every((node) => node.hidden), 'home: review nav links stay hidden');
   expect(document.querySelector('.nav [data-nav="reviews"]').hidden === true, 'home: Reviews nav item hides while unverified');
+
+  // Home page extras added on top of the multi-page build
+  expect(document.querySelector('#trust') !== null, 'home: trust band exists');
+  expect(document.querySelectorAll('.trust__item:not([hidden])').length === 2, 'home: trust band hides the unverified rating figures');
+  // dataset.count is the settled value; .textContent is mid-count-up at this point
+  expect(document.querySelector('[data-bind="facilityCount"]').dataset.count === '2', 'home: facility count comes from content.js');
+  expect(document.querySelector('[data-bind="spend"]').textContent === '₹1–200', 'home: typical spend renders');
+  expect(document.querySelector('#pairing') !== null, 'home: order-both strip exists');
+  expect(document.querySelector('[data-bind="pairingTitle"]').textContent.length > 0, 'home: order-both strip has its headline');
+  expect(document.querySelectorAll('.dish__tag').length === 2, 'home: dish cards render their gold tag ribbon');
+
+  // Photo-driven extras must degrade gracefully while no photo is uploaded
+  expect(document.querySelectorAll('.pairing__plate').length === 0, 'home: order-both strip drops the plates when no photo exists');
+  expect(document.querySelector('#heroPicks').hidden === true, 'home: hero dish peeks stay hidden without photos');
 
   // Language switch keeps the visitor on the same page
   document.querySelector('[data-lang="bn"]').click();

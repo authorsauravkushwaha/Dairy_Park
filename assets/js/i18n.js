@@ -87,6 +87,15 @@ window.DP_I18N = {
     "hero.ownerKicker": "Meet the owner",
     "hero.ownerRole": "Owner, Dairy Park",
     "hero.scroll": "Scroll to explore",
+    "hero.picksLabel": "Worth trying",
+    "hero.picksAria": "See the menu highlights",
+
+    /* ---------- trust band (home) ---------- */
+    "trust.title": "Dairy Park at a glance",
+    "trust.rating": "Google rating",
+    "trust.reviews": "Google reviews",
+    "trust.spend": "Typical spend per person",
+    "trust.ways": "Ways to visit — dine-in & drive-through",
 
     "dish.dahiVada": "Dahi Vada",
     "dish.steamMomo": "Steam Momo",
@@ -432,6 +441,15 @@ window.DP_I18N = {
     "hero.ownerKicker": "মালিকের সাথে পরিচিত হন",
     "hero.ownerRole": "মালিক, ডেয়ারি পার্ক",
     "hero.scroll": "নিচে স্ক্রল করুন",
+    "hero.picksLabel": "চেখে দেখুন",
+    "hero.picksAria": "মেনুর জনপ্রিয় পদ দেখুন",
+
+    /* ---------- trust band (home) ---------- */
+    "trust.title": "এক নজরে ডেয়ারি পার্ক",
+    "trust.rating": "গুগল রেটিং",
+    "trust.reviews": "গুগল রিভিউ",
+    "trust.spend": "প্রতি জনে সাধারণ খরচ",
+    "trust.ways": "আসার উপায় — ডাইন-ইন ও ড্রাইভ-থ্রু",
 
     "dish.dahiVada": "দই বড়া",
     "dish.steamMomo": "স্টিম মোমো",

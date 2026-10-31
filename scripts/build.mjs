@@ -164,8 +164,10 @@ async function assemblePage(page, ctx) {
     home: homeHref,
     page: page.id,
     bodyClass: page.id === 'home' ? '' : 'subpage',
+    // WebP is the format findPhoto() tries first, so preload that exact file
+    // or the browser downloads the hero twice.
     headExtra: page.id === 'home'
-      ? '  <link rel="preload" href="assets/img/photos/owner.jpeg" as="image" fetchpriority="high">'
+      ? '  <link rel="preload" href="assets/img/photos/owner.webp" as="image" fetchpriority="high">'
       : '',
     jsonld,
     jsonldHash,

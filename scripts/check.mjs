@@ -281,6 +281,26 @@ const photos = await readdir(path.join(dist, 'assets/img/photos')).catch(() => [
 const realPhotos = photos.filter((f) => /\.(webp|avif|jpe?g|png)$/i.test(f));
 if (!realPhotos.length) notes.push('no owner photos uploaded yet — designed placeholders are in use');
 
+/* Every photo referenced from content.js must actually exist — otherwise the
+   site silently falls back to a placeholder where a real photo was intended. */
+const referenced = [];
+for (const value of Object.values(C.photos || {})) if (typeof value === 'string') referenced.push(value);
+for (const item of C.menu || []) if (item && item.photo) referenced.push(item.photo);
+for (const shot of C.gallery || []) if (shot && shot.base) referenced.push(shot.base);
+for (const promo of C.promos || []) if (promo && promo.photo) referenced.push(promo.photo);
+for (const base of new Set(referenced)) {
+  const found = realPhotos.some((file) => file.replace(/\.(webp|avif|jpe?g|png)$/i, '') === path.basename(base));
+  if (!found) fail(`content.js points at a photo that is not in assets/img/photos/: ${base}`);
+}
+
+/* Gallery captions/alts must be translated like every other string */
+for (const shot of C.gallery || []) {
+  if (!shot) continue;
+  if (shot.alt && (typeof shot.alt.en !== 'string' || typeof shot.alt.bn !== 'string')) {
+    fail('gallery entry has an alt that is not translated into both languages');
+  }
+}
+
 /* Report */
 for (const note of notes) console.log(`• ${note}`);
 if (problems.length) {

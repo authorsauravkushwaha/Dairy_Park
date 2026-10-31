@@ -140,6 +140,12 @@ window.DP_CONTENT = {
                  and the featured row of the Food & Menu page
      photo:      put an image in assets/img/photos/ and change the name here
                  (no file extension — .webp, .jpg or .png all work)
+     tag:        short gold ribbon on the photo, e.g. "Signature".
+                 Set to null (or delete the line) for no ribbon.
+     badges:     optional ticked lines under the name, e.g.
+                 [ { en: "Served with chutney", bn: "চাটনি সঙ্গে" } ]
+                 Leave empty until you have confirmed each line — the site
+                 shows nothing at all while the list is empty.
      --------------------------------------------------------------------- */
   menu: [
     {
@@ -152,6 +158,8 @@ window.DP_CONTENT = {
       veg: null,
       available: true,
       highlight: true,
+      tag: { en: "Signature", bn: "সিগনেচার" },
+      badges: [],
       photo: "assets/img/photos/dahi-vada"
     },
     {
@@ -164,9 +172,27 @@ window.DP_CONTENT = {
       veg: null,
       available: true,
       highlight: true,
+      tag: { en: "Steamed", bn: "স্টিম করা" },
+      badges: [],
       photo: "assets/img/photos/steam-momo"
     }
   ],
+
+  /* ---------------------------------------------------------------------
+     6b. THE "ORDER BOTH" STRIP (under the menu on the home page)
+     A gentle nudge to try both highlights. No prices, no invented claims.
+     Set show: false to hide the whole strip.
+     --------------------------------------------------------------------- */
+  pairing: {
+    show: true,
+    eyebrow: { en: "The regular's order", bn: "নিয়মিতদের অর্ডার" },
+    title: { en: "One plate each. Share the table.", bn: "একটি করে প্লেট। টেবিল ভাগ করে নিন।" },
+    desc: {
+      en: "Dahi Vada for the cool bite, Steam Momo for the hot one. Plenty of people order both — ask for them together at the counter.",
+      bn: "ঠান্ডা স্বাদের জন্য দই বড়া, গরম স্বাদের জন্য স্টিম মোমো। অনেকেই দুটোই নেন — কাউন্টারে একসঙ্গে চেয়ে নিন।"
+    },
+    cta: { en: "Call to order both", bn: "দুটোই অর্ডার করতে কল করুন" }
+  },
 
   /* ---------------------------------------------------------------------
      7. SPECIAL OFFERS
