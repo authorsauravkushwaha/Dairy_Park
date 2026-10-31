@@ -2,7 +2,7 @@ name: Build and deploy website
 
 on:
   push:
-    branches: [main, arena/412f2c65-dairy-park]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

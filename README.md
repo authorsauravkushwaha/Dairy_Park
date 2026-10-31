@@ -63,9 +63,7 @@ tests rendering, the Bengali switch, phone links and the mobile menu.
 
 Pushes to `main` run `.github/workflows/deploy.yml`, which builds `dist/`,
 runs both test suites, and publishes the artifact with GitHub Pages
-(Settings → Pages → Source: **GitHub Actions**). The active Arena delivery
-branch is also enabled for a deployment run so this update can be published
-without changing branches.
+(Settings → Pages → Source: **GitHub Actions**).
 
 Because the repository is named `Dairy_Park`, GitHub serves it from a
 sub-path: `https://authorsauravkushwaha.github.io/Dairy_Park/`. All asset URLs
