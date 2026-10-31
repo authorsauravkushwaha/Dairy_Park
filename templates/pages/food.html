@@ -1,0 +1,95 @@
+<!--meta
+{
+  "page": "food",
+  "title": "Food & Menu | Dairy Park Kolaghat – Dahi Vada, Steam Momo & More",
+  "desc": "Discover what's good at Dairy Park, Kolaghat. Browse our menu highlights including Dahi Vada and Steam Momo, with category filters and call-to-enquire. Fast food on Kolaghat – Jashar Road.",
+  "slug": "food/"
+}
+-->
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero" aria-labelledby="food-title">
+      <div class="page-hero__bg" aria-hidden="true"></div>
+      <div class="container page-hero__inner">
+        <nav class="crumbs" aria-label="Breadcrumb" data-i18n-aria="a11y.breadcrumb">
+          <a href="../" data-i18n="nav.home">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page" data-i18n="nav.menu">Food &amp; Menu</span>
+        </nav>
+        <p class="eyebrow eyebrow--light reveal" data-i18n="foodPage.eyebrow">Food &amp; Menu</p>
+        <h1 class="page-hero__title reveal" id="food-title" data-reveal="down" data-i18n="foodPage.title">Discover What’s Good at Dairy Park.</h1>
+        <p class="page-hero__lead reveal" data-i18n="foodPage.lead">Our confirmed menu highlights from Kolaghat — fresh from the counter on Kolaghat – Jashar Road. Prices and the full list are confirmed when you call or visit.</p>
+        <div class="page-hero__actions reveal">
+          <a class="btn btn--primary" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="food_hero">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span data-i18n="foodPage.callEnquire">Call to Enquire</span>
+          </a>
+          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=22.441782%2C87.8769404" data-link="directions" data-track="directions_click" data-track-location="food_hero" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21 3-8.5 18-2-7.5L3 11.5 21 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span data-i18n="sticky.directions">Get Directions</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED ================= -->
+    <section class="section section--cream food-featured" id="featured" aria-labelledby="featured-title" hidden>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal" data-i18n="foodPage.featuredEyebrow">Guest favourites</p>
+          <h2 class="section-title section-title--sm reveal" id="featured-title" data-reveal="down" data-i18n="foodPage.featuredTitle">Menu highlights</h2>
+        </div>
+        <div class="dish-grid dish-grid--featured" id="featuredGrid"></div>
+      </div>
+    </section>
+
+    <!-- ================= FULL MENU ================= -->
+    <section class="section section--dark food-menu" id="all-menu" aria-labelledby="allmenu-title">
+      <div class="food-menu__glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-head section-head--dark">
+          <p class="eyebrow eyebrow--light reveal" data-i18n="foodPage.browseEyebrow">The menu</p>
+          <h2 class="section-title reveal" id="allmenu-title" data-reveal="down" data-i18n="foodPage.browseTitle">Browse by category</h2>
+          <p class="section-lead reveal" data-i18n="foodPage.browseLead">Only categories with confirmed items are shown. Tap a dish for details, or call us about anything on the menu.</p>
+        </div>
+
+        <div class="menu-tools reveal">
+          <div class="menu-search">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="search" id="menuSearch" autocomplete="off" placeholder="Search the menu…" data-i18n-attr="placeholder|foodPage.search" aria-label="Search the menu" data-i18n-aria="foodPage.search">
+          </div>
+          <div class="menu-cats" id="menuCats" role="group" aria-label="Menu categories" data-i18n-aria="foodPage.catsLabel"></div>
+        </div>
+
+        <div class="dish-grid dish-grid--full" id="menuGrid"></div>
+
+        <div class="menu-empty" id="menuEmpty" hidden>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <h3 class="menu-empty__title" data-i18n="foodPage.emptyTitle">Nothing matches that search</h3>
+          <p class="menu-empty__text" data-i18n="foodPage.emptyText">Try another word, or clear the filters — and call us for the full counter menu.</p>
+          <button type="button" class="btn btn--ghost btn--sm" id="menuClear" data-i18n="foodPage.clear">Clear filters</button>
+        </div>
+
+        <noscript>
+          <div class="menu__noscript">
+            <h3 data-i18n="menu.noscriptTitle">Menu highlights</h3>
+            <p data-i18n="menu.noscript">Dahi Vada and Steam Momo. Call +91 99324 52124 for the full menu and today’s prices.</p>
+          </div>
+        </noscript>
+
+        <div class="menu__cta reveal">
+          <p class="menu__note" data-i18n="foodPage.ctaNote">Looking for something specific? The counter menu is bigger than what fits online — give us a call.</p>
+          <a class="btn btn--primary btn--lg" href="tel:+919932452124" data-link="phone" data-track="menu_call">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span data-i18n="foodPage.callEnquire">Call to Enquire</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DISH DETAIL DIALOG ================= -->
+    <dialog class="dish-dialog" id="dishDialog" aria-labelledby="dishDialogTitle">
+      <div class="dish-dialog__inner" id="dishDialogBody"></div>
+      <button type="button" class="dish-dialog__close" id="dishDialogClose" aria-label="Close" data-i18n-aria="a11y.close">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </dialog>

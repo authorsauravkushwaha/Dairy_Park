@@ -1,0 +1,135 @@
+<!--meta
+{
+  "page": "visit",
+  "title": "Visit Us | Dairy Park, Kolaghat – Jashar Road – Directions & Hours",
+  "desc": "Visit Dairy Park at Kolaghat – Jashar Road, Kolaghat, West Bengal 721134. Dine-in and drive-through. Get directions, call +91 99324 52124, or open the map.",
+  "slug": "visit/"
+}
+-->
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero" aria-labelledby="visit-title">
+      <div class="page-hero__bg" aria-hidden="true"></div>
+      <div class="container page-hero__inner">
+        <nav class="crumbs" aria-label="Breadcrumb" data-i18n-aria="a11y.breadcrumb">
+          <a href="../" data-i18n="nav.home">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page" data-i18n="nav.visit">Visit</span>
+        </nav>
+        <p class="eyebrow eyebrow--light reveal" data-i18n="visit.eyebrow">Visit us</p>
+        <h1 class="page-hero__title reveal" id="visit-title" data-reveal="down" data-i18n="visit.title">Come find Dairy Park in Kolaghat.</h1>
+        <p class="page-hero__lead reveal" data-i18n="visit.lead">Kolaghat – Jashar Road, Kolaghat, West Bengal 721134. Dine in, or use the drive-through — the map pin takes you straight to us.</p>
+        <div class="page-hero__actions reveal">
+          <a class="btn btn--primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=22.441782%2C87.8769404" data-link="directions" data-track="directions_click" data-track-location="visit_hero" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21 3-8.5 18-2-7.5L3 11.5 21 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span data-i18n="locate.directions">Get Directions</span>
+          </a>
+          <a class="btn btn--ghost" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="visit_hero">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span data-i18n="nav.call">Call Now</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MAP + DETAILS ================= -->
+    <section class="section section--cream locate locate--page" id="location" aria-labelledby="visit-map-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal" data-i18n="locate.eyebrow">Location &amp; contact</p>
+          <h2 class="section-title section-title--sm reveal" id="visit-map-title" data-reveal="down" data-i18n="visit.mapTitle">Dairy Park on the map</h2>
+        </div>
+
+        <div class="locate__grid">
+          <div class="map-card reveal" data-reveal="left">
+            <div class="map-card__frame">
+              <iframe
+                title="Google Map showing Dairy Park on Kolaghat – Jashar Road"
+                src="https://www.google.com/maps?q=Dairy+Park%2C+Kolaghat+-+Jashar+Rd%2C+Kolaghat%2C+West+Bengal+721134&amp;z=16&amp;hl=en&amp;output=embed"
+                data-link="mapEmbed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                width="600"
+                height="420"
+                allowfullscreen></iframe>
+            </div>
+            <a class="map-card__link" href="https://www.google.com/maps/place/Dairy+Park/@22.441782,87.8743655,17z/data=!3m1!4b1!4m6!3m5!1s0x3a0298420419a7f9:0x7076d2125261a325!8m2!3d22.441782!4d87.8769404" data-link="maps" data-track="maps_listing_click" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+              <span data-i18n="locate.maps">Open Google Maps listing</span>
+            </a>
+          </div>
+
+          <div class="info-card reveal" data-reveal="right">
+            <div class="info-row">
+              <span class="info-row__label" data-i18n="locate.addressLabel">Address</span>
+              <p class="info-row__value" data-bind="address">Kolaghat – Jashar Road, Kolaghat, West Bengal 721134</p>
+            </div>
+
+            <div class="info-row">
+              <span class="info-row__label" data-i18n="locate.phoneLabel">Phone</span>
+              <a class="info-row__value info-row__phone" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="visit">+91 99324 52124</a>
+            </div>
+
+            <div class="info-row">
+              <span class="info-row__label" data-i18n="locate.hoursLabel">Opening hours</span>
+              <div class="info-row__value" data-bind="hours">
+                Please call to confirm today’s timings. <span class="info-row__muted">Google lists a 10:30 PM closing time.</span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-row__label" data-i18n="locate.facilitiesLabel">Facilities</span>
+              <ul class="facility-list" id="facilityList"></ul>
+            </div>
+
+            <div class="info-row">
+              <span class="info-row__label" data-i18n="visit.spendLabel">Typical spend</span>
+              <p class="info-row__value"><span data-bind="spend">₹1–200</span> <span class="info-row__muted" data-i18n="why.perPerson">per person</span></p>
+            </div>
+
+            <div class="info-card__actions">
+              <a class="btn btn--primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=22.441782%2C87.8769404" data-link="directions" data-track="directions_click" data-track-location="visit" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21 3-8.5 18-2-7.5L3 11.5 21 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span data-i18n="locate.directions">Get Directions</span>
+              </a>
+              <a class="btn btn--outline" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="visit_card">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span data-i18n="locate.call">Call Now</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FIRST-VISIT TIPS ================= -->
+    <section class="section section--dark visit-tips" aria-labelledby="visit-tips-title">
+      <div class="container">
+        <div class="section-head section-head--dark">
+          <p class="eyebrow eyebrow--light reveal" data-i18n="visit.tipsEyebrow">First time here?</p>
+          <h2 class="section-title section-title--sm reveal" id="visit-tips-title" data-reveal="down" data-i18n="visit.tipsTitle">Handy to know before you set off</h2>
+        </div>
+        <div class="visit-tips__grid">
+          <article class="fact reveal" data-reveal="up" data-tilt>
+            <span class="fact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </span>
+            <h3 class="fact__title" data-i18n="visit.tip1Title">On the main road</h3>
+            <p class="fact__desc" data-i18n="visit.tip1Desc">We’re on Kolaghat – Jashar Road — the same route many travellers use through Kolaghat.</p>
+          </article>
+          <article class="fact reveal" data-reveal="up" data-tilt>
+            <span class="fact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 15h18M5 15l1.6-5.2A2 2 0 0 1 8.5 8.3h7a2 2 0 0 1 1.9 1.5L19 15v3h-2.2M7.2 18H5v-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="18" r="1.4" fill="currentColor"/><circle cx="16" cy="18" r="1.4" fill="currentColor"/></svg>
+            </span>
+            <h3 class="fact__title" data-i18n="visit.tip2Title">Driving past?</h3>
+            <p class="fact__desc" data-i18n="visit.tip2Desc">Use the drive-through to order and collect without parking.</p>
+          </article>
+          <article class="fact reveal" data-reveal="up" data-tilt>
+            <span class="fact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <h3 class="fact__title" data-i18n="visit.tip3Title">Call before you come</h3>
+            <p class="fact__desc" data-i18n="visit.tip3Desc">Not sure about timings or a particular dish? One call saves a wasted trip.</p>
+          </article>
+        </div>
+      </div>
+    </section>

@@ -1,8 +1,10 @@
 # Security notes — Dairy Park website
 
 This is a **static marketing website**: no server code, no database, no user
-accounts, no forms, no payments and no ordering. That removes most of the usual
-attack surface. The remaining risks are handled as follows.
+accounts, no payments and no ordering. The only form is a client-side enquiry
+helper that transmits nothing (it points visitors to the phone number instead).
+That removes most of the usual attack surface. The remaining risks are handled
+as follows.
 
 ## What is in place
 
@@ -22,10 +24,12 @@ attack surface. The remaining risks are handled as follows.
 - **XSS-safe rendering.** Owner content is inserted with `textContent` /
   `createElement`, never `innerHTML`, so text from `content.js` cannot inject
   markup. `innerHTML` is used only for hard-coded SVG icon paths in the script.
-- **No form input to validate.** Contact happens through `tel:` links, so there
-  is nothing to sanitise, spam-filter or submit. If a contact form is ever
-  added, it must be handled by a validated server endpoint plus CSRF protection
-  and spam control — do not bolt one on client-side only.
+- **The enquiry form sends nothing.** The contact page’s form validates input
+  in the browser (length + digit checks), then shows a status panel directing
+  the visitor to call — no data leaves the device, there is no endpoint to
+  spam, and the site never claims a message was delivered. If real form
+  delivery is ever added, it must be handled by a validated server endpoint
+  plus CSRF protection and spam control — do not bolt one on client-side only.
 - **Privacy:** analytics is opt-in via a consent banner; declining loads
   nothing. See `privacy.html`.
 - **Supply chain:** the build uses two pinned dev dependencies (`esbuild`,
