@@ -637,7 +637,7 @@ html[lang="bn"] .section-title {
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 8.6vw, 5rem);
+  font-size: clamp(2.2rem, 9vw, 4.5rem);
   line-height: .98;
   letter-spacing: -.03em;
   font-weight: 600;
@@ -645,7 +645,7 @@ html[lang="bn"] .section-title {
   overflow-wrap: break-word;
 }
 html[lang="bn"] .hero__title {
-  font-size: clamp(2.05rem, 7vw, 3.9rem);
+  font-size: clamp(1.95rem, 7.2vw, 3.4rem);
   line-height: 1.22;
   letter-spacing: 0;
 }
