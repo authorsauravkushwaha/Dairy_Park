@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{title}}</title>
+  <meta name="description" content="{{desc}}">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#150e0b">
+  <meta name="format-detection" content="telephone=yes">
+  <link rel="canonical" href="{{canonical}}">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dairy Park">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{desc}}">
+  <meta property="og:url" content="{{canonical}}">
+  <meta property="og:image" content="{{ogImage}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dairy Park — fast food restaurant in Kolaghat, West Bengal">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:locale:alternate" content="bn_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{desc}}">
+  <meta name="twitter:image" content="{{ogImage}}">
+
+  <!-- Security: tighten what the page may load. See SECURITY.md -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' {{jsonldHash}} https://www.googletagmanager.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; frame-src https://www.google.com https://maps.google.com; form-action 'self'; frame-ancestors 'self'; manifest-src 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="icon" href="{{base}}assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{base}}assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="{{base}}manifest.webmanifest">
+
+  <link rel="preload" href="{{base}}assets/fonts/fraunces-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{base}}assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{base}}assets/css/main.min.css?v={{cssVer}}">
+
+  <!-- Local business structured data, generated at build time from content.js.
+       Only verified information is used — no invented ratings or hours. -->
+  <script type="application/ld+json">{{jsonld}}</script>
+</head>
+<body class="{{bodyClass}}" data-page="{{page}}" data-base="{{base}}">
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+  <div class="progress" aria-hidden="true"></div>
+
+{{include:header}}
+{{include:drawer}}
+
+  <main id="main">
+{{main}}
+  </main>
+
+{{include:footer}}
+{{include:sticky}}
+{{include:consent}}
+
+  <script src="{{base}}content.js"></script>
+  <script src="{{base}}assets/js/i18n.js"></script>
+  <script src="{{base}}assets/js/app.min.js?v={{jsVer}}" defer></script>
+</body>
+</html>

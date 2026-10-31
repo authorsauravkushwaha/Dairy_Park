@@ -1,0 +1,54 @@
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a class="brand brand--footer" href="{{home}}">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" focusable="false">
+              <rect width="48" height="48" rx="14" fill="url(#brandGrad2)"></rect>
+              <path d="M12.5 24.5h23a11.5 11.5 0 0 1-23 0Z" fill="none" stroke="#FFF7EC" stroke-width="2.6" stroke-linejoin="round"></path>
+              <path d="M18 18.5c0-2 2-2.4 2-4.4M24 18.5c0-2 2-2.4 2-4.4M30 18.5c0-2 2-2.4 2-4.4" fill="none" stroke="#FFF7EC" stroke-width="2.2" stroke-linecap="round" opacity=".9"></path>
+              <defs><linearGradient id="brandGrad2" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#F26A2E"></stop><stop offset=".55" stop-color="#D9441C"></stop><stop offset="1" stop-color="#A92C10"></stop></linearGradient></defs>
+            </svg>
+          </span>
+          <span class="brand__text">
+            <span class="brand__name">Dairy Park</span>
+            <span class="brand__bn" lang="bn">ডেয়ারি পার্ক</span>
+          </span>
+        </a>
+        <p class="footer__about" data-i18n="footer.about">Dairy Park is a fast-food restaurant in Kolaghat, West Bengal — dine-in and drive-through.</p>
+        <p class="footer__addr" data-bind="address">Kolaghat – Jashar Road, Kolaghat, West Bengal 721134</p>
+      </div>
+
+      <nav class="footer__col" aria-labelledby="footer-explore">
+        <h2 class="footer__title" id="footer-explore" data-i18n="footer.explore">Explore</h2>
+        <a href="{{base}}food/" data-nav="menu" data-i18n="nav.menu">Food &amp; Menu</a>
+        <a href="{{base}}about/" data-nav="about" data-i18n="nav.about">About</a>
+        <a href="{{base}}gallery/" data-nav="gallery" data-i18n="nav.gallery">Gallery</a>
+        <a href="{{base}}offers/" data-nav="offers" data-i18n="nav.offers">Offers</a>
+        <a href="{{base}}reviews/" data-nav="reviews" data-i18n="nav.reviews">Reviews</a>
+      </nav>
+
+      <div class="footer__col">
+        <h2 class="footer__title" data-i18n="footer.contact">Contact</h2>
+        <a href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="footer">+91 99324 52124</a>
+        <a href="{{base}}visit/" data-nav="visit" data-i18n="nav.visit">Visit</a>
+        <a href="{{base}}contact/" data-nav="contact" data-i18n="nav.contact">Contact</a>
+        <a href="https://www.google.com/maps/place/Dairy+Park/@22.441782,87.8743655,17z/data=!3m1!4b1!4m6!3m5!1s0x3a0298420419a7f9:0x7076d2125261a325!8m2!3d22.441782!4d87.8769404" data-link="maps" data-track="maps_listing_click" target="_blank" rel="noopener" data-i18n="locate.maps">Open Google Maps listing</a>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=22.441782%2C87.8769404" data-link="directions" data-track="directions_click" data-track-location="footer" target="_blank" rel="noopener" data-i18n="locate.directions">Get Directions</a>
+      </div>
+
+      <div class="footer__col">
+        <h2 class="footer__title" data-i18n="footer.hoursTitle">Hours</h2>
+        <p class="footer__hours" data-bind="hoursFooter">Please call to confirm today’s timings. Google lists a 10:30 PM closing time.</p>
+        <p class="footer__note" data-bind="footerNote">Menu highlights, facilities and rating are based on our Google Maps listing. Prices and timings can change — please call to confirm.</p>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <p>© <span id="year">2026</span> Dairy Park · ডেয়ারি পার্ক · <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer__legal">
+        <a href="{{base}}privacy.html" data-i18n="footer.privacy">Privacy note</a>
+        <button type="button" class="footer__consent-btn" id="consentReopen" data-i18n="footer.analytics" hidden>Analytics settings</button>
+      </div>
+    </div>
+  </footer>

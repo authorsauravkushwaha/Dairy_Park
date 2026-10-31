@@ -6,51 +6,71 @@ itself automatically (about a minute).
 
 ---
 
-## 1. Add the owner + shop photos (do this first)
+## 1. Add the restaurant photos (do this first)
 
-1. Open the folder `assets/img/photos/`.
-2. Upload your real photos with these exact names:
+Upload your real photos into `assets/img/photos/` (single-photo slots) and
+`assets/img/photos/gallery/` (gallery slots). The site picks up `.jpg`,
+`.jpeg`, `.png`, `.webp` and `.avif` automatically. Until a photo exists, a
+designed placeholder is shown — nothing ever breaks, and no fake photograph is
+ever used.
 
 | File name | Where it shows |
 | --- | --- |
-| `owner.jpg` (or `.webp` / `.png`) | Full-screen background of the homepage |
-| `shop.jpg` | “Inside Dairy Park” gallery |
-| `shop-2.jpg` | Second gallery photo (optional) |
-| `dahi-vada.jpg` | Dahi Vada menu card |
-| `steam-momo.jpg` | Steam Momo menu card |
+| `photos/owner.*` | Homepage hero background + About page inset |
+| `photos/shop.*` | About page main photo |
+| `photos/shop-2.*` | (optional, spare slot) |
+| `photos/dahi-vada.*` | Dahi Vada cards on Home + Food & Menu |
+| `photos/steam-momo.*` | Steam Momo cards on Home + Food & Menu |
+| `photos/offer-combo.*` | Offer cards (when you add a promo with a photo) |
 
-The site detects the file automatically — `.jpg`, `.jpeg`, `.png`, `.webp` and
-`.avif` all work. Until a photo exists, a designed placeholder is shown, so
-nothing ever breaks.
+Gallery photographs live in `assets/img/photos/gallery/` and are listed in
+`content.js → gallery`. Add a line for each uploaded file:
 
-**Tip:** crop the owner photo landscape (or at least 1600 px wide) and keep each
-file under ~400 kB so phones load it quickly.
+```js
+gallery: [
+  { section: "exterior",
+    base: "assets/img/photos/gallery/exterior-1",
+    alt: { en: "Dairy Park shop front on Kolaghat – Jashar Road",
+           bn: "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের সামনের দৃশ্য" } }
+]
+```
 
----
+`section` can be `exterior`, `interior`, `food` or `products` — those are the
+four headings on the Gallery page. Sections without photos show a designed
+“photograph coming soon” tile.
+
+**Tip:** crop photos landscape (at least 1200 px wide, 1600 px for the hero)
+and keep each file under ~400 kB so phones load them quickly.
 
 ## 2. Change the menu (`content.js`)
 
-Open `content.js` and find the `menu: [` list. Each item looks like this:
+Menu items live in `content.js → menu`. Each item looks like this:
 
 ```js
 {
   id: "dahi-vada",
   name: { en: "Dahi Vada", bn: "দই বড়া" },
   desc: { en: "Short description", bn: "সংক্ষিপ্ত বিবরণ" },
-  price: null,          // "₹40" once a price is confirmed
-  veg: null,            // true = Veg, false = Non-veg, null = no label
-  available: true,      // false shows "Not available right now"
-  highlight: true,      // shows the "Menu highlight" tag
+  category: "special",    // one of the ids in menuCategories below
+  price: null,            // "₹40" once a price is confirmed
+  veg: null,              // true = Veg, false = Non-veg, null = no label
+  available: true,        // false shows "Not available right now"
+  highlight: true,        // shows on the home page + featured row
   photo: "assets/img/photos/dahi-vada"
 }
 ```
 
 - **Add an item:** copy a block (from `{` to `},`) and paste it after the last
   one, then change the values. Keep the commas!
-- **Remove an item:** delete its whole block, again keeping commas valid.
+- **Categories:** the Food & Menu page shows only categories that have at least
+  one item. Proposed categories (Snacks, Chaat, Beverages, Ice Cream, Other…)
+  stay hidden until you add an item that uses them — so never add an empty one
+  to the website by accident. Category ids: `special`, `snacks`, `momos`,
+  `chaat`, `beverages`, `icecream`, `other`.
 - **Price:** leave `null` until you have confirmed the price. The site shows
   “Ask for today’s price” — it never invents a number.
-- The last item must not have a comma after its closing `}`.
+- **Search & filters:** visitors can filter by category and search by name in
+  either language — all driven by this same list.
 
 ## 3. Opening hours (`content.js → hours`)
 
@@ -73,9 +93,24 @@ Never enable `verified` for hours you have not checked.
 
 ## 4. Offers (`content.js → promos`)
 
-While `promos: []` is empty, the offers section and its menu links are hidden
-completely. To publish a genuine, currently-running offer, add a block from the
-comment inside `content.js` and set `active: true`.
+The Special Offers page shows a friendly empty state while `promos: []` is
+empty. To publish a genuine, currently-running offer:
+
+```js
+promos: [
+  {
+    id: "combo-1",
+    active: true,
+    badge: { en: "Combo", bn: "কম্বো" },
+    title: { en: "Dahi Vada + Momo combo", bn: "দই বড়া + মোমো কম্বো" },
+    desc:  { en: "Ask for the combo price at the counter.", bn: "কাউন্টারে কম্বোর দাম জেনে নিন।" },
+    validity: { en: "Runs until further notice", bn: "পরবর্তী ঘোষণা পর্যন্ত" },
+    conditions: { en: "Available at the counter only.", bn: "শুধু কাউন্টারে।" },
+    photo: "assets/img/photos/offer-combo",   // optional
+    cta:   { en: "Call to ask", bn: "কল করে জিজ্ঞাসা করুন" }
+  }
+]
+```
 
 Rules: no fake discounts, no fake countdowns, no “limited time” unless it is
 true. When the offer ends, set `active: false` or delete the block.
@@ -89,23 +124,25 @@ live Google listing before publishing** and update:
 reviews: { show: true, rating: 4.0, count: 204, sourceLabel: "Google Maps" }
 ```
 
-If you would rather not display a rating, set `show: false` — the whole section
-disappears. Ratings are deliberately **not** put into the structured data
-(machine-readable SEO) because Google requires verified review data there.
+If you would rather not display a rating, set `show: false` — the rating
+blocks disappear. The Reviews page never copies customer quotes; it links to
+the real reviews on Google. Ratings are deliberately **not** put into the
+structured data (machine-readable SEO) because Google requires verified review
+data there.
 
 ## 6. Contact details (`content.js → business`)
 
 Update the phone, address, Maps listing link or directions link in one place.
 The call buttons, footer, map and structured data all use those values.
 If you change the domain (for example to `dairypark.com`), also update
-`site.url`, the canonical/Open Graph URLs in `index.html`, and
-`sitemap.xml` + `robots.txt`.
+`site.url` in `content.js` — canonicals, Open Graph URLs, structured data and
+the generated `sitemap.xml` all follow it automatically.
 
 ## 7. Wording and Bengali translation (`assets/js/i18n.js`)
 
 Every label exists twice: `en` (English) and `bn` (Bengali). Keep both sides in
 sync — the build checks that every key exists in both languages. Business facts
-(menu, prices, hours, offers) live in `content.js`, not here.
+(menu, prices, hours, offers, photos) live in `content.js`, not here.
 
 ## 8. Analytics (optional)
 
@@ -136,6 +173,8 @@ Run `npm test` locally if you want to see the same checks before publishing.
 ## Before you go live — owner checklist
 
 - [ ] Upload `owner.jpg` (homepage background) and `shop.jpg`.
+- [ ] Add real Gallery photographs to `assets/img/photos/gallery/` and list
+      them in `content.js → gallery` (exterior, interior, food, products).
 - [ ] Confirm the Google rating is still 4.0 from 204 reviews (or update it).
 - [ ] Confirm the full opening hours and set `hours.verified = true` only then.
 - [ ] Confirm the phone number is still +91 99324 52124.
@@ -147,7 +186,10 @@ Run `npm test` locally if you want to see the same checks before publishing.
 
 ## What the site deliberately does not do
 
-- It does not invent food prices, ratings, reviews, awards or hygiene claims.
+- It does not invent food prices, ratings, reviews, photographs, awards or
+  hygiene claims.
 - It does not offer online ordering, WhatsApp ordering, delivery or payments.
+- It does not pretend the enquiry form sends messages — there is no backend;
+  the form points visitors to your phone number instead.
 - It does not show fake urgency or countdown timers.
 - It does not track visitors without permission.

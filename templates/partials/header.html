@@ -1,0 +1,51 @@
+  <header class="site-header" id="top">
+    <div class="site-header__inner">
+      <a class="brand" href="{{home}}" aria-label="Dairy Park — home">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" focusable="false">
+            <rect width="48" height="48" rx="14" fill="url(#brandGrad)"></rect>
+            <path d="M12.5 24.5h23a11.5 11.5 0 0 1-23 0Z" fill="none" stroke="#FFF7EC" stroke-width="2.6" stroke-linejoin="round"></path>
+            <path d="M18 18.5c0-2 2-2.4 2-4.4M24 18.5c0-2 2-2.4 2-4.4M30 18.5c0-2 2-2.4 2-4.4" fill="none" stroke="#FFF7EC" stroke-width="2.2" stroke-linecap="round" opacity=".9"></path>
+            <defs>
+              <linearGradient id="brandGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F26A2E"></stop>
+                <stop offset=".55" stop-color="#D9441C"></stop>
+                <stop offset="1" stop-color="#A92C10"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">Dairy Park</span>
+          <span class="brand__bn" lang="bn">ডেয়ারি পার্ক</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation" data-i18n-aria="a11y.nav">
+        <a class="nav__link" href="{{home}}" data-nav="home" data-i18n="nav.home">Home</a>
+        <a class="nav__link" href="{{base}}food/" data-nav="menu" data-i18n="nav.menu">Food &amp; Menu</a>
+        <a class="nav__link" href="{{base}}about/" data-nav="about" data-i18n="nav.about">About</a>
+        <a class="nav__link" href="{{base}}gallery/" data-nav="gallery" data-i18n="nav.gallery">Gallery</a>
+        <a class="nav__link" href="{{base}}offers/" data-nav="offers" data-i18n="nav.offers">Offers</a>
+        <a class="nav__link" href="{{base}}reviews/" data-nav="reviews" data-i18n="nav.reviews">Reviews</a>
+        <a class="nav__link" href="{{base}}visit/" data-nav="visit" data-i18n="nav.visit">Visit</a>
+        <a class="nav__link" href="{{base}}contact/" data-nav="contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <div class="header__actions">
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="a11y.language">
+          <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true" lang="en" aria-label="English"><span data-i18n="lang.en">English</span><span class="lang-switch__short">EN</span></button>
+          <button type="button" class="lang-switch__btn" data-lang="bn" aria-pressed="false" lang="bn" aria-label="বাংলা"><span data-i18n="lang.bn">বাংলা</span><span class="lang-switch__short" aria-hidden="true">বাং</span></button>
+        </div>
+
+        <a class="btn btn--primary btn--sm header__call" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="header">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span data-i18n="nav.call">Call Now</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open navigation menu">
+          <span class="nav-toggle__box" aria-hidden="true"><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </header>

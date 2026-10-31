@@ -1,0 +1,55 @@
+<!--meta
+{
+  "page": "offers",
+  "title": "Special Offers | Dairy Park Kolaghat – Combos & Seasonal Deals",
+  "desc": "Current special offers at Dairy Park, Kolaghat. Combo offers, festival promotions and seasonal specials — confirmed offers only, on Kolaghat – Jashar Road.",
+  "slug": "offers/"
+}
+-->
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero" aria-labelledby="offers-title">
+      <div class="page-hero__bg" aria-hidden="true"></div>
+      <div class="container page-hero__inner">
+        <nav class="crumbs" aria-label="Breadcrumb" data-i18n-aria="a11y.breadcrumb">
+          <a href="../" data-i18n="nav.home">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page" data-i18n="nav.offers">Offers</span>
+        </nav>
+        <p class="eyebrow eyebrow--light reveal" data-i18n="offers.eyebrow">Offers</p>
+        <h1 class="page-hero__title reveal" id="offers-title" data-reveal="down" data-i18n="offersPage.title">Special offers, only when they’re real.</h1>
+        <p class="page-hero__lead reveal" data-i18n="offersPage.lead">Combo offers, festival promotions and seasonal specials appear here once the restaurant confirms them. No fake discounts, no countdowns.</p>
+      </div>
+    </section>
+
+    <!-- ================= ACTIVE OFFERS ================= -->
+    <section class="section section--dark offers-page" id="offersActive" aria-labelledby="offers-active-title" hidden>
+      <div class="container">
+        <div class="section-head section-head--dark">
+          <p class="eyebrow eyebrow--light" data-i18n="offersPage.activeEyebrow">Running now</p>
+          <h2 class="section-title" id="offers-active-title" data-i18n="offers.title">At the counter right now</h2>
+        </div>
+        <div class="offer-grid" id="offerGrid"></div>
+      </div>
+    </section>
+
+    <!-- ================= EMPTY STATE ================= -->
+    <section class="section section--cream offers-page" id="offersEmpty" aria-labelledby="offers-empty-title">
+      <div class="container">
+        <div class="empty-state reveal" data-reveal="zoom">
+          <span class="empty-state__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 9.5A2.5 2.5 0 0 1 6.5 7h11A2.5 2.5 0 0 1 20 9.5v.7a2 2 0 0 0 0 3.6v.7A2.5 2.5 0 0 1 17.5 17h-11A2.5 2.5 0 0 1 4 14.5v-.7a2 2 0 0 0 0-3.6v-.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 7v10" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2 2.6" stroke-linecap="round"/></svg>
+          </span>
+          <h2 class="empty-state__title" id="offers-empty-title" data-i18n="offersPage.emptyTitle">No special offers running right now</h2>
+          <p class="empty-state__text" data-i18n="offersPage.emptyText">When Dairy Park runs a combo, festival deal or seasonal special, it will appear on this page. In the meantime, ask at the counter — counter-only deals never make it online.</p>
+          <div class="empty-state__actions">
+            <a class="btn btn--primary" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="offers_empty">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              <span data-i18n="offersPage.emptyCall">Call to ask about today’s deals</span>
+            </a>
+            <a class="btn btn--outline" href="../food/" data-track="menu_cta">
+              <span data-i18n="menu.exploreFull">Explore Full Menu</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>

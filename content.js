@@ -35,6 +35,15 @@ window.DP_CONTENT = {
       bn: ["কোলাঘাট – যশোর রোড", "কোলাঘাট, পশ্চিমবঙ্গ ৭২১১৩৪"]
     },
 
+    // Structured address used for SEO (search engines read this English form)
+    schemaAddress: {
+      streetAddress: "Kolaghat - Jashar Road",
+      addressLocality: "Kolaghat",
+      addressRegion: "West Bengal",
+      postalCode: "721134",
+      addressCountry: "IN"
+    },
+
     // Phone: "display" is what visitors see, "tel" is the number the phone dials
     phone: {
       display: "+91 99324 52124",
@@ -100,14 +109,35 @@ window.DP_CONTENT = {
   },
 
   /* ---------------------------------------------------------------------
-     5. MENU
+     5. MENU CATEGORIES
+     Proposed categories for the Food & Menu page. A category is HIDDEN
+     automatically until it has at least one item in the menu list below —
+     so empty categories never appear on the website.
+     --------------------------------------------------------------------- */
+  menuCategories: [
+    { id: "special", name: { en: "Special Items", bn: "স্পেশাল আইটেম" } },
+    { id: "snacks", name: { en: "Snacks", bn: "স্ন্যাকস" } },
+    { id: "momos", name: { en: "Momos", bn: "মোমো" } },
+    { id: "chaat", name: { en: "Chaat", bn: "চাট" } },
+    { id: "beverages", name: { en: "Beverages", bn: "পানীয়" } },
+    { id: "icecream", name: { en: "Ice Cream", bn: "আইসক্রিম" } },
+    { id: "other", name: { en: "Other Items", bn: "অন্যান্য পণ্য" } }
+  ],
+
+  /* ---------------------------------------------------------------------
+     6. MENU ITEMS
      Add, remove or edit items freely. Copy a block below and change it.
-     price:  null      -> shows "Ask for today's price" (never invent a price)
-             "₹40"     -> shows that price
-     veg:    null      -> no vegetarian label shown
-             true/false -> green "Veg" / red "Non-veg" label
-     photo:  put an image in assets/img/photos/ and change the name here
-             (no file extension — .webp, .jpg or .png all work)
+     category:   must be one of the category ids above. Categories with no
+                 items stay hidden.
+     price:      null      -> shows "Ask for today's price" (never invent a price)
+                 "₹40"     -> shows that price
+     veg:        null      -> no vegetarian label shown
+                 true/false -> green "Veg" / red "Non-veg" label
+     available:  false     -> shows "Not available right now"
+     highlight:  true      -> shown as a menu highlight on the home page
+                 and the featured row of the Food & Menu page
+     photo:      put an image in assets/img/photos/ and change the name here
+                 (no file extension — .webp, .jpg or .png all work)
      --------------------------------------------------------------------- */
   menu: [
     {
@@ -117,6 +147,7 @@ window.DP_CONTENT = {
         en: "A classic Indian chaat — soft lentil dumplings served in whisked curd.",
         bn: "ক্লাসিক ভারতীয় চাট — নরম ডালের বড়া, ফেটানো দইয়ের সঙ্গে।"
       },
+      category: "special",
       price: null,
       veg: null,
       available: true,
@@ -130,6 +161,7 @@ window.DP_CONTENT = {
         en: "Steamed dumplings served hot — a favourite street-food snack.",
         bn: "গরম গরম স্টিম করা মোমো — জনপ্রিয় স্ট্রিট-ফুড।"
       },
+      category: "momos",
       price: null,
       veg: null,
       available: true,
@@ -139,8 +171,10 @@ window.DP_CONTENT = {
   ],
 
   /* ---------------------------------------------------------------------
-     6. SPECIAL OFFERS  (hidden automatically while this list is empty)
-     Only add a real, approved offer. No fake discounts, no fake deadlines.
+     7. SPECIAL OFFERS
+     The Special Offers page shows a friendly empty state while this list
+     is empty. Only add a real, approved offer — no fake discounts, no fake
+     deadlines.
 
      Example:
      promos: [
@@ -150,6 +184,9 @@ window.DP_CONTENT = {
          badge: { en: "Combo", bn: "কম্বো" },
          title: { en: "Dahi Vada + Momo combo", bn: "দই বড়া + মোমো কম্বো" },
          desc:  { en: "Ask for the combo price at the counter.", bn: "কাউন্টারে কম্বোর দাম জেনে নিন।" },
+         validity: { en: "Runs until further notice", bn: "পরবর্তী ঘোষণা পর্যন্ত" },
+         conditions: { en: "Available at the counter only.", bn: "শুধু কাউন্টারে।" },
+         photo: "assets/img/photos/offer-combo",   // optional, same rules as menu photos
          cta:   { en: "Call to ask", bn: "কল করে জিজ্ঞাসা করুন" }
        }
      ],
@@ -157,7 +194,22 @@ window.DP_CONTENT = {
   promos: [],
 
   /* ---------------------------------------------------------------------
-     7. PHOTOS
+     8. GALLERY PHOTOGRAPHS
+     Upload real photographs of Dairy Park into assets/img/photos/gallery/
+     and list them here. section: "exterior" | "interior" | "food" |
+     "products". Slots without an uploaded file show a designed placeholder,
+     never a fake photograph. The site picks up .webp, .avif, .jpg, .jpeg
+     or .png automatically.
+
+     Example:
+     { section: "exterior", base: "assets/img/photos/gallery/exterior-1",
+       alt: { en: "Dairy Park shop front on Kolaghat – Jashar Road",
+              bn: "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের সামনের দৃশ্য" } }
+     --------------------------------------------------------------------- */
+  gallery: [],
+
+  /* ---------------------------------------------------------------------
+     9. PHOTOS (single-photo slots)
      Upload the real photos into assets/img/photos/ using these names.
      The site picks up .webp, .avif, .jpg, .jpeg or .png automatically.
      Until a photo is uploaded, a designed placeholder is shown instead.
@@ -169,7 +221,7 @@ window.DP_CONTENT = {
   },
 
   /* ---------------------------------------------------------------------
-     8. ANALYTICS (optional)
+     10. ANALYTICS (optional)
      The site already records clicks (call, directions, menu, language) as
      events. To send them to Google Analytics 4, paste your Measurement ID
      and set enabled: true. A consent banner appears automatically and no
@@ -181,7 +233,7 @@ window.DP_CONTENT = {
   },
 
   /* ---------------------------------------------------------------------
-     9. SMALL NOTE SHOWN IN THE FOOTER
+     11. SMALL NOTE SHOWN IN THE FOOTER
      --------------------------------------------------------------------- */
   footerNote: {
     en: "Menu highlights, facilities and rating are based on our Google Maps listing. Prices and timings can change — please call to confirm.",

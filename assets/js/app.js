@@ -1,7 +1,8 @@
 /* =============================================================================
-   DAIRY PARK — SITE BEHAVIOUR
+   DAIRY PARK — SITE BEHAVIOUR (multi-page)
    Vanilla JS, no framework. Bundled + minified into assets/js/app.min.js
-   by `npm run build` (see scripts/build.mjs).
+   by `npm run build` (see scripts/build.mjs). Every page loads the same
+   bundle; page-specific modules activate from body[data-page].
    ============================================================================= */
 
 (function () {
@@ -10,8 +11,12 @@
   var C = window.DP_CONTENT || {};
   var I = window.DP_I18N || { en: {}, bn: {} };
   var root = document.documentElement;
-  // Lets CSS know scripting is available (content stays visible without it)
   root.classList.add('js');
+
+  var body = document.body || {};
+  var PAGE = body.dataset ? body.dataset.page : '';
+  var BASE = body.dataset && body.dataset.base ? body.dataset.base : '';
+
   var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
 
@@ -19,9 +24,9 @@
   var reducedMotion = motionQuery.matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* ---------------------------------------------------------------------------
-     Storage (never throws — private mode can block localStorage)
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Storage (never throws — private mode can block localStorage)                */
+  /* --------------------------------------------------------------------------- */
   var store = {
     get: function (key) {
       try { return window.localStorage.getItem(key); } catch (e) { return null; }
@@ -31,9 +36,9 @@
     }
   };
 
-  /* ---------------------------------------------------------------------------
-     Language + text helpers
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Language + text helpers                                                     */
+  /* --------------------------------------------------------------------------- */
   var lang = initialLang();
 
   function initialLang() {
@@ -85,9 +90,13 @@
     els(selector).forEach(function (node) { node.textContent = value; });
   }
 
-  /* ---------------------------------------------------------------------------
-     Small DOM helper
-     --------------------------------------------------------------------------- */
+  function phoneHref() {
+    return 'tel:' + ((C.business && C.business.phone && C.business.phone.tel) || '');
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* Small DOM helper                                                            */
+  /* --------------------------------------------------------------------------- */
   function el(tag, props, children) {
     var node = document.createElement(tag);
     if (props) {
@@ -96,7 +105,6 @@
         if (value == null || value === false) return;
         if (key === 'class') node.className = value;
         else if (key === 'text') node.textContent = value;
-        else if (key === 'html') node.innerHTML = value;
         else if (key === 'dataset') {
           Object.keys(value).forEach(function (d) { node.dataset[d] = value[d]; });
         } else node.setAttribute(key, value === true ? '' : value);
@@ -112,7 +120,10 @@
     var paths = {
       phone: '<path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
       arrow: '<path d="M5 12h13m-5.5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
-      camera: '<path d="M4 8.5h3l1.5-2h7l1.5 2h3v10H4v-10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>'
+      camera: '<path d="M4 8.5h3l1.5-2h7l1.5 2h3v10H4v-10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+      star: '<path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z" fill="currentColor"/>',
+      pin: '<path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/>',
+      info: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
     };
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('class', 'icon');
@@ -123,9 +134,9 @@
     return svg;
   }
 
-  /* ---------------------------------------------------------------------------
-     Static links kept in sync with content.js
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Static links kept in sync with content.js                                   */
+  /* --------------------------------------------------------------------------- */
   function syncLinks() {
     var b = C.business || {};
     var map = {
@@ -140,11 +151,15 @@
       if (node.tagName === 'IFRAME') node.src = url;
       else node.setAttribute('href', url);
     });
+    els('[data-link="phone"]').forEach(function (node) {
+      var label = node.querySelector('[data-bind="phoneDisplay"]');
+      if (label && b.phone) label.textContent = b.phone.display;
+    });
   }
 
-  /* ---------------------------------------------------------------------------
-     Content rendering
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Content rendering (shared across pages)                                     */
+  /* --------------------------------------------------------------------------- */
   var heroHasPhoto = false;
 
   function renderAddress() {
@@ -156,16 +171,15 @@
   function renderSpend() {
     var spend = (C.business && C.business.spend) || {};
     var currency = spend.currency || '₹';
-    var text = currency + num(spend.min) + '–' + num(spend.max);
-    setText('[data-bind="spend"]', text);
+    setText('[data-bind="spend"]', currency + num(spend.min) + '–' + num(spend.max));
   }
 
   function renderFacilities() {
-    var list = $('#facilityList');
-    if (!list) return;
-    list.textContent = '';
-    ((C.business && C.business.facilities) || []).forEach(function (facility) {
-      list.appendChild(el('li', { text: tx(facility) }));
+    els('#facilityList').forEach(function (list) {
+      list.textContent = '';
+      ((C.business && C.business.facilities) || []).forEach(function (facility) {
+        list.appendChild(el('li', { text: tx(facility) }));
+      });
     });
   }
 
@@ -175,16 +189,12 @@
     if (hours.verified && Array.isArray(hours.schedule) && hours.schedule.length) {
       hours.schedule.forEach(function (entry) {
         var line = tx(entry.days) + ': ' + (entry.open || '') + ' – ' + (entry.close || '');
-        if (compact) {
-          frag.appendChild(el('span', { text: line }));
-        } else {
-          frag.appendChild(el('div', { class: 'hours-line', text: line }));
-        }
+        frag.appendChild(el(compact ? 'span' : 'div', { class: compact ? '' : 'hours-line', text: line }));
       });
       return frag;
     }
     frag.appendChild(document.createTextNode(t('locate.hoursCall') + ' '));
-    frag.appendChild(el(compact ? 'span' : 'span', {
+    frag.appendChild(el('span', {
       class: compact ? '' : 'info-row__muted',
       text: tf('locate.hoursListed', { closing: localizeDigits(hours.closingTime || '') })
     }));
@@ -206,177 +216,9 @@
     setText('[data-bind="footerNote"]', tx(C.footerNote));
   }
 
-  function menuAlt(item, hasPhoto) {
-    var name = tx(item.name);
-    return hasPhoto ? name : name + ' — ' + t('menu.photoSoon');
-  }
-
-  function buildDish(item, index) {
-    var hasPrice = item.price !== null && item.price !== undefined && item.price !== '';
-    var available = item.available !== false;
-
-    var media = el('div', { class: 'dish__media' });
-    var img = el('img', {
-      class: 'dish__img',
-      src: 'assets/img/placeholder-dish.svg',
-      alt: menuAlt(item, false),
-      width: '800',
-      height: '600',
-      loading: 'lazy',
-      decoding: 'async'
-    });
-    media.appendChild(img);
-
-    if (item.highlight) {
-      media.appendChild(el('span', { class: 'dish__badge', text: t('menu.highlight') }));
-    }
-    var note = el('span', { class: 'dish__note' });
-    note.appendChild(icon('camera'));
-    note.appendChild(el('span', { text: t('menu.photoSoon') }));
-    media.appendChild(note);
-
-    var body = el('div', { class: 'dish__body' });
-    var primaryName = tx(item.name);
-    var secondaryName = lang === 'bn' ? (item.name && item.name.en) : (item.name && item.name.bn);
-    var heading = el('h3', { class: 'dish__name', text: primaryName });
-    if (secondaryName && secondaryName !== primaryName) {
-      heading.appendChild(el('span', {
-        class: 'dish__name-alt',
-        text: secondaryName,
-        lang: lang === 'bn' ? 'en' : 'bn'
-      }));
-    }
-    body.appendChild(heading);
-    body.appendChild(el('p', { class: 'dish__desc', text: tx(item.desc) }));
-
-    var meta = el('div', { class: 'dish__meta' });
-    meta.appendChild(el('span', {
-      class: 'pill' + (hasPrice ? '' : ' pill--muted'),
-      text: hasPrice ? localizeDigits(item.price) : t('menu.priceAsk')
-    }));
-    if (item.veg === true) meta.appendChild(el('span', { class: 'pill pill--veg', text: t('menu.veg') }));
-    if (item.veg === false) meta.appendChild(el('span', { class: 'pill pill--nonveg', text: t('menu.nonveg') }));
-    meta.appendChild(el('span', {
-      class: 'pill ' + (available ? 'pill--ok' : ''),
-      text: available ? t('menu.available') : t('menu.unavailable')
-    }));
-    body.appendChild(meta);
-
-    var call = el('a', {
-      class: 'dish__cta',
-      href: 'tel:' + ((C.business && C.business.phone && C.business.phone.tel) || ''),
-      'data-track': 'menu_item_call'
-    });
-    call.appendChild(el('span', { text: t('menu.ask') }));
-    call.appendChild(icon('arrow'));
-    body.appendChild(call);
-
-    var card = el('article', {
-      class: 'dish reveal' + (available ? '' : ' is-unavailable'),
-      'data-dish-id': item.id || 'item-' + index,
-      'data-tilt': '',
-      'data-reveal': index % 2 ? 'up' : 'down'
-    }, [media, body]);
-    card.style.setProperty('--i', String(Math.min(index, 6)));
-
-    // Attach the real photo if one exists; otherwise keep the designed placeholder
-    findPhoto(item.photo).then(function (url) {
-      if (url) {
-        img.src = url;
-        img.alt = menuAlt(item, true);
-        note.remove();
-        card.dataset.hasPhoto = 'true';
-      }
-    });
-
-    return card;
-  }
-
-  function renderMenu() {
-    var grid = $('#dishGrid');
-    if (!grid) return;
-    grid.textContent = '';
-    ((C.menu) || []).forEach(function (item, index) {
-      if (!item) return;
-      grid.appendChild(buildDish(item, index));
-    });
-  }
-
-  function renderPromos() {
-    var section = $('#offers');
-    var grid = $('#offerGrid');
-    var active = ((C.promos) || []).filter(function (promo) { return promo && promo.active !== false; });
-
-    els('[data-offers-link]').forEach(function (link) { link.hidden = active.length === 0; });
-    if (!section || !grid) return;
-
-    if (!active.length) {
-      section.hidden = true;
-      grid.textContent = '';
-      return;
-    }
-
-    section.hidden = false;
-    grid.textContent = '';
-    active.forEach(function (promo) {
-      var card = el('article', { class: 'offer reveal' });
-      if (promo.badge) card.appendChild(el('span', { class: 'offer__badge', text: tx(promo.badge) }));
-      card.appendChild(el('h3', { class: 'offer__title', text: tx(promo.title) }));
-      if (promo.desc) card.appendChild(el('p', { class: 'offer__desc', text: tx(promo.desc) }));
-
-      var cta = el('a', {
-        class: 'offer__cta',
-        href: 'tel:' + ((C.business && C.business.phone && C.business.phone.tel) || ''),
-        'data-track': 'promo_click'
-      });
-      cta.appendChild(el('span', { text: tx(promo.cta) || t('offers.cta') }));
-      cta.appendChild(icon('arrow'));
-      card.appendChild(cta);
-      grid.appendChild(card);
-    });
-  }
-
-  function renderReviews() {
-    var reviews = C.reviews || {};
-    var section = $('#reviews');
-    var rating = Number(reviews.rating);
-    var count = reviews.count;
-
-    if (section && reviews.show === false) {
-      section.hidden = true;
-      return;
-    }
-    if (section) section.hidden = false;
-
-    var ratingText = formatRating(rating);
-    var countText = num(count);
-
-    setText('[data-bind="rating"]', ratingText);
-    setText('[data-bind="reviewCount"]', countText);
-
-    var ring = $('#ratingRing');
-    if (ring && isFinite(rating)) {
-      ring.style.setProperty('--pct', (Math.max(0, Math.min(5, rating)) / 5 * 100).toFixed(1) + '%');
-      ring.setAttribute('aria-label', tf('reviews.aria', { rating: ratingText, count: countText }));
-      ring.setAttribute('role', 'img');
-    }
-
-    var filled = Math.round(Math.max(0, Math.min(5, rating || 0)));
-    els('[data-bind-stars]').forEach(function (group) {
-      Array.prototype.forEach.call(group.children, function (star, i) {
-        star.setAttribute('class', i < filled ? 'star-fill' : 'star-empty');
-      });
-    });
-
-    setText('[data-bind="reviewsLead"]', tf('reviews.lead', { rating: ratingText, count: countText }));
-
-    var heroReviews = $('[data-bind="heroReviews"]');
-    if (heroReviews) heroReviews.textContent = tf('hero.reviews', { count: countText });
-  }
-
-  /* ---------------------------------------------------------------------------
-     Photos — resolves whichever extension the owner uploaded
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Photos — resolves whichever extension the owner uploaded (BASE-relative)     */
+  /* --------------------------------------------------------------------------- */
   var PHOTO_EXTS = ['webp', 'avif', 'jpg', 'jpeg', 'png'];
   var photoCache = {};
 
@@ -388,7 +230,7 @@
       var index = 0;
       function next() {
         if (index >= PHOTO_EXTS.length) { resolve(null); return; }
-        var url = base + '.' + PHOTO_EXTS[index++];
+        var url = BASE + base + '.' + PHOTO_EXTS[index++];
         var probe = new Image();
         probe.onload = function () { if (probe.naturalWidth > 0) resolve(url); else next(); };
         probe.onerror = next;
@@ -405,57 +247,729 @@
     return heroHasPhoto ? t('hero.photoAlt') : t('hero.photoSoon');
   }
 
-  function initPhotos() {
-    var photos = C.photos || {};
-    var hero = $('.hero');
+  function initHeroPhoto() {
     var heroImg = $('#heroPhoto');
+    if (!heroImg) return;
+    var photos = C.photos || {};
+    findPhoto(photos.owner).then(function (url) {
+      heroHasPhoto = !!url;
+      var hero = $('.hero');
+      if (url) {
+        heroImg.src = url;
+        heroImg.classList.add('is-real');
+        if (hero) hero.classList.remove('is-nophoto');
+      } else {
+        heroImg.src = BASE + 'assets/img/placeholder-hero.svg';
+        if (hero) hero.classList.add('is-nophoto');
+      }
+      heroImg.alt = heroAlt();
+    });
+  }
 
-    if (heroImg) {
-      findPhoto(photos.owner).then(function (url) {
-        heroHasPhoto = !!url;
-        if (url) {
-          heroImg.src = url;
-          heroImg.classList.add('is-real');
-          if (hero) hero.classList.remove('is-nophoto');
-        } else {
-          heroImg.src = 'assets/img/placeholder-hero.svg';
-          if (hero) hero.classList.add('is-nophoto');
+  /* --------------------------------------------------------------------------- */
+  /* Dish cards + detail dialog                                                  */
+  /* --------------------------------------------------------------------------- */
+  function menuAlt(item, hasPhoto) {
+    var name = tx(item.name);
+    return hasPhoto ? name : name + ' — ' + t('menu.photoSoon');
+  }
+
+  function dishPriceText(item) {
+    var hasPrice = item.price !== null && item.price !== undefined && item.price !== '';
+    return hasPrice ? localizeDigits(item.price) : t('menu.priceAsk');
+  }
+
+  function buildDish(item, index, options) {
+    var opts = options || {};
+    var hasPrice = item.price !== null && item.price !== undefined && item.price !== '';
+    var available = item.available !== false;
+
+    var media = el('div', { class: 'dish__media' });
+    var img = el('img', {
+      class: 'dish__img',
+      src: BASE + 'assets/img/placeholder-dish.svg',
+      alt: menuAlt(item, false),
+      width: '800',
+      height: '600',
+      loading: 'lazy',
+      decoding: 'async'
+    });
+    media.appendChild(img);
+
+    if (item.highlight) {
+      media.appendChild(el('span', { class: 'dish__badge', text: t('menu.highlight') }));
+    }
+    var note = el('span', { class: 'dish__note' });
+    note.appendChild(icon('camera'));
+    note.appendChild(el('span', { text: t('menu.photoSoon') }));
+    media.appendChild(note);
+
+    var bodyEl = el('div', { class: 'dish__body' });
+    var primaryName = tx(item.name);
+    var secondaryName = lang === 'bn' ? (item.name && item.name.en) : (item.name && item.name.bn);
+    var heading = el('h3', { class: 'dish__name', text: primaryName });
+    if (secondaryName && secondaryName !== primaryName) {
+      heading.appendChild(el('span', {
+        class: 'dish__name-alt',
+        text: secondaryName,
+        lang: lang === 'bn' ? 'en' : 'bn'
+      }));
+    }
+    bodyEl.appendChild(heading);
+    bodyEl.appendChild(el('p', { class: 'dish__desc', text: tx(item.desc) }));
+
+    var meta = el('div', { class: 'dish__meta' });
+    meta.appendChild(el('span', {
+      class: 'pill' + (hasPrice ? '' : ' pill--muted'),
+      text: dishPriceText(item)
+    }));
+    if (item.veg === true) meta.appendChild(el('span', { class: 'pill pill--veg', text: t('menu.veg') }));
+    if (item.veg === false) meta.appendChild(el('span', { class: 'pill pill--nonveg', text: t('menu.nonveg') }));
+    meta.appendChild(el('span', {
+      class: 'pill ' + (available ? 'pill--ok' : ''),
+      text: available ? t('menu.available') : t('menu.unavailable')
+    }));
+    bodyEl.appendChild(meta);
+
+    var call = el('a', {
+      class: 'dish__cta',
+      href: phoneHref(),
+      'data-track': 'menu_item_call'
+    });
+    call.appendChild(el('span', { text: t('menu.ask') }));
+    call.appendChild(icon('arrow'));
+    bodyEl.appendChild(call);
+
+    var card = el('article', {
+      class: 'dish reveal' + (available ? '' : ' is-unavailable'),
+      'data-dish-id': item.id || 'item-' + index,
+      'data-tilt': '',
+      'data-reveal': index % 2 ? 'up' : 'down'
+    }, [media, bodyEl]);
+    card.style.setProperty('--i', String(Math.min(index, 6)));
+
+    if (opts.detail) {
+      card.classList.add('dish--detail');
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', primaryName + ' — ' + t('foodPage.detailsShort'));
+      card.addEventListener('click', function (event) {
+        if (closest(event.target, 'a')) return;
+        openDishDialog(item);
+      });
+      card.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openDishDialog(item);
         }
-        heroImg.alt = heroAlt();
       });
     }
 
-    // Optional shop gallery — completely hidden until real photos exist
-    var shopSection = $('#shop');
-    var frames = $$('[data-shop-photo]');
-    if (shopSection && frames.length) {
-      var found = 0;
-      var pending = frames.length;
-      frames.forEach(function (img) {
-        var card = closest(img, '.shop__card');
-        findPhoto(photos[img.dataset.shopPhoto]).then(function (url) {
-          if (url) {
-            found += 1;
-            img.src = url;
-            img.alt = t('shop.alt');
-            if (card) card.hidden = false;
-          } else if (card) {
-            card.hidden = true;
-          }
-          pending -= 1;
-          if (pending === 0) {
-            shopSection.hidden = found === 0;
-            initReveals();
-            revealInView();
-          }
-        });
+    findPhoto(item.photo).then(function (url) {
+      if (url) {
+        img.src = url;
+        img.alt = menuAlt(item, true);
+        note.remove();
+        card.dataset.hasPhoto = 'true';
+      }
+    });
+
+    return card;
+  }
+
+  /* ---- Dish detail dialog (Food & Menu page) ---- */
+  var dishDialog = $('#dishDialog');
+  var dishDialogBody = $('#dishDialogBody');
+
+  function openDishDialog(item) {
+    if (!dishDialog || !dishDialogBody) return;
+    dishDialogBody.textContent = '';
+
+    var hasPrice = item.price !== null && item.price !== undefined && item.price !== '';
+    var available = item.available !== false;
+
+    var media = el('div', { class: 'dish-dialog__media' });
+    var img = el('img', {
+      src: BASE + 'assets/img/placeholder-dish.svg',
+      alt: menuAlt(item, false),
+      width: '800',
+      height: '600',
+      decoding: 'async'
+    });
+    media.appendChild(img);
+    findPhoto(item.photo).then(function (url) {
+      if (url) { img.src = url; img.alt = menuAlt(item, true); }
+    });
+
+    var info = el('div', { class: 'dish-dialog__info' });
+    var cat = categoryById(item.category);
+    if (cat) info.appendChild(el('span', { class: 'dish-dialog__cat', text: tx(cat.name) }));
+
+    var heading = el('h2', { class: 'dish-dialog__title', id: 'dishDialogTitle', text: tx(item.name) });
+    var secondaryName = lang === 'bn' ? (item.name && item.name.en) : (item.name && item.name.bn);
+    if (secondaryName && secondaryName !== tx(item.name)) {
+      heading.appendChild(el('span', {
+        class: 'dish__name-alt',
+        text: secondaryName,
+        lang: lang === 'bn' ? 'en' : 'bn'
+      }));
+    }
+    info.appendChild(heading);
+    info.appendChild(el('p', { class: 'dish-dialog__desc', text: tx(item.desc) }));
+
+    var meta = el('div', { class: 'dish__meta' });
+    meta.appendChild(el('span', { class: 'pill' + (hasPrice ? '' : ' pill--muted'), text: dishPriceText(item) }));
+    if (item.veg === true) meta.appendChild(el('span', { class: 'pill pill--veg', text: t('menu.veg') }));
+    if (item.veg === false) meta.appendChild(el('span', { class: 'pill pill--nonveg', text: t('menu.nonveg') }));
+    meta.appendChild(el('span', {
+      class: 'pill ' + (available ? 'pill--ok' : ''),
+      text: available ? t('menu.available') : t('menu.unavailable')
+    }));
+    info.appendChild(meta);
+
+    info.appendChild(el('p', { class: 'dish-dialog__note', text: t('menu.note') }));
+
+    var call = el('a', {
+      class: 'btn btn--primary',
+      href: phoneHref(),
+      'data-track': 'menu_item_call'
+    });
+    call.appendChild(icon('phone'));
+    call.appendChild(el('span', { text: t('foodPage.callEnquire') }));
+    info.appendChild(call);
+
+    dishDialogBody.appendChild(media);
+    dishDialogBody.appendChild(info);
+
+    if (typeof dishDialog.showModal === 'function') dishDialog.showModal();
+    else dishDialog.setAttribute('open', '');
+    track('menu_item_open', { item: item.id || '' });
+  }
+
+  function closeDishDialog() {
+    if (!dishDialog) return;
+    if (typeof dishDialog.close === 'function') dishDialog.close();
+    else dishDialog.removeAttribute('open');
+  }
+
+  function initDishDialog() {
+    if (!dishDialog) return;
+    var close = $('#dishDialogClose');
+    if (close) close.addEventListener('click', closeDishDialog);
+    dishDialog.addEventListener('click', function (event) {
+      if (event.target === dishDialog) closeDishDialog();
+    });
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* Menu categories                                                             */
+  /* --------------------------------------------------------------------------- */
+  function allCategories() { return C.menuCategories || []; }
+
+  function categoryById(id) {
+    var found = allCategories().filter(function (c) { return c.id === id; });
+    return found[0] || null;
+  }
+
+  /* Categories that actually have at least one item — empty ones stay hidden */
+  function usedCategories(items) {
+    var source = items || C.menu || [];
+    var usedIds = {};
+    source.forEach(function (item) { if (item && item.category) usedIds[item.category] = true; });
+    var fromRegistry = allCategories().filter(function (c) { return usedIds[c.id]; });
+    if (fromRegistry.length) return fromRegistry;
+    // Items without a matching registry entry still need a home
+    var unknown = {};
+    source.forEach(function (item) {
+      if (item && item.category && !categoryById(item.category)) unknown[item.category] = true;
+    });
+    return Object.keys(unknown).map(function (id) {
+      return { id: id, name: { en: id, bn: id } };
+    });
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* HOME — featured dishes + gallery preview                                    */
+  /* --------------------------------------------------------------------------- */
+  function renderHomeMenu() {
+    var grid = $('#dishGrid');
+    if (!grid) return;
+    grid.textContent = '';
+    var items = ((C.menu) || []).filter(function (item) {
+      return item && item.highlight !== false;
+    });
+    items.forEach(function (item, index) {
+      grid.appendChild(buildDish(item, index));
+    });
+  }
+
+  function renderGalleryPreview() {
+    var wrap = $('#galleryPreview');
+    if (!wrap) return;
+    wrap.textContent = '';
+
+    var entries = ((C.gallery) || []).slice(0, 4);
+    if (!entries.length) {
+      // Honest designed panel until real photographs are uploaded
+      var panel = el('div', { class: 'gallery-preview__empty reveal', 'data-reveal': 'zoom' });
+      panel.appendChild(icon('camera'));
+      panel.appendChild(el('p', { text: t('gallery.prevEmpty') }));
+      wrap.appendChild(panel);
+      return;
+    }
+
+    entries.forEach(function (entry, index) {
+      var tile = el('figure', { class: 'gallery-preview__tile reveal', 'data-reveal': index % 2 ? 'up' : 'zoom' });
+      var img = el('img', {
+        src: BASE + 'assets/img/placeholder-shop.svg',
+        alt: tx(entry.alt) || t('shop.alt'),
+        width: '800',
+        height: '640',
+        loading: 'lazy',
+        decoding: 'async'
+      });
+      tile.appendChild(img);
+      findPhoto(entry.base).then(function (url) {
+        if (url) { img.src = url; tile.classList.add('has-photo'); }
+      });
+      wrap.appendChild(tile);
+    });
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* FOOD & MENU page — featured, filters, search, grid                          */
+  /* --------------------------------------------------------------------------- */
+  var menuState = { cat: 'all', query: '' };
+
+  function initFoodPage() {
+    var featuredSection = $('#featured');
+    var featuredGrid = $('#featuredGrid');
+    if (featuredGrid) {
+      featuredGrid.textContent = '';
+      var featured = ((C.menu) || []).filter(function (item) { return item && item.highlight; });
+      featured.forEach(function (item, index) {
+        featuredGrid.appendChild(buildDish(item, index));
+      });
+      if (featuredSection) featuredSection.hidden = featured.length === 0;
+    }
+    renderMenuCats();
+    renderMenuGrid();
+
+    var search = $('#menuSearch');
+    if (search && search.dataset.ready !== '1') {
+      search.dataset.ready = '1';
+      var timer = null;
+      search.addEventListener('input', function () {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+          menuState.query = search.value.trim().toLowerCase();
+          renderMenuGrid();
+        }, 120);
+      });
+    }
+    var clear = $('#menuClear');
+    if (clear && clear.dataset.ready !== '1') {
+      clear.dataset.ready = '1';
+      clear.addEventListener('click', function () {
+        menuState.cat = 'all';
+        menuState.query = '';
+        if (search) search.value = '';
+        renderMenuCats();
+        renderMenuGrid();
       });
     }
   }
 
-  /* ---------------------------------------------------------------------------
-     Apply language
-     --------------------------------------------------------------------------- */
+  function renderMenuCats() {
+    var wrap = $('#menuCats');
+    if (!wrap) return;
+    wrap.textContent = '';
+
+    var cats = usedCategories();
+    var options = [{ id: 'all', name: { en: 'All', bn: 'সব' } }].concat(cats);
+    options.forEach(function (cat) {
+      var active = menuState.cat === cat.id;
+      var chip = el('button', {
+        type: 'button',
+        class: 'menu-cat' + (active ? ' is-active' : ''),
+        'aria-pressed': active ? 'true' : 'false',
+        text: tx(cat.name)
+      });
+      chip.addEventListener('click', function () {
+        menuState.cat = cat.id;
+        renderMenuCats();
+        renderMenuGrid();
+        track('menu_category', { category: cat.id });
+      });
+      wrap.appendChild(chip);
+    });
+  }
+
+  function menuMatches(item) {
+    if (menuState.cat !== 'all' && item.category !== menuState.cat) return false;
+    if (!menuState.query) return true;
+    var haystack = [
+      tx(item.name), item.name && item.name.en, item.name && item.name.bn,
+      tx(item.desc), item.desc && item.desc.en, item.desc && item.desc.bn,
+      item.category
+    ].join(' ').toLowerCase();
+    return haystack.indexOf(menuState.query) !== -1;
+  }
+
+  function renderMenuGrid() {
+    var grid = $('#menuGrid');
+    var empty = $('#menuEmpty');
+    if (!grid) return;
+    grid.textContent = '';
+
+    var items = ((C.menu) || []).filter(function (item) { return item && menuMatches(item); });
+    items.forEach(function (item, index) {
+      grid.appendChild(buildDish(item, index, { detail: true }));
+    });
+
+    if (empty) empty.hidden = items.length > 0;
+    revealInView();
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* GALLERY page — sections + lightbox                                          */
+  /* --------------------------------------------------------------------------- */
+  var GALLERY_SECTIONS = ['exterior', 'interior', 'food', 'products'];
+  var lightboxItems = [];
+
+  function renderGalleryPage() {
+    var wrap = $('#gallerySections');
+    if (!wrap) return;
+    wrap.textContent = '';
+    lightboxItems = [];
+
+    GALLERY_SECTIONS.forEach(function (sectionId, sIndex) {
+      var section = el('section', { class: 'gallery-section', 'aria-labelledby': 'gsec-' + sectionId });
+      var head = el('div', { class: 'gallery-section__head reveal' });
+      head.appendChild(el('h2', {
+        class: 'gallery-section__title',
+        id: 'gsec-' + sectionId,
+        text: t('gallery.sec.' + sectionId)
+      }));
+      head.appendChild(el('p', {
+        class: 'gallery-section__lead',
+        text: t('gallery.secLead.' + sectionId)
+      }));
+      section.appendChild(head);
+
+      var grid = el('div', { class: 'masonry' });
+      var entries = ((C.gallery) || []).filter(function (entry) { return entry && entry.section === sectionId; });
+
+      if (!entries.length) {
+        grid.appendChild(placeholderTile(sectionId));
+      } else {
+        entries.forEach(function (entry, index) {
+          var tile = galleryTile(entry, sectionId, index);
+          grid.appendChild(tile);
+        });
+      }
+      section.appendChild(grid);
+      wrap.appendChild(section);
+      if (sIndex === 0) section.classList.add('gallery-section--first');
+    });
+
+    initLightbox();
+    revealInView();
+  }
+
+  function placeholderTile(sectionId) {
+    var tile = el('figure', { class: 'masonry__item masonry__item--placeholder reveal', 'data-reveal': 'zoom' });
+    var img = el('img', {
+      src: BASE + (sectionId === 'food' || sectionId === 'products'
+        ? 'assets/img/placeholder-dish.svg'
+        : 'assets/img/placeholder-shop.svg'),
+      alt: t('gallery.placeholderAlt'),
+      width: '800',
+      height: '640',
+      loading: 'lazy',
+      decoding: 'async'
+    });
+    tile.appendChild(img);
+    tile.appendChild(el('figcaption', { class: 'masonry__caption', text: t('gallery.comingSoon') }));
+    return tile;
+  }
+
+  function galleryTile(entry, sectionId, index) {
+    var tile = el('figure', { class: 'masonry__item masonry__item--pending reveal', 'data-reveal': index % 2 ? 'up' : 'zoom' });
+    var img = el('img', {
+      src: BASE + 'assets/img/placeholder-shop.svg',
+      alt: tx(entry.alt) || t('shop.alt'),
+      width: '900',
+      height: '720',
+      loading: 'lazy',
+      decoding: 'async'
+    });
+    tile.appendChild(img);
+    if (entry.alt) tile.appendChild(el('figcaption', { class: 'masonry__caption', text: tx(entry.alt) }));
+
+    findPhoto(entry.base).then(function (url) {
+      if (!url) {
+        tile.classList.add('masonry__item--placeholder');
+        tile.classList.remove('masonry__item--pending');
+        img.src = BASE + 'assets/img/placeholder-shop.svg';
+        img.alt = t('gallery.placeholderAlt');
+        var cap = tile.querySelector('.masonry__caption');
+        if (cap) cap.textContent = t('gallery.comingSoon');
+        return;
+      }
+      img.src = url;
+      img.classList.add('masonry__img--real');
+      tile.classList.remove('masonry__item--pending');
+      tile.classList.add('masonry__item--ready');
+      var itemIndex = lightboxItems.length;
+      lightboxItems.push({ src: url, alt: tx(entry.alt) || t('shop.alt'), section: sectionId });
+      tile.addEventListener('click', function () { openLightbox(itemIndex); });
+      tile.tabIndex = 0;
+      tile.setAttribute('role', 'button');
+      tile.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openLightbox(itemIndex);
+        }
+      });
+    });
+
+    return tile;
+  }
+
+  var lightbox = $('#lightbox');
+  var lightboxIndex = 0;
+  var lightboxReturnFocus = null;
+
+  function openLightbox(index) {
+    if (!lightbox || !lightboxItems.length) return;
+    lightboxIndex = index;
+    lightboxReturnFocus = document.activeElement;
+    paintLightbox();
+    lightbox.hidden = false;
+    root.classList.add('is-locked');
+    var close = $('#lightboxClose');
+    if (close) close.focus();
+    track('gallery_open');
+  }
+
+  function paintLightbox() {
+    var img = $('#lightboxImg');
+    var caption = $('#lightboxCaption');
+    var item = lightboxItems[lightboxIndex];
+    if (!item || !img) return;
+    img.src = item.src;
+    img.alt = item.alt;
+    if (caption) caption.textContent = item.alt;
+    var multi = lightboxItems.length > 1;
+    var prev = $('#lightboxPrev');
+    var next = $('#lightboxNext');
+    if (prev) prev.hidden = !multi;
+    if (next) next.hidden = !multi;
+  }
+
+  function moveLightbox(step) {
+    if (!lightboxItems.length) return;
+    lightboxIndex = (lightboxIndex + step + lightboxItems.length) % lightboxItems.length;
+    paintLightbox();
+  }
+
+  function closeLightbox() {
+    if (!lightbox || lightbox.hidden) return;
+    lightbox.hidden = true;
+    root.classList.remove('is-locked');
+    if (lightboxReturnFocus && lightboxReturnFocus.focus) lightboxReturnFocus.focus();
+  }
+
+  function initLightbox() {
+    if (!lightbox || lightbox.dataset.ready === '1') return;
+    lightbox.dataset.ready = '1';
+    var close = $('#lightboxClose');
+    var prev = $('#lightboxPrev');
+    var next = $('#lightboxNext');
+    if (close) close.addEventListener('click', closeLightbox);
+    if (prev) prev.addEventListener('click', function () { moveLightbox(-1); });
+    if (next) next.addEventListener('click', function () { moveLightbox(1); });
+    lightbox.addEventListener('click', function (event) {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (lightbox.hidden) return;
+      if (event.key === 'Escape') closeLightbox();
+      else if (event.key === 'ArrowLeft') moveLightbox(-1);
+      else if (event.key === 'ArrowRight') moveLightbox(1);
+    });
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* OFFERS page                                                                 */
+  /* --------------------------------------------------------------------------- */
+  function renderOffersPage() {
+    var activeSection = $('#offersActive');
+    var emptySection = $('#offersEmpty');
+    var grid = $('#offerGrid');
+    var active = ((C.promos) || []).filter(function (promo) { return promo && promo.active !== false; });
+
+    if (!grid || !activeSection || !emptySection) return;
+
+    if (!active.length) {
+      activeSection.hidden = true;
+      emptySection.hidden = false;
+      grid.textContent = '';
+      return;
+    }
+
+    emptySection.hidden = true;
+    activeSection.hidden = false;
+    grid.textContent = '';
+
+    active.forEach(function (promo, index) {
+      var card = el('article', { class: 'offer offer--page reveal', 'data-reveal': index % 2 ? 'up' : 'zoom' });
+
+      var media = el('div', { class: 'offer__media' });
+      var img = el('img', {
+        src: BASE + 'assets/img/placeholder-dish.svg',
+        alt: tx(promo.title),
+        width: '800',
+        height: '500',
+        loading: 'lazy',
+        decoding: 'async'
+      });
+      media.appendChild(img);
+      if (promo.photo) {
+        findPhoto(promo.photo).then(function (url) { if (url) img.src = url; });
+      } else {
+        img.remove();
+      }
+      if (promo.badge) media.appendChild(el('span', { class: 'offer__badge', text: tx(promo.badge) }));
+      if (promo.photo) card.appendChild(media);
+
+      var content = el('div', { class: 'offer__content' });
+      content.appendChild(el('h3', { class: 'offer__title', text: tx(promo.title) }));
+      if (promo.desc) content.appendChild(el('p', { class: 'offer__desc', text: tx(promo.desc) }));
+      if (promo.validity) {
+        var validity = el('p', { class: 'offer__meta' });
+        validity.appendChild(el('span', { class: 'offer__meta-label', text: t('offers.validity') }));
+        validity.appendChild(el('span', { text: tx(promo.validity) }));
+        content.appendChild(validity);
+      }
+      if (promo.conditions) {
+        var conditions = el('p', { class: 'offer__meta' });
+        conditions.appendChild(el('span', { class: 'offer__meta-label', text: t('offers.conditions') }));
+        conditions.appendChild(el('span', { text: tx(promo.conditions) }));
+        content.appendChild(conditions);
+      }
+
+      var cta = el('a', {
+        class: 'offer__cta',
+        href: phoneHref(),
+        'data-track': 'promo_click'
+      });
+      cta.appendChild(el('span', { text: tx(promo.cta) || t('offers.cta') }));
+      cta.appendChild(icon('arrow'));
+      content.appendChild(cta);
+      card.appendChild(content);
+      grid.appendChild(card);
+    });
+    revealInView();
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* REVIEWS (home preview + dedicated page share these bindings)                */
+  /* --------------------------------------------------------------------------- */
+  function renderReviews() {
+    var reviews = C.reviews || {};
+    if (reviews.show === false) {
+      els('#reviews, .reviews-page').forEach(function (node) { node.hidden = true; });
+      return;
+    }
+
+    var ratingText = formatRating(Number(reviews.rating));
+    var countText = num(reviews.count);
+
+    setText('[data-bind="rating"]', ratingText);
+    setText('[data-bind="reviewCount"]', countText);
+
+    els('.rating-ring').forEach(function (ring) {
+      var rating = Number(reviews.rating);
+      if (!isFinite(rating)) return;
+      ring.style.setProperty('--pct', (Math.max(0, Math.min(5, rating)) / 5 * 100).toFixed(1) + '%');
+      ring.setAttribute('aria-label', tf('reviews.aria', { rating: ratingText, count: countText }));
+      ring.setAttribute('role', 'img');
+    });
+
+    var filled = Math.round(Math.max(0, Math.min(5, Number(reviews.rating) || 0)));
+    els('[data-bind-stars]').forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (star, i) {
+        star.setAttribute('class', i < filled ? 'star-fill' : 'star-empty');
+      });
+    });
+
+    setText('[data-bind="reviewsLead"]', tf('reviews.lead', { rating: ratingText, count: countText }));
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* ABOUT page photos                                                           */
+  /* --------------------------------------------------------------------------- */
+  function initAboutPhotos() {
+    var shop = $('#aboutShopPhoto');
+    var owner = $('#aboutOwnerPhoto');
+    var photos = C.photos || {};
+    if (shop) {
+      findPhoto(photos.shop).then(function (url) {
+        if (url) { shop.src = url; shop.alt = t('about.photoCaption'); }
+      });
+    }
+    if (owner) {
+      findPhoto(photos.owner).then(function (url) {
+        if (url) { owner.src = url; owner.alt = heroHasPhoto ? t('hero.photoAlt') : t('hero.photoSoon'); }
+      });
+    }
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* CONTACT page — enquiry form (honest, no backend)                            */
+  /* --------------------------------------------------------------------------- */
+  function initContactForm() {
+    var form = $('#enquiryForm');
+    if (!form) return;
+    var errorBox = $('#formError');
+    var status = $('#formStatus');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var name = (form.elements.name && form.elements.name.value || '').trim();
+      var phone = (form.elements.phone && form.elements.phone.value || '').trim();
+      var message = (form.elements.message && form.elements.message.value || '').trim();
+
+      var errorKey = '';
+      if (name.length < 2) errorKey = 'contact.errName';
+      else if ((phone.match(/[0-9]/g) || []).length < 7) errorKey = 'contact.errPhone';
+      else if (message.length < 5) errorKey = 'contact.errMessage';
+
+      if (errorKey) {
+        if (errorBox) {
+          errorBox.textContent = t(errorKey);
+          errorBox.hidden = false;
+        }
+        if (status) status.hidden = true;
+        return;
+      }
+
+      if (errorBox) { errorBox.hidden = true; errorBox.textContent = ''; }
+      if (status) {
+        status.hidden = false;
+        if (typeof status.scrollIntoView === 'function') {
+          status.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+        }
+      }
+      track('enquiry_prepared');
+    });
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* Apply language                                                              */
+  /* --------------------------------------------------------------------------- */
   function applyLang(next, options) {
     var opts = options || {};
     lang = next === 'bn' ? 'bn' : 'en';
@@ -475,14 +989,28 @@
       if (text) node.setAttribute('aria-label', text);
     });
 
-    var title = t('meta.title');
+    els('[data-i18n-alt]').forEach(function (node) {
+      var text = t(node.dataset.i18nAlt);
+      if (text && !node.classList.contains('is-real')) node.alt = text;
+    });
+
+    els('[data-i18n-attr]').forEach(function (node) {
+      var spec = (node.dataset.i18nAttr || '').split('|');
+      if (spec.length !== 2) return;
+      var text = t(spec[1]);
+      if (text) node.setAttribute(spec[0], text);
+    });
+
+    var title = t('meta.' + PAGE + '.title') || t('meta.title');
     if (title) document.title = title;
-    var desc = t('meta.desc');
+    var desc = t('meta.' + PAGE + '.desc') || t('meta.desc');
     if (desc) {
       var metaDesc = $('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', desc);
       var ogDesc = $('meta[property="og:description"]');
       if (ogDesc) ogDesc.setAttribute('content', desc);
+      var ogTitle = $('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', title);
     }
 
     els('[data-lang]').forEach(function (btn) {
@@ -498,14 +1026,14 @@
     renderHours();
     renderFooterNote();
     renderReviews();
-    renderMenu();
-    renderPromos();
+    renderHomeMenu();
+    renderGalleryPreview();
+    renderGalleryPage();
+    renderOffersPage();
+    initFoodPage();
 
     var heroImg = $('#heroPhoto');
     if (heroImg) heroImg.alt = heroAlt();
-    $$('[data-shop-photo]').forEach(function (img) {
-      if (img.getAttribute('src') && img.getAttribute('src').indexOf('placeholder') === -1) img.alt = t('shop.alt');
-    });
 
     updateToggleLabel();
 
@@ -522,7 +1050,6 @@
       track('language_change', { value: lang });
     }
 
-    // Newly rendered cards may be in view — reveal without waiting
     revealInView();
   }
 
@@ -531,9 +1058,9 @@
     applyLang(next);
   }
 
-  /* ---------------------------------------------------------------------------
-     Header, drawer, navigation state
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Header, drawer                                                              */
+  /* --------------------------------------------------------------------------- */
   var header = $('.site-header');
   var drawer = $('#drawer');
   var navToggle = $('.nav-toggle');
@@ -582,8 +1109,7 @@
     if (drawer) {
       drawer.addEventListener('click', function (event) {
         if (event.target === drawer) closeDrawer();
-        var link = closest(event.target, 'a[href^="#"]');
-        if (link) closeDrawer(false);
+        if (closest(event.target, 'a')) closeDrawer(false);
       });
 
       drawer.addEventListener('keydown', function (event) {
@@ -608,10 +1134,10 @@
     });
 
     window.addEventListener('resize', function () {
-      if (window.innerWidth >= 900 && drawerOpen) closeDrawer(false);
+      if (window.innerWidth >= 1080 && drawerOpen) closeDrawer(false);
     });
 
-    // Anchor navigation: close drawer, then let the browser scroll (CSS smooth)
+    // In-page anchors: close the drawer, then scroll (CSS smooth)
     document.addEventListener('click', function (event) {
       var link = closest(event.target, 'a[href^="#"]');
       if (!link) return;
@@ -629,18 +1155,18 @@
     });
   }
 
-  /* ---------------------------------------------------------------------------
-     Language switcher
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Language switcher                                                           */
+  /* --------------------------------------------------------------------------- */
   function initLangSwitch() {
     $$('[data-lang]').forEach(function (btn) {
       btn.addEventListener('click', function () { setLang(btn.dataset.lang); });
     });
   }
 
-  /* ---------------------------------------------------------------------------
-     Scroll-driven effects
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Scroll-driven effects                                                       */
+  /* --------------------------------------------------------------------------- */
   var lastScroll = 0;
   var scrollQueued = false;
   var menuSeen = false;
@@ -660,7 +1186,7 @@
     }
 
     if (!reducedMotion) {
-      var hero = $('.hero');
+      var hero = $('.hero, .page-hero');
       if (hero && y < hero.offsetHeight * 1.2) {
         hero.style.setProperty('--hero-p', Math.min(1, y / Math.max(1, hero.offsetHeight)).toFixed(3));
       }
@@ -674,7 +1200,7 @@
     }
 
     if (!menuSeen) {
-      var menuSection = $('#menu');
+      var menuSection = $('#menu, #all-menu');
       if (menuSection && menuSection.getBoundingClientRect().top < window.innerHeight * 0.85) {
         menuSeen = true;
         track('menu_view');
@@ -783,34 +1309,14 @@
     });
   }
 
-  /* Scroll spy for the desktop nav */
-  function initScrollSpy() {
-    var links = $$('.nav__link');
-    if (!links.length || !('IntersectionObserver' in window)) return;
-    var sections = links.map(function (link) {
-      return document.querySelector(link.getAttribute('href'));
-    }).filter(Boolean);
-
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        links.forEach(function (link) {
-          link.classList.toggle('is-active', link.getAttribute('href') === '#' + entry.target.id);
-        });
-      });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-
-    sections.forEach(function (section) { spy.observe(section); });
-  }
-
-  /* ---------------------------------------------------------------------------
-     Analytics + consent
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Analytics + consent                                                         */
+  /* --------------------------------------------------------------------------- */
   var analyticsConfig = C.analytics || {};
   var gaLoaded = false;
 
   function track(event, params) {
-    var payload = { event: event, language: lang };
+    var payload = { event: event, language: lang, page: PAGE };
     if (params) Object.keys(params).forEach(function (key) { payload[key] = params[key]; });
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(payload);
@@ -820,7 +1326,6 @@
   }
 
   function consentValue() {
-    // 'granted' | 'denied' | null (not chosen yet)
     return store.get('dp-consent');
   }
 
@@ -885,22 +1390,11 @@
         label: (target.textContent || '').trim().slice(0, 64)
       });
     }, { passive: true });
-
-    // Taps on menu cards (not just the call link) count as menu interest
-    var grid = $('#dishGrid');
-    if (grid) {
-      grid.addEventListener('click', function (event) {
-        var card = closest(event.target, '[data-dish-id]');
-        if (!card) return;
-        if (closest(event.target, '[data-track]')) return;
-        track('menu_item_interest', { item: card.dataset.dishId });
-      }, { passive: true });
-    }
   }
 
-  /* ---------------------------------------------------------------------------
-     Boot
-     --------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------- */
+  /* Boot                                                                        */
+  /* --------------------------------------------------------------------------- */
   function boot() {
     var year = $('#year');
     if (year) year.textContent = new Date().getFullYear();
@@ -909,30 +1403,20 @@
     initNav();
     initLangSwitch();
     initTracking();
+    initDishDialog();
 
     applyLang(lang, { silent: true });
     initConsent();
 
-    // Localise the review lead on first paint
-    var lead = $('[data-bind="reviewsLead"]');
-    if (lead) {
-      lead.textContent = tf('reviews.lead', {
-        rating: formatRating((C.reviews || {}).rating),
-        count: num((C.reviews || {}).count)
-      });
-    }
-    var heroReviews = $('[data-bind="heroReviews"]');
-    if (heroReviews) {
-      heroReviews.textContent = tf('hero.reviews', { count: num((C.reviews || {}).count) });
-    }
+    initHeroPhoto();
+    initAboutPhotos();
+    initFoodPage();
+    initContactForm();
 
-    initPhotos();
     initReveals();
     initTilt();
     initScroll();
-    initScrollSpy();
 
-    // Reveal anything already on screen once fonts/layout settle
     revealInView();
     window.addEventListener('load', revealInView);
 

@@ -1,0 +1,66 @@
+<!--meta
+{
+  "page": "gallery",
+  "title": "Photo Gallery | Dairy Park Kolaghat – Restaurant & Food Photos",
+  "desc": "Photographs of Dairy Park in Kolaghat — restaurant exterior, interior, food and products. Real photos from our fast-food restaurant on Kolaghat – Jashar Road.",
+  "slug": "gallery/"
+}
+-->
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero" aria-labelledby="gallery-title">
+      <div class="page-hero__bg" aria-hidden="true"></div>
+      <div class="container page-hero__inner">
+        <nav class="crumbs" aria-label="Breadcrumb" data-i18n-aria="a11y.breadcrumb">
+          <a href="../" data-i18n="nav.home">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page" data-i18n="nav.gallery">Gallery</span>
+        </nav>
+        <p class="eyebrow eyebrow--light reveal" data-i18n="gallery.eyebrow">Gallery</p>
+        <h1 class="page-hero__title reveal" id="gallery-title" data-reveal="down" data-i18n="gallery.title">See Dairy Park for yourself.</h1>
+        <p class="page-hero__lead reveal" data-i18n="gallery.lead">Real photographs of the restaurant, the counter and the food — nothing staged, nothing borrowed.</p>
+      </div>
+    </section>
+
+    <!-- ================= GALLERY ================= -->
+    <section class="section section--cream gallery-page" aria-labelledby="gallery-grid-title">
+      <div class="container">
+        <h2 class="sr-only" id="gallery-grid-title" data-i18n="gallery.title">See Dairy Park for yourself.</h2>
+
+        <div class="gallery-note reveal">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8.5h3l1.5-2h7l1.5 2h3v10H4v-10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <p data-i18n="gallery.note">Only genuine photographs of Dairy Park appear here. Fresh pictures are added as they are taken — until then, some slots show a designed placeholder.</p>
+        </div>
+
+        <div id="gallerySections"></div>
+
+        <noscript>
+          <div class="menu__noscript">
+            <p data-i18n="gallery.noscript">Photographs open best with JavaScript enabled. You can still visit us on Kolaghat – Jashar Road, or call +91 99324 52124.</p>
+          </div>
+        </noscript>
+
+        <div class="section-cta reveal">
+          <a class="btn btn--primary btn--lg" href="../visit/" data-track="visit_cta">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+            <span data-i18n="gallery.visitCta">Visit Us in Kolaghat</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LIGHTBOX ================= -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" data-i18n-aria="a11y.photoViewer" hidden>
+      <button type="button" class="lightbox__btn lightbox__close" id="lightboxClose" aria-label="Close" data-i18n-aria="a11y.close">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <button type="button" class="lightbox__btn lightbox__prev" id="lightboxPrev" aria-label="Previous photo" data-i18n-aria="a11y.prev">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <figure class="lightbox__figure">
+        <img id="lightboxImg" src="" alt="" width="1600" height="1200" decoding="async">
+        <figcaption class="lightbox__caption" id="lightboxCaption"></figcaption>
+      </figure>
+      <button type="button" class="lightbox__btn lightbox__next" id="lightboxNext" aria-label="Next photo" data-i18n-aria="a11y.next">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
