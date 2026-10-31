@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Decorative Dairy Park background">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#221510"/>
+      <stop offset=".55" stop-color="#180f0c"/>
+      <stop offset="1" stop-color="#0f0a08"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(1180 250) scale(620 520)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e2582a" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#a3300f" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#a3300f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gold" cx="0" cy="0" r="1" gradientTransform="translate(420 780) scale(520 480)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f0b24a" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#f0b24a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="steam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0b24a" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#f0b24a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+  <rect width="1600" height="1000" fill="url(#gold)"/>
+
+  <!-- concentric "plate" arcs -->
+  <g fill="none" stroke="#f0b24a" stroke-opacity=".16">
+    <circle cx="1210" cy="470" r="300"/>
+    <circle cx="1210" cy="470" r="380" stroke-opacity=".1"/>
+    <circle cx="1210" cy="470" r="460" stroke-opacity=".06"/>
+    <circle cx="1210" cy="470" r="210" stroke-dasharray="3 14" stroke-opacity=".2"/>
+  </g>
+
+  <!-- bowl silhouette -->
+  <g transform="translate(1210 470)">
+    <path d="M-170 10h340a170 170 0 0 1-340 0Z" fill="none" stroke="#fff7ec" stroke-opacity=".22" stroke-width="2"/>
+    <path d="M-118 -58c0-34 34-40 34-74M0 -58c0-34 34-40 34-74M118 -58c0-34 34-40 34-74" fill="none" stroke="url(#steam)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- hairline grid -->
+  <g stroke="#fff7ec" stroke-opacity=".045">
+    <path d="M-200 1120 1500 -200"/>
+    <path d="M-100 1120 1600 -200"/>
+    <path d="M0 1120 1600 -100"/>
+    <path d="M100 1120 1600 0"/>
+    <path d="M200 1120 1600 100"/>
+  </g>
+
+  <rect width="1600" height="1000" fill="none"/>
+</svg>
