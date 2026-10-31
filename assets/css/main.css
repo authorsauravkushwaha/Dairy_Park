@@ -675,6 +675,75 @@ html[lang="bn"] .hero__title {
   margin-top: 1.5rem;
 }
 
+
+/* Owner portrait — the face of the restaurant, shown large in the hero */
+.hero__owner { display: none; margin: 0; position: relative; z-index: 3; }
+.hero.has-owner .hero__owner {
+  display: block;
+  order: -1;
+  width: min(66vw, 17rem);
+  margin-inline: auto;
+  animation: owner-in .9s var(--ease) both;
+}
+@keyframes owner-in { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+.hero__owner-frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 999px 999px 26px 26px;
+  padding: 6px;
+  background: linear-gradient(160deg, #ffe1bc 0%, var(--gold) 45%, #e2582a 100%);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .9), 0 0 0 10px rgba(240, 178, 74, .10), 0 0 90px rgba(226, 88, 42, .28);
+  overflow: hidden;
+}
+.hero__owner-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: 999px 999px 21px 21px;
+  background: #1b110d;
+}
+.hero__owner-cap {
+  position: absolute;
+  left: 50%;
+  bottom: -.9rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .1rem;
+  width: max-content;
+  max-width: calc(100% + 1.5rem);
+  padding: .55rem 1.1rem;
+  border-radius: 16px;
+  text-align: center;
+  background: rgba(20, 12, 9, .78);
+  border: 1px solid rgba(240, 178, 74, .55);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .8);
+}
+.hero__owner-kicker {
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-weight: 700;
+  color: var(--gold);
+}
+html[lang="bn"] .hero__owner-kicker { letter-spacing: 0; font-size: .75rem; }
+.hero__owner-role { font-family: var(--font-display); font-size: 1.05rem; color: var(--cream); line-height: 1.2; }
+
+/* With the owner photo, the full-bleed background becomes a soft backdrop */
+.hero.has-owner .hero__bg img { filter: blur(26px) saturate(1.15) brightness(.6); }
+.hero.has-owner .hero__scrim {
+  background:
+    linear-gradient(100deg, rgba(12, 8, 6, .9) 0%, rgba(12, 8, 6, .7) 45%, rgba(12, 8, 6, .5) 100%),
+    linear-gradient(180deg, rgba(12, 8, 6, .6) 0%, rgba(12, 8, 6, .1) 35%, rgba(12, 8, 6, .5) 75%, rgba(12, 8, 6, .95) 100%),
+    radial-gradient(55% 55% at 78% 40%, rgba(226, 88, 42, .26), transparent 70%);
+}
+.hero.has-owner .hero__inner { padding-bottom: 1.2rem; }
+
 /* 3D floating stage (desktop) */
 .hero__stage {
   position: relative;
@@ -1648,6 +1717,23 @@ html:not(.js) .reveal {
   .hero__inner { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); gap: 1.5rem; }
   .hero__stage { display: block; }
   .hero__badges { margin-top: 1.9rem; }
+
+  /* Owner portrait takes the right-hand column; floating cards orbit it */
+  .hero.has-owner .hero__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .hero.has-owner .hero__content { grid-column: 1; grid-row: 1; }
+  .hero.has-owner .hero__owner,
+  .hero.has-owner .hero__stage { grid-column: 2; grid-row: 1; }
+  .hero.has-owner .hero__owner {
+    order: 0;
+    width: min(100%, 25rem);
+    justify-self: center;
+    margin-bottom: 1.4rem;
+  }
+  .hero.has-owner .hero__stage { pointer-events: none; z-index: 4; min-height: 0; align-self: stretch; }
+  .hero.has-owner .hero__ring { display: none; }
+  .hero.has-owner .float-card--rating { top: 2%; left: -2%; width: 11rem; }
+  .hero.has-owner .float-card--dish { right: -3%; top: auto; bottom: 18%; width: 11.5rem; }
+  .hero.has-owner .float-card--place { display: none; }
 
   .sticky-bar { display: none; }
   .consent { left: 1.2rem; right: 1.2rem; bottom: 1.2rem; max-width: 62rem; margin-inline: auto; }
