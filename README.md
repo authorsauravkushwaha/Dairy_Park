@@ -1,7 +1,8 @@
 # Dairy Park — website
 
-Marketing website for **Dairy Park (ডেয়ারি পার্ক)**, a fast-food restaurant on
-Kolaghat – Jashar Road, Kolaghat, West Bengal 721134.
+Marketing website for **Dairy Park (ডেয়ারি পার্ক)**, a family restaurant on
+Kolaghat – Jashar Road, Kolaghat, West Bengal 721134, with a green-walled dining
+room of hand-painted arches.
 
 - Live site: **https://authorsauravkushwaha.github.io/Dairy_Park/**
 - Phone: +91 99324 52124 · Google rating is hidden until the live listing is re-checked

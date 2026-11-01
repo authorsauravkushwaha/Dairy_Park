@@ -10,33 +10,33 @@
 window.DP_I18N = {
   en: {
     /* ---------- shared meta ---------- */
-    "meta.title": "Dairy Park Kolaghat | Fast Food Restaurant – Dahi Vada & Steam Momo",
+    "meta.title": "Dairy Park Kolaghat | Family Restaurant – Dahi Vada & Steam Momo",
     "meta.desc":
-      "Dairy Park is a fast-food restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Dine-in and drive-through. Try our Dahi Vada and Steam Momo. Call +91 99324 52124.",
-    "meta.home.title": "Dairy Park Kolaghat | Fast Food Restaurant – Dahi Vada & Steam Momo",
+      "Dairy Park is a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134, with a green-walled dining room, dine-in and drive-through. Try our Dahi Vada and Steam Momo. Call +91 99324 52124.",
+    "meta.home.title": "Dairy Park Kolaghat | Family Restaurant – Dahi Vada & Steam Momo",
     "meta.home.desc":
-      "Dairy Park is a fast-food restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Dine-in and drive-through. Try our Dahi Vada and Steam Momo. Call +91 99324 52124.",
+      "Dairy Park is a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134, with a green-walled dining room, dine-in and drive-through. Try our Dahi Vada and Steam Momo. Call +91 99324 52124.",
     "meta.food.title": "Food & Menu | Dairy Park Kolaghat – Dahi Vada, Steam Momo & More",
     "meta.food.desc":
-      "Discover what's good at Dairy Park, Kolaghat. Menu highlights include Dahi Vada and Steam Momo, with category filters and call-to-enquire. Fast food on Kolaghat – Jashar Road.",
-    "meta.about.title": "About Us | Dairy Park – Fast Food Restaurant in Kolaghat",
+      "Discover what's good at Dairy Park, Kolaghat. Menu highlights include Dahi Vada and Steam Momo, with category filters and call-to-enquire. Dine in or use the drive-through on Kolaghat – Jashar Road.",
+    "meta.about.title": "About Us | Dairy Park – Family Restaurant in Kolaghat",
     "meta.about.desc":
-      "About Dairy Park, a fast-food restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Dine-in and drive-through, with menu highlights like Dahi Vada and Steam Momo.",
+      "About Dairy Park, a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Green-walled dining room, dine-in and drive-through, with highlights like Dahi Vada and Steam Momo.",
     "meta.gallery.title": "Photo Gallery | Dairy Park Kolaghat – Restaurant & Food Photos",
     "meta.gallery.desc":
-      "Photographs of Dairy Park in Kolaghat — restaurant exterior, interior, food and products. Real photos from our fast-food restaurant on Kolaghat – Jashar Road.",
+      "Photographs of Dairy Park in Kolaghat — shopfront, green-walled dining room, food and counter. Real photos from our family restaurant on Kolaghat – Jashar Road.",
     "meta.offers.title": "Special Offers | Dairy Park Kolaghat – Combos & Seasonal Deals",
     "meta.offers.desc":
       "Current special offers at Dairy Park, Kolaghat. Combo offers, festival promotions and seasonal specials — confirmed offers only, on Kolaghat – Jashar Road.",
     "meta.reviews.title": "Customer Reviews | Dairy Park Kolaghat – Google Reviews",
     "meta.reviews.desc":
-      "See what customers say about Dairy Park, Kolaghat. Read genuine Google reviews of our fast food restaurant on Kolaghat – Jashar Road.",
+      "See what customers say about Dairy Park, Kolaghat. Read genuine Google reviews of our family restaurant on Kolaghat – Jashar Road.",
     "meta.visit.title": "Visit Us | Dairy Park, Kolaghat – Jashar Road – Directions & Hours",
     "meta.visit.desc":
       "Visit Dairy Park at Kolaghat – Jashar Road, Kolaghat, West Bengal 721134. Dine-in and drive-through. Get directions or call +91 99324 52124.",
     "meta.contact.title": "Contact Us | Dairy Park Kolaghat – Call +91 99324 52124",
     "meta.contact.desc":
-      "Contact Dairy Park, Kolaghat. Call +91 99324 52124, find our address on Kolaghat – Jashar Road, or send an enquiry. Fast-food restaurant in Kolaghat 721134.",
+      "Contact Dairy Park, Kolaghat. Call +91 99324 52124, find our address on Kolaghat – Jashar Road, or send an enquiry. Family restaurant in Kolaghat 721134.",
     "meta.privacy.title": "Privacy Note | Dairy Park, Kolaghat",
     "meta.privacy.desc":
       "How the Dairy Park website handles data: no accounts, no ordering, no payment. Analytics only with your permission. Enquiry form data never leaves your device.",
@@ -70,11 +70,11 @@ window.DP_I18N = {
     "lang.bn": "বাংলা",
 
     /* ---------- hero ---------- */
-    "hero.eyebrow": "Fast-food restaurant · Kolaghat, West Bengal",
+    "hero.eyebrow": "Family restaurant · Kolaghat, West Bengal",
     "hero.title1": "Dahi Vada & Steam Momo,",
     "hero.title2": "right on the Kolaghat–Jashar Road.",
     "hero.sub":
-      "Dairy Park is a fast-food stop in Kolaghat, with dine-in and drive-through. Pull in for our menu highlights — or call before you come.",
+      "A family restaurant in Kolaghat with a dining room of deep green walls and painted arches. Dine in, use the drive-through, or call before you come.",
     "hero.ctaCall": "Call Now",
     "hero.ctaMenu": "Explore Our Food",
     "hero.ctaDirections": "Get Directions",
@@ -82,6 +82,7 @@ window.DP_I18N = {
     "hero.reviews": "{count} reviews",
     "hero.chipDine": "Dine-in",
     "hero.chipDrive": "Drive-through",
+    "hero.bgAlt": "The Dairy Park shopfront on Kolaghat – Jashar Road",
     "hero.photoAlt": "The owner of Dairy Park at the restaurant in Kolaghat",
     "hero.photoSoon": "Owner photo will appear here once it is uploaded",
     "hero.ownerKicker": "Meet the owner",
@@ -113,7 +114,7 @@ window.DP_I18N = {
     "welcome.eyebrow": "Welcome",
     "welcome.title": "Welcome to Dairy Park",
     "welcome.lead":
-      "A family fast-food restaurant on the Kolaghat – Jashar Road — easy to stop at, easy to enjoy.",
+      "A family restaurant on the Kolaghat – Jashar Road — easy to stop at, easy to enjoy.",
     "welcome.placeTitle": "Kolaghat – Jashar Road",
     "welcome.placeDesc": "Find us at Kolaghat, West Bengal 721134 — right on the main road.",
     "welcome.dineDesc": "Sit down and enjoy your food at the restaurant.",
@@ -271,19 +272,19 @@ window.DP_I18N = {
 
     /* ---------- about ---------- */
     "about.eyebrow": "About us",
-    "about.title": "The story so far: a fast-food stop Kolaghat can rely on.",
+    "about.title": "The story so far: a restaurant Kolaghat can rely on.",
     "about.lead":
-      "Dairy Park is a fast-food restaurant on Kolaghat – Jashar Road — simple food, a convenient location, and both dine-in and drive-through.",
+      "Dairy Park is a family restaurant on Kolaghat – Jashar Road — simple food, a convenient location, and both dine-in and drive-through.",
+    "about.p1":
+      "Dairy Park (ডেয়ারি পার্ক) is a restaurant in Kolaghat, West Bengal, located on Kolaghat – Jashar Road. People stop here for a bite on the road — whether they are driving through Kolaghat or live nearby. Inside, the walls are deep green, painted with arched murals.",
     "about.introEyebrow": "About Dairy Park",
     "about.introTitle": "A restaurant on the Kolaghat road",
-    "about.p1":
-      "Dairy Park (ডেয়ারি পার্ক) is a fast-food restaurant in Kolaghat, West Bengal, located on Kolaghat – Jashar Road. People stop here for a quick bite on the road — whether they are driving through Kolaghat or live nearby.",
     "about.p2":
       "Our Google listing features Dahi Vada and Steam Momo as menu highlights. The restaurant offers both dine-in seating and a drive-through, so you can choose to sit and eat or collect your order from your vehicle.",
     "about.p3":
-      "This page will grow as the owner shares more of the restaurant’s story. Until then, everything you read here comes from our verified Google listing — nothing is invented.",
+      "The green walls, brass lights and painted arches in our photos are the dining room you will sit in. Everything on this page comes from our own photographs and our Google listing — nothing is invented.",
     "about.menuCta": "Explore the Menu",
-    "about.photoCaption": "Our place on Kolaghat – Jashar Road",
+    "about.photoCaption": "Our dining room, painted with arches",
     "about.facEyebrow": "What we offer",
     "about.facTitle": "Facilities at Dairy Park",
     "about.dineDesc": "Take a seat at the restaurant and enjoy your food fresh from the counter.",
@@ -335,7 +336,7 @@ window.DP_I18N = {
 
     /* ---------- footer ---------- */
     "footer.about":
-      "Dairy Park is a fast-food restaurant in Kolaghat, West Bengal — dine-in and drive-through.",
+      "Dairy Park is a family restaurant in Kolaghat, West Bengal — a green-walled dining room, dine-in and drive-through.",
     "footer.explore": "Explore",
     "footer.contact": "Contact",
     "footer.hoursTitle": "Hours",
@@ -364,33 +365,33 @@ window.DP_I18N = {
 
   bn: {
     /* ---------- shared meta ---------- */
-    "meta.title": "ডেয়ারি পার্ক কোলাঘাট | ফাস্ট-ফুড রেস্তোরাঁ – দই বড়া ও স্টিম মোমো",
+    "meta.title": "ডেয়ারি পার্ক কোলাঘাট | পারিবারিক রেস্তোরাঁ – দই বড়া ও স্টিম মোমো",
     "meta.desc":
-      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ একটি ফাস্ট-ফুড রেস্তোরাঁ। ডাইন-ইন ও ড্রাইভ-থ্রু সুবিধা। দই বড়া ও স্টিম মোমো। ফোন +91 99324 52124।",
-    "meta.home.title": "ডেয়ারি পার্ক কোলাঘাট | ফাস্ট-ফুড রেস্তোরাঁ – দই বড়া ও স্টিম মোমো",
+      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ একটি পারিবারিক রেস্তোরাঁ। সবুজ দেওয়ালের খাওয়ার ঘর, ডাইন-ইন ও ড্রাইভ-থ্রু সুবিধা। দই বড়া ও স্টিম মোমো। ফোন +91 99324 52124।",
+    "meta.home.title": "ডেয়ারি পার্ক কোলাঘাট | পারিবারিক রেস্তোরাঁ – দই বড়া ও স্টিম মোমো",
     "meta.home.desc":
-      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ একটি ফাস্ট-ফুড রেস্তোরাঁ। ডাইন-ইন ও ড্রাইভ-থ্রু সুবিধা। দই বড়া ও স্টিম মোমো। ফোন +91 99324 52124।",
+      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ একটি পারিবারিক রেস্তোরাঁ। সবুজ দেওয়ালের খাওয়ার ঘর, ডাইন-ইন ও ড্রাইভ-থ্রু সুবিধা। দই বড়া ও স্টিম মোমো। ফোন +91 99324 52124।",
     "meta.food.title": "খাবার ও মেনু | ডেয়ারি পার্ক কোলাঘাট – দই বড়া, স্টিম মোমো ও আরও অনেক কিছু",
     "meta.food.desc":
-      "কোলাঘাটের ডেয়ারি পার্কে কী ভালো পাওয়া যায় দেখুন। মেনুর জনপ্রিয় পদ দই বড়া ও স্টিম মোমো, ক্যাটাগরি ফিল্টার ও কল করে জানার সুবিধা। কোলাঘাট–যশোর রোডে ফাস্ট-ফুড।",
-    "meta.about.title": "আমাদের কথা | ডেয়ারি পার্ক – কোলাঘাটের ফাস্ট-ফুড রেস্তোরাঁ",
+      "কোলাঘাটের ডেয়ারি পার্কে কী ভালো পাওয়া যায় দেখুন। মেনুর জনপ্রিয় পদ দই বড়া ও স্টিম মোমো, ক্যাটাগরি ফিল্টার ও কল করে জানার সুবিধা। কোলাঘাট–যশোর রোডে ডাইন-ইন ও ড্রাইভ-থ্রু।",
+    "meta.about.title": "আমাদের কথা | ডেয়ারি পার্ক – কোলাঘাটের পারিবারিক রেস্তোরাঁ",
     "meta.about.desc":
-      "ডেয়ারি পার্ক সম্পর্কে জানুন — কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ অবস্থিত ফাস্ট-ফুড রেস্তোরাঁ। ডাইন-ইন ও ড্রাইভ-থ্রু, দই বড়া ও স্টিম মোমো।",
+      "ডেয়ারি পার্ক সম্পর্কে জানুন — কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ অবস্থিত পারিবারিক রেস্তোরাঁ। ডাইন-ইন ও ড্রাইভ-থ্রু, দই বড়া ও স্টিম মোমো।",
     "meta.gallery.title": "ফটো গ্যালারি | ডেয়ারি পার্ক কোলাঘাট – রেস্তোরাঁ ও খাবারের ছবি",
     "meta.gallery.desc":
-      "কোলাঘাটের ডেয়ারি পার্কের ছবি — রেস্তোরাঁর বাইরের দৃশ্য, ভিতরের দৃশ্য, খাবার ও পণ্য। কোলাঘাট–যশোর রোডের আমাদের ফাস্ট-ফুড রেস্তোরাঁর আসল ছবি।",
+      "কোলাঘাটের ডেয়ারি পার্কের ছবি — রেস্তোরাঁর বাইরের দৃশ্য, ভিতরের দৃশ্য, খাবার ও পণ্য। কোলাঘাট–যশোর রোডের আমাদের পারিবারিক রেস্তোরাঁর আসল ছবি।",
     "meta.offers.title": "বিশেষ অফার | ডেয়ারি পার্ক কোলাঘাট – কম্বো ও সিজনাল অফার",
     "meta.offers.desc":
       "কোলাঘাটে ডেয়ারি পার্কের চলমান বিশেষ অফার। কম্বো অফার, উৎসবের প্রচার ও সিজনাল অফার — শুধু নিশ্চিত অফার, কোলাঘাট–যশোর রোডে।",
     "meta.reviews.title": "গ্রাহক রিভিউ | ডেয়ারি পার্ক কোলাঘাট – গুগল রিভিউ",
     "meta.reviews.desc":
-      "কোলাঘাটের ডেয়ারি পার্ক সম্পর্কে গ্রাহকদের মতামত দেখুন। কোলাঘাট–যশোর রোডের আমাদের ফাস্ট-ফুড রেস্তোরাঁর আসল গুগল রিভিউ পড়ুন।",
+      "কোলাঘাটের ডেয়ারি পার্ক সম্পর্কে গ্রাহকদের মতামত দেখুন। কোলাঘাট–যশোর রোডের আমাদের পারিবারিক রেস্তোরাঁর আসল গুগল রিভিউ পড়ুন।",
     "meta.visit.title": "ভিজিট করুন | ডেয়ারি পার্ক, কোলাঘাট – যশোর রোড – পথনির্দেশ ও সময়",
     "meta.visit.desc":
       "ডেয়ারি পার্ক দেখতে আসুন — কোলাঘাট–যশোর রোড, কোলাঘাট, পশ্চিমবঙ্গ ৭২১১৩৪। ডাইন-ইন ও ড্রাইভ-থ্রু। পথনির্দেশ নিন বা ফোন করুন +91 99324 52124।",
     "meta.contact.title": "যোগাযোগ | ডেয়ারি পার্ক কোলাঘাট – ফোন +91 99324 52124",
     "meta.contact.desc":
-      "ডেয়ারি পার্ক, কোলাঘাটের সঙ্গে যোগাযোগ করুন। ফোন +91 99324 52124, ঠিকানা কোলাঘাট–যশোর রোড, অথবা অনুসন্ধান পাঠান। কোলাঘাট ৭২১১৩৪-এ ফাস্ট-ফুড রেস্তোরাঁ।",
+      "ডেয়ারি পার্ক, কোলাঘাটের সঙ্গে যোগাযোগ করুন। ফোন +91 99324 52124, ঠিকানা কোলাঘাট–যশোর রোড, অথবা অনুসন্ধান পাঠান। কোলাঘাট ৭২১১৩৪-এ পারিবারিক রেস্তোরাঁ।",
     "meta.privacy.title": "প্রাইভেসি নোট | ডেয়ারি পার্ক, কোলাঘাট",
     "meta.privacy.desc":
       "ডেয়ারি পার্কের ওয়েবসাইট তথ্য কীভাবে ব্যবহার করে: কোনো অ্যাকাউন্ট নেই, অর্ডার নেই, পেমেন্ট নেই। অ্যানালিটিক্স শুধু আপনার অনুমতিতে। ফর্মের তথ্য আপনার ডিভাইস ছাড়ে না।",
@@ -424,11 +425,11 @@ window.DP_I18N = {
     "lang.bn": "বাংলা",
 
     /* ---------- hero ---------- */
-    "hero.eyebrow": "ফাস্ট-ফুড রেস্তোরাঁ · কোলাঘাট, পশ্চিমবঙ্গ",
+    "hero.eyebrow": "পারিবারিক রেস্তোরাঁ · কোলাঘাট, পশ্চিমবঙ্গ",
     "hero.title1": "দই বড়া আর স্টিম মোমো,",
     "hero.title2": "কোলাঘাট–যশোর রোডেই।",
     "hero.sub":
-      "ডেয়ারি পার্ক কোলাঘাটের একটি ফাস্ট-ফুড জায়গা — ডাইন-ইন ও ড্রাইভ-থ্রু দুটোই আছে। জনপ্রিয় পদগুলো চেখে দেখুন, অথবা আসার আগে ফোন করে নিন।",
+      "কোলাঘাটে একটি পারিবারিক রেস্তোরাঁ — গাঢ় সবুজ দেওয়াল আর আঁকা খিলানে সাজানো খাওয়ার ঘর। বসে খান, ড্রাইভ-থ্রু নিন, অথবা আসার আগে ফোন করে নিন।",
     "hero.ctaCall": "এখনই কল করুন",
     "hero.ctaMenu": "আমাদের খাবার দেখুন",
     "hero.ctaDirections": "পথনির্দেশ পান",
@@ -436,6 +437,7 @@ window.DP_I18N = {
     "hero.reviews": "{count}টি রিভিউ",
     "hero.chipDine": "ডাইন-ইন",
     "hero.chipDrive": "ড্রাইভ-থ্রু",
+    "hero.bgAlt": "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের দোকানের সামনের অংশ",
     "hero.photoAlt": "কোলাঘাটের রেস্তোরাঁয় ডেয়ারি পার্কের মালিক",
     "hero.photoSoon": "ছবি আপলোড করা হলে মালিকের ছবি এখানে দেখা যাবে",
     "hero.ownerKicker": "মালিকের সাথে পরিচিত হন",
@@ -467,7 +469,7 @@ window.DP_I18N = {
     "welcome.eyebrow": "স্বাগতম",
     "welcome.title": "ডেয়ারি পার্কে স্বাগতম",
     "welcome.lead":
-      "কোলাঘাট–যশোর রোডে একটি পারিবারিক ফাস্ট-ফুড রেস্তোরাঁ — থামা সহজ, খাওয়া আরামদায়ক।",
+      "কোলাঘাট–যশোর রোডে একটি পারিবারিক রেস্তোরাঁ — থামা সহজ, খাওয়া আরামদায়ক।",
     "welcome.placeTitle": "কোলাঘাট – যশোর রোড",
     "welcome.placeDesc": "কোলাঘাট, পশ্চিমবঙ্গ ৭২১১৩৪-এ আমাদের খুঁজে নিন — ঠিক মূল রোডে।",
     "welcome.dineDesc": "রেস্তোরাঁয় বসে খাবার উপভোগ করুন।",
@@ -625,19 +627,19 @@ window.DP_I18N = {
 
     /* ---------- about ---------- */
     "about.eyebrow": "আমাদের কথা",
-    "about.title": "এখন পর্যন্ত গল্প: কোলাঘাটের ভরসাযোগ্য ফাস্ট-ফুড থামা।",
+    "about.title": "এখন পর্যন্ত গল্প: কোলাঘাটের ভরসাযোগ্য একটি রেস্তোরাঁ।",
     "about.lead":
-      "ডেয়ারি পার্ক কোলাঘাট–যশোর রোডের একটি ফাস্ট-ফুড রেস্তোরাঁ — সহজ খাবার, সুবিধাজনক জায়গা, আর ডাইন-ইন ও ড্রাইভ-থ্রু দুটোই।",
+      "ডেয়ারি পার্ক কোলাঘাট–যশোর রোডের একটি পারিবারিক রেস্তোরাঁ — সহজ খাবার, সুবিধাজনক জায়গা, আর ডাইন-ইন ও ড্রাইভ-থ্রু দুটোই।",
+    "about.p1":
+      "ডেয়ারি পার্ক পশ্চিমবঙ্গের কোলাঘাটে কোলাঘাট–যশোর রোডে অবস্থিত একটি রেস্তোরাঁ। রাস্তায় একটা খাবার খেতে এখানে থেমে যান সবাই — কোলাঘাট ধরে যাতায়াতকারী হোক বা আশপাশের বাসিন্দা। ভিতরে দেওয়াল গাঢ় সবুজ, তার উপরে আঁকা খিলান।",
     "about.introEyebrow": "ডেয়ারি পার্ক সম্পর্কে",
     "about.introTitle": "কোলাঘাটের রোডের ধারে একটা রেস্তোরাঁ",
-    "about.p1":
-      "ডেয়ারি পার্ক (ডেয়ারি পার্ক) পশ্চিমবঙ্গের কোলাঘাটে কোলাঘাট–যশোর রোডে অবস্থিত একটি ফাস্ট-ফুড রেস্তোরাঁ। রাস্তায় দ্রুত একটা খাবার খেতে এখানে থেমে যান সবাই — কোলাঘাট ধরে যাতায়াতকারী হোক বা আশপাশের বাসিন্দা।",
     "about.p2":
       "আমাদের গুগল লিস্টিংয়ে দই বড়া ও স্টিম মোমো মেনুর জনপ্রিয় পদ হিসেবে তালিকাভুক্ত। রেস্তোরাঁয় বসে খাওয়ার আসন আর ড্রাইভ-থ্রু দুটোই আছে — আপনি বসে খান, কিংবা গাড়ি থেকেই অর্ডার নিয়ে যান।",
     "about.p3":
-      "মালিক রেস্তোরাঁর আরও গল্প দিলে এই পাতা বাড়বে। ততক্ষণ এখানে যা পড়ছেন সবই আমাদের যাচাই করা গুগল লিস্টিং থেকে — কিছুই বানানো নয়।",
+      "আমাদের ছবিতে যে সবুজ দেওয়াল, পিতলের আলো আর আঁকা খিলান দেখছেন, সেটিই আপনার বসে খাওয়ার ঘর। এই পাতার সব তথ্য আমাদের নিজেদের ছবি ও গুগল লিস্টিং থেকে — কিছুই বানানো নয়।",
     "about.menuCta": "মেনু দেখুন",
-    "about.photoCaption": "কোলাঘাট–যশোর রোডে আমাদের জায়গা",
+    "about.photoCaption": "খিলানে আঁকা আমাদের খাওয়ার ঘর",
     "about.facEyebrow": "আমরা যা দিই",
     "about.facTitle": "ডেয়ারি পার্কের সুবিধা",
     "about.dineDesc": "রেস্তোরাঁয় বসে কাউন্টার থেকে তাজা খাবার উপভোগ করুন।",
@@ -689,7 +691,7 @@ window.DP_I18N = {
 
     /* ---------- footer ---------- */
     "footer.about":
-      "ডেয়ারি পার্ক পশ্চিমবঙ্গের কোলাঘাটে একটি ফাস্ট-ফুড রেস্তোরাঁ — ডাইন-ইন ও ড্রাইভ-থ্রু।",
+      "ডেয়ারি পার্ক পশ্চিমবঙ্গের কোলাঘাটে একটি পারিবারিক রেস্তোরাঁ — ডাইন-ইন ও ড্রাইভ-থ্রু।",
     "footer.explore": "দেখুন",
     "footer.contact": "যোগাযোগ",
     "footer.hoursTitle": "সময়",

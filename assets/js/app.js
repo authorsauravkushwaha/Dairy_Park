@@ -257,25 +257,37 @@
     var heroImg = $('#heroPhoto');
     if (!heroImg) return;
     var photos = C.photos || {};
-    findPhoto(photos.owner).then(function (url) {
+    var hero = $('.hero');
+
+    // Full-screen background: the shopfront. Falls back to the owner portrait,
+    // then to the designed placeholder.
+    findPhoto(photos.hero || photos.owner).then(function (url) {
       heroHasPhoto = !!url;
-      var hero = $('.hero');
       if (url) {
         heroImg.src = url;
         heroImg.classList.add('is-real');
-        // The owner is the star: show the photo as a large portrait, too
-        var portrait = $('#ownerPortrait');
-        if (portrait) {
-          portrait.src = url;
-          portrait.classList.add('is-real');
-          if (hero) hero.classList.add('has-owner');
+        heroImg.alt = t('hero.bgAlt');
+        if (hero) {
+          hero.classList.remove('is-nophoto');
+          // The shopfront is a photograph in its own right — keep it sharp.
+          if (photos.hero) hero.classList.add('has-shopfront');
         }
-        if (hero) hero.classList.remove('is-nophoto');
       } else {
         heroImg.src = BASE + 'assets/img/placeholder-hero.svg';
+        heroImg.alt = t('hero.photoSoon');
         if (hero) hero.classList.add('is-nophoto');
       }
-      heroImg.alt = heroAlt();
+    });
+
+    // The owner portrait in the arch frame
+    var portrait = $('#ownerPortrait');
+    if (!portrait) return;
+    findPhoto(photos.owner).then(function (url) {
+      if (!url) return;
+      portrait.src = url;
+      portrait.classList.add('is-real');
+      portrait.alt = t('hero.photoAlt');
+      if (hero) hero.classList.add('has-owner');
     });
   }
 
@@ -680,7 +692,15 @@
     if (!wrap) return;
     wrap.textContent = '';
 
-    var entries = ((C.gallery) || []).slice(0, 4);
+    // One photograph from each section, so the preview sells the whole place:
+    // the shopfront, the dining room, a plate of food and the counter.
+    var gallery = (C.gallery) || [];
+    var entries = [];
+    ['exterior', 'interior', 'food', 'products'].forEach(function (sectionId) {
+      var match = gallery.filter(function (entry) { return entry && entry.section === sectionId; })[0];
+      if (match) entries.push(match);
+    });
+    if (!entries.length) entries = gallery.slice(0, 4);
     if (!entries.length) {
       // Honest designed panel until real photographs are uploaded
       var panel = el('div', { class: 'gallery-preview__empty reveal', 'data-reveal': 'zoom' });
@@ -829,7 +849,9 @@
       }));
       section.appendChild(head);
 
-      var grid = el('div', { class: 'masonry' });
+      var grid = el('div', {
+        class: (sectionId === 'exterior' || sectionId === 'interior') ? 'masonry masonry--arch' : 'masonry'
+      });
       var entries = ((C.gallery) || []).filter(function (entry) { return entry && entry.section === sectionId; });
 
       if (!entries.length) {
@@ -877,7 +899,6 @@
       decoding: 'async'
     });
     tile.appendChild(img);
-    if (entry.alt) tile.appendChild(el('figcaption', { class: 'masonry__caption', text: tx(entry.alt) }));
 
     findPhoto(entry.base).then(function (url) {
       if (!url) {
@@ -885,8 +906,7 @@
         tile.classList.remove('masonry__item--pending');
         img.src = BASE + 'assets/img/placeholder-shop.svg';
         img.alt = t('gallery.placeholderAlt');
-        var cap = tile.querySelector('.masonry__caption');
-        if (cap) cap.textContent = t('gallery.comingSoon');
+        tile.appendChild(el('figcaption', { class: 'masonry__caption', text: t('gallery.comingSoon') }));
         return;
       }
       img.src = url;
@@ -1218,7 +1238,7 @@
     syncCounters();
 
     var heroImg = $('#heroPhoto');
-    if (heroImg) heroImg.alt = heroAlt();
+    if (heroImg && heroImg.classList.contains('is-real')) heroImg.alt = t('hero.bgAlt');
     var ownerImg = $('#ownerPortrait');
     if (ownerImg && ownerImg.classList.contains('is-real')) ownerImg.alt = t('hero.photoAlt');
 

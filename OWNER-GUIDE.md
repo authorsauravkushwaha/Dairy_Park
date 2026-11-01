@@ -6,48 +6,53 @@ itself automatically (about a minute).
 
 ---
 
-## 1. Add the restaurant photos (do this first)
+## 1. Restaurant photos (already supplied)
 
-Upload your real photos into `assets/img/photos/` (single-photo slots) and
-`assets/img/photos/gallery/` (gallery slots). The site picks up `.jpg`,
-`.jpeg`, `.png`, `.webp` and `.avif` automatically. Until a photo exists, a
-designed placeholder is shown — nothing ever breaks, and no fake photograph is
-ever used.
+The genuine photographs you sent over WhatsApp are in `assets/img/photos/` and
+are already wired up — the homepage hero, the About page and all four Gallery
+sections show real photos today. The site picks up `.jpg`, `.jpeg`, `.png`,
+`.webp` and `.avif` automatically. If a photo file is ever missing, a designed
+placeholder is shown instead — nothing breaks, and no fake photograph is used.
 
 | File name | Where it shows |
 | --- | --- |
-| `photos/owner.*` | **Supplied** — large portrait in the homepage hero + About page inset |
-| `photos/shop.*` | **Supplied** — shop interior (About page + Gallery) |
-| `photos/counter-snacks.*` | **Supplied** — snacks at the counter (Gallery) |
-| `photos/ice-cream-freezer.*` | **Supplied** — ice-cream freezer (Gallery) |
-| `photos/chocolate-freezer.*` | **Supplied** — chocolate selection (Gallery) |
-| `photos/menu-spread-1.*`, `menu-spread-2.*` | **Supplied** — menu-counter shots (Gallery) |
-| `photos/menu-drinks.*` | **Supplied** — drinks (Gallery) |
-| `photos/dahi-vada.*` | Dahi Vada cards on Home + Food & Menu (not yet supplied) |
-| `photos/steam-momo.*` | Steam Momo cards on Home + Food & Menu (not yet supplied) |
+| `photos/shop-front.*` | **Supplied** — full-screen homepage hero backdrop |
+| `photos/owner.*` | **Supplied** — owner portrait in the hero frame + About page inset |
+| `photos/interior-room.*` | **Supplied** — dining room (About page + Gallery) |
+| `photos/interior-arches.*`, `interior-booth.*`, `interior-green.*`, `interior-lounge.*`, `interior-night.*` | **Supplied** — dining room, arches and evening frontage (Gallery) |
+| `photos/table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and snacks counter (Gallery) |
+| `photos/dahi-vada.*` | **Supplied** — Dahi Vada cards on Home + Food & Menu, “order both” strip, Gallery |
+| `photos/steam-momo.*` | **Supplied** — Steam Momo cards on Home + Food & Menu, “order both” strip, Gallery |
+| `photos/menu-spread-1.*`, `menu-spread-2.*`, `menu-drinks.*` | **Supplied** — printed menu boards (Gallery) |
+| `photos/counter-snacks.*` | **Supplied** — samosas at the counter (Gallery) |
+| `photos/ice-cream-freezer.*`, `chocolate-freezer.*` | **Supplied** — freezers (Gallery) |
 | `photos/offer-combo.*` | Offer cards (when you add a promo with a photo) |
 
-The seven supplied photographs are already wired up in `content.js → gallery`,
-so the About page and Gallery show real photos today. For **new** gallery
-photos, drop the file into `assets/img/photos/gallery/` (any name) and add a
+Every photo is listed in `content.js → gallery` with its `section` and
+bilingual alt text, so the Gallery page renders itself. `section` can be
+`exterior`, `interior`, `food` or `products` — those are the four headings, and
+the outside/inside sets are framed in arches to echo the murals in the dining
+room.
+
+For **new** photos, drop the file into `assets/img/photos/` (any name) and add a
 line in `content.js → gallery`:
 
 ```js
 gallery: [
-  { section: "exterior",
-    base: "assets/img/photos/gallery/exterior-1",
-    alt: { en: "Dairy Park shop front on Kolaghat – Jashar Road",
-           bn: "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের সামনের দৃশ্য" } }
+  { section: "interior",
+    base: "assets/img/photos/interior-new",
+    alt: { en: "Booth seating at Dairy Park",
+           bn: "ডেয়ারি পার্কে বেঞ্চ আসন" } }
 ]
 ```
 
-`section` can be `exterior`, `interior`, `food` or `products` — those are the
-four headings on the Gallery page. Sections without photos show a designed
-“photograph coming soon” tile.
+Keep alt text short and factual — it is read out by screen readers and is what
+search engines index. Sections without photos show a designed “photograph
+coming soon” tile.
 
-**Tip:** the supplied owner portrait works as the hero backdrop and the large
-portrait frame (portrait orientation suits it). For replacements, keep files
-around ~400 kB or less so phones load them quickly.
+**Tip:** export replacements as **WebP**, about 1400–1600 px on the long edge,
+quality 75–82. That keeps the whole photo folder around 2–3 MB, so the site is
+still quick on a phone.
 
 ## 2. Change the menu (`content.js`)
 

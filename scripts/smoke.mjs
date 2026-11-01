@@ -3,7 +3,8 @@
  * Headless smoke test: loads every built page in jsdom, runs the real scripts,
  * and checks rendering, bilingual switching, navigation, the food filters,
  * the gallery lightbox, offers empty state and the honest contact form.
- * Image probes fail on purpose so the placeholder paths are exercised.
+ * Photo probes resolve against the files that actually ship, so the real-photo
+ * paths are exercised; only files that are absent fall back to placeholders.
  */
 import { JSDOM } from 'jsdom';
 import { readFile, readdir } from 'node:fs/promises';
@@ -20,8 +21,7 @@ const expect = (condition, message) => (condition ? pass.push(message) : failure
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /** Photo files actually shipped in dist — mirrored here so the image probes in
- *  jsdom resolve the same way they do in a real browser. The two featured-dish
- *  photos are deliberately excluded so the placeholder path stays covered. */
+ *  jsdom resolve the same way they do in a real browser. */
 let shippedPhotoCache = null;
 async function shippedPhotos() {
   if (shippedPhotoCache) return shippedPhotoCache;
@@ -29,7 +29,6 @@ async function shippedPhotos() {
   shippedPhotoCache = new Set(
     files
       .filter((f) => /\.(webp|avif|jpe?g|png)$/i.test(f))
-      .filter((f) => !/^(dahi-vada|steam-momo)\./.test(f))
   );
   return shippedPhotoCache;
 }
@@ -67,9 +66,8 @@ async function loadPage(outFile, urlPath) {
   window.Element.prototype.scrollIntoView = function () {};
   window.scrollTo = () => {};
 
-  // Simulate the photos that are actually shipped in dist/assets/img/photos/.
-  // The two featured-dish photos are deliberately left out so the designed
-  // placeholder path stays covered by the tests below.
+  // Simulate the photos that are actually shipped in dist/assets/img/photos/, so
+  // the photo-driven extras are exercised against the real set.
   const suppliedPhotos = await shippedPhotos();
   window.Image = class {
     constructor() { this.onload = null; this.onerror = null; this.naturalWidth = 0; }
@@ -114,9 +112,17 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelectorAll('#facilityList li').length === 2, 'home: facilities render');
   expect(document.querySelector('#offers, #offersActive') === null, 'home: no offers section leaks onto the homepage');
   expect(!!document.querySelector('#galleryPreview'), 'home: gallery preview container exists');
-  expect(document.querySelectorAll('#galleryPreview .gallery-preview__tile.has-photo').length >= 3, 'home: gallery preview shows the supplied photographs');
+  const previewTiles = [...document.querySelectorAll('#galleryPreview .gallery-preview__tile')];
+  expect(previewTiles.length === 4, 'home: gallery preview shows four tiles');
+  expect(previewTiles.every((tile) => tile.classList.contains('has-photo')), 'home: every preview tile shows a supplied photograph');
+  expect(previewTiles.every((tile) => /photos\//.test(tile.querySelector('img').getAttribute('src'))), 'home: preview tiles point at the photo folder');
+  const previewSrcs = previewTiles.map((tile) => tile.querySelector('img').getAttribute('src')).join(' ');
+  expect(/shop-front/.test(previewSrcs) && /interior-/.test(previewSrcs) && /dahi-vada/.test(previewSrcs), 'home: preview mixes the shopfront, the dining room and the food');
   expect(document.querySelector('.hero.has-owner') !== null, 'home: owner portrait appears in the hero with the supplied photo');
   expect(/owner\.(webp|avif|jpe?g|png)$/.test(document.querySelector('#ownerPortrait').getAttribute('src')), 'home: portrait uses the real owner photo');
+  expect(/shop-front\.(webp|avif|jpe?g|png)$/.test(document.querySelector('#heroPhoto').getAttribute('src')), 'home: hero background uses the shopfront photo');
+  expect(document.querySelector('.hero__botanical') !== null, 'home: hero carries its botanical line art');
+  expect(document.querySelector('.hero.has-shopfront') !== null, 'home: the shopfront stays sharp behind the headline');
   expect(document.querySelector('.closing') !== null, 'home: closing CTA exists');
   expect(document.querySelectorAll('.welcome-card').length === 4, 'home: welcome cards render');
 
@@ -146,9 +152,9 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelector('[data-bind="pairingTitle"]').textContent.length > 0, 'home: order-both strip has its headline');
   expect(document.querySelectorAll('.dish__tag').length === 2, 'home: dish cards render their gold tag ribbon');
 
-  // Photo-driven extras must degrade gracefully while no photo is uploaded
-  expect(document.querySelectorAll('.pairing__plate').length === 0, 'home: order-both strip drops the plates when no photo exists');
-  expect(document.querySelector('#heroPicks').hidden === true, 'home: hero dish peeks stay hidden without photos');
+  // Photo-driven extras appear once the dish photos are supplied
+  expect(document.querySelectorAll('.pairing__plate').length === 2, 'home: order-both strip shows both dish photos');
+  expect(document.querySelector('#heroPicks').hidden === false, 'home: hero dish peeks appear with the supplied photos');
 
   // Language switch keeps the visitor on the same page
   document.querySelector('[data-lang="bn"]').click();
@@ -227,8 +233,11 @@ async function loadPage(outFile, urlPath) {
   const { document, window, runtimeErrors } = await loadPage('gallery/index.html', 'gallery/');
   expect(runtimeErrors.length === 0, `gallery: no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
   expect(document.querySelectorAll('.gallery-section').length === 4, 'gallery: four sections render');
-  expect(document.querySelectorAll('.masonry__item--ready').length === 7, 'gallery: all seven supplied photographs load');
-  expect(document.querySelectorAll('.masonry__item--placeholder').length === 1, 'gallery: exterior shows one designed placeholder (no photo yet)');
+  const galleryTiles = [...document.querySelectorAll('.masonry__item')];
+  expect(galleryTiles.length >= 12, 'gallery: the whole supplied photo set is on the page');
+  expect(galleryTiles.every((tile) => tile.classList.contains('masonry__item--ready')), 'gallery: every gallery entry loads a real photograph');
+  expect(document.querySelectorAll('.masonry__item--placeholder').length === 0, 'gallery: no designed placeholders are left');
+  expect(document.querySelectorAll('.masonry--arch .masonry__item').length > 0, 'gallery: outside/inside sets hang in arched frames');
   expect(document.querySelector('#lightbox').hidden === true, 'gallery: lightbox starts closed');
   const titles = [...document.querySelectorAll('.gallery-section__title')].map((n) => n.textContent);
   expect(titles.join('|').includes('Restaurant Exterior') && titles.join('|').includes('Food & Menu'), 'gallery: section titles are present');

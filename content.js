@@ -27,7 +27,9 @@ window.DP_CONTENT = {
   business: {
     name: "Dairy Park",
     nameBn: "ডেয়ারি পার্ক",
-    category: { en: "Fast Food Restaurant", bn: "ফাস্ট-ফুড রেস্তোরাঁ" },
+    // The printed menu covers North Indian, Chinese and snacks — and the shop
+    // sells dairy products and sweets too, hence the name.
+    category: { en: "Family Restaurant", bn: "পারিবারিক রেস্তোরাঁ" },
 
     // Address lines, as shown on the website and in the footer
     addressLines: {
@@ -155,7 +157,7 @@ window.DP_CONTENT = {
       desc: { en: "", bn: "" },
       category: "special",
       price: null,
-      veg: null,
+      veg: true,
       available: true,
       highlight: true,
       tag: { en: "Signature", bn: "সিগনেচার" },
@@ -231,27 +233,85 @@ window.DP_CONTENT = {
               bn: "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের সামনের দৃশ্য" } }
      --------------------------------------------------------------------- */
   gallery: [
+    /* ---- OUTSIDE THE SHOP ---- */
+    { section: "exterior",
+      base: "assets/img/photos/shop-front",
+      alt: { en: "The Dairy Park shopfront on Kolaghat – Jashar Road, with its yellow and white signboard",
+             bn: "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের সামনের অংশ, হলুদ-সাদা সাইনবোর্ড" } },
+
+    /* ---- INSIDE THE DINING ROOM ---- */
     { section: "interior",
-      base: "assets/img/photos/shop",
-      alt: { en: "Dairy Park shop interior", bn: "ডেয়ারি পার্কের দোকানের ভিতর" } },
+      base: "assets/img/photos/interior-room",
+      alt: { en: "The dining room at Dairy Park: deep green walls, hand-painted arched murals, marble-look tables and green stools",
+             bn: "ডেয়ারি পার্কের খাওয়ার ঘর: গাঢ় সবুজ দেওয়াল, হাতে আঁকা খিলান, মার্বেলের মতো টেবিল আর সবুজ স্টুল" } },
+    { section: "interior",
+      base: "assets/img/photos/interior-arches",
+      alt: { en: "Three arched wall panels painted with palms and banana leaves inside Dairy Park",
+             bn: "ডেয়ারি পার্কের ভিতরে তাল ও কলাপাতার আঁকা তিনটি খিলান" } },
+    { section: "interior",
+      base: "assets/img/photos/interior-booth",
+      alt: { en: "Green leather bench seating and long tables at Dairy Park",
+             bn: "ডেয়ারি পার্কে সবুজ লেদার বেঞ্চ আর লম্বা টেবিল" } },
+    { section: "interior",
+      base: "assets/img/photos/interior-green",
+      alt: { en: "Corner tables and stools under an arched mural at Dairy Park",
+             bn: "ডেয়ারি পার্কে খিলানের নিচে কোণের টেবিল ও স্টুল" } },
+    { section: "interior",
+      base: "assets/img/photos/interior-lounge",
+      alt: { en: "Wide view of the Dairy Park dining lounge with booth sofas and arched murals",
+             bn: "সোফা আর খিলানসহ ডেয়ারি পার্কের খাওয়ার ঘরের চওড়া দৃশ্য" } },
+    { section: "interior",
+      base: "assets/img/photos/interior-night",
+      alt: { en: "The dining room at Dairy Park in the evening, seen through the glass front — cove lighting, painted arches and bench seating",
+             bn: "সন্ধ্যায় ডেয়ারি পার্কের খাওয়ার ঘর, কাচের সামনের দিক দিয়ে দেখা — ছাদের আলো, আঁকা খিলান আর বেঞ্চ আসন" } },
+    { section: "interior",
+      base: "assets/img/photos/wall-art",
+      alt: { en: "Framed pictures and small wall lights on the dark green wall at Dairy Park",
+             bn: "ডেয়ারি পার্কের গাঢ় সবুজ দেওয়ালে ফ্রেমে বাঁধানো ছবি ও ছোট লাইট" } },
+    { section: "interior",
+      base: "assets/img/photos/table-setting",
+      alt: { en: "A marble-look table at Dairy Park with the menu card, a steel jug and green stools around it",
+             bn: "ডেয়ারি পার্কের মার্বেলের মতো টেবিলে মেনু কার্ড, স্টিলের জগ আর চারপাশে সবুজ স্টুল" } },
+
+    /* ---- FOOD ---- */
+    { section: "food",
+      base: "assets/img/photos/dahi-vada",
+      alt: { en: "A plate of dahi vada topped with curd, green chutney and chaat masala",
+             bn: "দই, সবুজ চাটনি ও চাট মসলা দিয়ে সাজানো দই বড়ার প্লেট" } },
+    { section: "food",
+      base: "assets/img/photos/steam-momo",
+      alt: { en: "A steel plate of steamed momos with a bowl of red chutney",
+             bn: "লাল চাটনির বাটি সহ স্টিলের প্লেটে স্টিম মোমো" } },
     { section: "food",
       base: "assets/img/photos/menu-spread-1",
-      alt: { en: "A spread from the Dairy Park counter", bn: "ডেয়ারি পার্ক কাউন্টারের খাবারের ছড়া" } },
+      alt: { en: "A page of the Dairy Park menu listing rolls, salads and raitas",
+             bn: "ডেয়ারি পার্কের মেনুর পাতা — রোল, সালাদ ও রায়তা" } },
     { section: "food",
       base: "assets/img/photos/menu-spread-2",
-      alt: { en: "More from the Dairy Park menu counter", bn: "ডেয়ারি পার্কের মেনু কাউন্টার থেকে আরও" } },
+      alt: { en: "A page of the Dairy Park menu listing Chinese dishes and snacks",
+             bn: "ডেয়ারি পার্কের মেনুর পাতা — চাইনিজ পদ ও স্ন্যাকস" } },
     { section: "food",
       base: "assets/img/photos/menu-drinks",
-      alt: { en: "Drinks at Dairy Park", bn: "ডেয়ারি পার্কের পানীয়" } },
+      alt: { en: "A page of the Dairy Park menu listing tea, coffee and cold drinks",
+             bn: "ডেয়ারি পার্কের মেনুর পাতা — চা, কফি ও ঠান্ডা পানীয়" } },
+
+    /* ---- PRODUCTS ---- */
     { section: "products",
       base: "assets/img/photos/counter-snacks",
-      alt: { en: "Snacks at the counter", bn: "কাউন্টারের স্ন্যাকস" } },
+      alt: { en: "Samosas on a steel tray at the Dairy Park counter",
+             bn: "ডেয়ারি পার্ক কাউন্টারে স্টিলের ট্রেতে সিঙাড়া" } },
+    { section: "products",
+      base: "assets/img/photos/shop",
+      alt: { en: "The shop floor at Dairy Park: shelves of chocolates and snacks, with the Amul and Cadbury freezers",
+             bn: "ডেয়ারি পার্কের ভিতরের দোকান: চকলেট ও স্ন্যাকসের তাক, সাথে আমুল ও ক্যাডবেরি ফ্রিজার" } },
     { section: "products",
       base: "assets/img/photos/ice-cream-freezer",
-      alt: { en: "Ice-cream freezer", bn: "আইসক্রিমের ফ্রিজার" } },
+      alt: { en: "A stocked freezer at Dairy Park with ice-cream and chocolate bars",
+             bn: "ডেয়ারি পার্কের ভরা ফ্রিজারে আইসক্রিম ও চকলেট বার" } },
     { section: "products",
       base: "assets/img/photos/chocolate-freezer",
-      alt: { en: "Chocolate selection", bn: "চকলেটের সংগ্রহ" } }
+      alt: { en: "The Cadbury Dairy Milk freezer at Dairy Park",
+             bn: "ডেয়ারি পার্কে ক্যাডবেরি ডেয়ারি মিল্কের ফ্রিজার" } }
   ],
 
   /* ---------------------------------------------------------------------
@@ -261,8 +321,9 @@ window.DP_CONTENT = {
      Until a photo is uploaded, a designed placeholder is shown instead.
      --------------------------------------------------------------------- */
   photos: {
+    hero: "assets/img/photos/shop-front", // shopfront — full-screen homepage background
     owner: "assets/img/photos/owner", // real owner portrait — homepage hero
-    shop: "assets/img/photos/shop", // real shop interior — About page
+    shop: "assets/img/photos/interior-room", // dining room — About page
     shopAlt: "assets/img/photos/counter-snacks", // snacks at the counter
     freezer: "assets/img/photos/ice-cream-freezer",
     chocolate: "assets/img/photos/chocolate-freezer"

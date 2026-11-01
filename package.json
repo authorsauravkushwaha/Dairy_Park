@@ -2,7 +2,7 @@
   "name": "dairy-park-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Marketing website for Dairy Park (\u09a1\u09c7\u09af\u09bc\u09be\u09b0\u09bf \u09aa\u09be\u09b0\u09cd\u0995), a fast-food restaurant in Kolaghat, West Bengal.",
+  "description": "Marketing website for Dairy Park (\u09a1\u09c7\u09af\u09bc\u09be\u09b0\u09bf \u09aa\u09be\u09b0\u09cd\u0995), a family restaurant in Kolaghat, West Bengal.",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -15,7 +15,8 @@
     "dairy-park",
     "kolaghat",
     "restaurant",
-    "fast-food"
+    "family-restaurant",
+    "north-indian"
   ],
   "license": "UNLICENSED",
   "devDependencies": {
