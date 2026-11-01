@@ -136,6 +136,10 @@ svg,
 iframe { max-width: 100%; }
 img { display: block; height: auto; }
 
+/* `hidden` must win over component display rules (buttons, cards, grids).
+   Used for the WhatsApp blocks while content.js → whatsapp.enabled is false. */
+[hidden] { display: none !important; }
+
 h1, h2, h3, h4 {
   margin: 0;
   font-weight: 600;

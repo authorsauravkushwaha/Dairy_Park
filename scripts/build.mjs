@@ -121,6 +121,25 @@ function jsonLdFor(page, C) {
 }
 
 /* ------------------------------------------------------------------ */
+/* WhatsApp enquiries                                                  */
+/* ------------------------------------------------------------------ */
+/* Enquiry messages are addressed to the owner's own WhatsApp. The number
+   lives in content.js → whatsapp.number, so the static links are generated
+   from it here instead of being typed twice. */
+function whatsappConfig(content) {
+  const wa = content.whatsapp || {};
+  const number = String(wa.number || '').replace(/[^0-9]/g, '');
+  const valid = number.length >= 10 && number.length <= 15;
+  const enabled = wa.enabled !== false && valid;
+  return {
+    enabled,
+    number,
+    url: enabled ? 'https://wa.me/' + number : '',
+    template: wa.template || {}
+  };
+}
+
+/* ------------------------------------------------------------------ */
 /* Page assembly                                                       */
 /* ------------------------------------------------------------------ */
 const escapeAttr = (value) =>
@@ -143,6 +162,7 @@ async function assemblePage(page, ctx) {
 
   const siteUrl = content.site.url;
   const canonical = siteUrl + page.slug;
+  const wa = whatsappConfig(content);
   const jsonld = jsonLdFor(page, content);
   const jsonldHash = `'sha256-${hash(Buffer.from(jsonld, 'utf8'))}'`;
 
@@ -156,6 +176,9 @@ async function assemblePage(page, ctx) {
   }
 
   const replacements = {
+    // The page body goes in first: page templates may use tokens such as
+    // {{waUrl}} themselves, so every token must still be resolved afterwards.
+    main,
     title: escapeAttr(meta.title),
     desc: escapeAttr(meta.desc),
     canonical: escapeAttr(canonical),
@@ -171,9 +194,11 @@ async function assemblePage(page, ctx) {
       : '',
     jsonld,
     jsonldHash,
+    // WhatsApp enquiry links (empty-safe: a disabled config hides the blocks)
+    waUrl: escapeAttr(wa.enabled ? wa.url : 'tel:' + ((content.business.phone && content.business.phone.tel) || '')),
+    waHidden: wa.enabled ? '' : ' hidden',
     cssVer: cssVersion,
-    jsVer: jsVersion,
-    main
+    jsVer: jsVersion
   };
   for (const [key, value] of Object.entries(replacements)) {
     html = html.split(`{{${key}}}`).join(value);

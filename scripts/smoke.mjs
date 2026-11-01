@@ -377,8 +377,19 @@ async function loadPage(outFile, urlPath) {
 {
   const { document, window, runtimeErrors } = await loadPage('contact/index.html', 'contact/');
   expect(runtimeErrors.length === 0, `contact: no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
-  expect(document.querySelectorAll('.contact-card').length === 3, 'contact: phone, address and hours cards render');
+  expect(document.querySelectorAll('.contact-card').length === 4, 'contact: phone, address, hours and WhatsApp cards render');
   expect(document.querySelector('#location iframe, .contact-map iframe') !== null, 'contact: map embed present');
+
+  // The enquiry is addressed to the owner's WhatsApp number from content.js
+  const waNumber = String(window.DP_CONTENT.whatsapp.number).replace(/[^0-9]/g, '');
+  const waOn = window.DP_CONTENT.whatsapp?.enabled !== false;
+  const waCard = document.querySelector('[data-whatsapp]');
+  if (waOn) {
+    expect(waCard !== null && waCard.hidden === false, 'contact: WhatsApp card is shown while the feature is enabled');
+    expect(waCard.querySelector('a[href^="https://wa.me/"]') !== null, 'contact: WhatsApp card links to wa.me');
+  } else {
+    expect(waCard === null || waCard.hidden === true, 'contact: WhatsApp card hides when the owner disables it');
+  }
 
   const form = document.querySelector('#enquiryForm');
   form.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
@@ -386,15 +397,61 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelector('#formError').hidden === false, 'contact: empty submit shows a validation error');
   expect(document.querySelector('#formStatus').hidden === true, 'contact: no status shown for an invalid form');
 
+  // Capture the hand-off to WhatsApp
+  const opened = [];
+  window.open = (url) => { opened.push(String(url)); return null; };
+
   form.elements.name.value = 'Test Visitor';
   form.elements.phone.value = '9876543210';
   form.elements.message.value = 'Are Steam Momos available this evening?';
   form.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
   await sleep(40);
   expect(document.querySelector('#formError').hidden === true, 'contact: valid input clears the error');
-  expect(document.querySelector('#formStatus').hidden === false, 'contact: valid input reveals the honest status panel');
-  expect(document.querySelector('#formStatus a[href^="tel:"]') !== null, 'contact: status hands the visitor a call button');
-  expect(/haven’t received|can’t send/i.test(document.querySelector('#formStatus').textContent), 'contact: status admits nothing was transmitted');
+  expect(document.querySelector('#formStatus').hidden === false, 'contact: valid input reveals the status panel');
+  expect(document.querySelector('#formStatus a[href^="tel:"]') !== null, 'contact: status still hands the visitor a call button');
+
+  if (!waOn) {
+    expect(opened.length === 0, 'contact: nothing is handed to WhatsApp while the feature is disabled');
+    expect(document.querySelector('#formWhatsApp').hidden === true, 'contact: WhatsApp button hides while disabled');
+    expect(/now call us/i.test(document.querySelector('#formStatus').textContent), 'contact: status falls back to calling');
+  } else {
+    expect(opened.length === 1, 'contact: submit hands the enquiry to WhatsApp');
+    const sentUrl = opened[0] || '';
+    expect(sentUrl.startsWith('https://wa.me/' + waNumber + '?text='), 'contact: WhatsApp message is addressed to the number in content.js');
+    const sentText = decodeURIComponent(sentUrl.split('?text=')[1] || '');
+    expect(sentText.includes('Test Visitor'), 'contact: WhatsApp message carries the visitor name');
+    expect(sentText.includes('9876543210'), 'contact: WhatsApp message carries the phone number');
+    expect(sentText.includes('Are Steam Momos available this evening?'), 'contact: WhatsApp message carries the enquiry text');
+    expect(/New enquiry from the Dairy Park website/.test(sentText), 'contact: WhatsApp message opens with a clear heading');
+
+    const sendLink = document.querySelector('#formWhatsApp');
+    expect(sendLink !== null && sendLink.hidden === false, 'contact: status keeps a WhatsApp button for blocked popups');
+    expect(sendLink.getAttribute('href') === sentUrl, 'contact: WhatsApp button carries the same prepared message');
+    expect(/Tap Send/i.test(document.querySelector('#formStatus').textContent), 'contact: status explains nothing is sent until the visitor taps Send');
+  }
+}
+
+/* ========================================================================== */
+/* CONTACT — Bengali enquiry reaches the owner in Bengali                     */
+/* ========================================================================== */
+{
+  const { document, window, runtimeErrors } = await loadPage('contact/index.html', 'contact/');
+  expect(runtimeErrors.length === 0, `contact (bn): no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
+  document.querySelector('[data-lang="bn"]').click();
+  await sleep(80);
+  expect(document.querySelector('#enquiry-title').textContent === window.DP_I18N.bn['contact.formTitle'], 'contact (bn): heading switches to Bengali');
+
+  const opened = [];
+  window.open = (url) => { opened.push(String(url)); return null; };
+  const form = document.querySelector('#enquiryForm');
+  form.elements.name.value = 'রমেশ';
+  form.elements.phone.value = '9876543210';
+  form.elements.message.value = 'আজ মোমো আছে?';
+  form.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
+  await sleep(40);
+  const sentText = decodeURIComponent((opened[0] || '').split('?text=')[1] || '');
+  expect(sentText.includes('ডেয়ারি পার্ক ওয়েবসাইট থেকে নতুন অনুসন্ধান'), 'contact (bn): WhatsApp message uses the Bengali template');
+  expect(sentText.includes('রমেশ') && sentText.includes('আজ মোমো আছে?'), 'contact (bn): Bengali name and enquiry are carried through');
 }
 
 /* ========================================================================== */
