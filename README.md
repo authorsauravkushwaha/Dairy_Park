@@ -1,7 +1,10 @@
 # Dairy Park — website
 
-Marketing website for **Dairy Park (ডেয়ারি পার্ক)**, a fast-food restaurant on
-Kolaghat – Jashar Road, Kolaghat, West Bengal 721134.
+Marketing website for **Dairy Park (ডেয়ারি পার্ক)**, a 100% pure veg family
+restaurant on Kolaghat – Jashar Road, Kolaghat, West Bengal 721134, with a
+green-walled dining room of hand-painted arches, a dairy counter (ice cream,
+sweets and snacks) and a printed menu card of about ninety dishes — every price
+of which is on the site.
 
 - Live site: **https://authorsauravkushwaha.github.io/Dairy_Park/**
 - Phone: +91 99324 52124 · Google rating is hidden until the live listing is re-checked
@@ -18,8 +21,8 @@ commented files.
 
 | Route | Page | Purpose |
 | --- | --- | --- |
-| `/` | Home | Hero, welcome, menu highlights, why visit, gallery + reviews preview, location, closing CTA |
-| `/food/` | Food & Menu | Central food discovery: categories, search, featured row, detail popups, call-to-enquire |
+| `/` | Home | Hero with pure-veg seal + price ribbon, trust figures, welcome, six priced highlights, dining-room band, dairy-counter band, why visit, gallery + reviews preview, location, closing CTA |
+| `/food/` | Food & Menu | The whole menu card with prices: category chips, search, dotted price list grouped by category, featured row, detail popups, printed-card photographs, call-to-enquire |
 | `/about/` | About Us | Restaurant introduction, facilities, what to explore |
 | `/gallery/` | Gallery | Exterior / interior / food / products sections with lightbox |
 | `/offers/` | Special Offers | Owner-approved promos, or a friendly empty state |
@@ -94,7 +97,10 @@ security posture.
 Only verified information is published. Prices, full opening hours, offers,
 gallery photographs and customer quotes are **not** invented — they are either
 absent, marked “call to confirm”, or kept in `content.js` for the owner to fill
-in once confirmed. The Google rating is **hidden by default** (`reviews.show`)
+in once confirmed. Every price on the site is copied from the printed menu card
+in the Gallery photographs, and the pure-veg claim comes from the signboard
+outside; the footer asks visitors to confirm prices by phone because they can
+change. The Google rating is **hidden by default** (`reviews.show`)
 until the owner re-checks the live listing; menu descriptions stay blank until
 ingredients are confirmed. Empty menu categories and the offers page degrade to
 honest designed states rather than fake content.

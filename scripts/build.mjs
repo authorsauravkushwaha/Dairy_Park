@@ -62,7 +62,7 @@ function restaurantNode(C, siteUrl) {
     url: siteUrl,
     image: siteUrl + 'assets/img/og-image.png',
     telephone: b.phone && b.phone.tel,
-    servesCuisine: ['Fast Food', 'Indian'],
+    servesCuisine: ['North Indian', 'Chinese', 'Fast Food'],
     priceRange: (spend.currency || '₹') + spend.min + '–' + spend.max,
     currenciesAccepted: 'INR',
     address: {

@@ -7,8 +7,8 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#150e0b",
-  "theme_color": "#150e0b",
+  "background_color": "#081a13",
+  "theme_color": "#0d2419",
   "categories": ["food", "restaurant"],
   "icons": [
     { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },

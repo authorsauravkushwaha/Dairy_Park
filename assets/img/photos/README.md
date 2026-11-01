@@ -13,30 +13,38 @@ order, so if you re-export as WebP it is picked up automatically.
 
 | File name        | Where it appears                                  |
 | ---------------- | ------------------------------------------------- |
-| `owner.*`        | **Supplied** — hero portrait frame + blurred hero backdrop + About inset |
-| `shop.*`         | **Supplied** — shop interior (About + Gallery)    |
-| `counter-snacks.*` | **Supplied** — snacks at the counter (Gallery)  |
+| `shop-front.*`   | **Supplied** — full-screen homepage hero backdrop |
+| `owner.*`        | **Supplied** — hero portrait frame + About inset   |
+| `interior-room.*` | **Supplied** — dining room (About + Gallery)      |
+| `interior-bench.*` | **Supplied** — home “Inside the dining room” band + Gallery |
+| `interior-glass.*` | **Supplied** — evening room through the glass, home band + Gallery |
+| `interior-arches.*`, `interior-booth.*`, `interior-green.*`, `interior-lounge.*`, `interior-night.*` | **Supplied** — murals, booths and evening frontage (Gallery) |
+| `table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and the snacks counter (Gallery) |
+| `menu-spread-1.*`, `menu-spread-2.*` | **Supplied** — menu boards (Gallery) |
+| `menu-drinks.*`  | **Supplied** — drinks (Gallery)                   |
+| `counter-snacks.*` | **Supplied** — samosas at the counter (Gallery) |
 | `ice-cream-freezer.*` | **Supplied** — ice-cream freezer (Gallery)    |
 | `chocolate-freezer.*` | **Supplied** — chocolate selection (Gallery)  |
-| `menu-spread-1.*`, `menu-spread-2.*` | **Supplied** — menu-counter shots (Gallery) |
-| `menu-drinks.*`  | **Supplied** — drinks (Gallery)                   |
-| `dahi-vada.*`    | **Supplied** — Dahi Vada menu card + hero peek + "order both" strip |
-| `steam-momo.*`   | **Supplied** — Steam Momo menu card + hero peek + "order both" strip |
+| `dahi-vada.*`    | **Supplied** — Dahi Vada cards + hero peek + "order both" strip + Gallery |
+| `steam-momo.*`   | **Supplied** — Steam Momo cards + hero peek + "order both" strip + Gallery |
 
 ## New gallery photographs
 
-Create a `gallery/` sub-folder, drop the file in with any name, then list it in
-`content.js → gallery` with its section (`exterior`, `interior`, `food`,
-`products`) and bilingual alt text — see OWNER-GUIDE.md for the exact snippet.
+Drop the file in this folder with any name, then list it in `content.js →
+gallery` with its section (`exterior`, `interior`, `food`, `products`) and
+bilingual alt text — see OWNER-GUIDE.md for the exact snippet. The outside and
+inside sets are framed in arches on the Gallery page.
 
 If a file is missing, the site shows a designed placeholder instead — nothing
 breaks, and no fake photograph of Dairy Park is ever used. `npm run check`
 fails the build if `content.js` points at a photograph that is not here, so a
 typo in a file name is caught before the site goes live.
 
-For replacements, export **WebP** at about 1000 px on the long edge and
-quality 68–80 — that lands each photo around 100–180 kB, so the whole page
-stays quick on a phone. The two menu-card photos are also preloaded in the
-hero, so keeping them small matters most.
+For replacements, export **WebP** at about 1400–1600 px on the long edge and
+quality 75–82. The current set is 21 files and about 2.6 MB in total. The
+shopfront is the hero backdrop, so keeping it under ~250 kB matters most.
+
+The home page also uses three of these in its dairy-counter band — `freezer`,
+`shelves` and `counter` are named in `content.js → photos`.
 
 Please upload only genuine photos of the restaurant, the owner and the food.

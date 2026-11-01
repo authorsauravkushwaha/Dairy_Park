@@ -1,17 +1,29 @@
 <!--meta
 {
   "page": "home",
-  "title": "Dairy Park Kolaghat | Fast Food Restaurant – Dahi Vada & Steam Momo",
-  "desc": "Dairy Park is a fast-food restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Dine-in and drive-through. Try our Dahi Vada and Steam Momo. Call +91 99324 52124.",
+  "title": "Dairy Park Kolaghat | Pure Veg Restaurant – Menu, Prices & Ice Cream",
+  "desc": "Dairy Park is a 100% pure veg family restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Dahi Vada ₹80, Chola Bhatura ₹120, roti from ₹9, ice cream at the counter. Dine-in and drive-through. Call +91 99324 52124.",
   "slug": ""
 }
 -->
     <!-- ================= HERO ================= -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero__bg">
-        <img id="heroPhoto" src="assets/img/photos/owner.webp" alt="The owner of Dairy Park at the restaurant in Kolaghat" data-i18n-alt="hero.photoAlt" width="960" height="1280" fetchpriority="high" decoding="async">
+        <img id="heroPhoto" src="assets/img/photos/shop-front.webp" alt="The Dairy Park shopfront on Kolaghat – Jashar Road" data-i18n-alt="hero.bgAlt" width="1448" height="1086" fetchpriority="high" decoding="async">
       </div>
       <div class="hero__scrim" aria-hidden="true"></div>
+
+      <div class="hero__botanical" aria-hidden="true">
+        <svg viewBox="0 0 220 360" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M110 360V150"/>
+          <path d="M110 196c-38-6-60-30-66-66 34 4 58 28 66 66Z"/>
+          <path d="M110 196c38-6 60-30 66-66-34 4-58 28-66 66Z"/>
+          <path d="M110 142c-30-12-44-40-44-78 28 14 40 42 44 78Z"/>
+          <path d="M110 142c30-12 44-40 44-78-28 14-40 42-44 78Z"/>
+          <path d="M110 258c-32-4-52-24-58-56 30 4 50 24 58 56Z" opacity=".7"/>
+          <path d="M110 258c32-4 52-24 58-56-30 4-50 24-58 56Z" opacity=".7"/>
+        </svg>
+      </div>
 
       <div class="hero__inner">
         <figure class="hero__owner" id="heroOwner">
@@ -27,7 +39,7 @@
         <div class="hero__content">
           <p class="eyebrow hero__eyebrow">
             <span class="eyebrow__dot" aria-hidden="true"></span>
-            <span data-i18n="hero.eyebrow">Fast-food restaurant · Kolaghat, West Bengal</span>
+            <span data-i18n="hero.eyebrow">Family restaurant · Kolaghat, West Bengal</span>
           </p>
 
           <h1 class="hero__title" id="hero-title">
@@ -35,7 +47,17 @@
             <span class="hero__title-line hero__title-line--accent" data-i18n="hero.title2">right on the Kolaghat–Jashar Road.</span>
           </h1>
 
-          <p class="hero__sub" data-i18n="hero.sub">Dairy Park is a fast-food stop in Kolaghat, with dine-in and drive-through. Pull in for our menu highlights — or call before you come.</p>
+          <p class="hero__sub" data-i18n="hero.sub">A family restaurant in Kolaghat with a dining room of deep green walls and painted arches. Dine in, use the drive-through, or call before you come.</p>
+
+          <a class="hero__ribbon" href="food/" data-track="menu_cta" data-track-location="hero_ribbon">
+            <span class="hero__ribbon-veg">
+              <svg class="hero__ribbon-leaf" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 3.5c-9 0-15 4.6-15 12 0 2.3.8 4 .8 4s3.7-9.4 14.2-11.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4.5 20.5c1.6-3.9 4.4-6.9 8.1-8.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <span data-i18n="hero.seal">100% Pure Veg</span>
+            </span>
+            <span class="hero__ribbon-sep" aria-hidden="true"></span>
+            <span class="hero__ribbon-price" data-bind="heroPrice">The full menu starts at ₹9</span>
+            <span class="hero__ribbon-note" data-i18n="hero.priceRibbonNote">Roti, tea and idli — every price is on the menu</span>
+          </a>
 
           <a class="hero__picks" id="heroPicks" href="food/" data-i18n-aria="hero.picksAria" hidden>
             <span class="hero__picks-label" data-i18n="hero.picksLabel">Worth trying</span>
@@ -92,6 +114,15 @@
             <p>Kolaghat – Jashar Road</p>
           </div>
 
+          <div class="hero__seal" data-depth=".9">
+            <span class="seal">
+              <span class="seal__ring" aria-hidden="true"></span>
+              <svg class="seal__leaf" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 3.5c-9 0-15 4.6-15 12 0 2.3.8 4 .8 4s3.7-9.4 14.2-11.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 20.5c1.6-3.9 4.4-6.9 8.1-8.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <span class="seal__text" data-i18n="hero.seal">100% Pure Veg</span>
+              <span class="seal__sub" data-i18n="hero.sealSub">Kitchen</span>
+            </span>
+          </div>
+
           <div class="hero__ring"></div>
         </div>
       </div>
@@ -136,6 +167,14 @@
             <span class="trust__label" data-i18n="trust.spend">Typical spend per person</span>
           </li>
           <li class="trust__item reveal" data-reveal="up">
+            <span class="trust__num"><span data-bind="menuCount">87</span></span>
+            <span class="trust__label" data-i18n="trust.items">Dishes on the menu</span>
+          </li>
+          <li class="trust__item reveal" data-reveal="up">
+            <span class="trust__num trust__num--gold"><span data-bind="priceFrom">₹9</span></span>
+            <span class="trust__label" data-i18n="trust.from">Cheapest thing on the menu</span>
+          </li>
+          <li class="trust__item reveal" data-reveal="up">
             <span class="trust__num"><span data-count="2" data-bind="facilityCount">2</span></span>
             <span class="trust__label" data-i18n="trust.ways">Ways to visit — dine-in &amp; drive-through</span>
           </li>
@@ -149,7 +188,7 @@
         <div class="section-head">
           <p class="eyebrow reveal" data-i18n="welcome.eyebrow">Welcome</p>
           <h2 class="section-title reveal" id="welcome-title" data-reveal="down" data-i18n="welcome.title">Welcome to Dairy Park</h2>
-          <p class="section-lead reveal" data-i18n="welcome.lead">A family fast-food restaurant on the Kolaghat – Jashar Road — easy to stop at, easy to enjoy.</p>
+          <p class="section-lead reveal" data-i18n="welcome.lead">A family restaurant on the Kolaghat – Jashar Road — easy to stop at, easy to enjoy.</p>
         </div>
 
         <div class="welcome__grid">
@@ -183,6 +222,14 @@
             </span>
             <h3 class="welcome-card__title" data-i18n="welcome.highlightsTitle">Dahi Vada &amp; Steam Momo</h3>
             <p class="welcome-card__desc" data-i18n="welcome.highlightsDesc">Our listed menu highlights — ask at the counter for today’s full menu.</p>
+          </article>
+
+          <article class="welcome-card welcome-card--veg reveal" data-reveal="up" data-tilt>
+            <span class="welcome-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20.5 3.5c-9 0-15 4.6-15 12 0 2.3.8 4 .8 4s3.7-9.4 14.2-11.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 20.5c1.6-3.9 4.4-6.9 8.1-8.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <h3 class="welcome-card__title" data-i18n="welcome.vegTitle">100% Pure Veg</h3>
+            <p class="welcome-card__desc" data-i18n="welcome.vegDesc">Our signboard says pure veg and the printed menu keeps it that way.</p>
           </article>
         </div>
       </div>
@@ -219,6 +266,13 @@
           </a>
         </aside>
 
+        <p class="menu__price-note reveal">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 3.5c-9 0-15 4.6-15 12 0 2.3.8 4 .8 4s3.7-9.4 14.2-11.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 20.5c1.6-3.9 4.4-6.9 8.1-8.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span data-i18n="menu.vegNote">Everything on this menu is vegetarian.</span>
+          <span class="menu__price-note-sep" aria-hidden="true"></span>
+          <span data-bind="menuPriceNote">Prices are copied from our printed menu card and can change — please call to confirm.</span>
+        </p>
+
         <noscript>
           <div class="menu__noscript">
             <h3 data-i18n="menu.noscriptTitle">Menu highlights</h3>
@@ -231,13 +285,100 @@
           <div class="menu__cta-actions">
             <a class="btn btn--ghost btn--lg" href="food/" data-track="menu_cta" data-track-location="home_menu">
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13m-5.5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span data-i18n="menu.exploreFull">Explore Full Menu</span>
+              <span data-i18n="menu.boardCta">See every price</span>
             </a>
             <a class="btn btn--primary btn--lg" href="tel:+919932452124" data-link="phone" data-track="menu_call">
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
               <span data-i18n="menu.ask">Ask About Our Menu</span>
             </a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DINING ROOM ================= -->
+    <section class="section section--cream dine" id="dining-room" aria-labelledby="dine-title">
+      <div class="container">
+        <div class="dine__grid">
+          <div class="dine__text">
+            <p class="eyebrow reveal" data-i18n="dine.eyebrow">Inside the dining room</p>
+            <h2 class="section-title section-title--sm reveal" id="dine-title" data-reveal="down" data-i18n="dine.title">Green walls, painted arches, long tables.</h2>
+            <p class="section-lead reveal" data-i18n="dine.lead">The room in our photographs is the room you eat in — bottle-green walls, hand-painted palms in arched niches and brass lamps above every table.</p>
+            <ul class="dine__facts reveal">
+              <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dine.f1">Air-conditioned seating</span></li>
+              <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dine.f2">Bench seats, stools and long tables</span></li>
+              <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dine.f3">Comfortable for families and groups</span></li>
+            </ul>
+            <div class="dine__actions reveal">
+              <a class="btn btn--primary" href="gallery/" data-track="gallery_cta" data-track-location="dine">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8.5h3l1.5-2h7l1.5 2h3v10H4v-10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <span data-i18n="dine.cta">See more photographs</span>
+              </a>
+              <a class="btn btn--outline" href="visit/" data-track="visit_cta" data-track-location="dine">
+                <span data-i18n="locate.visitPage">Visit Us page</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="dine__photos reveal" data-reveal="right">
+            <figure class="arch-photo arch-photo--tall" data-photo-frame>
+              <img src="assets/img/photos/interior-bench.webp" data-photo-key="dining" data-photo-alt="dine.alt1" alt="Bench seating and long marble-look tables at Dairy Park" width="1288" height="966" loading="lazy" decoding="async">
+            </figure>
+            <figure class="arch-photo arch-photo--wide" data-photo-frame>
+              <img src="assets/img/photos/interior-glass.webp" data-photo-key="glass" data-photo-alt="dine.alt2" alt="The lit dining room seen through the glass front at Dairy Park" width="1288" height="966" loading="lazy" decoding="async">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DAIRY COUNTER ================= -->
+    <section class="section section--dark counter" id="dairy-counter" aria-labelledby="counter-title">
+      <span class="counter__glow" aria-hidden="true"></span>
+      <div class="container">
+        <div class="section-head section-head--dark">
+          <p class="eyebrow eyebrow--light reveal" data-i18n="counter.eyebrow">At the counter</p>
+          <h2 class="section-title reveal" id="counter-title" data-reveal="down" data-i18n="counter.title">Ice cream, chocolate and snacks to take away.</h2>
+          <p class="section-lead reveal" data-i18n="counter.lead">Dairy Park is a dairy shop as much as a restaurant — pick up ice cream, sweets and snacks on your way out.</p>
+        </div>
+
+        <div class="counter__grid">
+          <article class="counter-card reveal" data-reveal="up">
+            <figure class="counter-card__photo" data-photo-frame>
+              <img src="assets/img/photos/ice-cream-freezer.webp" data-photo-key="freezer" data-photo-alt="counter.alt1" alt="The ice-cream freezer at Dairy Park" width="900" height="1200" loading="lazy" decoding="async">
+            </figure>
+            <div class="counter-card__body">
+              <h3 class="counter-card__title" data-i18n="counter.c1Title">Ice cream freezers</h3>
+              <p class="counter-card__desc" data-i18n="counter.c1Desc">Amul and Cadbury freezers, right by the entrance.</p>
+            </div>
+          </article>
+
+          <article class="counter-card reveal" data-reveal="up">
+            <figure class="counter-card__photo" data-photo-frame>
+              <img src="assets/img/photos/shop.webp" data-photo-key="shelves" data-photo-alt="counter.alt2" alt="Shelves of chocolates and snacks inside Dairy Park" width="1200" height="900" loading="lazy" decoding="async">
+            </figure>
+            <div class="counter-card__body">
+              <h3 class="counter-card__title" data-i18n="counter.c2Title">Shelves of snacks</h3>
+              <p class="counter-card__desc" data-i18n="counter.c2Desc">Chocolates, chips and namkeen to carry home.</p>
+            </div>
+          </article>
+
+          <article class="counter-card reveal" data-reveal="up">
+            <figure class="counter-card__photo" data-photo-frame>
+              <img src="assets/img/photos/counter-snacks.webp" data-photo-key="counter" data-photo-alt="counter.alt3" alt="Samosas on a steel tray at the counter" width="1000" height="750" loading="lazy" decoding="async">
+            </figure>
+            <div class="counter-card__body">
+              <h3 class="counter-card__title" data-i18n="counter.c3Title">Samosas &amp; sweets</h3>
+              <p class="counter-card__desc" data-i18n="counter.c3Desc">Fresh at the counter through the day.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="counter__actions reveal">
+          <a class="btn btn--primary btn--lg" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="counter">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span data-i18n="counter.cta">Ask what is fresh today</span>
+          </a>
         </div>
       </div>
     </section>
