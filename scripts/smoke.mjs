@@ -108,7 +108,7 @@ async function loadPage(outFile, urlPath) {
   expect(runtimeErrors.length === 0, `home: no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
   expect(document.documentElement.getAttribute('lang') === 'en', 'home: starts in English');
   expect(document.title.includes('Dairy Park'), 'home: title is set');
-  expect(document.querySelectorAll('[data-dish-id]').length === 2, 'home: both featured menu items render');
+  expect(document.querySelectorAll('[data-dish-id]').length === 6, 'home: all six featured menu items render');
   expect(document.querySelectorAll('#facilityList li').length === 2, 'home: facilities render');
   expect(document.querySelector('#offers, #offersActive') === null, 'home: no offers section leaks onto the homepage');
   expect(!!document.querySelector('#galleryPreview'), 'home: gallery preview container exists');
@@ -164,7 +164,7 @@ async function loadPage(outFile, urlPath) {
   expect(document.title.includes('ডেয়ারি পার্ক'), 'home: page title is translated');
   expect(window.location.pathname === '/Dairy_Park/', 'home: language switch keeps the current page');
   expect(document.querySelector('#reviews').hidden === true, 'home: reviews stay hidden after switching language');
-  expect(document.querySelectorAll('[data-dish-id]').length === 2, 'home: menu re-renders in Bengali');
+  expect(document.querySelectorAll('[data-dish-id]').length === 6, 'home: menu re-renders in Bengali');
   expect(window.localStorage.getItem('dp-lang') === 'bn', 'home: language choice is remembered');
 
   // Mobile drawer
@@ -186,11 +186,11 @@ async function loadPage(outFile, urlPath) {
   const { document, window, runtimeErrors } = await loadPage('food/index.html', 'food/');
   expect(runtimeErrors.length === 0, `food: no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
   expect(document.querySelector('#featured').hidden === false, 'food: featured section visible');
-  expect(document.querySelectorAll('#featuredGrid [data-dish-id]').length === 2, 'food: featured grid shows the two highlights');
-  expect(document.querySelectorAll('#menuGrid [data-dish-id]').length === 2, 'food: full menu grid renders');
+  expect(document.querySelectorAll('#featuredGrid [data-dish-id]').length === 6, 'food: featured grid shows all six highlights');
+  expect(document.querySelectorAll('#menuGrid [data-dish-id]').length === 6, 'food: full menu grid renders');
 
   const cats = [...document.querySelectorAll('.menu-cat')];
-  expect(cats.length === 3, 'food: category chips = All + the two non-empty categories');
+  expect(cats.length === 6, 'food: category chips = All + the five non-empty categories');
   expect(cats[0].classList.contains('is-active'), 'food: "All" is active initially');
 
   // Category filter
@@ -208,7 +208,7 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelector('#menuEmpty').hidden === false, 'food: empty state appears for a dead search');
   document.querySelector('#menuClear').click();
   await sleep(60);
-  expect(document.querySelectorAll('#menuGrid [data-dish-id]').length === 2, 'food: clear filters restores the grid');
+  expect(document.querySelectorAll('#menuGrid [data-dish-id]').length === 6, 'food: clear filters restores the grid');
   expect(document.querySelector('#menuEmpty').hidden === true, 'food: empty state hides after clearing');
 
   // Detail dialog
@@ -223,7 +223,8 @@ async function loadPage(outFile, urlPath) {
   expect(dialog.open === false || !dialog.hasAttribute('open'), 'food: dialog closes');
 
   // Empty configured categories must not appear
-  expect(![...document.querySelectorAll('.menu-cat')].some((c) => /Beverages|Chaat|Ice Cream/i.test(c.textContent)), 'food: empty categories stay hidden');
+  expect(![...document.querySelectorAll('.menu-cat')].some((c) => /Chaat|Ice Cream|Snacks|Other/i.test(c.textContent)), 'food: empty categories stay hidden');
+  expect([...document.querySelectorAll('.menu-cat')].some((c) => c.textContent === 'Beverages'), 'food: Beverages appears now that Cold Coffee is on the menu');
 }
 
 /* ========================================================================== */

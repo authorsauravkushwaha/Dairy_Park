@@ -25,6 +25,10 @@ order, so if you re-export as WebP it is picked up automatically.
 | `chocolate-freezer.*` | **Supplied** — chocolate selection (Gallery)  |
 | `dahi-vada.*`    | **Supplied** — Dahi Vada cards + hero peek + "order both" strip + Gallery |
 | `steam-momo.*`   | **Supplied** — Steam Momo cards + hero peek + "order both" strip + Gallery |
+| `chola-bhatura.*` | **Supplied** — Chola Bhatura cards on Home + Food & Menu + Gallery |
+| `paneer-butter-masala.*` | **Supplied** — Paneer Butter Masala cards on Home + Food & Menu + Gallery |
+| `veg-chowmein.*` | **Supplied** — Veg Chowmein cards on Home + Food & Menu + Gallery |
+| `cold-coffee.*`  | **Supplied** — Cold Coffee with Ice Cream on Home + Food & Menu + Gallery |
 
 ## New gallery photographs
 
@@ -39,7 +43,7 @@ fails the build if `content.js` points at a photograph that is not here, so a
 typo in a file name is caught before the site goes live.
 
 For replacements, export **WebP** at about 1400–1600 px on the long edge and
-quality 75–82. The current set is 19 files and about 2.4 MB in total. The
+quality 75–82. The current set is 23 files and about 2.9 MB in total. The
 shopfront is the hero backdrop, so keeping it under ~250 kB matters most.
 
 Please upload only genuine photos of the restaurant, the owner and the food.

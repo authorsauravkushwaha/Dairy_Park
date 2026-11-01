@@ -23,6 +23,9 @@ placeholder is shown instead — nothing breaks, and no fake photograph is used.
 | `photos/table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and snacks counter (Gallery) |
 | `photos/dahi-vada.*` | **Supplied** — Dahi Vada cards on Home + Food & Menu, “order both” strip, Gallery |
 | `photos/steam-momo.*` | **Supplied** — Steam Momo cards on Home + Food & Menu, “order both” strip, Gallery |
+| `photos/chola-bhatura.*`, `paneer-butter-masala.*` | **Supplied** — North Indian mains on Home + Food & Menu, Gallery |
+| `photos/veg-chowmein.*` | **Supplied** — Veg Chowmein cards on Home + Food & Menu, Gallery |
+| `photos/cold-coffee.*` | **Supplied** — Cold Coffee with Ice Cream on Home + Food & Menu, Gallery |
 | `photos/menu-spread-1.*`, `menu-spread-2.*`, `menu-drinks.*` | **Supplied** — printed menu boards (Gallery) |
 | `photos/counter-snacks.*` | **Supplied** — samosas at the counter (Gallery) |
 | `photos/ice-cream-freezer.*`, `chocolate-freezer.*` | **Supplied** — freezers (Gallery) |
@@ -77,8 +80,9 @@ Menu items live in `content.js → menu`. Each item looks like this:
 - **Categories:** the Food & Menu page shows only categories that have at least
   one item. Proposed categories (Snacks, Chaat, Beverages, Ice Cream, Other…)
   stay hidden until you add an item that uses them — so never add an empty one
-  to the website by accident. Category ids: `special`, `snacks`, `momos`,
-  `chaat`, `beverages`, `icecream`, `other`.
+  to the website by accident. Category ids: `special`, `mains` (North Indian
+  mains), `chinese`, `snacks`, `momos`, `chaat`, `beverages`, `icecream`,
+  `other`.
 - **Price:** leave `null` until you have confirmed the price. The site shows
   “Ask for today’s price” — it never invents a number.
 - **Search & filters:** visitors can filter by category and search by name in
@@ -191,8 +195,9 @@ Run `npm test` locally if you want to see the same checks before publishing.
       add an exterior photo when one is taken (`gallery/` section `exterior`).
 - [ ] Confirm the Google rating and review count on the live listing, then set
       `reviews.show = true` only after checking (currently hidden).
-- [ ] Add Dahi Vada / Steam Momo photographs (`photos/dahi-vada.*`,
-      `photos/steam-momo.*`) and their confirmed descriptions.
+- [ ] Confirm the descriptions for the six dishes supplied so far —
+      Dahi Vada, Steam Momo, Chola Bhatura, Paneer Butter Masala,
+      Veg Chowmein and Cold Coffee with Ice Cream.
 - [ ] Confirm the full opening hours and set `hours.verified = true` only then.
 - [ ] Confirm the phone number is still +91 99324 52124.
 - [ ] Add prices only if you want them public.
