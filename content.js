@@ -6,7 +6,7 @@
      • Keep the quotes " " and the commas between items.
      • // marks a comment — the website ignores everything after it on that line.
      • After saving, refresh the website to see your changes.
-     • Never add information you cannot verify (prices, hours, offers, claims).
+     • Never add information you cannot verify.
    More help: OWNER-GUIDE.md
    ============================================================================= */
 
@@ -30,6 +30,11 @@ window.DP_CONTENT = {
     // The printed menu covers North Indian, Chinese and snacks — and the shop
     // sells dairy products and sweets too, hence the name.
     category: { en: "Family Restaurant", bn: "পারিবারিক রেস্তোরাঁ" },
+
+    // The signboard outside reads "DAIRY PARK — PURE VEG RESTAURANT", and the
+    // printed menu lists no non-vegetarian dishes. This powers the Pure Veg
+    // seal and the vegetarian filter across the site.
+    pureVeg: true,
 
     // Address lines, as shown on the website and in the footer
     addressLines: {
@@ -73,7 +78,8 @@ window.DP_CONTENT = {
     // Facilities listed on Google. Remove a line only if the facility is gone.
     facilities: [
       { id: "dine-in", en: "Dine-in", bn: "ডাইন-ইন" },
-      { id: "drive-through", en: "Drive-through", bn: "ড্রাইভ-থ্রু" }
+      { id: "drive-through", en: "Drive-through", bn: "ড্রাইভ-থ্রু" },
+      { id: "pure-veg", en: "Pure veg", bn: "নিরামিষ" }
     ]
   },
 
@@ -114,25 +120,38 @@ window.DP_CONTENT = {
 
   /* ---------------------------------------------------------------------
      5. MENU CATEGORIES
-     Proposed categories for the Food & Menu page. A category is HIDDEN
-     automatically until it has at least one item in the menu list below —
-     so empty categories never appear on the website.
+     The order here is the order of the category chips on the Food & Menu
+     page. A category is HIDDEN automatically until it has at least one item
+     in the menu list below — so empty categories never appear.
      --------------------------------------------------------------------- */
   menuCategories: [
-    { id: "special", name: { en: "Special Items", bn: "স্পেশাল আইটেম" } },
-    { id: "mains", name: { en: "North Indian Mains", bn: "উত্তর ভারতীয় পদ" } },
-    { id: "chinese", name: { en: "Chinese", bn: "চাইনিজ" } },
-    { id: "snacks", name: { en: "Snacks", bn: "স্ন্যাকস" } },
+    { id: "special", name: { en: "Signature Plates", bn: "সিগনেচার প্লেট" } },
+    { id: "chaat", name: { en: "Chaat & Chola", bn: "চাট ও ছোলা" } },
     { id: "momos", name: { en: "Momos", bn: "মোমো" } },
-    { id: "chaat", name: { en: "Chaat", bn: "চাট" } },
-    { id: "beverages", name: { en: "Beverages", bn: "পানীয়" } },
-    { id: "icecream", name: { en: "Ice Cream", bn: "আইসক্রিম" } },
-    { id: "other", name: { en: "Other Items", bn: "অন্যান্য পণ্য" } }
+    { id: "south", name: { en: "Idli & Vada", bn: "ইডলি ও বড়া" } },
+    { id: "snacks", name: { en: "Snacks & Fries", bn: "স্ন্যাকস ও ফ্রাই" } },
+    { id: "chinese", name: { en: "Chinese", bn: "চাইনিজ" } },
+    { id: "pizza", name: { en: "Pizza", bn: "পিজ্জা" } },
+    { id: "moglai", name: { en: "Moglai & Rolls", bn: "মোগলাই ও রোল" } },
+    { id: "paneer", name: { en: "Paneer & Veg", bn: "পনির ও ভেজ" } },
+    { id: "dal", name: { en: "Dal & Tarka", bn: "ডাল ও তরকা" } },
+    { id: "chana", name: { en: "Chana", bn: "ছানা" } },
+    { id: "aloo", name: { en: "Aloo", bn: "আলু" } },
+    { id: "rice", name: { en: "Rice & Biryani", bn: "ভাত ও বিরিয়ানি" } },
+    { id: "roti", name: { en: "Roti & Paratha", bn: "রুটি ও পরোটা" } },
+    { id: "salad", name: { en: "Salad & Raita", bn: "সালাদ ও রাইতা" } },
+    { id: "papad", name: { en: "Papad", bn: "পাপড়" } },
+    { id: "shakes", name: { en: "Shakes & Lassi", bn: "শেক ও লাস্যি" } },
+    { id: "tea", name: { en: "Tea & Coffee", bn: "চা ও কফি" } },
+    { id: "icecream", name: { en: "Ice Cream & Dairy", bn: "আইসক্রিম ও ডেইরি" } }
   ],
 
   /* ---------------------------------------------------------------------
      6. MENU ITEMS
-     Add, remove or edit items freely. Copy a block below and change it.
+     Every item and price below is copied from the printed Dairy Park menu
+     card (the two photographs in the Gallery). Add, remove or edit items
+     freely. Copy a block below and change it.
+
      category:   must be one of the category ids above. Categories with no
                  items stay hidden.
      price:      null      -> shows "Ask for today's price" (never invent a price)
@@ -152,13 +171,13 @@ window.DP_CONTENT = {
                  shows nothing at all while the list is empty.
      --------------------------------------------------------------------- */
   menu: [
+    /* ---- SIGNATURE PLATES (home-page highlights) ---- */
     {
       id: "dahi-vada",
       name: { en: "Dahi Vada", bn: "দই বড়া" },
-      // Keep descriptions blank until the owner confirms ingredients/details.
       desc: { en: "", bn: "" },
       category: "special",
-      price: null,
+      price: "₹80",
       veg: true,
       available: true,
       highlight: true,
@@ -167,9 +186,21 @@ window.DP_CONTENT = {
       photo: "assets/img/photos/dahi-vada"
     },
     {
+      id: "chola-bhatura",
+      name: { en: "Chola Bhatura", bn: "ছোলা ভাটুরা" },
+      desc: { en: "", bn: "" },
+      category: "special",
+      price: "₹120",
+      veg: true,
+      available: true,
+      highlight: true,
+      tag: { en: "Most ordered", bn: "সবচেয়ে জনপ্রিয়" },
+      badges: [],
+      photo: "assets/img/photos/chola-bhatura"
+    },
+    {
       id: "steam-momo",
       name: { en: "Steam Momo", bn: "স্টিম মোমো" },
-      // Keep descriptions blank until the owner confirms ingredients/details.
       desc: { en: "", bn: "" },
       category: "momos",
       price: null,
@@ -181,66 +212,1007 @@ window.DP_CONTENT = {
       photo: "assets/img/photos/steam-momo"
     },
     {
-      id: "chola-bhatura",
-      name: { en: "Chola Bhatura", bn: "ছোলা ভাটোরা" },
-      // Keep descriptions blank until the owner confirms ingredients/details.
-      desc: { en: "", bn: "" },
-      category: "mains",
-      price: null,
-      veg: true,
-      available: true,
-      highlight: true,
-      tag: null,
-      badges: [],
-      photo: "assets/img/photos/chola-bhatura"
-    },
-    {
       id: "paneer-butter-masala",
       name: { en: "Paneer Butter Masala", bn: "পনির বাটার মসলা" },
-      // Keep descriptions blank until the owner confirms ingredients/details.
       desc: { en: "", bn: "" },
-      category: "mains",
-      price: null,
+      category: "paneer",
+      price: "₹180",
       veg: true,
       available: true,
       highlight: true,
-      tag: null,
+      tag: { en: "Chef's pick", bn: "শেফের পছন্দ" },
       badges: [],
       photo: "assets/img/photos/paneer-butter-masala"
     },
     {
       id: "veg-chowmein",
       name: { en: "Veg Chowmein", bn: "ভেজ চাউমিন" },
-      // Keep descriptions blank until the owner confirms ingredients/details.
       desc: { en: "", bn: "" },
       category: "chinese",
-      price: null,
+      price: "₹70",
       veg: true,
       available: true,
       highlight: true,
-      tag: null,
+      tag: { en: "Under ₹100", bn: "₹১০০র নিচে" },
       badges: [],
       photo: "assets/img/photos/veg-chowmein"
     },
     {
-      id: "cold-coffee",
-      name: { en: "Cold Coffee with Ice Cream", bn: "আইসক্রিম সহ কোল্ড কফি" },
-      // Keep descriptions blank until the owner confirms ingredients/details.
+      id: "cold-coffee-icecream",
+      name: { en: "Cold Coffee with Ice Cream", bn: "কোল্ড কফি উইথ আইসক্রিম" },
       desc: { en: "", bn: "" },
-      category: "beverages",
-      price: null,
+      category: "shakes",
+      price: "₹160",
       veg: true,
       available: true,
       highlight: true,
-      tag: null,
+      tag: { en: "Chilled", bn: "ঠান্ডা" },
       badges: [],
       photo: "assets/img/photos/cold-coffee"
+    },
+
+    /* ---- CHAAT & CHOLA ---- */
+    {
+      id: "papdi-chaat",
+      name: { en: "Papdi Chaat", bn: "পাপড়ি চাট" },
+      desc: { en: "", bn: "" },
+      category: "chaat",
+      price: "₹90",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "chola-tikia",
+      name: { en: "Chola Tikia", bn: "ছোলা টিকিয়া" },
+      desc: { en: "", bn: "" },
+      category: "chaat",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "masala-dahi",
+      name: { en: "Masala Dahi", bn: "মসলা দই" },
+      desc: { en: "", bn: "" },
+      category: "chaat",
+      price: "₹50",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- IDLI & VADA ---- */
+    {
+      id: "idli",
+      name: { en: "Idli", bn: "ইডলি" },
+      desc: { en: "", bn: "" },
+      category: "south",
+      price: "₹20",
+      veg: true,
+      available: true,
+      tag: { en: "From ₹20", bn: "₹২০ থেকে" },
+      badges: []
+    },
+    {
+      id: "fried-idli",
+      name: { en: "Fried Idli", bn: "ফ্রাইড ইডলি" },
+      desc: { en: "", bn: "" },
+      category: "south",
+      price: "₹90",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "butter-fried-idli",
+      name: { en: "Butter Fried Idli", bn: "বাটার ফ্রাইড ইডলি" },
+      desc: { en: "", bn: "" },
+      category: "south",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "dahi-idli",
+      name: { en: "Dahi Idli", bn: "দই ইডলি" },
+      desc: { en: "", bn: "" },
+      category: "south",
+      price: "₹80",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "sambar-vada",
+      name: { en: "Sambar Vada", bn: "সাম্বার বড়া" },
+      desc: { en: "", bn: "" },
+      category: "south",
+      price: "₹40",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- SNACKS & FRIES ---- */
+    {
+      id: "chinese-singara",
+      name: { en: "Chinese Singara", bn: "চাইনিজ সিঙাড়া" },
+      desc: { en: "", bn: "" },
+      category: "snacks",
+      price: "₹50",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "cutlet",
+      name: { en: "Cutlet", bn: "কাটলেট" },
+      desc: { en: "", bn: "" },
+      category: "snacks",
+      price: "₹60",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "veg-pakora",
+      name: { en: "Veg Pakora", bn: "ভেজ পাকোড়া" },
+      desc: { en: "", bn: "" },
+      category: "snacks",
+      price: "₹130",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "onion-pakora",
+      name: { en: "Onion Pakora", bn: "পেঁয়াজ পাকোড়া" },
+      desc: { en: "", bn: "" },
+      category: "snacks",
+      price: "₹130",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "paneer-pakora",
+      name: { en: "Paneer Pakora", bn: "পনির পাকোড়া" },
+      desc: { en: "", bn: "" },
+      category: "snacks",
+      price: "₹170",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "french-fries",
+      name: { en: "French Fries", bn: "ফ্রেঞ্চ ফ্রাই" },
+      desc: { en: "", bn: "" },
+      category: "snacks",
+      price: "₹100",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "cheese-fries",
+      name: { en: "Cheese French Fries", bn: "চিজ ফ্রেঞ্চ ফ্রাই" },
+      desc: { en: "", bn: "" },
+      category: "snacks",
+      price: "₹120",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- CHINESE ---- */
+    {
+      id: "paneer-chowmein",
+      name: { en: "Paneer Chowmein", bn: "পনির চাউমিন" },
+      desc: { en: "", bn: "" },
+      category: "chinese",
+      price: "₹100",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "special-mix-chowmein",
+      name: { en: "Special Mix Chowmein", bn: "স্পেশাল মিক্স চাউমিন" },
+      desc: { en: "", bn: "" },
+      category: "chinese",
+      price: "₹160",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "potato-chilli",
+      name: { en: "Potato Chilli", bn: "পটেটো চিলি" },
+      desc: { en: "", bn: "" },
+      category: "chinese",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "chilli-paneer",
+      name: { en: "Chilli Paneer", bn: "চিলি পনির" },
+      desc: { en: "", bn: "" },
+      category: "chinese",
+      price: "₹190",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "chilli-babycorn",
+      name: { en: "Chilli Babycorn", bn: "চিলি বেবিকর্ন" },
+      desc: { en: "", bn: "" },
+      category: "chinese",
+      price: "₹230",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "chilli-mushroom",
+      name: { en: "Chilli Mushroom", bn: "চিলি মাশরুম" },
+      desc: { en: "", bn: "" },
+      category: "chinese",
+      price: "₹260",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- PIZZA ---- */
+    {
+      id: "veg-pizza",
+      name: { en: "Veg Pizza", bn: "ভেজ পিজ্জা" },
+      desc: { en: "", bn: "" },
+      category: "pizza",
+      price: "₹210",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "double-cheese-pizza",
+      name: { en: "Double Cheese Pizza", bn: "ডাবল চিজ পিজ্জা" },
+      desc: { en: "", bn: "" },
+      category: "pizza",
+      price: "₹230",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "paneer-pizza",
+      name: { en: "Paneer Pizza", bn: "পনির পিজ্জা" },
+      desc: { en: "", bn: "" },
+      category: "pizza",
+      price: "₹260",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "double-cheese-paneer-pizza",
+      name: { en: "Double Cheese Paneer Pizza", bn: "ডাবল চিজ পনির পিজ্জা" },
+      desc: { en: "", bn: "" },
+      category: "pizza",
+      price: "₹310",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- MOGLAI & ROLLS ---- */
+    {
+      id: "veg-moglai",
+      name: { en: "Veg Moglai", bn: "ভেজ মোগলাই" },
+      desc: { en: "", bn: "" },
+      category: "moglai",
+      price: "₹100",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "paneer-moglai",
+      name: { en: "Paneer Moglai", bn: "পনির মোগলাই" },
+      desc: { en: "", bn: "" },
+      category: "moglai",
+      price: "₹130",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "veg-roll",
+      name: { en: "Veg Roll", bn: "ভেজ রোল" },
+      desc: { en: "", bn: "" },
+      category: "moglai",
+      price: "₹60",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "paneer-roll",
+      name: { en: "Paneer Roll", bn: "পনির রোল" },
+      desc: { en: "", bn: "" },
+      category: "moglai",
+      price: "₹90",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- PANEER & VEG ---- */
+    {
+      id: "paneer-masala",
+      name: { en: "Paneer Masala", bn: "পনির মসলা" },
+      desc: { en: "", bn: "" },
+      category: "paneer",
+      price: "₹190",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "shahi-paneer",
+      name: { en: "Shahi Paneer", bn: "শাহি পনির" },
+      desc: { en: "", bn: "" },
+      category: "paneer",
+      price: "₹220",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "kadai-paneer",
+      name: { en: "Kadai Paneer", bn: "কড়াই পনির" },
+      desc: { en: "", bn: "" },
+      category: "paneer",
+      price: "₹230",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "matar-paneer",
+      name: { en: "Matar Paneer", bn: "মটর পনির" },
+      desc: { en: "", bn: "" },
+      category: "paneer",
+      price: "₹190",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "paneer-do-pyasa",
+      name: { en: "Paneer Do Pyasa", bn: "পনির দো পিয়াজা" },
+      desc: { en: "", bn: "" },
+      category: "paneer",
+      price: "₹220",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "mix-veg",
+      name: { en: "Mix Veg", bn: "মিক্স ভেজ" },
+      desc: { en: "", bn: "" },
+      category: "paneer",
+      price: "₹140",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- DAL & TARKA ---- */
+    {
+      id: "dal-fry",
+      name: { en: "Dal Fry", bn: "ডাল ফ্রাই" },
+      desc: { en: "", bn: "" },
+      category: "dal",
+      price: "₹80",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "butter-dal-fry",
+      name: { en: "Butter Dal Fry", bn: "বাটার ডাল ফ্রাই" },
+      desc: { en: "", bn: "" },
+      category: "dal",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "dal-makhani",
+      name: { en: "Dal Makhani", bn: "ডাল মাখানি" },
+      desc: { en: "", bn: "" },
+      category: "dal",
+      price: "₹160",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "plain-tarka",
+      name: { en: "Plain Tarka", bn: "প্লেন তরকা" },
+      desc: { en: "", bn: "" },
+      category: "dal",
+      price: "₹80",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "butter-tarka",
+      name: { en: "Butter Tarka", bn: "বাটার তরকা" },
+      desc: { en: "", bn: "" },
+      category: "dal",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "paneer-tarka",
+      name: { en: "Paneer Tarka", bn: "পনির তরকা" },
+      desc: { en: "", bn: "" },
+      category: "dal",
+      price: "₹140",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "chana-tarka",
+      name: { en: "Chana Tarka", bn: "ছানা তরকা" },
+      desc: { en: "", bn: "" },
+      category: "dal",
+      price: "₹120",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- CHANA ---- */
+    {
+      id: "chana-masala",
+      name: { en: "Chana Masala", bn: "ছানা মসলা" },
+      desc: { en: "", bn: "" },
+      category: "chana",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "butter-chana-masala",
+      name: { en: "Butter Chana Masala", bn: "বাটার ছানা মসলা" },
+      desc: { en: "", bn: "" },
+      category: "chana",
+      price: "₹140",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "punjabi-chana-masala",
+      name: { en: "Punjabi Chana Masala", bn: "পাঞ্জাবি ছানা মসলা" },
+      desc: { en: "", bn: "" },
+      category: "chana",
+      price: "₹180",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- ALOO ---- */
+    {
+      id: "aloo-dum",
+      name: { en: "Aloo Dum", bn: "আলু দম" },
+      desc: { en: "", bn: "" },
+      category: "aloo",
+      price: "₹90",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "butter-aloo-dum",
+      name: { en: "Butter Aloo Dum", bn: "বাটার আলু দম" },
+      desc: { en: "", bn: "" },
+      category: "aloo",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "kashmiri-aloo-dum",
+      name: { en: "Kashmiri Aloo Dum", bn: "কাশ্মীরি আলু দম" },
+      desc: { en: "", bn: "" },
+      category: "aloo",
+      price: "₹140",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- RICE & BIRYANI ---- */
+    {
+      id: "plain-rice",
+      name: { en: "Plain Rice", bn: "প্লেন ভাত" },
+      desc: { en: "", bn: "" },
+      category: "rice",
+      price: "₹60",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "jeera-rice",
+      name: { en: "Jeera Rice", bn: "জিরা ভাত" },
+      desc: { en: "", bn: "" },
+      category: "rice",
+      price: "₹70",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "fried-rice",
+      name: { en: "Fried Rice", bn: "ফ্রায়েড রাইস" },
+      desc: { en: "", bn: "" },
+      category: "rice",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "veg-pulao",
+      name: { en: "Veg Pulao", bn: "ভেজ পোলাও" },
+      desc: { en: "", bn: "" },
+      category: "rice",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "paneer-pulao",
+      name: { en: "Paneer Pulao", bn: "পনির পোলাও" },
+      desc: { en: "", bn: "" },
+      category: "rice",
+      price: "₹140",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "aloo-biryani",
+      name: { en: "Aloo Biryani", bn: "আলু বিরিয়ানি" },
+      desc: { en: "", bn: "" },
+      category: "rice",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "veg-biryani",
+      name: { en: "Veg Biryani", bn: "ভেজ বিরিয়ানি" },
+      desc: { en: "", bn: "" },
+      category: "rice",
+      price: "₹140",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- ROTI & PARATHA ---- */
+    {
+      id: "roti",
+      name: { en: "Roti", bn: "রুটি" },
+      desc: { en: "", bn: "" },
+      category: "roti",
+      price: "₹9",
+      veg: true,
+      available: true,
+      tag: { en: "From ₹9", bn: "₹৯ থেকে" },
+      badges: []
+    },
+    {
+      id: "plain-paratha",
+      name: { en: "Plain Paratha", bn: "প্লেন পরোটা" },
+      desc: { en: "", bn: "" },
+      category: "roti",
+      price: "₹35",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "aloo-paratha",
+      name: { en: "Aloo Paratha", bn: "আলু পরোটা" },
+      desc: { en: "", bn: "" },
+      category: "roti",
+      price: "₹70",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "paneer-paratha",
+      name: { en: "Paneer Paratha", bn: "পনির পরোটা" },
+      desc: { en: "", bn: "" },
+      category: "roti",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "lachha-paratha",
+      name: { en: "Lachha Paratha", bn: "লাচ্ছা পরোটা" },
+      desc: { en: "", bn: "" },
+      category: "roti",
+      price: "₹70",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- SALAD & RAITA ---- */
+    {
+      id: "onion-salad",
+      name: { en: "Onion Salad", bn: "পেঁয়াজ সালাদ" },
+      desc: { en: "", bn: "" },
+      category: "salad",
+      price: "₹50",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "green-salad",
+      name: { en: "Green Salad", bn: "গ্রিন সালাদ" },
+      desc: { en: "", bn: "" },
+      category: "salad",
+      price: "₹60",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "family-salad",
+      name: { en: "Family Salad", bn: "ফ্যামিলি সালাদ" },
+      desc: { en: "", bn: "" },
+      category: "salad",
+      price: "₹90",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "onion-raita",
+      name: { en: "Onion Raita", bn: "পেঁয়াজ রাইতা" },
+      desc: { en: "", bn: "" },
+      category: "salad",
+      price: "₹60",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "mix-raita",
+      name: { en: "Mix Raita", bn: "মিক্স রাইতা" },
+      desc: { en: "", bn: "" },
+      category: "salad",
+      price: "₹70",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "bundi-raita",
+      name: { en: "Bundi Raita", bn: "বুন্দি রাইতা" },
+      desc: { en: "", bn: "" },
+      category: "salad",
+      price: "₹70",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- PAPAD ---- */
+    {
+      id: "roasted-papad",
+      name: { en: "Roasted Papad", bn: "রোস্টেড পাপড়" },
+      desc: { en: "", bn: "" },
+      category: "papad",
+      price: "₹40",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "fried-papad",
+      name: { en: "Fried Papad", bn: "ফ্রায়েড পাপড়" },
+      desc: { en: "", bn: "" },
+      category: "papad",
+      price: "₹45",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "masala-papad",
+      name: { en: "Masala Papad", bn: "মসলা পাপড়" },
+      desc: { en: "", bn: "" },
+      category: "papad",
+      price: "₹60",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- SHAKES & LASSI ---- */
+    {
+      id: "vanilla-shake",
+      name: { en: "Vanilla Shake", bn: "ভ্যানিলা শেক" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹80",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "mango-shake",
+      name: { en: "Mango Shake", bn: "ম্যাংগো শেক" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹80",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "strawberry-shake",
+      name: { en: "Strawberry Shake", bn: "স্ট্রবেরি শেক" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹80",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "chocolate-shake",
+      name: { en: "Chocolate Shake", bn: "চকোলেট শেক" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "butterscotch-shake",
+      name: { en: "Butterscotch Shake", bn: "বাটারস্কচ শেক" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "plain-lassi",
+      name: { en: "Plain Lassi", bn: "প্লেন লাস্যি" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹50",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "special-lassi",
+      name: { en: "Special Lassi", bn: "স্পেশাল লাস্যি" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹70",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "lassi-chocolate",
+      name: { en: "Lassi with Chocolate", bn: "চকোলেট লাস্যি" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹110",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "soda-sikanji",
+      name: { en: "Soda Sikanji", bn: "সোডা শিকাঞ্জি" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹50",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "masala-cold-drinks",
+      name: { en: "Masala Cold Drinks", bn: "মসলা কোল্ড ড্রিংকস" },
+      desc: { en: "", bn: "" },
+      category: "shakes",
+      price: "₹50",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- TEA & COFFEE ---- */
+    {
+      id: "tea",
+      name: { en: "Tea", bn: "চা" },
+      desc: { en: "", bn: "" },
+      category: "tea",
+      price: "₹15",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "masala-tea",
+      name: { en: "Masala Tea", bn: "মসলা চা" },
+      desc: { en: "", bn: "" },
+      category: "tea",
+      price: "₹25",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "coffee",
+      name: { en: "Coffee", bn: "কফি" },
+      desc: { en: "", bn: "" },
+      category: "tea",
+      price: "₹60",
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- ICE CREAM & DAIRY (counter — ask at the shop) ---- */
+    {
+      id: "amul-ice-cream",
+      name: { en: "Amul Ice Cream", bn: "আমুল আইসক্রিম" },
+      desc: { en: "", bn: "" },
+      category: "icecream",
+      price: null,
+      veg: true,
+      available: true,
+      tag: { en: "Counter", bn: "কাউন্টার" },
+      badges: []
+    },
+    {
+      id: "chocolates-snacks",
+      name: { en: "Chocolates & Snacks", bn: "চকলেট ও স্ন্যাকস" },
+      desc: { en: "", bn: "" },
+      category: "icecream",
+      price: null,
+      veg: true,
+      available: true,
+      tag: { en: "Counter", bn: "কাউন্টার" },
+      badges: []
     }
   ],
 
   /* ---------------------------------------------------------------------
      6b. THE "ORDER BOTH" STRIP (under the menu on the home page)
-     A gentle nudge to try both highlights. No prices, no invented claims.
+     A gentle nudge to try both highlights. No invented claims.
      Set show: false to hide the whole strip.
      --------------------------------------------------------------------- */
   pairing: {
@@ -279,14 +1251,14 @@ window.DP_CONTENT = {
 
   /* ---------------------------------------------------------------------
      8. GALLERY PHOTOGRAPHS
-     Upload real photographs of Dairy Park into assets/img/photos/gallery/
-     and list them here. section: "exterior" | "interior" | "food" |
-     "products". Slots without an uploaded file show a designed placeholder,
-     never a fake photograph. The site picks up .webp, .avif, .jpg, .jpeg
-     or .png automatically.
+     Upload real photographs of Dairy Park into assets/img/photos/ and list
+     them here. section: "exterior" | "interior" | "food" | "products".
+     Slots without an uploaded file show a designed placeholder, never a
+     fake photograph. The site picks up .webp, .avif, .jpg, .jpeg or .png
+     automatically.
 
      Example:
-     { section: "exterior", base: "assets/img/photos/gallery/exterior-1",
+     { section: "exterior", base: "assets/img/photos/exterior-1",
        alt: { en: "Dairy Park shop front on Kolaghat – Jashar Road",
               bn: "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের সামনের দৃশ্য" } }
      --------------------------------------------------------------------- */
@@ -302,6 +1274,14 @@ window.DP_CONTENT = {
       base: "assets/img/photos/interior-room",
       alt: { en: "The dining room at Dairy Park: deep green walls, hand-painted arched murals, marble-look tables and green stools",
              bn: "ডেয়ারি পার্কের খাওয়ার ঘর: গাঢ় সবুজ দেওয়াল, হাতে আঁকা খিলান, মার্বেলের মতো টেবিল আর সবুজ স্টুল" } },
+    { section: "interior",
+      base: "assets/img/photos/interior-bench",
+      alt: { en: "Green leather bench seating and long tables beside the mural wall at Dairy Park",
+             bn: "ডেয়ারি পার্কে খিলানের দেওয়ালের পাশে সবুজ লেদার বেঞ্চ আর লম্বা টেবিল" } },
+    { section: "interior",
+      base: "assets/img/photos/interior-glass",
+      alt: { en: "The lit dining room seen through the glass front of Dairy Park in the evening",
+             bn: "সন্ধ্যায় ডেয়ারি পার্কের কাচের সামনের দিক দিয়ে দেখা আলোকিত খাওয়ার ঘর" } },
     { section: "interior",
       base: "assets/img/photos/interior-arches",
       alt: { en: "Three arched wall panels painted with palms and banana leaves inside Dairy Park",
@@ -358,12 +1338,12 @@ window.DP_CONTENT = {
              bn: "উঁচু গ্লাসে আইসক্রিম সহ কোল্ড কফি, উপরে হুইপড ক্রিম, চকলেট সস ও চকলেট ফ্লেক্স" } },
     { section: "food",
       base: "assets/img/photos/menu-spread-1",
-      alt: { en: "A page of the Dairy Park menu listing rolls, salads and raitas",
-             bn: "ডেয়ারি পার্কের মেনুর পাতা — রোল, সালাদ ও রায়তা" } },
+      alt: { en: "A page of the Dairy Park menu with prices for moglai, chat, chilli, pizza, rice, roti, dal and paneer dishes",
+             bn: "ডেয়ারি পার্কের মেনুর পাতা — মোগলাই, চাট, চিলি, পিজ্জা, ভাত, রুটি, ডাল ও পনিরের দাম" } },
     { section: "food",
       base: "assets/img/photos/menu-spread-2",
-      alt: { en: "A page of the Dairy Park menu listing Chinese dishes and snacks",
-             bn: "ডেয়ারি পার্কের মেনুর পাতা — চাইনিজ পদ ও স্ন্যাকস" } },
+      alt: { en: "A page of the Dairy Park menu with prices for rolls, salad, raita, papad, shakes, lassi, chai, snacks, fries, idli and vada",
+             bn: "ডেয়ারি পার্কের মেনুর পাতা — রোল, সালাদ, রাইতা, পাপড়, শেক, লাস্যি, চা, স্ন্যাকস, ফ্রাই, ইডলি ও বড়ার দাম" } },
     { section: "food",
       base: "assets/img/photos/menu-drinks",
       alt: { en: "A page of the Dairy Park menu listing tea, coffee and cold drinks",
@@ -399,8 +1379,13 @@ window.DP_CONTENT = {
     owner: "assets/img/photos/owner", // real owner portrait — homepage hero
     shop: "assets/img/photos/interior-room", // dining room — About page
     shopAlt: "assets/img/photos/counter-snacks", // snacks at the counter
+    dining: "assets/img/photos/interior-bench", // bench seating — dining band on the home page
+    glass: "assets/img/photos/interior-glass", // evening room seen through the glass
+    arches: "assets/img/photos/interior-arches", // painted arches
     freezer: "assets/img/photos/ice-cream-freezer",
-    chocolate: "assets/img/photos/chocolate-freezer"
+    chocolate: "assets/img/photos/chocolate-freezer",
+    shelves: "assets/img/photos/shop",
+    counter: "assets/img/photos/counter-snacks"
   },
 
   /* ---------------------------------------------------------------------
@@ -416,10 +1401,46 @@ window.DP_CONTENT = {
   },
 
   /* ---------------------------------------------------------------------
+     10b. WHATSAPP ENQUIRIES
+     When a visitor fills the enquiry form on the Contact page, the website
+     opens WhatsApp with the whole enquiry typed out and addressed to the
+     number below. The visitor only has to tap Send in WhatsApp — the
+     message then arrives on that phone like any other WhatsApp chat.
+
+        number   country code + number, DIGITS ONLY (no +, no spaces).
+                 India = 91 followed by the 10-digit number.
+                 This is normally the owner's own WhatsApp number.
+        enabled  false hides every WhatsApp link and button on the site.
+        template the ready-made message. {name}, {phone} and {message} are
+                 replaced with what the visitor typed — keep those
+                 placeholders exactly as written.
+
+     Note: the website never sends anything by itself and needs no server or
+     internet service. WhatsApp opens on the visitor's own phone and they
+     choose whether to tap Send.
+     --------------------------------------------------------------------- */
+  whatsapp: {
+    enabled: true,
+    number: "919932452124", // the owner's WhatsApp — country code first, digits only
+    template: {
+      en:
+        "New enquiry from the Dairy Park website\n\n" +
+        "Name: {name}\n" +
+        "Phone: {phone}\n" +
+        "Enquiry: {message}",
+      bn:
+        "ডেয়ারি পার্ক ওয়েবসাইট থেকে নতুন অনুসন্ধান\n\n" +
+        "নাম: {name}\n" +
+        "ফোন: {phone}\n" +
+        "অনুসন্ধান: {message}"
+    }
+  },
+
+  /* ---------------------------------------------------------------------
      11. SMALL NOTE SHOWN IN THE FOOTER
      --------------------------------------------------------------------- */
   footerNote: {
-    en: "Menu highlights, facilities and rating are based on our Google Maps listing. Prices and timings can change — please call to confirm.",
-    bn: "মেনুর উল্লেখযোগ্য পদ, সুবিধা ও রেটিং আমাদের গুগল ম্যাপ লিস্টিং অনুযায়ী। দাম ও সময় বদলাতে পারে — কল করে নিশ্চিত হয়ে নিন।"
+    en: "Menu prices are copied from our printed menu card and can change — please call to confirm. Facilities and rating are based on our Google Maps listing.",
+    bn: "মেনুর দাম আমাদের ছাপা মেনু কার্ড থেকে নেওয়া, বদলাতে পারে — কল করে নিশ্চিত হয়ে নিন। সুবিধা ও রেটিং আমাদের গুগল ম্যাপ লিস্টিং অনুযায়ী।"
   }
 };

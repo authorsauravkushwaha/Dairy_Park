@@ -23,13 +23,21 @@ placeholder is shown instead — nothing breaks, and no fake photograph is used.
 | `photos/table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and snacks counter (Gallery) |
 | `photos/dahi-vada.*` | **Supplied** — Dahi Vada cards on Home + Food & Menu, “order both” strip, Gallery |
 | `photos/steam-momo.*` | **Supplied** — Steam Momo cards on Home + Food & Menu, “order both” strip, Gallery |
-| `photos/chola-bhatura.*`, `paneer-butter-masala.*` | **Supplied** — North Indian mains on Home + Food & Menu, Gallery |
-| `photos/veg-chowmein.*` | **Supplied** — Veg Chowmein cards on Home + Food & Menu, Gallery |
-| `photos/cold-coffee.*` | **Supplied** — Cold Coffee with Ice Cream on Home + Food & Menu, Gallery |
+| `photos/chola-bhatura.*` | **Supplied** — Chola Bhatura card on Home + Food & Menu, Gallery |
+| `photos/paneer-butter-masala.*` | **Supplied** — Paneer Butter Masala card on Home + Food & Menu, Gallery |
+| `photos/veg-chowmein.*` | **Supplied** — Veg Chowmein card on Home + Food & Menu, Gallery |
+| `photos/cold-coffee.*` | **Supplied** — Cold Coffee with Ice Cream card on Home + Food & Menu, Gallery |
 | `photos/menu-spread-1.*`, `menu-spread-2.*`, `menu-drinks.*` | **Supplied** — printed menu boards (Gallery) |
 | `photos/counter-snacks.*` | **Supplied** — samosas at the counter (Gallery) |
 | `photos/ice-cream-freezer.*`, `chocolate-freezer.*` | **Supplied** — freezers (Gallery) |
+| `photos/interior-bench.*` | **Supplied** — “Inside the dining room” band on the home page + Gallery |
+| `photos/interior-glass.*` | **Supplied** — evening room seen through the glass, home page + Gallery |
+| `photos/shop.*` | **Supplied** — snack shelves, used in the dairy-counter band |
 | `photos/offer-combo.*` | Offer cards (when you add a promo with a photo) |
+
+The home page also has a **dairy-counter band** (ice cream, snacks, samosas).
+Those three photos are named in `content.js → photos` as `freezer`, `shelves`
+and `counter` — change the file name there and the band follows.
 
 Every photo is listed in `content.js → gallery` with its `section` and
 bilingual alt text, so the Gallery page renders itself. `section` can be
@@ -78,15 +86,26 @@ Menu items live in `content.js → menu`. Each item looks like this:
 - **Add an item:** copy a block (from `{` to `},`) and paste it after the last
   one, then change the values. Keep the commas!
 - **Categories:** the Food & Menu page shows only categories that have at least
-  one item. Proposed categories (Snacks, Chaat, Beverages, Ice Cream, Other…)
-  stay hidden until you add an item that uses them — so never add an empty one
-  to the website by accident. Category ids: `special`, `mains` (North Indian
-  mains), `chinese`, `snacks`, `momos`, `chaat`, `beverages`, `icecream`,
-  `other`.
+  one item — an empty category never appears. Current ids: `special`, `chaat`,
+  `momos`, `south`, `snacks`, `chinese`, `pizza`, `moglai`, `paneer`, `dal`,
+  `chana`, `aloo`, `rice`, `roti`, `salad`, `papad`, `shakes`, `tea`,
+  `icecream`. Rename the English + Bengali labels freely; keep the ids.
 - **Price:** leave `null` until you have confirmed the price. The site shows
-  “Ask for today’s price” — it never invents a number.
+  “Ask for today’s price” — it never invents a number. Every price currently on
+  the site is copied from the printed menu card in the Gallery, so when the
+  card changes, change it here too.
+- **Pure veg:** `business.pureVeg: true` turns on the “100% Pure Veg” seal and
+  the ribbon in the hero, the pure-veg card on the home page and the 100% stat
+  on the Food & Menu page. If the kitchen ever serves non-veg dishes, set it to
+  `false` — the seal and the stat disappear and each dish shows its own
+  Veg / Non-veg pill again.
 - **Search & filters:** visitors can filter by category and search by name in
-  either language — all driven by this same list.
+  either language — all driven by this same list. On the Food & Menu page the
+  menu is printed as a dotted price list grouped by category, so a long card
+  stays readable.
+- **Highlights:** only items with `highlight: true` appear on the home page
+  (six of them) and in the “Guest favourites” row. Keep that list short — it is
+  the shop window, not the whole menu.
 
 ## 3. Opening hours (`content.js → hours`)
 
@@ -157,13 +176,52 @@ If you change the domain (for example to `dairypark.com`), also update
 `site.url` in `content.js` — canonicals, Open Graph URLs, structured data and
 the generated `sitemap.xml` all follow it automatically.
 
-## 7. Wording and Bengali translation (`assets/js/i18n.js`)
+## 7. Enquiries on WhatsApp (`content.js → whatsapp`)
+
+When a visitor fills the enquiry form on the Contact page, the website does
+two things: it opens WhatsApp on the visitor's own phone, and it types the
+whole enquiry into a chat addressed to **your** WhatsApp number — name, phone
+number and the question. The visitor only has to tap **Send** in WhatsApp, and
+the enquiry then arrives on your phone like any other WhatsApp message.
+
+The website never sends anything by itself and needs no server, no API key and
+no monthly service.
+
+```js
+whatsapp: {
+  enabled: true,             // false hides every WhatsApp button on the site
+  number: "919932452124",    // country code + number, DIGITS ONLY
+  template: {
+    en: "New enquiry from the Dairy Park website\n\nName: {name}\nPhone: {phone}\nEnquiry: {message}",
+    bn: "…Bengali version…"
+  }
+}
+```
+
+- **Put your own WhatsApp number in `number`** — country code first, no `+`,
+  no spaces, no dashes (India: `91` + the 10-digit number). It is currently the
+  same number as the shop phone.
+- If your WhatsApp is on a different number than the shop phone, change only
+  this line — the contact card, the form's status panel and the prefilled
+  enquiry all follow it.
+- The wording of the ready-made message is in `template`. Keep the
+  `{name}`, `{phone}` and `{message}` placeholders exactly as they are — they
+  are replaced with what the visitor typed. The English text is used when the
+  visitor reads the site in English, the Bengali text when they switch to
+  বাংলা.
+- Set `enabled: false` and the WhatsApp card, buttons and wording disappear and
+  the form goes back to pointing visitors at your phone number.
+
+The site never claims a message was delivered before the visitor taps Send, and
+it does not advertise WhatsApp ordering, delivery or payment — only enquiries.
+
+## 8. Wording and Bengali translation (`assets/js/i18n.js`)
 
 Every label exists twice: `en` (English) and `bn` (Bengali). Keep both sides in
 sync — the build checks that every key exists in both languages. Business facts
 (menu, prices, hours, offers, photos) live in `content.js`, not here.
 
-## 8. Analytics (optional)
+## 9. Analytics (optional)
 
 The site records clicks on call, directions, menu cards, promo links and the
 language switch as first-party events (`window.dataLayer`). Nothing is sent
@@ -178,7 +236,7 @@ A consent banner then appears. Visitors who decline load no analytics at all.
 Measure only what you will act on — calls and direction taps are the useful
 numbers for a restaurant.
 
-## 9. Publishing changes
+## 10. Publishing changes
 
 1. Edit the file on GitHub (pencil icon) or upload the photo directly.
 2. Commit the change.
@@ -195,23 +253,27 @@ Run `npm test` locally if you want to see the same checks before publishing.
       add an exterior photo when one is taken (`gallery/` section `exterior`).
 - [ ] Confirm the Google rating and review count on the live listing, then set
       `reviews.show = true` only after checking (currently hidden).
-- [ ] Confirm the descriptions for the six dishes supplied so far —
-      Dahi Vada, Steam Momo, Chola Bhatura, Paneer Butter Masala,
-      Veg Chowmein and Cold Coffee with Ice Cream.
+- [ ] Add Dahi Vada / Steam Momo photographs (`photos/dahi-vada.*`,
+      `photos/steam-momo.*`) and their confirmed descriptions.
 - [ ] Confirm the full opening hours and set `hours.verified = true` only then.
 - [ ] Confirm the phone number is still +91 99324 52124.
+- [ ] Check `whatsapp.number` is the phone that has WhatsApp installed — send
+      yourself a test enquiry from the live Contact page.
 - [ ] Add prices only if you want them public.
 - [ ] Add an offer only if it is genuinely running now.
 - [ ] Confirm the Google listing still shows dine-in + drive-through.
-- [ ] Never add WhatsApp ordering, delivery or online payment here unless those
-      services really exist.
+- [ ] Never advertise WhatsApp ordering, delivery or online payment here unless
+      those services really exist. (WhatsApp *enquiries* are fine — that is what
+      the contact form does.)
 
 ## What the site deliberately does not do
 
 - It does not invent food prices, ratings, reviews, photographs, awards or
   hygiene claims.
-- It does not offer online ordering, WhatsApp ordering, delivery or payments.
-- It does not pretend the enquiry form sends messages — there is no backend;
-  the form points visitors to your phone number instead.
+- It does not offer online ordering, delivery or payments, and it never
+  advertises WhatsApp ordering.
+- It does not pretend an enquiry was delivered. The enquiry form writes the
+  message into WhatsApp addressed to your number; the visitor taps Send, and
+  the site says plainly that nothing reaches you until they do.
 - It does not show fake urgency or countdown timers.
 - It does not track visitors without permission.

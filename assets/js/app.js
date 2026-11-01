@@ -20,6 +20,9 @@
   var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
 
+  // The whole kitchen is vegetarian — the signboard and the menu card agree.
+  var pureVeg = !!(C.business && C.business.pureVeg === true);
+
   var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reducedMotion = motionQuery.matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -144,7 +147,8 @@
       phone: b.phone && b.phone.tel ? 'tel:' + b.phone.tel : '',
       directions: b.directionsUrl || '',
       maps: b.mapsUrl || '',
-      mapEmbed: b.mapEmbedUrl || ''
+      mapEmbed: b.mapEmbedUrl || '',
+      whatsapp: whatsappEnabled() ? whatsappUrl('') : ''
     };
     els('[data-link]').forEach(function (node) {
       var url = map[node.dataset.link];
@@ -292,6 +296,74 @@
   }
 
   /* --------------------------------------------------------------------------- */
+  /* Menu numbers — dish count and the cheapest printed price                    */
+  /* --------------------------------------------------------------------------- */
+  function priceValue(item) {
+    if (!item || item.price == null || item.price === '') return null;
+    var match = String(item.price).match(/(\d+(?:\.\d+)?)/);
+    return match ? Number(match[1]) : null;
+  }
+
+  function pricedItems() {
+    return ((C.menu) || []).filter(function (item) { return priceValue(item) !== null; });
+  }
+
+  function cheapestPrice() {
+    var values = pricedItems().map(priceValue);
+    if (!values.length) return null;
+    var min = Math.min.apply(null, values);
+    return '₹' + min;
+  }
+
+  function renderMenuFacts() {
+    var priced = pricedItems();
+    var min = cheapestPrice();
+    var count = ((C.menu) || []).length;
+
+    els('[data-bind="menuCount"]').forEach(function (node) {
+      node.textContent = localizeDigits(String(priced.length || count));
+    });
+    els('[data-bind="priceFrom"]').forEach(function (node) {
+      node.textContent = min ? localizeDigits(min) : t('menu.priceAsk');
+    });
+    els('[data-bind="menuTotal"]').forEach(function (node) {
+      node.textContent = localizeDigits(String(count));
+    });
+    els('[data-bind="heroPrice"]').forEach(function (node) {
+      node.textContent = min ? tf('hero.priceRibbon', { price: localizeDigits(min) }) : t('menu.priceAsk');
+    });
+    els('[data-bind="menuPriceNote"]').forEach(function (node) {
+      node.textContent = t('menu.priceNote');
+    });
+    els('[data-bind="foodPriceNote"]').forEach(function (node) {
+      node.textContent = t('foodPage.priceNote');
+    });
+    els('[data-bind="vegShare"]').forEach(function (node) {
+      var stat = closest(node, '.menu-stat');
+      if (!pureVeg) { if (stat) stat.hidden = true; return; }
+      node.textContent = localizeDigits('100');
+    });
+  }
+
+  /* Photos in the static bands (dining room, counter) are resolved from
+     content.js so replacing a file keeps working. */
+  function renderPhotoSlots() {
+    var photos = C.photos || {};
+    $$('[data-photo-key]').forEach(function (img) {
+      var key = img.dataset.photoKey;
+      if (!key) return;
+      findPhoto(photos[key]).then(function (url) {
+        if (!url) return;
+        img.src = url;
+        if (img.dataset.photoAlt) img.alt = t(img.dataset.photoAlt);
+        img.classList.add('is-real');
+        var frame = closest(img, '[data-photo-frame]');
+        if (frame) frame.classList.add('has-photo');
+      });
+    });
+  }
+
+  /* --------------------------------------------------------------------------- */
   /* Dish cards + detail dialog                                                  */
   /* --------------------------------------------------------------------------- */
   function menuAlt(item, hasPhoto) {
@@ -302,6 +374,13 @@
   function dishPriceText(item) {
     var hasPrice = item.price !== null && item.price !== undefined && item.price !== '';
     return hasPrice ? localizeDigits(item.price) : t('menu.priceAsk');
+  }
+
+  /* First letter / first character of a dish name — used as the monogram on
+     cards that have no photograph yet, so the grid never looks empty. */
+  function monogram(item) {
+    var name = tx(item.name).trim();
+    return name ? name.charAt(0) : '❋';
   }
 
   function buildDish(item, index, options) {
@@ -322,6 +401,13 @@
     media.appendChild(img);
     media.appendChild(el('span', { class: 'dish__veil' }));
 
+    // Printed-card fallback: a monogram, the arch line-art and the price take
+    // over when there is no photograph, so a long menu still looks designed.
+    var mono = el('span', { class: 'dish__mono', 'aria-hidden': 'true' });
+    mono.appendChild(el('span', { class: 'dish__mono-letter', text: monogram(item) }));
+    mono.appendChild(el('span', { class: 'dish__mono-leaf', 'aria-hidden': 'true' }));
+    media.appendChild(mono);
+
     // Steam wisps over the plate — purely decorative
     var steam = el('span', { class: 'dish__steam' });
     steam.setAttribute('aria-hidden', 'true');
@@ -339,10 +425,6 @@
     if (hasPrice) {
       media.appendChild(el('span', { class: 'dish__price', text: localizeDigits(item.price) }));
     }
-    var note = el('span', { class: 'dish__note' });
-    note.appendChild(icon('camera'));
-    note.appendChild(el('span', { text: t('menu.photoSoon') }));
-    media.appendChild(note);
 
     var bodyEl = el('div', { class: 'dish__body' });
     var primaryName = tx(item.name);
@@ -373,7 +455,9 @@
       class: 'pill' + (hasPrice ? '' : ' pill--ask'),
       text: dishPriceText(item)
     }));
-    if (item.veg === true) {
+    // A whole-menu "Veg" pill would repeat on every card, so in a pure-veg
+    // kitchen the seal in the hero carries that message instead.
+    if (!pureVeg && item.veg === true) {
       var vegPill = el('span', { class: 'pill pill--veg' });
       vegPill.appendChild(el('span', { class: 'dot dot--veg' }));
       vegPill.appendChild(el('span', { text: t('menu.veg') }));
@@ -385,10 +469,7 @@
       nonVegPill.appendChild(el('span', { text: t('menu.nonveg') }));
       meta.appendChild(nonVegPill);
     }
-    meta.appendChild(el('span', {
-      class: 'pill ' + (available ? 'pill--ok' : ''),
-      text: available ? t('menu.available') : t('menu.unavailable')
-    }));
+    if (!available) meta.appendChild(el('span', { class: 'pill', text: t('menu.unavailable') }));
     bodyEl.appendChild(meta);
 
     var call = el('a', {
@@ -429,12 +510,87 @@
       if (url) {
         img.src = url;
         img.alt = menuAlt(item, true);
-        note.remove();
         card.dataset.hasPhoto = 'true';
+        card.classList.add('has-photo');
+      } else {
+        // No photograph: the printed-card fallback takes over.
+        img.remove();
+        card.classList.add('dish--nophoto');
       }
     });
 
     return card;
+  }
+
+  /* A single line of the printed menu: name, tag, dotted leader and price.
+     Used for the long list on the Food & Menu page — far easier to scan than
+     ninety photo cards, and it puts every price on screen. */
+  function buildDishRow(item, index) {
+    var hasPrice = item.price !== null && item.price !== undefined && item.price !== '';
+    var available = item.available !== false;
+    var primaryName = tx(item.name);
+    var secondaryName = lang === 'bn' ? (item.name && item.name.en) : (item.name && item.name.bn);
+    var priceText = dishPriceText(item);
+
+    var row = el('article', {
+      class: 'menu-row reveal' + (available ? '' : ' is-unavailable'),
+      'data-dish-id': item.id || 'row-' + index,
+      role: 'button',
+      tabindex: '0',
+      'aria-label': tf('foodPage.rowAria', { name: primaryName, price: priceText }),
+      'data-reveal': 'up'
+    });
+
+    var thumb = el('span', { class: 'menu-row__thumb', 'aria-hidden': 'true' });
+    thumb.appendChild(el('span', { class: 'menu-row__mono', text: monogram(item) }));
+    row.appendChild(thumb);
+
+    var main = el('span', { class: 'menu-row__main' });
+    var nameWrap = el('span', { class: 'menu-row__names' });
+    nameWrap.appendChild(el('span', { class: 'menu-row__name', text: primaryName }));
+    if (secondaryName && secondaryName !== primaryName) {
+      nameWrap.appendChild(el('span', {
+        class: 'menu-row__alt',
+        text: secondaryName,
+        lang: lang === 'bn' ? 'en' : 'bn'
+      }));
+    }
+    main.appendChild(nameWrap);
+    if (item.tag) main.appendChild(el('span', { class: 'menu-row__tag', text: tx(item.tag) }));
+    row.appendChild(main);
+
+    row.appendChild(el('span', { class: 'menu-row__leader', 'aria-hidden': 'true' }));
+    row.appendChild(el('span', {
+      class: 'menu-row__price' + (hasPrice ? '' : ' menu-row__price--ask'),
+      text: priceText
+    }));
+    row.appendChild(icon('arrow'));
+
+    function open() { openDishDialog(item); }
+    row.addEventListener('click', open);
+    row.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        open();
+      }
+    });
+
+    findPhoto(item.photo).then(function (url) {
+      if (!url) return;
+      var img = el('img', {
+        src: url,
+        alt: '',
+        width: '96',
+        height: '96',
+        loading: 'lazy',
+        decoding: 'async'
+      });
+      thumb.textContent = '';
+      thumb.appendChild(img);
+      row.classList.add('has-photo');
+    });
+
+    return row;
   }
 
   /* ---- Dish detail dialog (Food & Menu page) ---- */
@@ -459,6 +615,7 @@
     media.appendChild(img);
     findPhoto(item.photo).then(function (url) {
       if (url) { img.src = url; img.alt = menuAlt(item, true); }
+      else media.remove();
     });
 
     var info = el('div', { class: 'dish-dialog__info' });
@@ -680,8 +837,8 @@
     if (!grid) return;
     grid.textContent = '';
     var items = ((C.menu) || []).filter(function (item) {
-      return item && item.highlight !== false;
-    });
+      return item && item.highlight === true;
+    }).slice(0, 6);
     items.forEach(function (item, index) {
       grid.appendChild(buildDish(item, index));
     });
@@ -738,7 +895,7 @@
     var featuredGrid = $('#featuredGrid');
     if (featuredGrid) {
       featuredGrid.textContent = '';
-      var featured = ((C.menu) || []).filter(function (item) { return item && item.highlight; });
+      var featured = ((C.menu) || []).filter(function (item) { return item && item.highlight === true; });
       featured.forEach(function (item, index) {
         featuredGrid.appendChild(buildDish(item, index));
       });
@@ -815,8 +972,29 @@
     grid.textContent = '';
 
     var items = ((C.menu) || []).filter(function (item) { return item && menuMatches(item); });
-    items.forEach(function (item, index) {
-      grid.appendChild(buildDish(item, index, { detail: true }));
+
+    // Group the price list by category so scanning a long card stays easy.
+    // A single category selected (or a search) still groups under its heading.
+    var groups = usedCategories(items);
+    groups.forEach(function (cat) {
+      var groupItems = items.filter(function (item) { return item.category === cat.id; });
+      if (!groupItems.length) return;
+
+      var group = el('section', { class: 'menu-group', 'aria-labelledby': 'mg-' + cat.id });
+      var head = el('div', { class: 'menu-group__head' });
+      head.appendChild(el('h3', { class: 'menu-group__title', id: 'mg-' + cat.id, text: tx(cat.name) }));
+      head.appendChild(el('span', {
+        class: 'menu-group__count',
+        text: tf('menu.countLabel', { count: localizeDigits(String(groupItems.length)) })
+      }));
+      group.appendChild(head);
+
+      var list = el('div', { class: 'menu-group__list' });
+      groupItems.forEach(function (item, index) {
+        list.appendChild(buildDishRow(item, index));
+      });
+      group.appendChild(list);
+      grid.appendChild(group);
     });
 
     if (empty) empty.hidden = items.length > 0;
@@ -994,6 +1172,34 @@
   }
 
   /* --------------------------------------------------------------------------- */
+  /* OFFERS page — "under ₹100" picks straight from the printed prices           */
+  /* --------------------------------------------------------------------------- */
+  function renderValuePicks() {
+    var host = $('#valuePicks');
+    if (!host) return;
+    host.textContent = '';
+
+    var picks = ((C.menu) || []).filter(function (item) {
+      var value = priceValue(item);
+      return item && value !== null && value <= 100;
+    }).sort(function (a, b) { return priceValue(a) - priceValue(b); }).slice(0, 8);
+
+    picks.forEach(function (item, index) {
+      var row = el('li', { class: 'value-pick reveal', 'data-reveal': 'up' });
+      row.appendChild(el('span', { class: 'value-pick__price', text: localizeDigits(item.price) }));
+      var text = el('span', { class: 'value-pick__text' });
+      text.appendChild(el('span', { class: 'value-pick__name', text: tx(item.name) }));
+      var secondary = lang === 'bn' ? (item.name && item.name.en) : (item.name && item.name.bn);
+      if (secondary) text.appendChild(el('span', { class: 'value-pick__alt', text: secondary, lang: lang === 'bn' ? 'en' : 'bn' }));
+      row.appendChild(text);
+      row.style.setProperty('--i', String(Math.min(index, 6)));
+      host.appendChild(row);
+    });
+
+    host.hidden = picks.length === 0;
+  }
+
+  /* --------------------------------------------------------------------------- */
   /* OFFERS page                                                                 */
   /* --------------------------------------------------------------------------- */
   function renderOffersPage() {
@@ -1130,13 +1336,85 @@
   }
 
   /* --------------------------------------------------------------------------- */
-  /* CONTACT page — enquiry form (honest, no backend)                            */
+  /* WhatsApp enquiries                                                          */
   /* --------------------------------------------------------------------------- */
+  /* Enquiries are addressed to the owner's own WhatsApp (content.js →
+     whatsapp). We only ever build a wa.me link and open it — the visitor taps
+     Send inside WhatsApp themselves, so nothing is transmitted by this site. */
+  var WA = C.whatsapp || {};
+  var WA_DEFAULT_TEMPLATE =
+    'New enquiry from the Dairy Park website\n\n' +
+    'Name: {name}\nPhone: {phone}\nEnquiry: {message}';
+
+  function whatsappNumber() {
+    var digits = String(WA.number || '').replace(/[^0-9]/g, '');
+    return digits.length >= 10 && digits.length <= 15 ? digits : '';
+  }
+
+  function whatsappEnabled() {
+    return WA.enabled !== false && !!whatsappNumber();
+  }
+
+  function whatsappUrl(text) {
+    var digits = whatsappNumber();
+    if (!digits) return '';
+    var base = 'https://wa.me/' + digits;
+    var body = String(text || '').replace(/\s+$/, '');
+    return body ? base + '?text=' + encodeURIComponent(body) : base;
+  }
+
+  function whatsappTemplate() {
+    var custom = tx(WA.template && (WA.template[lang] || WA.template.en));
+    return custom || WA_DEFAULT_TEMPLATE;
+  }
+
+  function enquiryText(name, phone, message) {
+    return whatsappTemplate()
+      .split('{name}').join(name)
+      .split('{phone}').join(phone)
+      .split('{message}').join(message);
+  }
+
+  /* Plain WhatsApp links on the page (contact card, status button) get the
+     number from content.js at runtime too, so the two never disagree. */
+  function initWhatsAppLinks() {
+    var enabled = whatsappEnabled();
+    els('[data-link="whatsapp"]').forEach(function (node) {
+      node.hidden = !enabled;
+      if (enabled) node.setAttribute('href', whatsappUrl(''));
+    });
+    els('[data-whatsapp]').forEach(function (node) { node.hidden = !enabled; });
+    if (enabled) return;
+
+    /* The owner has switched WhatsApp off (content.js → whatsapp.enabled):
+       fall back to the call-first wording the site used before. */
+    var fallback = [
+      ['#enquiry-title', 'contact.callFormTitle'],
+      ['[data-i18n="contact.formLead"]', 'contact.callFormLead'],
+      ['[data-i18n="contact.prepare"]', 'contact.callPrepare']
+    ];
+    fallback.forEach(function (pair) {
+      var node = $(pair[0]);
+      if (!node) return;
+      node.setAttribute('data-i18n', pair[1]);
+      node.textContent = t(pair[1]);
+    });
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* CONTACT page — enquiry form → WhatsApp                                      */
+  /* --------------------------------------------------------------------------- */
+  function setStatusCopy(node, key) {
+    node.setAttribute('data-i18n', key);
+    node.textContent = t(key);
+  }
+
   function initContactForm() {
     var form = $('#enquiryForm');
     if (!form) return;
     var errorBox = $('#formError');
     var status = $('#formStatus');
+    var sendLink = $('#formWhatsApp');
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -1159,13 +1437,36 @@
       }
 
       if (errorBox) { errorBox.hidden = true; errorBox.textContent = ''; }
+
+      var enabled = whatsappEnabled();
+      var url = enabled ? whatsappUrl(enquiryText(name, phone, message)) : '';
+
       if (status) {
+        var title = $('.form-status__title', status);
+        var text = $('.form-status__text', status);
+        if (title) setStatusCopy(title, enabled ? 'contact.statusTitle' : 'contact.callStatusTitle');
+        if (text) setStatusCopy(text, enabled ? 'contact.statusText' : 'contact.callStatusText');
+        if (sendLink) {
+          sendLink.hidden = !enabled;
+          if (enabled) sendLink.setAttribute('href', url);
+        }
         status.hidden = false;
         if (typeof status.scrollIntoView === 'function') {
           status.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
         }
       }
-      track('enquiry_prepared');
+
+      if (!enabled) {
+        track('enquiry_prepared');
+        return;
+      }
+
+      /* Hand straight over to WhatsApp with the message pre-filled. Popup
+         blockers can refuse this, so the status panel keeps a real link. */
+      try {
+        window.open(url, '_blank', 'noopener');
+      } catch (e) { /* the button in the status panel still works */ }
+      track('enquiry_whatsapp_opened');
     });
   }
 
@@ -1234,7 +1535,10 @@
     renderGalleryPreview();
     renderGalleryPage();
     renderOffersPage();
+    renderValuePicks();
     initFoodPage();
+    renderMenuFacts();
+    renderPhotoSlots();
     syncCounters();
 
     var heroImg = $('#heroPhoto');
@@ -1617,7 +1921,9 @@
 
     initHeroPhoto();
     initAboutPhotos();
+    renderPhotoSlots();
     initFoodPage();
+    initWhatsAppLinks();
     initContactForm();
 
     initReveals();

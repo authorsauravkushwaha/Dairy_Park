@@ -136,6 +136,10 @@ svg,
 iframe { max-width: 100%; }
 img { display: block; height: auto; }
 
+/* `hidden` must win over component display rules (buttons, cards, grids).
+   Used for the WhatsApp blocks while content.js → whatsapp.enabled is false. */
+[hidden] { display: none !important; }
+
 h1, h2, h3, h4 {
   margin: 0;
   font-weight: 600;
@@ -3215,3 +3219,696 @@ html[lang="bn"] .welcome-card__title { font-size: 1.1rem; }
   .explore-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .closing { padding-block: clamp(4rem, 8vw, 6rem); }
 }
+
+/* =============================================================================
+   MENU-LED REDESIGN — pure-veg seal, price ribbon, price list, dining and
+   dairy-counter bands.  Added on top of the original system; every rule here
+   uses the existing tokens (forest, gold, cream, terracotta).
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   HERO — pure-veg + price ribbon, and the brass seal
+   ------------------------------------------------------------------------- */
+.hero__ribbon {
+  display: inline-grid;
+  grid-template-columns: auto 1px auto;
+  align-items: center;
+  gap: .5rem .95rem;
+  margin-bottom: 1.5rem;
+  padding: .68rem 1.05rem .6rem;
+  border-radius: 16px;
+  border: 1px solid rgba(230, 189, 114, .42);
+  background:
+    linear-gradient(120deg, rgba(8, 26, 19, .82) 0%, rgba(18, 58, 42, .62) 100%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  backdrop-filter: blur(12px) saturate(130%);
+  box-shadow: 0 20px 44px -32px #000, inset 0 1px 0 rgba(255, 247, 236, .12);
+  transition: transform .35s var(--ease), border-color .35s, box-shadow .35s;
+  text-decoration: none;
+}
+.hero__ribbon:hover,
+.hero__ribbon:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(230, 189, 114, .8);
+  box-shadow: 0 26px 54px -30px #000, inset 0 1px 0 rgba(255, 247, 236, .2);
+}
+.hero__ribbon-veg {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+html[lang="bn"] .hero__ribbon-veg { letter-spacing: .04em; font-size: .78rem; }
+.hero__ribbon-leaf { width: 17px; height: 17px; flex: none; }
+.hero__ribbon-sep { width: 1px; height: 28px; background: rgba(230, 189, 114, .38); }
+.hero__ribbon-price {
+  font-family: var(--font-display);
+  font-size: clamp(.95rem, 2.4vw, 1.1rem);
+  color: var(--cream);
+  line-height: 1.25;
+}
+.hero__ribbon-note {
+  grid-column: 1 / -1;
+  font-size: .73rem;
+  letter-spacing: .01em;
+  color: rgba(255, 247, 236, .66);
+}
+
+/* The round brass seal, floating with the other hero cards on desktop */
+.hero__seal {
+  position: absolute;
+  right: -1%;
+  bottom: 1%;
+  z-index: 2;
+  width: 9.4rem;
+  height: 9.4rem;
+  pointer-events: none;
+  transform:
+    translate3d(calc(var(--mx, 0) * var(--depth, 1) * 14px), calc(var(--my, 0) * var(--depth, 1) * 14px), 0)
+    rotate(-7deg);
+  transition: transform .18s linear;
+}
+.seal {
+  position: relative;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: .1rem;
+  width: 100%;
+  height: 100%;
+  padding: .9rem;
+  border-radius: 50%;
+  text-align: center;
+  background:
+    radial-gradient(circle at 32% 24%, rgba(230, 189, 114, .26), rgba(6, 20, 14, .94) 68%);
+  border: 1px solid rgba(230, 189, 114, .62);
+  box-shadow: 0 34px 64px -34px #000, inset 0 1px 0 rgba(255, 247, 236, .18);
+}
+.seal__ring {
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  border: 1px dashed rgba(230, 189, 114, .5);
+}
+.seal__leaf { width: 26px; height: 26px; color: var(--gold); margin-bottom: .1rem; }
+.seal__text {
+  font-family: var(--font-display);
+  font-size: .92rem;
+  line-height: 1.15;
+  color: var(--cream);
+  max-width: 6.2rem;
+}
+html[lang="bn"] .seal__text { font-size: .84rem; }
+.seal__sub {
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(230, 189, 114, .86);
+}
+html[lang="bn"] .seal__sub { letter-spacing: .06em; font-size: .68rem; }
+
+/* ---------------------------------------------------------------------------
+   TRUST BAND — six figures now, so give the grid room
+   ------------------------------------------------------------------------- */
+.trust__list { gap: 1.35rem 1rem; }
+.trust__num--gold { color: var(--gold-ink); }
+@media (min-width: 760px) {
+  .trust__list { grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); }
+}
+
+/* Pure-veg welcome card */
+.welcome-card--veg {
+  background:
+    radial-gradient(120% 120% at 90% 0%, rgba(230, 189, 114, .22), transparent 60%),
+    linear-gradient(160deg, #123a2a 0%, #0d2419 100%);
+  border-color: rgba(230, 189, 114, .34);
+  color: var(--cream);
+}
+.welcome-card--veg .welcome-card__icon {
+  color: var(--gold);
+  background: rgba(255, 247, 236, .1);
+  border-color: rgba(230, 189, 114, .4);
+}
+.welcome-card--veg .welcome-card__title { color: var(--cream); }
+.welcome-card--veg .welcome-card__desc { color: rgba(255, 247, 236, .78); }
+
+/* ---------------------------------------------------------------------------
+   DISH CARDS WITHOUT A PHOTO — a printed-card look instead of a grey box
+   ------------------------------------------------------------------------- */
+.dish__mono { display: none; }
+
+.dish--nophoto .dish__media {
+  background:
+    radial-gradient(90% 90% at 18% 0%, #1a4d38 0%, #0f2f22 52%, #081a13 100%);
+}
+.dish--nophoto .dish__veil {
+  background: linear-gradient(180deg, rgba(8, 26, 19, 0) 40%, rgba(8, 26, 19, .5) 100%);
+}
+.dish--nophoto .dish__mono {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  pointer-events: none;
+}
+.dish--nophoto .dish__mono::before {
+  content: "";
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  width: 58%;
+  height: 82%;
+  transform: translateX(-50%);
+  border-radius: 999px 999px 14px 14px;
+  border: 1px solid rgba(230, 189, 114, .24);
+  background: linear-gradient(180deg, rgba(230, 189, 114, .1), rgba(230, 189, 114, 0) 72%);
+}
+.dish__mono-letter {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 4.4rem);
+  line-height: 1;
+  font-weight: 600;
+  color: rgba(230, 189, 114, .42);
+  text-transform: uppercase;
+}
+.dish__mono-leaf {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 1px;
+  margin-top: .6rem;
+  background: linear-gradient(90deg, transparent, rgba(230, 189, 114, .7), transparent);
+}
+.dish--nophoto .dish__tag,
+.dish--nophoto .dish__badge { z-index: 3; }
+.dish--nophoto .dish__price {
+  z-index: 3;
+  background: rgba(255, 247, 236, .94);
+  color: var(--forest);
+}
+.dish--nophoto .dish__body { padding-top: 1.15rem; }
+
+/* ---------------------------------------------------------------------------
+   PRICE NOTES
+   ------------------------------------------------------------------------- */
+.menu__price-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem .7rem;
+  margin-top: 2rem;
+  padding: .85rem 1.05rem;
+  border-radius: 14px;
+  border: 1px dashed rgba(230, 189, 114, .38);
+  background: rgba(230, 189, 114, .07);
+  color: rgba(255, 247, 236, .8);
+  font-size: .85rem;
+  line-height: 1.55;
+}
+.menu__price-note .icon { width: 18px; height: 18px; flex: none; color: var(--gold); }
+.menu__price-note-sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(230, 189, 114, .4);
+}
+
+/* ---------------------------------------------------------------------------
+   DINING ROOM BAND
+   ------------------------------------------------------------------------- */
+.dine { position: relative; overflow: hidden; }
+.dine::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -30% auto;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 189, 114, .22), transparent 66%);
+  pointer-events: none;
+}
+.dine__grid {
+  position: relative;
+  display: grid;
+  gap: 2.2rem;
+  align-items: center;
+}
+.dine__facts {
+  display: grid;
+  gap: .6rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.dine__facts li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .95rem;
+  color: var(--text);
+}
+.dine__facts .icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  padding: 3px;
+  border-radius: 50%;
+  color: #1f6e47;
+  background: rgba(44, 143, 94, .12);
+}
+.dine__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  margin-top: 1.7rem;
+}
+.dine__photos {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+}
+
+/* Arch-topped photo frames — the motif from the restaurant walls */
+.arch-photo {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 999px 999px 20px 20px;
+  border: 1px solid rgba(185, 138, 52, .45);
+  background: var(--cream-3);
+  box-shadow: var(--shadow-2);
+}
+.arch-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+  transition: transform .8s var(--ease);
+}
+.arch-photo:hover img { transform: scale(1.04); }
+.arch-photo--tall { transform: translateY(-.6rem); }
+.arch-photo--wide { transform: translateY(.9rem); }
+.arch-photo::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 999px 999px 14px 14px;
+  border: 1px solid rgba(255, 247, 236, .35);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
+   DAIRY COUNTER BAND
+   ------------------------------------------------------------------------- */
+.counter { position: relative; overflow: hidden; }
+.counter__glow {
+  position: absolute;
+  top: -18%;
+  right: -8%;
+  width: 32rem;
+  height: 32rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 189, 114, .22), transparent 64%);
+  pointer-events: none;
+}
+.counter__grid {
+  position: relative;
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 2.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+}
+.counter-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: linear-gradient(170deg, rgba(255, 247, 236, .1), rgba(255, 247, 236, .03));
+  border: 1px solid rgba(255, 247, 236, .16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 26px 54px -40px #000;
+  transition: transform .45s var(--ease), border-color .35s;
+}
+.counter-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(230, 189, 114, .5);
+}
+.counter-card__photo {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 999px 999px 0 0;
+  background: #0b2419;
+}
+.counter-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease);
+}
+.counter-card:hover .counter-card__photo img { transform: scale(1.05); }
+.counter-card__body { padding: 1.1rem 1.25rem 1.35rem; }
+.counter-card__title {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  color: var(--cream);
+  margin-bottom: .2rem;
+}
+.counter-card__desc { color: var(--muted-dark); font-size: .9rem; line-height: 1.6; }
+.counter__actions { display: flex; justify-content: center; margin-top: 2.2rem; }
+
+/* ---------------------------------------------------------------------------
+   FOOD & MENU — numbers, category groups and the dotted price list
+   ------------------------------------------------------------------------- */
+.menu-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: .8rem;
+  margin: 2.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.menu-stat {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding: .95rem 1.05rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 247, 236, .18);
+  background: rgba(255, 247, 236, .08);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.menu-stat[hidden] { display: none; }
+.menu-stat__num {
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  line-height: 1;
+  color: var(--cream);
+  font-variant-numeric: tabular-nums;
+}
+.menu-stat--gold .menu-stat__num { color: var(--gold); }
+.menu-stat__pct { font-size: .9em; margin-left: .1rem; }
+.menu-stat__label {
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255, 247, 236, .72);
+  line-height: 1.4;
+}
+html[lang="bn"] .menu-stat__label { letter-spacing: 0; font-size: .8rem; }
+
+.menu-group { margin-top: 2.6rem; }
+.menu-group__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .4rem .9rem;
+  padding-bottom: .55rem;
+  border-bottom: 1px solid rgba(230, 189, 114, .28);
+}
+.menu-group__title {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3.2vw, 1.55rem);
+  color: var(--cream);
+  letter-spacing: -.01em;
+}
+.menu-group__title::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(230, 189, 114, .16);
+  flex: none;
+}
+.menu-group__count {
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255, 247, 236, .55);
+}
+html[lang="bn"] .menu-group__count { letter-spacing: 0; font-size: .8rem; }
+
+.menu-group__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+  gap: .1rem 1.9rem;
+  margin-top: .45rem;
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .62rem .3rem .62rem .2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(255, 247, 236, .14);
+  transition: background-color .25s, padding-left .25s, color .25s;
+}
+.menu-row:hover,
+.menu-row:focus-visible {
+  background: rgba(255, 247, 236, .07);
+  padding-left: .55rem;
+  outline: none;
+}
+.menu-row:focus-visible { box-shadow: inset 0 0 0 1px rgba(230, 189, 114, .6); }
+.menu-row.is-unavailable { opacity: .6; }
+
+.menu-row__thumb {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid rgba(230, 189, 114, .34);
+  background: rgba(230, 189, 114, .1);
+  color: rgba(230, 189, 114, .8);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+.menu-row__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.menu-row.has-photo .menu-row__mono { display: none; }
+.menu-row__main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .1rem .55rem;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+.menu-row__names { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .5rem; min-width: 0; }
+.menu-row__name {
+  font-weight: 600;
+  font-size: .98rem;
+  color: var(--cream);
+  line-height: 1.35;
+}
+.menu-row__alt {
+  font-size: .8rem;
+  color: rgba(255, 247, 236, .5);
+  font-weight: 500;
+}
+.menu-row__tag {
+  font-size: .64rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .12rem .45rem;
+  border-radius: var(--r-pill);
+  color: var(--gold);
+  border: 1px solid rgba(230, 189, 114, .4);
+  white-space: nowrap;
+}
+html[lang="bn"] .menu-row__tag { letter-spacing: 0; font-size: .72rem; }
+.menu-row__leader {
+  flex: 1 1 1.5rem;
+  align-self: flex-end;
+  height: 1px;
+  min-width: 1.25rem;
+  margin-bottom: .42rem;
+  background-image: radial-gradient(circle, rgba(255, 247, 236, .32) 1px, transparent 1.4px);
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+}
+.menu-row__price {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.menu-row__price--ask {
+  font-family: var(--font-sans);
+  font-size: .78rem;
+  font-weight: 600;
+  color: rgba(255, 247, 236, .6);
+}
+.menu-row .icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 247, 236, .35);
+  transition: color .25s, transform .25s;
+}
+.menu-row:hover .icon { color: var(--gold); transform: translateX(3px); }
+
+/* The printed menu card band on the Food page */
+.menu-card-band__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 1.1rem;
+  margin-top: 2.2rem;
+}
+.menu-shot {
+  margin: 0;
+  padding: .55rem .55rem 0;
+  border-radius: 16px;
+  background: var(--paper);
+  border: 1px solid rgba(185, 138, 52, .34);
+  box-shadow: var(--shadow-1);
+  transition: transform .45s var(--ease), box-shadow .45s;
+}
+.menu-shot:nth-child(odd) { transform: rotate(-1.1deg); }
+.menu-shot:nth-child(even) { transform: rotate(1deg); }
+.menu-shot:hover { transform: rotate(0) translateY(-4px); box-shadow: var(--shadow-2); }
+.menu-shot a { display: block; border-radius: 10px; }
+.menu-shot img {
+  width: 100%;
+  border-radius: 10px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.menu-shot figcaption {
+  padding: .6rem .35rem .7rem;
+  font-size: .76rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+html[lang="bn"] .menu-shot figcaption { letter-spacing: 0; font-size: .85rem; text-transform: none; }
+
+/* Pure-veg fact icon on the About page */
+.fact__icon--veg {
+  color: #8ce0b4;
+  background: rgba(44, 143, 94, .22);
+  border-color: rgba(140, 224, 180, .4);
+}
+
+/* Small "pure veg" tag beside the wordmark */
+.brand__tag {
+  display: none;
+  align-self: center;
+  margin-left: .15rem;
+  padding: .2rem .5rem;
+  border-radius: var(--r-pill);
+  font-size: .6rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(230, 189, 114, .45);
+  background: rgba(230, 189, 114, .1);
+  white-space: nowrap;
+}
+html[lang="bn"] .brand__tag { letter-spacing: .02em; font-size: .68rem; }
+@media (min-width: 1080px) {
+  .brand__tag { display: inline-block; }
+}
+
+/* ---------------------------------------------------------------------------
+   RESPONSIVE FOR THE NEW BANDS
+   ------------------------------------------------------------------------- */
+@media (min-width: 720px) {
+  .dine__grid { grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); gap: 3rem; }
+  .counter__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hero__ribbon { padding: .75rem 1.2rem .7rem; }
+}
+
+@media (max-width: 719px) {
+  .hero__ribbon { grid-template-columns: 1fr; gap: .35rem; }
+  .hero__ribbon-sep { display: none; }
+  .hero__ribbon-price { font-size: 1rem; }
+  .menu-row { gap: .6rem; }
+  .menu-row .icon { display: none; }
+  .menu-row__leader { display: none; }
+  .menu-row__main { gap: .1rem .4rem; }
+  .dine__photos { grid-template-columns: 1fr 1fr; }
+  .arch-photo--tall, .arch-photo--wide { transform: none; }
+  .menu-group__list { grid-template-columns: 1fr; }
+  .menu-shot:nth-child(odd), .menu-shot:nth-child(even) { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__ribbon:hover,
+  .counter-card:hover,
+  .menu-shot:hover { transform: none; }
+  .menu-row:hover,
+  .menu-row:focus-visible { padding-left: .2rem; }
+}
+
+/* ---------------------------------------------------------------------------
+   OFFERS PAGE — everyday value row (real printed prices, not a discount)
+   ------------------------------------------------------------------------- */
+.offers-value { position: relative; overflow: hidden; }
+.value-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: .8rem;
+  margin: 2.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.value-row[hidden] { display: none; }
+.value-pick {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding: .8rem .95rem;
+  border-radius: 16px;
+  border: 1px solid rgba(230, 189, 114, .28);
+  background: linear-gradient(150deg, rgba(255, 247, 236, .1), rgba(255, 247, 236, .03));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12);
+  transition: transform .4s var(--ease), border-color .35s;
+}
+.value-pick:hover { transform: translateY(-3px); border-color: rgba(230, 189, 114, .6); }
+.value-pick__price {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 3.6rem;
+  padding: .45rem .5rem;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #3d1a06;
+  background: linear-gradient(135deg, #ffd894, var(--gold));
+  box-shadow: 0 10px 20px -14px rgba(0, 0, 0, .8);
+  font-variant-numeric: tabular-nums;
+}
+.value-pick__text { display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+.value-pick__name { font-weight: 600; font-size: .95rem; color: var(--cream); line-height: 1.3; }
+.value-pick__alt { font-size: .78rem; color: rgba(255, 247, 236, .55); line-height: 1.35; }
