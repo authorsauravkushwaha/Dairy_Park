@@ -27,6 +27,10 @@ order, so if you re-export as WebP it is picked up automatically.
 | `chocolate-freezer.*` | **Supplied** — chocolate selection (Gallery)  |
 | `dahi-vada.*`    | **Supplied** — Dahi Vada cards + hero peek + "order both" strip + Gallery |
 | `steam-momo.*`   | **Supplied** — Steam Momo cards + hero peek + "order both" strip + Gallery |
+| `chola-bhatura.*` | **Supplied** — Chola Bhatura card + Food & Menu thumbnail + Gallery |
+| `paneer-butter-masala.*` | **Supplied** — Paneer Butter Masala card + Food & Menu thumbnail + Gallery |
+| `veg-chowmein.*` | **Supplied** — Veg Chowmein card + Food & Menu thumbnail + Gallery |
+| `cold-coffee.*`  | **Supplied** — Cold Coffee with Ice Cream card + Food & Menu thumbnail + Gallery |
 
 ## New gallery photographs
 
@@ -41,7 +45,7 @@ fails the build if `content.js` points at a photograph that is not here, so a
 typo in a file name is caught before the site goes live.
 
 For replacements, export **WebP** at about 1400–1600 px on the long edge and
-quality 75–82. The current set is 21 files and about 2.6 MB in total. The
+quality 75–82. The current set is 25 files and about 3.0 MB in total. The
 shopfront is the hero backdrop, so keeping it under ~250 kB matters most.
 
 The home page also uses three of these in its dairy-counter band — `freezer`,

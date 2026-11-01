@@ -188,8 +188,13 @@ async function loadPage(outFile, urlPath) {
     document.querySelectorAll('.dish__tag').length === HIGHLIGHTS.filter((item) => item.tag).length,
     'home: dish cards render their gold tag ribbon'
   );
-  expect(document.querySelectorAll('.dish--nophoto').length > 0, 'home: dishes without a photograph get the printed-card look');
-  expect(document.querySelectorAll('.dish--nophoto img').length === 0, 'home: no placeholder image is left in a photo-less card');
+  // Every highlight dish now has a supplied photograph, so no card falls back
+  // to the printed-card look on the home page any more.
+  expect(document.querySelectorAll('.dish--nophoto').length === 0, 'home: every highlight dish has its own photograph');
+  expect(
+    document.querySelectorAll('[data-dish-id].has-photo').length === HIGHLIGHTS.length,
+    'home: every dish card loads a supplied photograph'
+  );
 
   // Photo-driven extras appear once the dish photos are supplied
   expect(document.querySelectorAll('.pairing__plate').length === 2, 'home: order-both strip shows both dish photos');
@@ -241,6 +246,11 @@ async function loadPage(outFile, urlPath) {
 
   // The price list itself
   expect(document.querySelectorAll('#menuGrid .menu-group').length === USED_CATEGORIES.length, 'food: the list is grouped by category');
+  expect(
+    document.querySelectorAll('#menuGrid .menu-row.has-photo').length === MENU.filter((item) => item.photo).length,
+    'food: every priced dish with a photograph shows its thumbnail'
+  );
+  expect(document.querySelectorAll('#menuGrid .menu-row__mono').length > 0, 'food: rows without a photograph keep the printed monogram');
   const rowPrices = [...document.querySelectorAll('#menuGrid .menu-row__price')];
   expect(rowPrices.length === MENU.length, 'food: every dish shows a price or an ask-for-price note');
   expect(rowPrices.filter((node) => /^₹\d/.test(node.textContent)).length === PRICED.length, 'food: printed prices come from the menu card');

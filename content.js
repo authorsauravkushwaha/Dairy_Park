@@ -195,7 +195,8 @@ window.DP_CONTENT = {
       available: true,
       highlight: true,
       tag: { en: "Most ordered", bn: "সবচেয়ে জনপ্রিয়" },
-      badges: []
+      badges: [],
+      photo: "assets/img/photos/chola-bhatura"
     },
     {
       id: "steam-momo",
@@ -220,7 +221,8 @@ window.DP_CONTENT = {
       available: true,
       highlight: true,
       tag: { en: "Chef's pick", bn: "শেফের পছন্দ" },
-      badges: []
+      badges: [],
+      photo: "assets/img/photos/paneer-butter-masala"
     },
     {
       id: "veg-chowmein",
@@ -232,7 +234,8 @@ window.DP_CONTENT = {
       available: true,
       highlight: true,
       tag: { en: "Under ₹100", bn: "₹১০০র নিচে" },
-      badges: []
+      badges: [],
+      photo: "assets/img/photos/veg-chowmein"
     },
     {
       id: "cold-coffee-icecream",
@@ -244,7 +247,8 @@ window.DP_CONTENT = {
       available: true,
       highlight: true,
       tag: { en: "Chilled", bn: "ঠান্ডা" },
-      badges: []
+      badges: [],
+      photo: "assets/img/photos/cold-coffee"
     },
 
     /* ---- CHAAT & CHOLA ---- */
@@ -1316,6 +1320,22 @@ window.DP_CONTENT = {
       base: "assets/img/photos/steam-momo",
       alt: { en: "A steel plate of steamed momos with a bowl of red chutney",
              bn: "লাল চাটনির বাটি সহ স্টিলের প্লেটে স্টিম মোমো" } },
+    { section: "food",
+      base: "assets/img/photos/chola-bhatura",
+      alt: { en: "Chola bhatura at Dairy Park: two puffed bhaturas with a bowl of chickpea chola, sliced onions, a green chilli and pickle",
+             bn: "ডেয়ারি পার্কে ছোলা ভাটোরা: দুটি ফোলা ভাটোরা, সাথে ছোলার বাটি, কাটা পেঁয়াজ, কাঁচা লঙ্কা ও আচার" } },
+    { section: "food",
+      base: "assets/img/photos/paneer-butter-masala",
+      alt: { en: "Paneer butter masala served in a steel bowl, with paneer cubes in a creamy orange gravy topped with cream and coriander",
+             bn: "স্টিলের বাটিতে পনির বাটার মসলা — ক্রিমি কমলা গ্রেভিতে পনিরের টুকরো, উপরে ক্রিম ও ধনে পাতা" } },
+    { section: "food",
+      base: "assets/img/photos/veg-chowmein",
+      alt: { en: "A plate of veg chowmein with noodles, capsicum, carrot and onion, served with tomato ketchup",
+             bn: "প্লেটে ভেজ চাউমিন — নুডলস, ক্যাপসিকাম, গাজর ও পেঁয়াজ, সাথে টমেটো কেচাপ" } },
+    { section: "food",
+      base: "assets/img/photos/cold-coffee",
+      alt: { en: "A tall glass of cold coffee with ice cream, topped with whipped cream, chocolate sauce and chocolate flakes",
+             bn: "উঁচু গ্লাসে আইসক্রিম সহ কোল্ড কফি, উপরে হুইপড ক্রিম, চকলেট সস ও চকলেট ফ্লেক্স" } },
     { section: "food",
       base: "assets/img/photos/menu-spread-1",
       alt: { en: "A page of the Dairy Park menu with prices for moglai, chat, chilli, pizza, rice, roti, dal and paneer dishes",

@@ -23,6 +23,10 @@ placeholder is shown instead — nothing breaks, and no fake photograph is used.
 | `photos/table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and snacks counter (Gallery) |
 | `photos/dahi-vada.*` | **Supplied** — Dahi Vada cards on Home + Food & Menu, “order both” strip, Gallery |
 | `photos/steam-momo.*` | **Supplied** — Steam Momo cards on Home + Food & Menu, “order both” strip, Gallery |
+| `photos/chola-bhatura.*` | **Supplied** — Chola Bhatura card on Home + Food & Menu, Gallery |
+| `photos/paneer-butter-masala.*` | **Supplied** — Paneer Butter Masala card on Home + Food & Menu, Gallery |
+| `photos/veg-chowmein.*` | **Supplied** — Veg Chowmein card on Home + Food & Menu, Gallery |
+| `photos/cold-coffee.*` | **Supplied** — Cold Coffee with Ice Cream card on Home + Food & Menu, Gallery |
 | `photos/menu-spread-1.*`, `menu-spread-2.*`, `menu-drinks.*` | **Supplied** — printed menu boards (Gallery) |
 | `photos/counter-snacks.*` | **Supplied** — samosas at the counter (Gallery) |
 | `photos/ice-cream-freezer.*`, `chocolate-freezer.*` | **Supplied** — freezers (Gallery) |
