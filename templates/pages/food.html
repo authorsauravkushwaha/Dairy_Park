@@ -1,8 +1,8 @@
 <!--meta
 {
   "page": "food",
-  "title": "Food & Menu | Dairy Park Kolaghat – Dahi Vada, Steam Momo & More",
-  "desc": "Discover what's good at Dairy Park, Kolaghat. Browse our menu highlights including Dahi Vada and Steam Momo, with category filters and call-to-enquire. Dine in or use the drive-through on Kolaghat – Jashar Road.",
+  "title": "Menu & Prices | Dairy Park Kolaghat – Pure Veg Restaurant",
+  "desc": "The full Dairy Park menu with prices: Dahi Vada ₹80, Chola Bhatura ₹120, paneer, Chinese, pizza, shakes, lassi and tea from ₹15. A 100% pure veg restaurant on Kolaghat – Jashar Road. Call +91 99324 52124.",
   "slug": "food/"
 }
 -->
@@ -28,6 +28,21 @@
             <span data-i18n="sticky.directions">Get Directions</span>
           </a>
         </div>
+
+        <ul class="menu-stats reveal" aria-label="The menu in numbers" data-i18n-aria="foodPage.statsLabel">
+          <li class="menu-stat">
+            <span class="menu-stat__num" data-bind="menuCount">87</span>
+            <span class="menu-stat__label" data-i18n="foodPage.statsItems">dishes with a printed price</span>
+          </li>
+          <li class="menu-stat menu-stat--gold">
+            <span class="menu-stat__num" data-bind="priceFrom">₹9</span>
+            <span class="menu-stat__label" data-i18n="foodPage.statsFrom">cheapest item on the menu</span>
+          </li>
+          <li class="menu-stat">
+            <span class="menu-stat__num"><span data-bind="vegShare">100</span><span class="menu-stat__pct">%</span></span>
+            <span class="menu-stat__label" data-i18n="foodPage.statsVeg">pure vegetarian</span>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -76,12 +91,49 @@
           </div>
         </noscript>
 
+        <p class="menu__price-note reveal">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 3.5c-9 0-15 4.6-15 12 0 2.3.8 4 .8 4s3.7-9.4 14.2-11.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 20.5c1.6-3.9 4.4-6.9 8.1-8.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span data-bind="foodPriceNote">Prices are taken from the printed menu card at the counter and can change — call to confirm before you come.</span>
+        </p>
+
         <div class="menu__cta reveal">
           <p class="menu__note" data-i18n="foodPage.ctaNote">Looking for something specific? The counter menu is bigger than what fits online — give us a call.</p>
           <a class="btn btn--primary btn--lg" href="tel:+919932452124" data-link="phone" data-track="menu_call">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
             <span data-i18n="foodPage.callEnquire">Call to Enquire</span>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRINTED MENU CARD ================= -->
+    <section class="section section--cream menu-card-band" aria-labelledby="menucard-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal" data-i18n="foodPage.cardEyebrow">From the counter</p>
+          <h2 class="section-title section-title--sm reveal" id="menucard-title" data-reveal="down" data-i18n="foodPage.cardTitle">The printed menu card</h2>
+          <p class="section-lead reveal" data-i18n="foodPage.cardLead">The same card that sits on every table. Tap a photograph to enlarge it.</p>
+        </div>
+
+        <div class="menu-card-band__grid">
+          <figure class="menu-shot reveal" data-reveal="up">
+            <a href="../assets/img/photos/menu-spread-1.webp" target="_blank" rel="noopener">
+              <img src="../assets/img/photos/menu-spread-1.webp" alt="The Dairy Park menu card, page one" data-i18n-alt="foodPage.cardAlt1" width="1000" height="750" loading="lazy" decoding="async">
+            </a>
+            <figcaption data-i18n="foodPage.cardAlt1">The Dairy Park menu card, page one</figcaption>
+          </figure>
+          <figure class="menu-shot reveal" data-reveal="up">
+            <a href="../assets/img/photos/menu-spread-2.webp" target="_blank" rel="noopener">
+              <img src="../assets/img/photos/menu-spread-2.webp" alt="The Dairy Park menu card, page two" data-i18n-alt="foodPage.cardAlt2" width="1000" height="750" loading="lazy" decoding="async">
+            </a>
+            <figcaption data-i18n="foodPage.cardAlt2">The Dairy Park menu card, page two</figcaption>
+          </figure>
+          <figure class="menu-shot reveal" data-reveal="up">
+            <a href="../assets/img/photos/menu-drinks.webp" target="_blank" rel="noopener">
+              <img src="../assets/img/photos/menu-drinks.webp" alt="The Dairy Park drinks page" data-i18n-alt="foodPage.cardAlt3" width="900" height="1205" loading="lazy" decoding="async">
+            </a>
+            <figcaption data-i18n="foodPage.cardAlt3">The Dairy Park drinks page</figcaption>
+          </figure>
         </div>
       </div>
     </section>

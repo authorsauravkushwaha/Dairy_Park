@@ -16,6 +16,8 @@ order, so if you re-export as WebP it is picked up automatically.
 | `shop-front.*`   | **Supplied** — full-screen homepage hero backdrop |
 | `owner.*`        | **Supplied** — hero portrait frame + About inset   |
 | `interior-room.*` | **Supplied** — dining room (About + Gallery)      |
+| `interior-bench.*` | **Supplied** — home “Inside the dining room” band + Gallery |
+| `interior-glass.*` | **Supplied** — evening room through the glass, home band + Gallery |
 | `interior-arches.*`, `interior-booth.*`, `interior-green.*`, `interior-lounge.*`, `interior-night.*` | **Supplied** — murals, booths and evening frontage (Gallery) |
 | `table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and the snacks counter (Gallery) |
 | `menu-spread-1.*`, `menu-spread-2.*` | **Supplied** — menu boards (Gallery) |
@@ -39,7 +41,10 @@ fails the build if `content.js` points at a photograph that is not here, so a
 typo in a file name is caught before the site goes live.
 
 For replacements, export **WebP** at about 1400–1600 px on the long edge and
-quality 75–82. The current set is 19 files and about 2.4 MB in total. The
+quality 75–82. The current set is 21 files and about 2.6 MB in total. The
 shopfront is the hero backdrop, so keeping it under ~250 kB matters most.
+
+The home page also uses three of these in its dairy-counter band — `freezer`,
+`shelves` and `counter` are named in `content.js → photos`.
 
 Please upload only genuine photos of the restaurant, the owner and the food.

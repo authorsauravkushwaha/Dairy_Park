@@ -26,7 +26,14 @@ placeholder is shown instead — nothing breaks, and no fake photograph is used.
 | `photos/menu-spread-1.*`, `menu-spread-2.*`, `menu-drinks.*` | **Supplied** — printed menu boards (Gallery) |
 | `photos/counter-snacks.*` | **Supplied** — samosas at the counter (Gallery) |
 | `photos/ice-cream-freezer.*`, `chocolate-freezer.*` | **Supplied** — freezers (Gallery) |
+| `photos/interior-bench.*` | **Supplied** — “Inside the dining room” band on the home page + Gallery |
+| `photos/interior-glass.*` | **Supplied** — evening room seen through the glass, home page + Gallery |
+| `photos/shop.*` | **Supplied** — snack shelves, used in the dairy-counter band |
 | `photos/offer-combo.*` | Offer cards (when you add a promo with a photo) |
+
+The home page also has a **dairy-counter band** (ice cream, snacks, samosas).
+Those three photos are named in `content.js → photos` as `freezer`, `shelves`
+and `counter` — change the file name there and the band follows.
 
 Every photo is listed in `content.js → gallery` with its `section` and
 bilingual alt text, so the Gallery page renders itself. `section` can be
@@ -75,14 +82,26 @@ Menu items live in `content.js → menu`. Each item looks like this:
 - **Add an item:** copy a block (from `{` to `},`) and paste it after the last
   one, then change the values. Keep the commas!
 - **Categories:** the Food & Menu page shows only categories that have at least
-  one item. Proposed categories (Snacks, Chaat, Beverages, Ice Cream, Other…)
-  stay hidden until you add an item that uses them — so never add an empty one
-  to the website by accident. Category ids: `special`, `snacks`, `momos`,
-  `chaat`, `beverages`, `icecream`, `other`.
+  one item — an empty category never appears. Current ids: `special`, `chaat`,
+  `momos`, `south`, `snacks`, `chinese`, `pizza`, `moglai`, `paneer`, `dal`,
+  `chana`, `aloo`, `rice`, `roti`, `salad`, `papad`, `shakes`, `tea`,
+  `icecream`. Rename the English + Bengali labels freely; keep the ids.
 - **Price:** leave `null` until you have confirmed the price. The site shows
-  “Ask for today’s price” — it never invents a number.
+  “Ask for today’s price” — it never invents a number. Every price currently on
+  the site is copied from the printed menu card in the Gallery, so when the
+  card changes, change it here too.
+- **Pure veg:** `business.pureVeg: true` turns on the “100% Pure Veg” seal and
+  the ribbon in the hero, the pure-veg card on the home page and the 100% stat
+  on the Food & Menu page. If the kitchen ever serves non-veg dishes, set it to
+  `false` — the seal and the stat disappear and each dish shows its own
+  Veg / Non-veg pill again.
 - **Search & filters:** visitors can filter by category and search by name in
-  either language — all driven by this same list.
+  either language — all driven by this same list. On the Food & Menu page the
+  menu is printed as a dotted price list grouped by category, so a long card
+  stays readable.
+- **Highlights:** only items with `highlight: true` appear on the home page
+  (six of them) and in the “Guest favourites” row. Keep that list short — it is
+  the shop window, not the whole menu.
 
 ## 3. Opening hours (`content.js → hours`)
 

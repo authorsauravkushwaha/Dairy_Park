@@ -13,12 +13,12 @@ window.DP_I18N = {
     "meta.title": "Dairy Park Kolaghat | Family Restaurant – Dahi Vada & Steam Momo",
     "meta.desc":
       "Dairy Park is a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134, with a green-walled dining room, dine-in and drive-through. Try our Dahi Vada and Steam Momo. Call +91 99324 52124.",
-    "meta.home.title": "Dairy Park Kolaghat | Family Restaurant – Dahi Vada & Steam Momo",
+    "meta.home.title": "Dairy Park Kolaghat | Pure Veg Restaurant – Menu, Prices & Ice Cream",
     "meta.home.desc":
-      "Dairy Park is a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134, with a green-walled dining room, dine-in and drive-through. Try our Dahi Vada and Steam Momo. Call +91 99324 52124.",
-    "meta.food.title": "Food & Menu | Dairy Park Kolaghat – Dahi Vada, Steam Momo & More",
+      "Dairy Park is a 100% pure veg family restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Dahi Vada ₹80, Chola Bhatura ₹120, roti from ₹9, ice cream at the counter. Dine-in and drive-through. Call +91 99324 52124.",
+    "meta.food.title": "Menu & Prices | Dairy Park Kolaghat – Pure Veg Restaurant",
     "meta.food.desc":
-      "Discover what's good at Dairy Park, Kolaghat. Menu highlights include Dahi Vada and Steam Momo, with category filters and call-to-enquire. Dine in or use the drive-through on Kolaghat – Jashar Road.",
+      "The Dairy Park menu with prices: Dahi Vada ₹80, Chola Bhatura ₹120, paneer, Chinese, pizza, shakes and tea from ₹15. A 100% pure veg restaurant on Kolaghat – Jashar Road. Call +91 99324 52124.",
     "meta.about.title": "About Us | Dairy Park – Family Restaurant in Kolaghat",
     "meta.about.desc":
       "About Dairy Park, a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Green-walled dining room, dine-in and drive-through, with highlights like Dahi Vada and Steam Momo.",
@@ -90,6 +90,12 @@ window.DP_I18N = {
     "hero.scroll": "Scroll to explore",
     "hero.picksLabel": "Worth trying",
     "hero.picksAria": "See the menu highlights",
+    "hero.seal": "100% Pure Veg",
+    "hero.sealSub": "Kitchen",
+    "hero.sealAria": "Dairy Park is a 100% pure vegetarian restaurant",
+    "hero.priceRibbon": "The full menu starts at {price}",
+    "hero.priceRibbonNote": "Roti, tea and idli — every price is on the menu",
+    "hero.orderHint": "Call ahead and we will keep your order ready",
 
     /* ---------- trust band (home) ---------- */
     "trust.title": "Dairy Park at a glance",
@@ -97,6 +103,8 @@ window.DP_I18N = {
     "trust.reviews": "Google reviews",
     "trust.spend": "Typical spend per person",
     "trust.ways": "Ways to visit — dine-in & drive-through",
+    "trust.items": "Dishes on the menu",
+    "trust.from": "Cheapest thing on the menu",
 
     "dish.dahiVada": "Dahi Vada",
     "dish.steamMomo": "Steam Momo",
@@ -104,10 +112,10 @@ window.DP_I18N = {
     "why.perPerson": "per person",
     "footer.analytics": "Analytics settings",
 
-    "strip.1": "Dine-in",
-    "strip.2": "Drive-through",
+    "strip.1": "100% Pure Veg",
+    "strip.2": "Dine-in & drive-through",
     "strip.3": "Dahi Vada",
-    "strip.4": "Steam Momo",
+    "strip.4": "Chola Bhatura · Roti · Ice cream counter",
     "strip.5": "Kolaghat – Jashar Road",
 
     /* ---------- welcome (home) ---------- */
@@ -121,12 +129,14 @@ window.DP_I18N = {
     "welcome.driveDesc": "Order and collect without leaving your vehicle.",
     "welcome.highlightsTitle": "Dahi Vada & Steam Momo",
     "welcome.highlightsDesc": "Our listed menu highlights — ask at the counter for today’s full menu.",
+    "welcome.vegTitle": "100% Pure Veg",
+    "welcome.vegDesc": "Our signboard says pure veg and the printed menu keeps it that way.",
 
     /* ---------- menu ---------- */
-    "menu.eyebrow": "Menu highlights",
-    "menu.title": "What’s on at Dairy Park",
+    "menu.eyebrow": "From our menu card",
+    "menu.title": "What people order at Dairy Park",
     "menu.lead":
-      "Only our confirmed highlights are shown here. For the full menu and today’s prices, give us a call.",
+      "Six plates that leave our counter again and again — each with the price printed on our menu card.",
     "menu.highlight": "Menu highlight",
     "menu.priceAsk": "Ask for today’s price",
     "menu.available": "Available",
@@ -139,20 +149,53 @@ window.DP_I18N = {
     "menu.exploreFull": "Explore Full Menu",
     "menu.noscriptTitle": "Menu highlights",
     "menu.noscript":
-      "Dahi Vada and Steam Momo. Call +91 99324 52124 for the full menu and today’s prices.",
+      "Dahi Vada ₹80, Chola Bhatura ₹120, roti from ₹9 and about ninety more dishes. Call +91 99324 52124 for today’s prices.",
 
+    "menu.boardCta": "See every price",
+    "menu.vegNote": "Everything on this menu is vegetarian.",
+    "menu.priceNote": "Prices are copied from our printed menu card and can change — please call to confirm.",
+    "menu.countLabel": "{count} dishes",
+    "menu.fromLabel": "from {price}",
+
+    /* ---------- dining room band (home) ---------- */
+    "dine.eyebrow": "Inside the dining room",
+    "dine.title": "Green walls, painted arches, long tables.",
+    "dine.lead":
+      "The room in our photographs is the room you eat in — bottle-green walls, hand-painted palms in arched niches and brass lamps above every table.",
+    "dine.f1": "Air-conditioned seating",
+    "dine.f2": "Bench seats, stools and long tables",
+    "dine.f3": "Comfortable for families and groups",
+    "dine.cta": "See more photographs",
+    "dine.alt1": "Bench seating and long marble-look tables at Dairy Park",
+    "dine.alt2": "The lit dining room seen through the glass front at Dairy Park",
+
+    /* ---------- counter & dairy band (home) ---------- */
+    "counter.eyebrow": "At the counter",
+    "counter.title": "Ice cream, chocolate and snacks to take away.",
+    "counter.lead":
+      "Dairy Park is a dairy shop as much as a restaurant — pick up ice cream, sweets and snacks on your way out.",
+    "counter.c1Title": "Ice cream freezers",
+    "counter.c1Desc": "Amul and Cadbury freezers, right by the entrance.",
+    "counter.c2Title": "Shelves of snacks",
+    "counter.c2Desc": "Chocolates, chips and namkeen to carry home.",
+    "counter.c3Title": "Samosas & sweets",
+    "counter.c3Desc": "Fresh at the counter through the day.",
+    "counter.cta": "Ask what is fresh today",
+    "counter.alt1": "The ice-cream freezer at Dairy Park",
+    "counter.alt2": "Shelves of chocolates and snacks inside Dairy Park",
+    "counter.alt3": "Samosas on a steel tray at the counter",
     /* ---------- food & menu page ---------- */
     "foodPage.eyebrow": "Food & Menu",
     "foodPage.title": "Discover What’s Good at Dairy Park.",
     "foodPage.lead":
-      "Our confirmed menu highlights from Kolaghat — fresh from the counter on Kolaghat – Jashar Road. Prices and the full list are confirmed when you call or visit.",
+      "Our whole menu card, with prices — from a ₹9 roti to our signature Dahi Vada. Pure veg, cooked to order on Kolaghat – Jashar Road.",
     "foodPage.callEnquire": "Call to Enquire",
     "foodPage.featuredEyebrow": "Guest favourites",
     "foodPage.featuredTitle": "Menu highlights",
     "foodPage.browseEyebrow": "The menu",
-    "foodPage.browseTitle": "Browse by category",
+    "foodPage.browseTitle": "The full menu, with prices",
     "foodPage.browseLead":
-      "Only categories with confirmed items are shown. Tap a dish for details, or call us about anything on the menu.",
+      "These are the prices printed on the card at our counter. Tap any line for details, or call us to place an order.",
     "foodPage.search": "Search the menu…",
     "foodPage.catsLabel": "Menu categories",
     "foodPage.emptyTitle": "Nothing matches that search",
@@ -160,14 +203,26 @@ window.DP_I18N = {
       "Try another word, or clear the filters — and call us for the full counter menu.",
     "foodPage.clear": "Clear filters",
     "foodPage.ctaNote":
-      "Looking for something specific? The counter menu is bigger than what fits online — give us a call.",
+      "Anything not on the card today? Ask at the counter — that is the final word on prices and availability.",
     "foodPage.detailsShort": "view details",
+    "foodPage.statsLabel": "The menu in numbers",
+    "foodPage.statsItems": "dishes with a printed price",
+    "foodPage.statsFrom": "cheapest item on the menu",
+    "foodPage.statsVeg": "pure vegetarian",
+    "foodPage.priceNote": "Prices are taken from the printed menu card at the counter and can change — call to confirm before you come.",
+    "foodPage.cardEyebrow": "From the counter",
+    "foodPage.cardTitle": "The printed menu card",
+    "foodPage.cardLead": "The same card that sits on every table. Tap a photograph to enlarge it.",
+    "foodPage.cardAlt1": "The Dairy Park menu card, page one",
+    "foodPage.cardAlt2": "The Dairy Park menu card, page two",
+    "foodPage.cardAlt3": "The Dairy Park drinks page",
+    "foodPage.rowAria": "{name}, {price} — open details",
 
     /* ---------- why visit ---------- */
     "why.eyebrow": "Why visit Dairy Park",
     "why.title": "A quick stop on the Kolaghat road",
     "why.lead":
-      "Just the facts from our Google listing — plus two dishes worth pulling over for.",
+      "A pure veg kitchen, a green dining room and prices that start at ₹9 — here is what you get at Dairy Park.",
     "fact.dine.title": "Dine-in",
     "fact.dine.desc": "Dine-in is listed as an available facility.",
     "fact.drive.title": "Drive-through",
@@ -175,6 +230,8 @@ window.DP_I18N = {
     "fact.place.title": "Easy to find in Kolaghat",
     "fact.place.desc": "Right on Kolaghat – Jashar Road, Kolaghat 721134.",
     "fact.budget.desc": "Typical spend range shown on our Google listing.",
+    "fact.veg.title": "100% Pure Veg",
+    "fact.veg.desc": "The signboard reads pure veg restaurant and no meat dishes appear on the menu card.",
 
     /* ---------- gallery ---------- */
     "gallery.eyebrow": "Gallery",
@@ -215,6 +272,11 @@ window.DP_I18N = {
     "offersPage.emptyText":
       "When Dairy Park runs a combo, festival deal or seasonal special, it will appear on this page. In the meantime, ask at the counter — counter-only deals never make it online.",
     "offersPage.emptyCall": "Call to ask about today’s deals",
+    "offersPage.valueEyebrow": "Everyday prices",
+    "offersPage.valueTitle": "Under ₹100, any day of the week",
+    "offersPage.valueLead":
+      "No coupon needed — these are regular menu prices from the card at our counter. Filter the menu by price on the food page.",
+    "offersPage.valueCta": "See the full price list",
 
     /* ---------- reviews ---------- */
     "reviews.eyebrow": "Customer reviews",
@@ -283,6 +345,8 @@ window.DP_I18N = {
       "Our Google listing features Dahi Vada and Steam Momo as menu highlights. The restaurant offers both dine-in seating and a drive-through, so you can choose to sit and eat or collect your order from your vehicle.",
     "about.p3":
       "The green walls, brass lights and painted arches in our photos are the dining room you will sit in. Everything on this page comes from our own photographs and our Google listing — nothing is invented.",
+    "about.p4":
+      "The kitchen is 100% pure veg — the signboard outside says so, and no meat dish appears on the printed menu card. That card carries the prices, from a ₹9 roti up to our largest paneer plate, and every one of them is listed on the food page.",
     "about.menuCta": "Explore the Menu",
     "about.photoCaption": "Our dining room, painted with arches",
     "about.facEyebrow": "What we offer",
@@ -290,6 +354,9 @@ window.DP_I18N = {
     "about.dineDesc": "Take a seat at the restaurant and enjoy your food fresh from the counter.",
     "about.driveDesc": "On the road through Kolaghat? Order and collect without leaving your vehicle.",
     "about.foodDesc": "The two menu highlights listed for Dairy Park on Google.",
+    "about.vegDesc": "A pure vegetarian kitchen, from the counter snacks to the paneer plates.",
+    "about.pricesTitle": "Prices on the page",
+    "about.pricesDesc": "The printed menu card is on the website, dish by dish — so you know the bill before you sit down.",
     "about.exploreEyebrow": "Explore",
     "about.exploreTitle": "What you can explore at Dairy Park",
     "about.ex1Title": "The food counter",
@@ -368,12 +435,12 @@ window.DP_I18N = {
     "meta.title": "ডেয়ারি পার্ক কোলাঘাট | পারিবারিক রেস্তোরাঁ – দই বড়া ও স্টিম মোমো",
     "meta.desc":
       "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ একটি পারিবারিক রেস্তোরাঁ। সবুজ দেওয়ালের খাওয়ার ঘর, ডাইন-ইন ও ড্রাইভ-থ্রু সুবিধা। দই বড়া ও স্টিম মোমো। ফোন +91 99324 52124।",
-    "meta.home.title": "ডেয়ারি পার্ক কোলাঘাট | পারিবারিক রেস্তোরাঁ – দই বড়া ও স্টিম মোমো",
+    "meta.home.title": "ডেয়ারি পার্ক কোলাঘাট | নিরামিষ রেস্তোরাঁ – মেনু, দাম ও আইসক্রিম",
     "meta.home.desc":
-      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ একটি পারিবারিক রেস্তোরাঁ। সবুজ দেওয়ালের খাওয়ার ঘর, ডাইন-ইন ও ড্রাইভ-থ্রু সুবিধা। দই বড়া ও স্টিম মোমো। ফোন +91 99324 52124।",
-    "meta.food.title": "খাবার ও মেনু | ডেয়ারি পার্ক কোলাঘাট – দই বড়া, স্টিম মোমো ও আরও অনেক কিছু",
+      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ ১০০% নিরামিষ পারিবারিক রেস্তোরাঁ। দই বড়া ₹৮০, ছোলা ভাটুরা ₹১২০, ₹৯ থেকে রুটি, কাউন্টারে আইসক্রিম। ডাইন-ইন ও ড্রাইভ-থ্রু। ফোন +91 99324 52124।",
+    "meta.food.title": "মেনু ও দাম | ডেয়ারি পার্ক কোলাঘাট – নিরামিষ রেস্তোরাঁ",
     "meta.food.desc":
-      "কোলাঘাটের ডেয়ারি পার্কে কী ভালো পাওয়া যায় দেখুন। মেনুর জনপ্রিয় পদ দই বড়া ও স্টিম মোমো, ক্যাটাগরি ফিল্টার ও কল করে জানার সুবিধা। কোলাঘাট–যশোর রোডে ডাইন-ইন ও ড্রাইভ-থ্রু।",
+      "ডেয়ারি পার্কের মেনু ও দাম: দই বড়া ₹৮০, ছোলা ভাটুরা ₹১২০, পনির, চাইনিজ, পিজ্জা, শেক আর ₹১৫ থেকে চা। কোলাঘাট–যশোর রোডে ১০০% নিরামিষ রেস্তোরাঁ। ফোন +91 99324 52124।",
     "meta.about.title": "আমাদের কথা | ডেয়ারি পার্ক – কোলাঘাটের পারিবারিক রেস্তোরাঁ",
     "meta.about.desc":
       "ডেয়ারি পার্ক সম্পর্কে জানুন — কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ অবস্থিত পারিবারিক রেস্তোরাঁ। ডাইন-ইন ও ড্রাইভ-থ্রু, দই বড়া ও স্টিম মোমো।",
@@ -445,6 +512,12 @@ window.DP_I18N = {
     "hero.scroll": "নিচে স্ক্রল করুন",
     "hero.picksLabel": "চেখে দেখুন",
     "hero.picksAria": "মেনুর জনপ্রিয় পদ দেখুন",
+    "hero.seal": "১০০% নিরামিষ",
+    "hero.sealSub": "রান্নাঘর",
+    "hero.sealAria": "ডেয়ারি পার্ক একটি ১০০% নিরামিষ রেস্তোরাঁ",
+    "hero.priceRibbon": "পুরো মেনু শুরু {price} থেকে",
+    "hero.priceRibbonNote": "রুটি, চা আর ইডলি — প্রতিটি দাম মেনুতে আছে",
+    "hero.orderHint": "আগে কল করুন, আমরা অর্ডার তৈরি রাখব",
 
     /* ---------- trust band (home) ---------- */
     "trust.title": "এক নজরে ডেয়ারি পার্ক",
@@ -452,6 +525,8 @@ window.DP_I18N = {
     "trust.reviews": "গুগল রিভিউ",
     "trust.spend": "প্রতি জনে সাধারণ খরচ",
     "trust.ways": "আসার উপায় — ডাইন-ইন ও ড্রাইভ-থ্রু",
+    "trust.items": "মেনুতে পদ সংখ্যা",
+    "trust.from": "মেনুর সবচেয়ে কম দাম",
 
     "dish.dahiVada": "দই বড়া",
     "dish.steamMomo": "স্টিম মোমো",
@@ -459,10 +534,10 @@ window.DP_I18N = {
     "why.perPerson": "প্রতি জন",
     "footer.analytics": "অ্যানালিটিক্স সেটিংস",
 
-    "strip.1": "ডাইন-ইন",
-    "strip.2": "ড্রাইভ-থ্রু",
+    "strip.1": "১০০% নিরামিষ",
+    "strip.2": "ডাইন-ইন ও ড্রাইভ-থ্রু",
     "strip.3": "দই বড়া",
-    "strip.4": "স্টিম মোমো",
+    "strip.4": "ছোলা ভাটুরা · রুটি · আইসক্রিম কাউন্টার",
     "strip.5": "কোলাঘাট – যশোর রোড",
 
     /* ---------- welcome (home) ---------- */
@@ -476,12 +551,14 @@ window.DP_I18N = {
     "welcome.driveDesc": "গাড়ি থেকেই অর্ডার করে নিয়ে যান।",
     "welcome.highlightsTitle": "দই বড়া ও স্টিম মোমো",
     "welcome.highlightsDesc": "আমাদের তালিকাভুক্ত জনপ্রিয় পদ — আজকের পুরো মেনু কাউন্টারে জেনে নিন।",
+    "welcome.vegTitle": "১০০% নিরামিষ",
+    "welcome.vegDesc": "সাইনবোর্ডে লেখা নিরামিষ, ছাপা মেনুতেও তাই।",
 
     /* ---------- menu ---------- */
-    "menu.eyebrow": "মেনুর জনপ্রিয় পদ",
-    "menu.title": "ডেয়ারি পার্কে কী পাবেন",
+    "menu.eyebrow": "আমাদের মেনু কার্ড থেকে",
+    "menu.title": "ডেয়ারি পার্কে মানুষ যা অর্ডার করেন",
     "menu.lead":
-      "এখানে শুধু যাচাই করা জনপ্রিয় পদগুলো দেখানো হয়েছে। পুরো মেনু ও আজকের দাম জানতে ফোন করুন।",
+      "যে ছয়টি পদ বারবার কাউন্টার থেকে বেরিয়ে যায় — প্রতিটির সাথে আমাদের মেনু কার্ডে ছাপা দাম।",
     "menu.highlight": "জনপ্রিয় পদ",
     "menu.priceAsk": "আজকের দাম জানতে কল করুন",
     "menu.available": "পাওয়া যায়",
@@ -494,20 +571,53 @@ window.DP_I18N = {
     "menu.exploreFull": "পুরো মেনু দেখুন",
     "menu.noscriptTitle": "মেনুর জনপ্রিয় পদ",
     "menu.noscript":
-      "দই বড়া ও স্টিম মোমো। পুরো মেনু ও আজকের দামের জন্য ফোন করুন +91 99324 52124।",
+      "দই বড়া ₹৮০, ছোলা ভাটুরা ₹১২০, ₹৯ থেকে রুটি আরও নব্বইটি পদ। আজকের দাম জানতে ফোন করুন +91 99324 52124।",
 
+    "menu.boardCta": "সব দাম দেখুন",
+    "menu.vegNote": "এই মেনুর সব পদ নিরামিষ।",
+    "menu.priceNote": "দাম ছাপা মেনু কার্ড থেকে নেওয়া, বদলাতে পারে — কল করে নিশ্চিত হয়ে নিন।",
+    "menu.countLabel": "{count} পদ",
+    "menu.fromLabel": "{price} থেকে",
+
+    /* ---------- dining room band (home) ---------- */
+    "dine.eyebrow": "খাওয়ার ঘরের ভিতরে",
+    "dine.title": "সবুজ দেওয়াল, আঁকা খিলান, লম্বা টেবিল।",
+    "dine.lead":
+      "আমাদের ছবিতে যে ঘর দেখছেন, খেতে বসবেন সেই ঘরেই — গাঢ় সবুজ দেওয়াল, খিলানে হাতে আঁকা তালগাছ আর প্রতিটি টেবিলের উপরে পিতলের আলো।",
+    "dine.f1": "শীতাতপ নিয়ন্ত্রিত বসার জায়গা",
+    "dine.f2": "বেঞ্চ, স্টুল ও লম্বা টেবিল",
+    "dine.f3": "পরিবার ও দলের জন্য আরামদায়ক",
+    "dine.cta": "আরও ছবি দেখুন",
+    "dine.alt1": "ডেয়ারি পার্কে বেঞ্চ আসন ও লম্বা মার্বেলের মতো টেবিল",
+    "dine.alt2": "কাচের সামনের দিক দিয়ে দেখা ডেয়ারি পার্কের আলোকিত খাওয়ার ঘর",
+
+    /* ---------- counter & dairy band (home) ---------- */
+    "counter.eyebrow": "কাউন্টারে",
+    "counter.title": "আইসক্রিম, চকলেট আর স্ন্যাকস — সাথে নিয়ে যান।",
+    "counter.lead":
+      "ডেয়ারি পার্ক রেস্তোরাঁর পাশাপাশি একটি ডেইরি দোকানও — বেরোনোর আগে আইসক্রিম, মিষ্টি ও স্ন্যাকস কিনে নিন।",
+    "counter.c1Title": "আইসক্রিম ফ্রিজার",
+    "counter.c1Desc": "দরজার পাশেই আমুল ও ক্যাডবেরি ফ্রিজার।",
+    "counter.c2Title": "স্ন্যাকসের তাক",
+    "counter.c2Desc": "বাড়ি নিয়ে যাওয়ার চকলেট, চিপস ও ন্যামকিন।",
+    "counter.c3Title": "সিঙাড়া ও মিষ্টি",
+    "counter.c3Desc": "সারাদিন কাউন্টারে টাটকা।",
+    "counter.cta": "আজ কী টাটকা আছে জেনে নিন",
+    "counter.alt1": "ডেয়ারি পার্কের আইসক্রিম ফ্রিজার",
+    "counter.alt2": "ডেয়ারি পার্কের ভিতরে চকলেট ও স্ন্যাকসের তাক",
+    "counter.alt3": "কাউন্টারে স্টিলের ট্রেতে সিঙাড়া",
     /* ---------- food & menu page ---------- */
     "foodPage.eyebrow": "খাবার ও মেনু",
     "foodPage.title": "ডেয়ারি পার্কে কী ভালো, জেনে নিন।",
     "foodPage.lead":
-      "কোলাঘাটের আমাদের নিশ্চিত মেনু হাইলাইট — কোলাঘাট–যশোর রোডের কাউন্টার থেকে তাজা। দাম ও পুরো তালিকা কল করে বা এসে নিশ্চিত করুন।",
+      "পুরো মেনু কার্ড, দাম সহ — ₹৯-এর রুটি থেকে আমাদের সিগনেচার দই বড়া। কোলাঘাট–যশোর রোডে নিরামিষ, অর্ডার পেয়ে তৈরি।",
     "foodPage.callEnquire": "জানতে কল করুন",
     "foodPage.featuredEyebrow": "পছন্দের পদ",
     "foodPage.featuredTitle": "মেনুর জনপ্রিয় পদ",
     "foodPage.browseEyebrow": "মেনু",
-    "foodPage.browseTitle": "ক্যাটাগরি অনুযায়ী দেখুন",
+    "foodPage.browseTitle": "পুরো মেনু, দাম সহ",
     "foodPage.browseLead":
-      "শুধু যে ক্যাটাগরিতে নিশ্চিত পদ আছে সেগুলোই দেখানো হয়। কোনো খাবারে ট্যাপ করে বিস্তারিত দেখুন, কিংবা মেনুর যেকোনো বিষয়ে আমাদের কল করুন।",
+      "কাউন্টারের কার্ডে যে দাম ছাপা আছে, সেটিই। যেকোনো লাইনে ট্যাপ করে বিস্তারিত দেখুন, বা অর্ডার করতে কল করুন।",
     "foodPage.search": "মেনুতে খুঁজুন…",
     "foodPage.catsLabel": "মেনুর ক্যাটাগরি",
     "foodPage.emptyTitle": "এই খোঁজে কিছু পাওয়া যায়নি",
@@ -517,12 +627,24 @@ window.DP_I18N = {
     "foodPage.ctaNote":
       "কিছু নির্দিষ্ট খুঁজছেন? কাউন্টারের মেনু অনলাইনের চেয়ে বড় — একটা কল করে ফেলুন।",
     "foodPage.detailsShort": "বিস্তারিত দেখুন",
+    "foodPage.statsLabel": "সংখ্যায় মেনু",
+    "foodPage.statsItems": "পদ, ছাপা দাম সহ",
+    "foodPage.statsFrom": "মেনুর সবচেয়ে কম দাম",
+    "foodPage.statsVeg": "নিরামিষ",
+    "foodPage.priceNote": "দাম কাউন্টারের ছাপা মেনু কার্ড থেকে নেওয়া এবং বদলাতে পারে — আসার আগে কল করে নিশ্চিত হয়ে নিন।",
+    "foodPage.cardEyebrow": "কাউন্টার থেকে",
+    "foodPage.cardTitle": "ছাপা মেনু কার্ড",
+    "foodPage.cardLead": "প্রতিটি টেবিলে যে কার্ড থাকে, সেটিই। ছবিতে ট্যাপ করে বড় করে দেখুন।",
+    "foodPage.cardAlt1": "ডেয়ারি পার্কের মেনু কার্ড, প্রথম পাতা",
+    "foodPage.cardAlt2": "ডেয়ারি পার্কের মেনু কার্ড, দ্বিতীয় পাতা",
+    "foodPage.cardAlt3": "ডেয়ারি পার্কের পানীয়ের পাতা",
+    "foodPage.rowAria": "{name}, {price} — বিস্তারিত দেখুন",
 
     /* ---------- why visit ---------- */
     "why.eyebrow": "কেন ডেয়ারি পার্কে আসবেন",
     "why.title": "কোলাঘাটের রাস্তার ধারে সহজ এক থামা",
     "why.lead":
-      "আমাদের গুগল লিস্টিংয়ে যা দেওয়া আছে, ঠিক তাই — সঙ্গে দুটি পদ, যার জন্য গাড়ি থামাবেনই।",
+      "নিরামিষ রান্নাঘর, সবুজ খাওয়ার ঘর আর ₹৯ থেকে শুরু হওয়া দাম — ডেয়ারি পার্কে এটুকুই পাবেন।",
     "fact.dine.title": "ডাইন-ইন",
     "fact.dine.desc": "ডাইন-ইন সুবিধা তালিকাভুক্ত রয়েছে।",
     "fact.drive.title": "ড্রাইভ-থ্রু",
@@ -530,6 +652,8 @@ window.DP_I18N = {
     "fact.place.title": "কোলাঘাটে সহজে খুঁজে পান",
     "fact.place.desc": "কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ।",
     "fact.budget.desc": "গুগল লিস্টিংয়ে দেখানো সাধারণ খরচের রেঞ্জ।",
+    "fact.veg.title": "১০০% নিরামিষ",
+    "fact.veg.desc": "সাইনবোর্ডে লেখা নিরামিষ রেস্তোরাঁ, মেনু কার্ডেও কোনো মাংসের পদ নেই।",
 
     /* ---------- gallery ---------- */
     "gallery.eyebrow": "গ্যালারি",
@@ -570,6 +694,11 @@ window.DP_I18N = {
     "offersPage.emptyText":
       "ডেয়ারি পার্ক কোনো কম্বো, উৎসব ডিল বা সিজনাল অফার দিলে এই পাতায় দেখা যাবে। এর মধ্যে কাউন্টারে জেনে নিন — যে ডিল শুধু কাউন্টারে, তা অনলাইনে আসে না।",
     "offersPage.emptyCall": "আজকের অফার জানতে কল করুন",
+    "offersPage.valueEyebrow": "রোজকার দাম",
+    "offersPage.valueTitle": "₹১০০র নিচে, সপ্তাহের যেকোনো দিন",
+    "offersPage.valueLead":
+      "কোনো কুপন লাগবে না — এগুলো আমাদের কাউন্টারের কার্ডের সাধারণ দাম। খাবারের পাতায় দাম অনুযায়ী দেখে নিন।",
+    "offersPage.valueCta": "পুরো দামের তালিকা দেখুন",
 
     /* ---------- reviews ---------- */
     "reviews.eyebrow": "গ্রাহক রিভিউ",
@@ -638,6 +767,8 @@ window.DP_I18N = {
       "আমাদের গুগল লিস্টিংয়ে দই বড়া ও স্টিম মোমো মেনুর জনপ্রিয় পদ হিসেবে তালিকাভুক্ত। রেস্তোরাঁয় বসে খাওয়ার আসন আর ড্রাইভ-থ্রু দুটোই আছে — আপনি বসে খান, কিংবা গাড়ি থেকেই অর্ডার নিয়ে যান।",
     "about.p3":
       "আমাদের ছবিতে যে সবুজ দেওয়াল, পিতলের আলো আর আঁকা খিলান দেখছেন, সেটিই আপনার বসে খাওয়ার ঘর। এই পাতার সব তথ্য আমাদের নিজেদের ছবি ও গুগল লিস্টিং থেকে — কিছুই বানানো নয়।",
+    "about.p4":
+      "রান্নাঘর ১০০% নিরামিষ — বাইরের সাইনবোর্ডে তাই লেখা, ছাপা মেনু কার্ডেও কোনো আমিষ পদ নেই। ওই কার্ডেই দাম থাকে, ₹৯-এর রুটি থেকে আমাদের সবচেয়ে বড় পনিরের প্লেট পর্যন্ত — সবটাই খাবারের পাতায় দেওয়া আছে।",
     "about.menuCta": "মেনু দেখুন",
     "about.photoCaption": "খিলানে আঁকা আমাদের খাওয়ার ঘর",
     "about.facEyebrow": "আমরা যা দিই",
@@ -645,6 +776,9 @@ window.DP_I18N = {
     "about.dineDesc": "রেস্তোরাঁয় বসে কাউন্টার থেকে তাজা খাবার উপভোগ করুন।",
     "about.driveDesc": "কোলাঘাট ধরে যাচ্ছেন? গাড়ি না নামিয়েই অর্ডার করে নিয়ে যান।",
     "about.foodDesc": "গুগলে ডেয়ারি পার্কের জন্য তালিকাভুক্ত দুটি জনপ্রিয় পদ।",
+    "about.vegDesc": "কাউন্টারের স্ন্যাকস থেকে পনিরের পদ — পুরোটাই নিরামিষ রান্নাঘর।",
+    "about.pricesTitle": "দাম ওয়েবসাইটে",
+    "about.pricesDesc": "ছাপা মেনু কার্ডটি পদে পদে ওয়েবসাইটে আছে — বসার আগেই বিলটা জানা হয়ে যাবে।",
     "about.exploreEyebrow": "দেখুন",
     "about.exploreTitle": "ডেয়ারি পার্কে আপনি যা যা দেখতে পাবেন",
     "about.ex1Title": "ফুড কাউন্টার",
