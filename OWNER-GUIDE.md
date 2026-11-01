@@ -148,13 +148,52 @@ If you change the domain (for example to `dairypark.com`), also update
 `site.url` in `content.js` — canonicals, Open Graph URLs, structured data and
 the generated `sitemap.xml` all follow it automatically.
 
-## 7. Wording and Bengali translation (`assets/js/i18n.js`)
+## 7. Enquiries on WhatsApp (`content.js → whatsapp`)
+
+When a visitor fills the enquiry form on the Contact page, the website does
+two things: it opens WhatsApp on the visitor's own phone, and it types the
+whole enquiry into a chat addressed to **your** WhatsApp number — name, phone
+number and the question. The visitor only has to tap **Send** in WhatsApp, and
+the enquiry then arrives on your phone like any other WhatsApp message.
+
+The website never sends anything by itself and needs no server, no API key and
+no monthly service.
+
+```js
+whatsapp: {
+  enabled: true,             // false hides every WhatsApp button on the site
+  number: "919932452124",    // country code + number, DIGITS ONLY
+  template: {
+    en: "New enquiry from the Dairy Park website\n\nName: {name}\nPhone: {phone}\nEnquiry: {message}",
+    bn: "…Bengali version…"
+  }
+}
+```
+
+- **Put your own WhatsApp number in `number`** — country code first, no `+`,
+  no spaces, no dashes (India: `91` + the 10-digit number). It is currently the
+  same number as the shop phone.
+- If your WhatsApp is on a different number than the shop phone, change only
+  this line — the contact card, the form's status panel and the prefilled
+  enquiry all follow it.
+- The wording of the ready-made message is in `template`. Keep the
+  `{name}`, `{phone}` and `{message}` placeholders exactly as they are — they
+  are replaced with what the visitor typed. The English text is used when the
+  visitor reads the site in English, the Bengali text when they switch to
+  বাংলা.
+- Set `enabled: false` and the WhatsApp card, buttons and wording disappear and
+  the form goes back to pointing visitors at your phone number.
+
+The site never claims a message was delivered before the visitor taps Send, and
+it does not advertise WhatsApp ordering, delivery or payment — only enquiries.
+
+## 8. Wording and Bengali translation (`assets/js/i18n.js`)
 
 Every label exists twice: `en` (English) and `bn` (Bengali). Keep both sides in
 sync — the build checks that every key exists in both languages. Business facts
 (menu, prices, hours, offers, photos) live in `content.js`, not here.
 
-## 8. Analytics (optional)
+## 9. Analytics (optional)
 
 The site records clicks on call, directions, menu cards, promo links and the
 language switch as first-party events (`window.dataLayer`). Nothing is sent
@@ -169,7 +208,7 @@ A consent banner then appears. Visitors who decline load no analytics at all.
 Measure only what you will act on — calls and direction taps are the useful
 numbers for a restaurant.
 
-## 9. Publishing changes
+## 10. Publishing changes
 
 1. Edit the file on GitHub (pencil icon) or upload the photo directly.
 2. Commit the change.
@@ -190,18 +229,23 @@ Run `npm test` locally if you want to see the same checks before publishing.
       `photos/steam-momo.*`) and their confirmed descriptions.
 - [ ] Confirm the full opening hours and set `hours.verified = true` only then.
 - [ ] Confirm the phone number is still +91 99324 52124.
+- [ ] Check `whatsapp.number` is the phone that has WhatsApp installed — send
+      yourself a test enquiry from the live Contact page.
 - [ ] Add prices only if you want them public.
 - [ ] Add an offer only if it is genuinely running now.
 - [ ] Confirm the Google listing still shows dine-in + drive-through.
-- [ ] Never add WhatsApp ordering, delivery or online payment here unless those
-      services really exist.
+- [ ] Never advertise WhatsApp ordering, delivery or online payment here unless
+      those services really exist. (WhatsApp *enquiries* are fine — that is what
+      the contact form does.)
 
 ## What the site deliberately does not do
 
 - It does not invent food prices, ratings, reviews, photographs, awards or
   hygiene claims.
-- It does not offer online ordering, WhatsApp ordering, delivery or payments.
-- It does not pretend the enquiry form sends messages — there is no backend;
-  the form points visitors to your phone number instead.
+- It does not offer online ordering, delivery or payments, and it never
+  advertises WhatsApp ordering.
+- It does not pretend an enquiry was delivered. The enquiry form writes the
+  message into WhatsApp addressed to your number; the visitor taps Send, and
+  the site says plainly that nothing reaches you until they do.
 - It does not show fake urgency or countdown timers.
 - It does not track visitors without permission.

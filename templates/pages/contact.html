@@ -2,7 +2,7 @@
 {
   "page": "contact",
   "title": "Contact Us | Dairy Park Kolaghat – Call +91 99324 52124",
-  "desc": "Contact Dairy Park, Kolaghat. Call +91 99324 52124, find our address on Kolaghat – Jashar Road, or send an enquiry. Fast-food restaurant in Kolaghat, West Bengal 721134.",
+  "desc": "Contact Dairy Park, Kolaghat. Call +91 99324 52124, find our address on Kolaghat – Jashar Road, or send your enquiry straight to our WhatsApp. Fast-food restaurant in Kolaghat, West Bengal 721134.",
   "slug": "contact/"
 }
 -->
@@ -58,6 +58,18 @@
             <div class="contact-card__value" data-bind="hours">Please call to confirm today’s timings.</div>
             <p class="contact-card__hint" data-i18n="contact.hoursHint">Hours can change — a quick call always confirms.</p>
           </article>
+
+          <article class="contact-card reveal" data-reveal="up" data-tilt data-whatsapp{{waHidden}}>
+            <span class="contact-card__icon contact-card__icon--wa" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20.6 11.7a8.6 8.6 0 0 1-12.7 7.5L3.4 20.6l1.5-4.4A8.6 8.6 0 1 1 20.6 11.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8.4h1.5l.9 2.1-1 .8a6.1 6.1 0 0 0 3.2 3.2l.8-1 2.1.9v1.5a1.1 1.1 0 0 1-1.2 1.1A8.6 8.6 0 0 1 7.9 9.6 1.1 1.1 0 0 1 9 8.4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <h3 class="contact-card__title" data-i18n="contact.whatsappTitle">WhatsApp</h3>
+            <p class="contact-card__value contact-card__phone">+91 99324 52124</p>
+            <a class="contact-card__link" href="{{waUrl}}" data-link="whatsapp" data-track="whatsapp_click" data-track-location="contact_card" target="_blank" rel="noopener">
+              <span data-i18n="contact.whatsappAction">Chat on WhatsApp</span>
+            </a>
+            <p class="contact-card__hint" data-i18n="contact.whatsappHint">Enquiries only — no delivery or payment over WhatsApp.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -68,8 +80,8 @@
       <div class="container contact-form__layout">
         <div class="contact-form__intro reveal">
           <p class="eyebrow eyebrow--light" data-i18n="contact.formEyebrow">Enquiry</p>
-          <h2 class="section-title section-title--sm" id="enquiry-title" data-i18n="contact.formTitle">Write down what you need</h2>
-          <p class="contact-form__lead" data-i18n="contact.formLead">This website has no messaging backend, so nothing you type is sent over the internet. The form helps you note your question, then hands you our phone number — the way customers actually reach Dairy Park.</p>
+          <h2 class="section-title section-title--sm" id="enquiry-title" data-i18n="contact.formTitle">Send your enquiry on WhatsApp</h2>
+          <p class="contact-form__lead" data-i18n="contact.formLead">Fill this in and we will open WhatsApp with your enquiry already written out and addressed to Dairy Park. Nothing is sent until you tap Send — then it reaches our phone like a normal WhatsApp message, and we reply from there.</p>
           <a class="contact-form__phone" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="contact_form">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
             <span>+91 99324 52124</span>
@@ -92,16 +104,22 @@
           <p class="form-error" id="formError" role="alert" hidden></p>
           <div class="form-actions">
             <button type="submit" class="btn btn--primary btn--lg" data-track="enquiry_submit">
-              <span data-i18n="contact.prepare">Prepare my enquiry</span>
+              <span data-i18n="contact.prepare">Continue to WhatsApp</span>
             </button>
           </div>
           <div class="form-status" id="formStatus" role="status" hidden>
-            <h3 class="form-status__title" data-i18n="contact.statusTitle">Ready — now call us</h3>
-            <p class="form-status__text" data-i18n="contact.statusText">This site can’t send messages online, so we haven’t received anything yet. Please call the number below and read out your enquiry — that reaches us instantly.</p>
-            <a class="btn btn--primary" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="contact_status">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-              <span data-i18n="contact.statusCall">Call +91 99324 52124</span>
-            </a>
+            <h3 class="form-status__title" data-i18n="contact.statusTitle">Tap Send in WhatsApp</h3>
+            <p class="form-status__text" data-i18n="contact.statusText">WhatsApp should have opened with your enquiry ready to send. Tap Send there and it reaches our phone — we cannot read anything until you do. If nothing opened, use the green button below.</p>
+            <div class="form-actions">
+              <a class="btn btn--primary" id="formWhatsApp" href="{{waUrl}}" data-link="whatsapp" data-track="whatsapp_click" data-track-location="contact_status" target="_blank" rel="noopener"{{waHidden}}>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.6 11.7a8.6 8.6 0 0 1-12.7 7.5L3.4 20.6l1.5-4.4A8.6 8.6 0 1 1 20.6 11.7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.4h1.5l.9 2.1-1 .8a6.1 6.1 0 0 0 3.2 3.2l.8-1 2.1.9v1.5a1.1 1.1 0 0 1-1.2 1.1A8.6 8.6 0 0 1 7.9 9.6 1.1 1.1 0 0 1 9 8.4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                <span data-i18n="contact.statusWhatsApp">Open WhatsApp</span>
+              </a>
+              <a class="btn btn--ghost" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="contact_status">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span data-i18n="contact.statusCall">Call +91 99324 52124</span>
+              </a>
+            </div>
           </div>
         </form>
       </div>

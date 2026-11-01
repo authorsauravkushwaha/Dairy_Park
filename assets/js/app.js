@@ -144,7 +144,8 @@
       phone: b.phone && b.phone.tel ? 'tel:' + b.phone.tel : '',
       directions: b.directionsUrl || '',
       maps: b.mapsUrl || '',
-      mapEmbed: b.mapEmbedUrl || ''
+      mapEmbed: b.mapEmbedUrl || '',
+      whatsapp: whatsappEnabled() ? whatsappUrl('') : ''
     };
     els('[data-link]').forEach(function (node) {
       var url = map[node.dataset.link];
@@ -1110,13 +1111,85 @@
   }
 
   /* --------------------------------------------------------------------------- */
-  /* CONTACT page — enquiry form (honest, no backend)                            */
+  /* WhatsApp enquiries                                                          */
   /* --------------------------------------------------------------------------- */
+  /* Enquiries are addressed to the owner's own WhatsApp (content.js →
+     whatsapp). We only ever build a wa.me link and open it — the visitor taps
+     Send inside WhatsApp themselves, so nothing is transmitted by this site. */
+  var WA = C.whatsapp || {};
+  var WA_DEFAULT_TEMPLATE =
+    'New enquiry from the Dairy Park website\n\n' +
+    'Name: {name}\nPhone: {phone}\nEnquiry: {message}';
+
+  function whatsappNumber() {
+    var digits = String(WA.number || '').replace(/[^0-9]/g, '');
+    return digits.length >= 10 && digits.length <= 15 ? digits : '';
+  }
+
+  function whatsappEnabled() {
+    return WA.enabled !== false && !!whatsappNumber();
+  }
+
+  function whatsappUrl(text) {
+    var digits = whatsappNumber();
+    if (!digits) return '';
+    var base = 'https://wa.me/' + digits;
+    var body = String(text || '').replace(/\s+$/, '');
+    return body ? base + '?text=' + encodeURIComponent(body) : base;
+  }
+
+  function whatsappTemplate() {
+    var custom = tx(WA.template && (WA.template[lang] || WA.template.en));
+    return custom || WA_DEFAULT_TEMPLATE;
+  }
+
+  function enquiryText(name, phone, message) {
+    return whatsappTemplate()
+      .split('{name}').join(name)
+      .split('{phone}').join(phone)
+      .split('{message}').join(message);
+  }
+
+  /* Plain WhatsApp links on the page (contact card, status button) get the
+     number from content.js at runtime too, so the two never disagree. */
+  function initWhatsAppLinks() {
+    var enabled = whatsappEnabled();
+    els('[data-link="whatsapp"]').forEach(function (node) {
+      node.hidden = !enabled;
+      if (enabled) node.setAttribute('href', whatsappUrl(''));
+    });
+    els('[data-whatsapp]').forEach(function (node) { node.hidden = !enabled; });
+    if (enabled) return;
+
+    /* The owner has switched WhatsApp off (content.js → whatsapp.enabled):
+       fall back to the call-first wording the site used before. */
+    var fallback = [
+      ['#enquiry-title', 'contact.callFormTitle'],
+      ['[data-i18n="contact.formLead"]', 'contact.callFormLead'],
+      ['[data-i18n="contact.prepare"]', 'contact.callPrepare']
+    ];
+    fallback.forEach(function (pair) {
+      var node = $(pair[0]);
+      if (!node) return;
+      node.setAttribute('data-i18n', pair[1]);
+      node.textContent = t(pair[1]);
+    });
+  }
+
+  /* --------------------------------------------------------------------------- */
+  /* CONTACT page — enquiry form → WhatsApp                                      */
+  /* --------------------------------------------------------------------------- */
+  function setStatusCopy(node, key) {
+    node.setAttribute('data-i18n', key);
+    node.textContent = t(key);
+  }
+
   function initContactForm() {
     var form = $('#enquiryForm');
     if (!form) return;
     var errorBox = $('#formError');
     var status = $('#formStatus');
+    var sendLink = $('#formWhatsApp');
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -1139,13 +1212,36 @@
       }
 
       if (errorBox) { errorBox.hidden = true; errorBox.textContent = ''; }
+
+      var enabled = whatsappEnabled();
+      var url = enabled ? whatsappUrl(enquiryText(name, phone, message)) : '';
+
       if (status) {
+        var title = $('.form-status__title', status);
+        var text = $('.form-status__text', status);
+        if (title) setStatusCopy(title, enabled ? 'contact.statusTitle' : 'contact.callStatusTitle');
+        if (text) setStatusCopy(text, enabled ? 'contact.statusText' : 'contact.callStatusText');
+        if (sendLink) {
+          sendLink.hidden = !enabled;
+          if (enabled) sendLink.setAttribute('href', url);
+        }
         status.hidden = false;
         if (typeof status.scrollIntoView === 'function') {
           status.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
         }
       }
-      track('enquiry_prepared');
+
+      if (!enabled) {
+        track('enquiry_prepared');
+        return;
+      }
+
+      /* Hand straight over to WhatsApp with the message pre-filled. Popup
+         blockers can refuse this, so the status panel keeps a real link. */
+      try {
+        window.open(url, '_blank', 'noopener');
+      } catch (e) { /* the button in the status panel still works */ }
+      track('enquiry_whatsapp_opened');
     });
   }
 
@@ -1598,6 +1694,7 @@
     initHeroPhoto();
     initAboutPhotos();
     initFoodPage();
+    initWhatsAppLinks();
     initContactForm();
 
     initReveals();
