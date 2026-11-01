@@ -186,7 +186,7 @@ window.DP_I18N = {
     "gallery.prevEmpty": "Fresh photographs are on their way — visit us in Kolaghat in the meantime.",
     "gallery.viewFull": "View Full Gallery",
     "gallery.note":
-      "Only genuine photographs of Dairy Park appear here. Fresh pictures are added as they are taken — until then, some slots show a designed placeholder.",
+      "Every photograph here was taken at Dairy Park in Kolaghat — the shopfront, the dining room, the plates and the counter. Nothing staged, nothing borrowed.",
     "gallery.noscript":
       "Photographs open best with JavaScript enabled. You can still visit us on Kolaghat – Jashar Road, or call +91 99324 52124.",
     "gallery.visitCta": "Visit Us in Kolaghat",
@@ -541,7 +541,7 @@ window.DP_I18N = {
     "gallery.prevEmpty": "নতুন ছবি আসছে — এর মধ্যে কোলাঘাটে এসে আমাদের দেখে নিন।",
     "gallery.viewFull": "পুরো গ্যালারি দেখুন",
     "gallery.note":
-      "এখানে শুধু ডেয়ারি পার্কের আসল ছবিই দেখা যাবে। নতুন ছবি তোলা হলে যোগ হয় — ততক্ষণ কিছু জায়গায় ডিজাইন করা প্লেসহোল্ডার দেখা যায়।",
+      "এখানে সব ছবিই কোলাঘাটের ডেয়ারি পার্কে তোলা — দোকানের সামনের অংশ, খাওয়ার ঘর, খাবার আর কাউন্টার। কোনো ছবি ধার করা নয়।",
     "gallery.noscript":
       "ছবি দেখতে জাভাস্ক্রিপ্ট চালু থাকলে ভালো হয়। আপনি তবুও কোলাঘাট–যশোর রোডে আমাদের দেতে পারেন, কিংবা ফোন করুন +91 99324 52124।",
     "gallery.visitCta": "কোলাঘাটে আমাদের ভিজিট করুন",
