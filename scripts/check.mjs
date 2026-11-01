@@ -51,6 +51,17 @@ const bnKeys = Object.keys(I18N?.bn || {});
 for (const key of enKeys) if (!bnKeys.includes(key)) fail(`i18n key missing in bn: ${key}`);
 for (const key of bnKeys) if (!enKeys.includes(key)) fail(`i18n key missing in en: ${key}`);
 
+/* WhatsApp enquiries (content.js → whatsapp): the owner's own number only */
+const waNumber = String(C.whatsapp?.number || '').replace(/[^0-9]/g, '');
+const waOn = C.whatsapp?.enabled !== false && /^[0-9]{10,15}$/.test(waNumber);
+const waTemplate = C.whatsapp?.template || {};
+for (const ln of ['en', 'bn']) {
+  const body = String(waTemplate[ln] || '');
+  for (const slot of ['{name}', '{phone}', '{message}']) {
+    if (!body.includes(slot)) fail(`whatsapp.template.${ln} is missing the ${slot} placeholder`);
+  }
+}
+
 const allPagesHtml = {};
 for (const page of PAGES) {
   const file = path.join(dist, page.out);
@@ -139,7 +150,12 @@ for (const page of PAGES) {
   if (/\son[a-z]+=/i.test(html)) fail(`${tag}: uses an inline event handler (blocked by CSP)`);
   if (/style="/.test(html)) fail(`${tag}: uses a style attribute (blocked by CSP)`);
   if (/http:\/\//.test(html)) fail(`${tag}: references an insecure http:// URL`);
-  if (/\b(WhatsApp|whatsapp)\b/.test(html)) fail(`${tag}: WhatsApp ordering must not be advertised unless confirmed`);
+  // WhatsApp: links may only point at the owner's configured enquiry number,
+  // and nothing links to WhatsApp at all when the owner switches it off.
+  for (const match of html.matchAll(/https:\/\/wa\.me\/([0-9]+)/g)) {
+    if (!waOn) fail(`${tag}: WhatsApp link present while whatsapp.enabled is false`);
+    else if (match[1] !== waNumber) fail(`${tag}: WhatsApp link uses ${match[1]}, not whatsapp.number (${waNumber})`);
+  }
 
   // JSON-LD sanity: valid JSON, Restaurant present, no unverified data
   const ld = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
@@ -238,6 +254,16 @@ if (/sent (successfully|your message)|message (has been )?sent/i.test(contactHtm
   fail('contact page: must not claim messages are sent — there is no backend');
 }
 if (!/id="enquiryForm"/.test(contactHtml)) fail('contact page: enquiry form missing');
+
+/* Enquiries are delivered through the owner's WhatsApp (content.js → whatsapp) */
+if (waOn) {
+  if (!contactHtml.includes('https://wa.me/' + waNumber)) fail('contact page: WhatsApp enquiry link missing');
+  if (!/data-whatsapp/.test(contactHtml)) fail('contact page: WhatsApp contact card missing');
+  if (/data-whatsapp hidden|data-link="whatsapp"[^>]*\shidden/.test(contactHtml)) fail('contact page: WhatsApp blocks are hidden while enabled');
+} else {
+  if (!/data-whatsapp hidden/.test(contactHtml)) fail('contact page: WhatsApp card must be hidden while whatsapp.enabled is false');
+  if (/https:\/\/wa\.me/.test(contactHtml)) fail('contact page: WhatsApp link present while whatsapp.enabled is false');
+}
 
 /* Hours must never be invented */
 if (!C.hours?.verified && C.hours?.schedule?.length) fail('hours marked unverified but a schedule is present');

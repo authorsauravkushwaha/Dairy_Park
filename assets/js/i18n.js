@@ -36,10 +36,10 @@ window.DP_I18N = {
       "Visit Dairy Park at Kolaghat – Jashar Road, Kolaghat, West Bengal 721134. Dine-in and drive-through. Get directions or call +91 99324 52124.",
     "meta.contact.title": "Contact Us | Dairy Park Kolaghat – Call +91 99324 52124",
     "meta.contact.desc":
-      "Contact Dairy Park, Kolaghat. Call +91 99324 52124, find our address on Kolaghat – Jashar Road, or send an enquiry. Fast-food restaurant in Kolaghat 721134.",
+      "Contact Dairy Park, Kolaghat. Call +91 99324 52124, find our address on Kolaghat – Jashar Road, or send your enquiry straight to our WhatsApp. Fast-food restaurant in Kolaghat 721134.",
     "meta.privacy.title": "Privacy Note | Dairy Park, Kolaghat",
     "meta.privacy.desc":
-      "How the Dairy Park website handles data: no accounts, no ordering, no payment. Analytics only with your permission. Enquiry form data never leaves your device.",
+      "How the Dairy Park website handles data: no accounts, no ordering, no payment. Analytics only with your permission. Enquiries are handed to WhatsApp only when you tap Send.",
 
     /* ---------- accessibility ---------- */
     "a11y.skip": "Skip to content",
@@ -309,17 +309,28 @@ window.DP_I18N = {
     "contact.phoneHint": "Tap to call — best for menus, timings and offers.",
     "contact.hoursHint": "Hours can change — a quick call always confirms.",
     "contact.formEyebrow": "Enquiry",
-    "contact.formTitle": "Write down what you need",
+    "contact.formTitle": "Send your enquiry on WhatsApp",
     "contact.formLead":
-      "This website has no messaging backend, so nothing you type is sent over the internet. The form helps you note your question, then hands you our phone number — the way customers actually reach Dairy Park.",
+      "Fill this in and we will open WhatsApp with your enquiry already written out and addressed to Dairy Park. Nothing is sent until you tap Send — then it reaches our phone like a normal WhatsApp message, and we reply from there.",
     "contact.nameLabel": "Your name",
     "contact.phoneLabel": "Phone number",
     "contact.messageLabel": "Your enquiry",
-    "contact.prepare": "Prepare my enquiry",
-    "contact.statusTitle": "Ready — now call us",
+    "contact.prepare": "Continue to WhatsApp",
+    "contact.statusTitle": "Tap Send in WhatsApp",
     "contact.statusText":
-      "This site can’t send messages online, so we haven’t received anything yet. Please call the number below and read out your enquiry — that reaches us instantly.",
+      "WhatsApp should have opened with your enquiry ready to send. Tap Send there and it reaches our phone — we cannot read anything until you do. If nothing opened, use the green button below.",
+    "contact.statusWhatsApp": "Open WhatsApp",
     "contact.statusCall": "Call +91 99324 52124",
+    "contact.callFormTitle": "Write down what you need",
+    "contact.callFormLead":
+      "This website has no messaging backend, so nothing you type is sent over the internet. The form helps you note your question, then hands you our phone number — the way customers actually reach Dairy Park.",
+    "contact.callPrepare": "Prepare my enquiry",
+    "contact.callStatusTitle": "Ready — now call us",
+    "contact.callStatusText":
+      "This site can’t open WhatsApp right now, so we haven’t received anything yet. Please call the number below and read out your enquiry — that reaches us instantly.",
+    "contact.whatsappTitle": "WhatsApp",
+    "contact.whatsappAction": "Chat on WhatsApp",
+    "contact.whatsappHint": "Enquiries only — no delivery or payment over WhatsApp.",
     "contact.errName": "Please enter your name (at least 2 characters).",
     "contact.errPhone": "Please enter a valid phone number (at least 7 digits).",
     "contact.errMessage": "Please write your enquiry (at least 5 characters).",
@@ -349,7 +360,7 @@ window.DP_I18N = {
     /* ---------- consent ---------- */
     "consent.title": "Analytics choice",
     "consent.text":
-      "With your permission we use analytics to see which parts of this site help visitors — for example taps on call and directions. Nothing loads until you choose. There are no accounts and no forms that send data.",
+      "With your permission we use analytics to see which parts of this site help visitors — for example taps on call, directions and WhatsApp enquiries. Nothing loads until you choose. There are no accounts and no online payments.",
     "consent.accept": "Allow analytics",
     "consent.decline": "No thanks",
     "consent.privacy": "Privacy note",
@@ -390,10 +401,10 @@ window.DP_I18N = {
       "ডেয়ারি পার্ক দেখতে আসুন — কোলাঘাট–যশোর রোড, কোলাঘাট, পশ্চিমবঙ্গ ৭২১১৩৪। ডাইন-ইন ও ড্রাইভ-থ্রু। পথনির্দেশ নিন বা ফোন করুন +91 99324 52124।",
     "meta.contact.title": "যোগাযোগ | ডেয়ারি পার্ক কোলাঘাট – ফোন +91 99324 52124",
     "meta.contact.desc":
-      "ডেয়ারি পার্ক, কোলাঘাটের সঙ্গে যোগাযোগ করুন। ফোন +91 99324 52124, ঠিকানা কোলাঘাট–যশোর রোড, অথবা অনুসন্ধান পাঠান। কোলাঘাট ৭২১১৩৪-এ ফাস্ট-ফুড রেস্তোরাঁ।",
+      "ডেয়ারি পার্ক, কোলাঘাটের সঙ্গে যোগাযোগ করুন। ফোন +91 99324 52124, ঠিকানা কোলাঘাট–যশোর রোড, অথবা সরাসরি আমাদের হোয়াটসঅ্যাপে অনুসন্ধান পাঠান। কোলাঘাট ৭২১১৩৪-এ ফাস্ট-ফুড রেস্তোরাঁ।",
     "meta.privacy.title": "প্রাইভেসি নোট | ডেয়ারি পার্ক, কোলাঘাট",
     "meta.privacy.desc":
-      "ডেয়ারি পার্কের ওয়েবসাইট তথ্য কীভাবে ব্যবহার করে: কোনো অ্যাকাউন্ট নেই, অর্ডার নেই, পেমেন্ট নেই। অ্যানালিটিক্স শুধু আপনার অনুমতিতে। ফর্মের তথ্য আপনার ডিভাইস ছাড়ে না।",
+      "ডেয়ারি পার্কের ওয়েবসাইট তথ্য কীভাবে ব্যবহার করে: কোনো অ্যাকাউন্ট নেই, অর্ডার নেই, পেমেন্ট নেই। অ্যানালিটিক্স শুধু আপনার অনুমতিতে। আপনি “সেন্ড” চাপলে তবেই অনুসন্ধান হোয়াটসঅ্যাপে যায়।",
 
     /* ---------- accessibility ---------- */
     "a11y.skip": "মূল অংশে যান",
@@ -663,17 +674,28 @@ window.DP_I18N = {
     "contact.phoneHint": "ট্যাপ করে কল করুন — মেনু, সময় ও অফারের জন্য সেরা উপায়।",
     "contact.hoursHint": "সময় বদলাতে পারে — একটা ছোট কলেই নিশ্চিত হয়ে যান।",
     "contact.formEyebrow": "অনুসন্ধান",
-    "contact.formTitle": "আপনার প্রয়োজন লিখে রাখুন",
+    "contact.formTitle": "হোয়াটসঅ্যাপে আপনার অনুসন্ধান পাঠান",
     "contact.formLead":
-      "এই ওয়েবসাইটে বার্তা পাঠানোর কোনো ব্যবস্থা নেই, তাই আপনি যা লেখেন তা ইন্টারনেটে যায় না। ফর্মটি আপনার প্রশ্নটি মনে রাখতে সাহায্য করে, তারপর আমাদের ফোন নম্বর দেখায় — গ্রাহকরা প্রকৃতপক্ষে যেভাবে ডেয়ারি পার্কের সঙ্গে যোগাযোগ করেন।",
+      "এটি পূরণ করুন — আমরা হোয়াটসঅ্যাপ খুলে দেব, যেখানে আপনার অনুসন্ধান লেখা থাকবে এবং ডেয়ারি পার্কের নম্বর আগেই দেওয়া থাকবে। আপনি “সেন্ড” না চাপা পর্যন্ত কিছুই পাঠানো হয় না; এরপর সেটি সাধারণ হোয়াটসঅ্যাপ বার্তার মতো আমাদের ফোনে পৌঁছায় এবং সেখান থেকেই আমরা উত্তর দিই।",
     "contact.nameLabel": "আপনার নাম",
     "contact.phoneLabel": "ফোন নম্বর",
     "contact.messageLabel": "আপনার অনুসন্ধান",
-    "contact.prepare": "আমার অনুসন্ধান তৈরি করুন",
-    "contact.statusTitle": "প্রস্তুত — এখন কল করুন",
+    "contact.prepare": "হোয়াটসঅ্যাপে যান",
+    "contact.statusTitle": "হোয়াটসঅ্যাপে “সেন্ড” চাপুন",
     "contact.statusText":
-      "সাইট অনলাইনে বার্তা পাঠাতে পারে না, তাই আমরা এখনো কিছু পাইনি। নিচের নম্বরে ফোন করে আপনার অনুসন্ধানটি পড়ুন — সেটি সঙ্গে সঙ্গে আমাদের কাছে পৌঁছাবে।",
+      "আপনার অনুসন্ধান লেখা অবস্থায় হোয়াটসঅ্যাপ খুলে যাওয়ার কথা। সেখানে “সেন্ড” চাপলেই সেটি আমাদের ফোনে পৌঁছাবে — আপনি না পাঠালে আমরা কিছু পড়তে পারি না। কিছু না খুললে নিচের সবুজ বোতামটি ব্যবহার করুন।",
+    "contact.statusWhatsApp": "হোয়াটসঅ্যাপ খুলুন",
     "contact.statusCall": "ফোন করুন +91 99324 52124",
+    "contact.callFormTitle": "আপনার প্রয়োজন লিখে রাখুন",
+    "contact.callFormLead":
+      "এই ওয়েবসাইটে বার্তা পাঠানোর কোনো ব্যবস্থা নেই, তাই আপনি যা লেখেন তা ইন্টারনেটে যায় না। ফর্মটি আপনার প্রশ্নটি মনে রাখতে সাহায্য করে, তারপর আমাদের ফোন নম্বর দেখায় — গ্রাহকরা প্রকৃতপক্ষে যেভাবে ডেয়ারি পার্কের সঙ্গে যোগাযোগ করেন।",
+    "contact.callPrepare": "আমার অনুসন্ধান তৈরি করুন",
+    "contact.callStatusTitle": "প্রস্তুত — এখন কল করুন",
+    "contact.callStatusText":
+      "এই মুহূর্তে সাইট হোয়াটসঅ্যাপ খুলতে পারছে না, তাই আমরা এখনো কিছু পাইনি। নিচের নম্বরে ফোন করে আপনার অনুসন্ধানটি বলুন — সেটি সঙ্গে সঙ্গে আমাদের কাছে পৌঁছাবে।",
+    "contact.whatsappTitle": "হোয়াটসঅ্যাপ",
+    "contact.whatsappAction": "হোয়াটসঅ্যাপে বার্তা পাঠান",
+    "contact.whatsappHint": "শুধু অনুসন্ধানের জন্য — হোয়াটসঅ্যাপে ডেলিভারি বা পেমেন্ট নেই।",
     "contact.errName": "অনুগ্রহ করে আপনার নাম লিখুন (অন্তত ২ অক্ষর)।",
     "contact.errPhone": "অনুগ্রহ করে সঠিক ফোন নম্বর লিখুন (অন্তত ৭ সংখ্যা)।",
     "contact.errMessage": "অনুগ্রহ করে আপনার অনুসন্ধান লিখুন (অন্তত ৫ অক্ষর)।",
@@ -703,7 +725,7 @@ window.DP_I18N = {
     /* ---------- consent ---------- */
     "consent.title": "অ্যানালিটিক্স পছন্দ",
     "consent.text":
-      "অনুমতি দিলে আমরা অ্যানালিটিক্স দিয়ে দেখি সাইটের কোন অংশ গ্রাহকদের কাজে লাগছে — যেমন কল ও পথনির্দেশের ট্যাপ। আপনি বেছে না নেওয়া পর্যন্ত কিছুই লোড হয় না। কোনো অ্যাকাউন্ট নেই, কোনো তথ্য পাঠানোর ফর্ম নেই।",
+      "অনুমতি দিলে আমরা অ্যানালিটিক্স দিয়ে দেখি সাইটের কোন অংশ গ্রাহকদের কাজে লাগছে — যেমন কল, পথনির্দেশ ও হোয়াটসঅ্যাপ অনুসন্ধানের ট্যাপ। আপনি বেছে না নেওয়া পর্যন্ত কিছুই লোড হয় না। কোনো অ্যাকাউন্ট নেই, অনলাইন পেমেন্ট নেই।",
     "consent.accept": "অ্যানালিটিক্স চালু করুন",
     "consent.decline": "না, থাক",
     "consent.privacy": "প্রাইভেসি নোট",

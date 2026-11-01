@@ -281,6 +281,42 @@ window.DP_CONTENT = {
   },
 
   /* ---------------------------------------------------------------------
+     10b. WHATSAPP ENQUIRIES
+     When a visitor fills the enquiry form on the Contact page, the website
+     opens WhatsApp with the whole enquiry typed out and addressed to the
+     number below. The visitor only has to tap Send in WhatsApp — the
+     message then arrives on that phone like any other WhatsApp chat.
+
+        number   country code + number, DIGITS ONLY (no +, no spaces).
+                 India = 91 followed by the 10-digit number.
+                 This is normally the owner's own WhatsApp number.
+        enabled  false hides every WhatsApp link and button on the site.
+        template the ready-made message. {name}, {phone} and {message} are
+                 replaced with what the visitor typed — keep those
+                 placeholders exactly as written.
+
+     Note: the website never sends anything by itself and needs no server or
+     internet service. WhatsApp opens on the visitor's own phone and they
+     choose whether to tap Send.
+     --------------------------------------------------------------------- */
+  whatsapp: {
+    enabled: true,
+    number: "919932452124", // the owner's WhatsApp — country code first, digits only
+    template: {
+      en:
+        "New enquiry from the Dairy Park website\n\n" +
+        "Name: {name}\n" +
+        "Phone: {phone}\n" +
+        "Enquiry: {message}",
+      bn:
+        "ডেয়ারি পার্ক ওয়েবসাইট থেকে নতুন অনুসন্ধান\n\n" +
+        "নাম: {name}\n" +
+        "ফোন: {phone}\n" +
+        "অনুসন্ধান: {message}"
+    }
+  },
+
+  /* ---------------------------------------------------------------------
      11. SMALL NOTE SHOWN IN THE FOOTER
      --------------------------------------------------------------------- */
   footerNote: {

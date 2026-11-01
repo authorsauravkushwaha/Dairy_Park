@@ -25,7 +25,7 @@ commented files.
 | `/offers/` | Special Offers | Owner-approved promos, or a friendly empty state |
 | `/reviews/` | Customer Reviews | Verified Google rating + links to the original reviews |
 | `/visit/` | Visit Us | Address, embedded map, directions, hours, first-visit tips |
-| `/contact/` | Contact Us | Click-to-call, address, map, honest enquiry form |
+| `/contact/` | Contact Us | Click-to-call, address, map, enquiry form that hands off to the owner's WhatsApp |
 | `/privacy.html` | Privacy note | Plain-language privacy summary |
 
 Every page has its own SEO title/description/canonical, Open Graph tags and
@@ -39,7 +39,7 @@ visitor on the current page.
 index.html              the source templates for the pages
 404.html                standalone error page
 content.js              ⭐ owner-editable content: menu, categories, hours,
-                        offers, gallery slots, analytics
+                        offers, gallery slots, analytics, WhatsApp number
 templates/layout.html   shared page shell (head, chrome)
 templates/partials/     header, drawer, footer, sticky bar, consent banner
 templates/pages/        the body of each page + its meta block
@@ -70,7 +70,9 @@ folders), alt text, duplicate IDs, active-nav markers, sitemap/robots/manifest,
 and that no unverified hours or ratings leak into structured data.
 `npm run smoke` boots each built page in jsdom and tests rendering, the Bengali
 switch, phone links, the mobile drawer, menu filters/search/dialog, the gallery
-lightbox, the offers empty state and the enquiry form.
+lightbox, the offers empty state, and the enquiry form's hand-off to WhatsApp
+(addressing, prefilled name/phone/message, the English and Bengali templates,
+and the call-only fallback when the feature is switched off).
 
 ## Deployment
 
@@ -96,6 +98,17 @@ in once confirmed. The Google rating is **hidden by default** (`reviews.show`)
 until the owner re-checks the live listing; menu descriptions stay blank until
 ingredients are confirmed. Empty menu categories and the offers page degrade to
 honest designed states rather than fake content.
+
+## WhatsApp enquiries
+
+There is no backend and no third-party form service. The Contact page's
+enquiry form packages the visitor's name, phone number and question into a
+`https://wa.me/<number>?text=…` link addressed to the owner's own WhatsApp
+number (`content.js → whatsapp.number`) and opens it. The visitor taps Send
+inside WhatsApp; the site itself transmits nothing, never claims delivery, and
+does not advertise WhatsApp ordering or payment. Setting
+`content.js → whatsapp.enabled: false` removes every WhatsApp block and the
+form falls back to the call-first wording.
 
 Genuine owner-supplied photographs are included: the owner portrait (hero +
 About), shop interior, counter snacks, ice-cream and chocolate freezers, and
