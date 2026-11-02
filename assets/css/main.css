@@ -424,7 +424,7 @@ html[lang="bn"] .section-title {
   box-shadow: 0 8px 18px -10px rgba(0, 0, 0, .7);
   flex: none;
 }
-.brand__mark svg { width: 100%; height: 100%; display: block; }
+.brand__mark img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 50%; }
 .brand__text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand__name {
   font-family: 'DP Display', 'DP Bengali', Georgia, serif;
