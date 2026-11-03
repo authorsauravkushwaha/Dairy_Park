@@ -28,6 +28,17 @@ const CHEAPEST = PRICED.reduce((min, item) => {
   return value && value < min ? value : min;
 }, Infinity);
 const USED_CATEGORIES = (CONTENT.menuCategories || []).filter((cat) => MENU.some((item) => item.category === cat.id));
+const PAGES_REF = [
+  { out: 'index.html', slug: '' },
+  { out: 'food/index.html', slug: 'food/' },
+  { out: 'about/index.html', slug: 'about/' },
+  { out: 'gallery/index.html', slug: 'gallery/' },
+  { out: 'offers/index.html', slug: 'offers/' },
+  { out: 'reviews/index.html', slug: 'reviews/' },
+  { out: 'visit/index.html', slug: 'visit/' },
+  { out: 'contact/index.html', slug: 'contact/' },
+  { out: 'privacy.html', slug: 'privacy.html' }
+];
 
 const failures = [];
 const pass = [];
@@ -136,12 +147,20 @@ async function loadPage(outFile, urlPath) {
   expect(previewTiles.every((tile) => /photos\//.test(tile.querySelector('img').getAttribute('src'))), 'home: preview tiles point at the photo folder');
   const previewSrcs = previewTiles.map((tile) => tile.querySelector('img').getAttribute('src')).join(' ');
   expect(/shop-front/.test(previewSrcs) && /interior-/.test(previewSrcs) && /dahi-vada/.test(previewSrcs), 'home: preview mixes the shopfront, the dining room and the food');
-  expect(document.querySelector('.hero.has-owner') !== null, 'home: owner portrait appears in the hero with the supplied photo');
-  expect(/owner\.(webp|avif|jpe?g|png)$/.test(document.querySelector('#ownerPortrait').getAttribute('src')), 'home: portrait uses the real owner photo');
+  expect(document.querySelector('#ownerPortrait') === null, 'home: the owner portrait is removed from the hero');
+  expect(document.querySelector('.hero.has-owner') === null, 'home: no owner-photo hero state is applied');
+  expect(/owner/.test(previewSrcs) === false, 'home: no owner photo anywhere in the gallery preview');
   expect(/shop-front\.(webp|avif|jpe?g|png)$/.test(document.querySelector('#heroPhoto').getAttribute('src')), 'home: hero background uses the shopfront photo');
   expect(document.querySelector('.hero__botanical') !== null, 'home: hero carries its botanical line art');
   expect(document.querySelector('.hero.has-shopfront') !== null, 'home: the shopfront stays sharp behind the headline');
   expect(document.querySelector('.closing') !== null, 'home: closing CTA exists');
+  expect(/dosa/i.test(document.querySelector('#hero-title').textContent), 'home: hero headline leads with dosa');
+  const delicoLinks = [...document.querySelectorAll('a[data-link="delico"]')];
+  expect(delicoLinks.length >= 3, 'home: Delico buttons in hero, promo band, header and closing');
+  expect(delicoLinks.every((a) => a.getAttribute('href') === 'https://delicoapp.com/'), 'home: every Delico button points at https://delicoapp.com/');
+  expect(delicoLinks.every((a) => a.getAttribute('target') === '_blank' && /noopener/.test(a.getAttribute('rel'))), 'home: Delico buttons open in a new tab with noopener');
+  expect(document.querySelector('.app-promo') !== null && document.querySelector('.app-promo').hidden === false, 'home: the Delico app promo band is visible');
+  expect(document.querySelector('.sticky-bar__btn--delico') !== null, 'home: sticky bar carries a Delico button');
   expect(document.querySelectorAll('.welcome-card').length === 5, 'home: welcome cards render, including pure veg');
   expect(document.querySelector('.welcome-card--veg') !== null, 'home: the pure-veg card is called out');
 
@@ -188,17 +207,29 @@ async function loadPage(outFile, urlPath) {
     document.querySelectorAll('.dish__tag').length === HIGHLIGHTS.filter((item) => item.tag).length,
     'home: dish cards render their gold tag ribbon'
   );
-  // Every highlight dish now has a supplied photograph, so no card falls back
-  // to the printed-card look on the home page any more.
-  expect(document.querySelectorAll('.dish--nophoto').length === 0, 'home: every highlight dish has its own photograph');
+  // Highlight dishes with a supplied photograph show it; dosas without one
+  // fall back to the designed printed-card monogram instead of breaking.
+  const HIGHLIGHTS_WITH_PHOTO = HIGHLIGHTS.filter((item) => item.photo).length;
   expect(
-    document.querySelectorAll('[data-dish-id].has-photo').length === HIGHLIGHTS.length,
-    'home: every dish card loads a supplied photograph'
+    document.querySelectorAll('[data-dish-id].has-photo').length === HIGHLIGHTS_WITH_PHOTO,
+    'home: every highlight dish with a photo loads it'
+  );
+  expect(
+    document.querySelectorAll('.dish--nophoto').length === HIGHLIGHTS.length - HIGHLIGHTS_WITH_PHOTO,
+    'home: photo-less highlights use the designed fallback'
+  );
+  expect(
+    [...document.querySelectorAll('#dishGrid [data-dish-id]')].some((n) => n.dataset.dishId === 'masala-dosa'),
+    'home: the dosa highlight leads the menu grid'
   );
 
   // Photo-driven extras appear once the dish photos are supplied
-  expect(document.querySelectorAll('.pairing__plate').length === 2, 'home: order-both strip shows both dish photos');
-  expect(document.querySelector('#heroPicks').hidden === false, 'home: hero dish peeks appear with the supplied photos');
+  const pairingIds = [...document.querySelectorAll('[data-pairing-photo]')].map((n) => n.dataset.pairingPhoto);
+  const pairingWithPhoto = pairingIds.filter((id) => MENU.some((m) => m && m.id === id && m.photo)).length;
+  expect(document.querySelectorAll('.pairing__plate').length === pairingWithPhoto, 'home: pairing strip shows a plate for each dosa with a photo');
+  expect(document.querySelector('#heroPicks').hidden === false, 'home: hero dish peeks appear');
+  expect(document.querySelectorAll('#heroPicks .hero__pick').length === Math.min(3, HIGHLIGHTS.length), 'home: hero peeks lead with the highlight dishes');
+  expect(document.querySelector('#heroPicks .hero__pick-name').textContent.length > 0, 'home: hero peek carries the dish name');
 
   // Language switch keeps the visitor on the same page
   document.querySelector('[data-lang="bn"]').click();
@@ -264,6 +295,9 @@ async function loadPage(outFile, urlPath) {
   );
 
   // Category filter
+  const dosaChip = cats.find((c) => c.textContent.startsWith('Dosa'));
+  expect(dosaChip !== undefined, 'food: the Dosa category chip is offered');
+  expect(document.querySelector('#menuGrid .menu-row[data-dish-id="masala-dosa"]') !== null, 'food: Masala Dosa is on the menu');
   const momoChip = cats.find((c) => c.textContent === 'Momos');
   momoChip.click();
   await sleep(40);
@@ -479,6 +513,20 @@ async function loadPage(outFile, urlPath) {
   expect(runtimeErrors.length === 0, `privacy: no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
   expect(document.querySelectorAll('.page__section').length === 2, 'privacy: English + Bengali sections render');
   expect(document.querySelector('.site-header') !== null, 'privacy: shares the site header');
+}
+
+/* Delico app promo is wired on every page */
+{
+  const promoUrl = (CONTENT.appPromo && CONTENT.appPromo.enabled !== false && CONTENT.appPromo.url) || '';
+  for (const page of PAGES_REF) {
+    const { document } = await loadPage(page.out, page.slug);
+    const links = [...document.querySelectorAll('a[data-link="delico"]')];
+    expect(links.length >= 1, `${page.out}: at least one Delico app button`);
+    if (promoUrl) {
+      expect(links.every((a) => a.getAttribute('href') === promoUrl), `${page.out}: Delico buttons point at ${promoUrl}`);
+      expect(links.every((a) => a.hidden === false || a.closest('[hidden]')), `${page.out}: Delico buttons visible while appPromo is enabled`);
+    }
+  }
 }
 
 /* Report */

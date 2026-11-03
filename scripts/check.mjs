@@ -268,6 +268,22 @@ if (waOn) {
 /* Hours must never be invented */
 if (!C.hours?.verified && C.hours?.schedule?.length) fail('hours marked unverified but a schedule is present');
 
+/* Delico app promo: external link must be a proper https URL */
+if (C.appPromo && C.appPromo.enabled !== false) {
+  if (!/^https:\/\/[^\s]+$/.test(String(C.appPromo.url || ''))) {
+    fail('appPromo.url must be a full https:// URL (e.g. https://delicoapp.com/)');
+  }
+}
+if (C.appPromo && C.appPromo.enabled !== false) {
+  for (const page of PAGES) {
+    const html = allPagesHtml[page.out];
+    if (html && !/data-link="delico"/.test(html)) {
+      // every page carries at least one Delico button (header / sticky / footer)
+      fail(`${page.out}: no Delico app link while appPromo is enabled`);
+    }
+  }
+}
+
 /* Analytics must stay off until configured */
 if (C.analytics?.enabled && !/^G-[A-Z0-9]+$/.test(C.analytics.ga4Id || '')) {
   fail('analytics.enabled is true but ga4Id is not a valid measurement id');

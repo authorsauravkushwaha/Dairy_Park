@@ -84,6 +84,17 @@ window.DP_CONTENT = {
   },
 
   /* ---------------------------------------------------------------------
+     2b. DELICO APP (online ordering partner)
+     Every "Delico" button on the site opens this link in a new tab.
+     Set enabled: false to hide the buttons everywhere again.
+     --------------------------------------------------------------------- */
+  appPromo: {
+    enabled: true,
+    url: "https://delicoapp.com/",
+    name: { en: "Delico", bn: "ডেলিকো" }
+  },
+
+  /* ---------------------------------------------------------------------
      3. OPENING HOURS
      Only verified hours are shown. The Google listing shows a 10:30 PM
      closing time, but not the full weekly schedule — so the site currently
@@ -126,6 +137,7 @@ window.DP_CONTENT = {
      --------------------------------------------------------------------- */
   menuCategories: [
     { id: "special", name: { en: "Signature Plates", bn: "সিগনেচার প্লেট" } },
+    { id: "dosa", name: { en: "Dosa — House Special", bn: "দোসা — হাউস স্পেশাল" } },
     { id: "chaat", name: { en: "Chaat & Chola", bn: "চাট ও ছোলা" } },
     { id: "momos", name: { en: "Momos", bn: "মোমো" } },
     { id: "south", name: { en: "Idli & Vada", bn: "ইডলি ও বড়া" } },
@@ -171,7 +183,70 @@ window.DP_CONTENT = {
                  shows nothing at all while the list is empty.
      --------------------------------------------------------------------- */
   menu: [
-    /* ---- SIGNATURE PLATES (home-page highlights) ---- */
+    /* ---- DOSA — THE HOUSE SPECIAL (home-page highlights) ----
+       Dosa is not on the printed menu card, so no price is published here:
+       price stays null and the site shows "Ask for today's price" until the
+       owner confirms the dosa prices at the counter. */
+    {
+      id: "masala-dosa",
+      name: { en: "Masala Dosa", bn: "মসলা দোসা" },
+      desc: { en: "", bn: "" },
+      category: "dosa",
+      price: null,
+      veg: true,
+      available: true,
+      highlight: true,
+      tag: { en: "House special", bn: "হাউস স্পেশাল" },
+      badges: []
+    },
+    {
+      id: "plain-dosa",
+      name: { en: "Plain Dosa", bn: "প্লেন দোসা" },
+      desc: { en: "", bn: "" },
+      category: "dosa",
+      price: null,
+      veg: true,
+      available: true,
+      highlight: true,
+      tag: { en: "Crispy", bn: "মচমचे" },
+      badges: []
+    },
+    {
+      id: "cheese-dosa",
+      name: { en: "Cheese Dosa", bn: "চিজ দোসা" },
+      desc: { en: "", bn: "" },
+      category: "dosa",
+      price: null,
+      veg: true,
+      available: true,
+      highlight: true,
+      tag: { en: "Most loved", bn: "সবচেয়ে পছন্দের" },
+      badges: []
+    },
+    {
+      id: "paneer-dosa",
+      name: { en: "Paneer Dosa", bn: "পনির দোসা" },
+      desc: { en: "", bn: "" },
+      category: "dosa",
+      price: null,
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+    {
+      id: "mysore-masala-dosa",
+      name: { en: "Mysore Masala Dosa", bn: "মাইসোর মসলা দোসা" },
+      desc: { en: "", bn: "" },
+      category: "dosa",
+      price: null,
+      veg: true,
+      available: true,
+      tag: null,
+      badges: []
+    },
+
+    /* ---- SIGNATURE PLATES ---- */
     {
       id: "dahi-vada",
       name: { en: "Dahi Vada", bn: "দই বড়া" },
@@ -180,8 +255,7 @@ window.DP_CONTENT = {
       price: "₹80",
       veg: true,
       available: true,
-      highlight: true,
-      tag: { en: "Signature", bn: "সিগনেচার" },
+      tag: { en: "On the card", bn: "সিগনেচার" },
       badges: [],
       photo: "assets/img/photos/dahi-vada"
     },
@@ -206,7 +280,6 @@ window.DP_CONTENT = {
       price: null,
       veg: null,
       available: true,
-      highlight: true,
       tag: { en: "Steamed", bn: "স্টিম করা" },
       badges: [],
       photo: "assets/img/photos/steam-momo"
@@ -232,7 +305,6 @@ window.DP_CONTENT = {
       price: "₹70",
       veg: true,
       available: true,
-      highlight: true,
       tag: { en: "Under ₹100", bn: "₹১০০র নিচে" },
       badges: [],
       photo: "assets/img/photos/veg-chowmein"
@@ -1217,13 +1289,13 @@ window.DP_CONTENT = {
      --------------------------------------------------------------------- */
   pairing: {
     show: true,
-    eyebrow: { en: "The regular's order", bn: "নিয়মিতদের অর্ডার" },
-    title: { en: "One plate each. Share the table.", bn: "একটি করে প্লেট। টেবিল ভাগ করে নিন।" },
+    eyebrow: { en: "The house special", bn: "হাউস স্পেশাল" },
+    title: { en: "Crispy dosa, hot off the tawa.", bn: "তাওয়া থেকে গরম, মচমче দোসা।" },
     desc: {
-      en: "Dahi Vada for the cool bite, Steam Momo for the hot one. Plenty of people order both — ask for them together at the counter.",
-      bn: "ঠান্ডা স্বাদের জন্য দই বড়া, গরম স্বাদের জন্য স্টিম মোমো। অনেকেই দুটোই নেন — কাউন্টারে একসঙ্গে চেয়ে নিন।"
+      en: "Our masala, plain and cheese dosas are the plates people stop for on the Kolaghat road. Ask for today's dosa price at the counter — or order ahead on the Delico app.",
+      bn: "আমাদের মসলা, প্লেন ও চিজ দোসা — কোলাঘাট–যশোর রোডে। কাউন্টারে দোসার দাম জেনে নিন। — আগে ডেলিকো অ্যাপে অর্ডার দিন।"
     },
-    cta: { en: "Call to order both", bn: "দুটোই অর্ডার করতে কল করুন" }
+    cta: { en: "Order a dosa on Delico", bn: "ডেলিকোতে দোসা অর্ডার করুন" }
   },
 
   /* ---------------------------------------------------------------------
@@ -1376,7 +1448,6 @@ window.DP_CONTENT = {
      --------------------------------------------------------------------- */
   photos: {
     hero: "assets/img/photos/shop-front", // shopfront — full-screen homepage background
-    owner: "assets/img/photos/owner", // real owner portrait — homepage hero
     shop: "assets/img/photos/interior-room", // dining room — About page
     shopAlt: "assets/img/photos/counter-snacks", // snacks at the counter
     dining: "assets/img/photos/interior-bench", // bench seating — dining band on the home page

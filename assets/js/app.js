@@ -143,18 +143,26 @@
   /* --------------------------------------------------------------------------- */
   function syncLinks() {
     var b = C.business || {};
+    var promo = C.appPromo || {};
+    var delicoUrl = promo.enabled === false ? '' : (promo.url || '');
     var map = {
       phone: b.phone && b.phone.tel ? 'tel:' + b.phone.tel : '',
       directions: b.directionsUrl || '',
       maps: b.mapsUrl || '',
       mapEmbed: b.mapEmbedUrl || '',
-      whatsapp: whatsappEnabled() ? whatsappUrl('') : ''
+      whatsapp: whatsappEnabled() ? whatsappUrl('') : '',
+      delico: delicoUrl
     };
     els('[data-link]').forEach(function (node) {
       var url = map[node.dataset.link];
       if (!url) return;
       if (node.tagName === 'IFRAME') node.src = url;
       else node.setAttribute('href', url);
+    });
+    // Every Delico button/section hides when the owner switches appPromo off
+    els('[data-app-promo]').forEach(function (node) {
+      node.hidden = !delicoUrl;
+      if (!delicoUrl && node.tagName === 'A') node.removeAttribute('href');
     });
     els('[data-link="phone"]').forEach(function (node) {
       var label = node.querySelector('[data-bind="phoneDisplay"]');
@@ -165,8 +173,6 @@
   /* --------------------------------------------------------------------------- */
   /* Content rendering (shared across pages)                                     */
   /* --------------------------------------------------------------------------- */
-  var heroHasPhoto = false;
-
   function renderAddress() {
     var lines = (C.business && C.business.addressLines) || {};
     var list = lines[lang] || lines.en || [];
@@ -253,20 +259,14 @@
     return promise;
   }
 
-  function heroAlt() {
-    return heroHasPhoto ? t('hero.photoAlt') : t('hero.photoSoon');
-  }
-
   function initHeroPhoto() {
     var heroImg = $('#heroPhoto');
     if (!heroImg) return;
     var photos = C.photos || {};
     var hero = $('.hero');
 
-    // Full-screen background: the shopfront. Falls back to the owner portrait,
-    // then to the designed placeholder.
-    findPhoto(photos.hero || photos.owner).then(function (url) {
-      heroHasPhoto = !!url;
+    // Full-screen background: the shopfront, then the designed placeholder.
+    findPhoto(photos.hero).then(function (url) {
       if (url) {
         heroImg.src = url;
         heroImg.classList.add('is-real');
@@ -281,17 +281,6 @@
         heroImg.alt = t('hero.photoSoon');
         if (hero) hero.classList.add('is-nophoto');
       }
-    });
-
-    // The owner portrait in the arch frame
-    var portrait = $('#ownerPortrait');
-    if (!portrait) return;
-    findPhoto(photos.owner).then(function (url) {
-      if (!url) return;
-      portrait.src = url;
-      portrait.classList.add('is-real');
-      portrait.alt = t('hero.photoAlt');
-      if (hero) hero.classList.add('has-owner');
     });
   }
 
@@ -689,7 +678,9 @@
     if (!host) return;
 
     if (!heroPicks.length) {
-      ((C.menu) || []).filter(function (item) { return item && item.photo; }).slice(0, 3)
+      var highlights = ((C.menu) || []).filter(function (item) { return item && item.highlight === true; });
+      var withPhoto = ((C.menu) || []).filter(function (item) { return item && item.photo && !item.highlight; });
+      highlights.concat(withPhoto).slice(0, 3)
         .forEach(function (item) {
           var pick = el('span', { class: 'hero__pick' });
           var img = el('img', {
@@ -707,9 +698,11 @@
           heroPicks.push({ item: item, img: img, name: name, pick: pick });
 
           findPhoto(item.photo).then(function (url) {
-            if (!url) { pick.hidden = true; return; }
-            img.src = url;
-            pick.classList.add('is-real');
+            if (url) {
+              img.src = url;
+              pick.classList.add('is-real');
+            }
+            // Dishes without a photograph keep the designed placeholder plate
             host.hidden = false;
           });
         });
@@ -838,7 +831,7 @@
     grid.textContent = '';
     var items = ((C.menu) || []).filter(function (item) {
       return item && item.highlight === true;
-    }).slice(0, 6);
+    }).slice(0, 8);
     items.forEach(function (item, index) {
       grid.appendChild(buildDish(item, index));
     });
@@ -1321,16 +1314,10 @@
   /* --------------------------------------------------------------------------- */
   function initAboutPhotos() {
     var shop = $('#aboutShopPhoto');
-    var owner = $('#aboutOwnerPhoto');
     var photos = C.photos || {};
     if (shop) {
       findPhoto(photos.shop).then(function (url) {
         if (url) { shop.src = url; shop.alt = t('about.photoCaption'); }
-      });
-    }
-    if (owner) {
-      findPhoto(photos.owner).then(function (url) {
-        if (url) { owner.src = url; owner.alt = heroHasPhoto ? t('hero.photoAlt') : t('hero.photoSoon'); }
       });
     }
   }
@@ -1543,9 +1530,6 @@
 
     var heroImg = $('#heroPhoto');
     if (heroImg && heroImg.classList.contains('is-real')) heroImg.alt = t('hero.bgAlt');
-    var ownerImg = $('#ownerPortrait');
-    if (ownerImg && ownerImg.classList.contains('is-real')) ownerImg.alt = t('hero.photoAlt');
-
     updateToggleLabel();
 
     if (!opts.silent) {
