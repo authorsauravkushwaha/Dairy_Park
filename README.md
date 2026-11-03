@@ -116,6 +116,10 @@ does not advertise WhatsApp ordering or payment. Setting
 `content.js → whatsapp.enabled: false` removes every WhatsApp block and the
 form falls back to the call-first wording.
 
-Genuine owner-supplied photographs are included: the owner portrait (hero +
-About), shop interior, counter snacks, ice-cream and chocolate freezers, and
-three menu-counter shots wired into the Gallery page.
+Genuine owner-supplied photographs are included: the shopfront (homepage
+hero), shop interior, counter snacks, ice-cream and chocolate freezers, dish
+plates and the printed menu boards wired into the Gallery page. The owner
+portrait has been removed at the owner's request. The site leads with our
+dosas (house special) and advertises the Delico app (`https://delicoapp.com/`)
+through buttons in the header, hero, promo band, food page, sticky bar,
+drawer, footer and closing CTA — all driven by `content.js → appPromo`.

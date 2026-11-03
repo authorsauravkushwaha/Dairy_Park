@@ -14,7 +14,6 @@ order, so if you re-export as WebP it is picked up automatically.
 | File name        | Where it appears                                  |
 | ---------------- | ------------------------------------------------- |
 | `shop-front.*`   | **Supplied** — full-screen homepage hero backdrop |
-| `owner.*`        | **Supplied** — hero portrait frame + About inset   |
 | `interior-room.*` | **Supplied** — dining room (About + Gallery)      |
 | `interior-bench.*` | **Supplied** — home “Inside the dining room” band + Gallery |
 | `interior-glass.*` | **Supplied** — evening room through the glass, home band + Gallery |
@@ -51,4 +50,4 @@ shopfront is the hero backdrop, so keeping it under ~250 kB matters most.
 The home page also uses three of these in its dairy-counter band — `freezer`,
 `shelves` and `counter` are named in `content.js → photos`.
 
-Please upload only genuine photos of the restaurant, the owner and the food.
+Please upload only genuine photos of the restaurant and the food. (The owner portrait has been removed from the site at the owner's request.)

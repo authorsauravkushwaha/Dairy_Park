@@ -10,18 +10,18 @@
 window.DP_I18N = {
   en: {
     /* ---------- shared meta ---------- */
-    "meta.title": "Dairy Park Kolaghat | Family Restaurant – Dahi Vada & Steam Momo",
+    "meta.title": "Dairy Park Kolaghat | Masala Dosa & Pure Veg Family Restaurant",
     "meta.desc":
-      "Dairy Park is a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134, with a green-walled dining room, dine-in and drive-through. Try our Dahi Vada and Steam Momo. Call +91 99324 52124.",
-    "meta.home.title": "Dairy Park Kolaghat | Pure Veg Restaurant – Menu, Prices & Ice Cream",
+      "Dairy Park is a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134, with a green-walled dining room, dine-in and drive-through. Try our crispy Masala Dosa. Call +91 99324 52124.",
+    "meta.home.title": "Dairy Park Kolaghat | Masala Dosa, Menu Prices & Ice Cream",
     "meta.home.desc":
-      "Dairy Park is a 100% pure veg family restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Dahi Vada ₹80, Chola Bhatura ₹120, roti from ₹9, ice cream at the counter. Dine-in and drive-through. Call +91 99324 52124.",
-    "meta.food.title": "Menu & Prices | Dairy Park Kolaghat – Pure Veg Restaurant",
+      "Dairy Park is a 100% pure veg family restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Crispy masala & cheese dosas, Chola Bhatura ₹120, roti from ₹9, ice cream at the counter. Dine-in and drive-through. Call +91 99324 52124.",
+    "meta.food.title": "Menu & Prices | Dairy Park Kolaghat – Dosa & Pure Veg Restaurant",
     "meta.food.desc":
-      "The Dairy Park menu with prices: Dahi Vada ₹80, Chola Bhatura ₹120, paneer, Chinese, pizza, shakes and tea from ₹15. A 100% pure veg restaurant on Kolaghat – Jashar Road. Call +91 99324 52124.",
+      "The Dairy Park menu with prices: dosas, Dahi Vada ₹80, Chola Bhatura ₹120, paneer, Chinese, pizza, shakes and tea from ₹15. A 100% pure veg restaurant on Kolaghat – Jashar Road. Call +91 99324 52124.",
     "meta.about.title": "About Us | Dairy Park – Family Restaurant in Kolaghat",
     "meta.about.desc":
-      "About Dairy Park, a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Green-walled dining room, dine-in and drive-through, with highlights like Dahi Vada and Steam Momo.",
+      "About Dairy Park, a family restaurant on Kolaghat – Jashar Road, Kolaghat 721134. Green-walled dining room, dine-in and drive-through, with highlights like our masala dosa.",
     "meta.gallery.title": "Photo Gallery | Dairy Park Kolaghat – Restaurant & Food Photos",
     "meta.gallery.desc":
       "Photographs of Dairy Park in Kolaghat — shopfront, green-walled dining room, food and counter. Real photos from our family restaurant on Kolaghat – Jashar Road.",
@@ -65,28 +65,38 @@ window.DP_I18N = {
     "nav.visit": "Visit",
     "nav.contact": "Contact",
     "nav.call": "Call Now",
+    "nav.delico": "Delico App",
+
+    /* ---------- Delico app (online ordering partner) ---------- */
+    "app.eyebrow": "Order online",
+    "app.title": "Dairy Park is on the Delico app",
+    "app.lead":
+      "Browse the full menu, check prices and place your order in the Delico app — then collect it at our counter or through the drive-through on Kolaghat – Jashar Road.",
+    "app.cta": "Open the Delico App",
+    "app.note": "Opens delicoapp.com in a new tab",
+    "app.aria": "Open the Delico app website in a new tab",
+    "app.stripTitle": "Ordering to go? Use the Delico app.",
+    "app.stripSub": "The full menu and prices in the app — pick up at the counter.",
+    "app.stripCta": "Open Delico",
 
     "lang.en": "English",
     "lang.bn": "বাংলা",
 
     /* ---------- hero ---------- */
     "hero.eyebrow": "Family restaurant · Kolaghat, West Bengal",
-    "hero.title1": "Dahi Vada & Steam Momo,",
+    "hero.title1": "Crispy Masala Dosa,",
     "hero.title2": "right on the Kolaghat–Jashar Road.",
     "hero.sub":
-      "A family restaurant in Kolaghat with a dining room of deep green walls and painted arches. Dine in, use the drive-through, or call before you come.",
+      "A family restaurant in Kolaghat with a dining room of deep green walls and painted arches — and a dosa counter worth the stop. Dine in, drive through, call ahead, or order on the Delico app.",
     "hero.ctaCall": "Call Now",
     "hero.ctaMenu": "Explore Our Food",
     "hero.ctaDirections": "Get Directions",
+    "hero.ctaDelico": "Order on Delico",
     "hero.ratingLabel": "Google rating",
     "hero.reviews": "{count} reviews",
     "hero.chipDine": "Dine-in",
     "hero.chipDrive": "Drive-through",
     "hero.bgAlt": "The Dairy Park shopfront on Kolaghat – Jashar Road",
-    "hero.photoAlt": "The owner of Dairy Park at the restaurant in Kolaghat",
-    "hero.photoSoon": "Owner photo will appear here once it is uploaded",
-    "hero.ownerKicker": "Meet the owner",
-    "hero.ownerRole": "Owner, Dairy Park",
     "hero.scroll": "Scroll to explore",
     "hero.picksLabel": "Worth trying",
     "hero.picksAria": "See the menu highlights",
@@ -106,16 +116,17 @@ window.DP_I18N = {
     "trust.items": "Dishes on the menu",
     "trust.from": "Cheapest thing on the menu",
 
-    "dish.dahiVada": "Dahi Vada",
-    "dish.steamMomo": "Steam Momo",
+    "dish.masalaDosa": "Masala Dosa",
+    "dish.plainDosa": "Plain Dosa",
+    "dish.cheeseDosa": "Cheese Dosa",
     "reviews.word": "reviews",
     "why.perPerson": "per person",
     "footer.analytics": "Analytics settings",
 
     "strip.1": "100% Pure Veg",
     "strip.2": "Dine-in & drive-through",
-    "strip.3": "Dahi Vada",
-    "strip.4": "Chola Bhatura · Roti · Ice cream counter",
+    "strip.3": "Masala Dosa",
+    "strip.4": "Cheese & paneer dosa too",
     "strip.5": "Kolaghat – Jashar Road",
 
     /* ---------- welcome (home) ---------- */
@@ -127,8 +138,8 @@ window.DP_I18N = {
     "welcome.placeDesc": "Find us at Kolaghat, West Bengal 721134 — right on the main road.",
     "welcome.dineDesc": "Sit down and enjoy your food at the restaurant.",
     "welcome.driveDesc": "Order and collect without leaving your vehicle.",
-    "welcome.highlightsTitle": "Dahi Vada & Steam Momo",
-    "welcome.highlightsDesc": "Our listed menu highlights — ask at the counter for today’s full menu.",
+    "welcome.highlightsTitle": "Masala & Cheese Dosa",
+    "welcome.highlightsDesc": "Our dosa counter’s most-ordered plates — ask at the counter for today’s dosa prices.",
     "welcome.vegTitle": "100% Pure Veg",
     "welcome.vegDesc": "Our signboard says pure veg and the printed menu keeps it that way.",
 
@@ -136,7 +147,7 @@ window.DP_I18N = {
     "menu.eyebrow": "From our menu card",
     "menu.title": "What people order at Dairy Park",
     "menu.lead":
-      "Six plates that leave our counter again and again — each with the price printed on our menu card.",
+      "Dosas lead the way — six plates that leave our counter again and again. Every printed price is on the food page.",
     "menu.highlight": "Menu highlight",
     "menu.priceAsk": "Ask for today’s price",
     "menu.available": "Available",
@@ -149,7 +160,7 @@ window.DP_I18N = {
     "menu.exploreFull": "Explore Full Menu",
     "menu.noscriptTitle": "Menu highlights",
     "menu.noscript":
-      "Dahi Vada ₹80, Chola Bhatura ₹120, roti from ₹9 and about ninety more dishes. Call +91 99324 52124 for today’s prices.",
+      "Masala dosa and about ninety more dishes, roti from ₹9. Call +91 99324 52124 for today’s dosa prices.",
 
     "menu.boardCta": "See every price",
     "menu.vegNote": "Everything on this menu is vegetarian.",
@@ -188,7 +199,7 @@ window.DP_I18N = {
     "foodPage.eyebrow": "Food & Menu",
     "foodPage.title": "Discover What’s Good at Dairy Park.",
     "foodPage.lead":
-      "Our whole menu card, with prices — from a ₹9 roti to our signature Dahi Vada. Pure veg, cooked to order on Kolaghat – Jashar Road.",
+      "Our whole menu card, with prices — from a ₹9 roti to our crispy house-special dosa. Pure veg, cooked to order on Kolaghat – Jashar Road.",
     "foodPage.callEnquire": "Call to Enquire",
     "foodPage.featuredEyebrow": "Guest favourites",
     "foodPage.featuredTitle": "Menu highlights",
@@ -222,7 +233,7 @@ window.DP_I18N = {
     "why.eyebrow": "Why visit Dairy Park",
     "why.title": "A quick stop on the Kolaghat road",
     "why.lead":
-      "A pure veg kitchen, a green dining room and prices that start at ₹9 — here is what you get at Dairy Park.",
+      "A pure veg kitchen, a green dining room and prices from ₹9 — plus crispy dosas worth pulling over for.",
     "fact.dine.title": "Dine-in",
     "fact.dine.desc": "Dine-in is listed as an available facility.",
     "fact.drive.title": "Drive-through",
@@ -342,7 +353,7 @@ window.DP_I18N = {
     "about.introEyebrow": "About Dairy Park",
     "about.introTitle": "A restaurant on the Kolaghat road",
     "about.p2":
-      "Our Google listing features Dahi Vada and Steam Momo as menu highlights. The restaurant offers both dine-in seating and a drive-through, so you can choose to sit and eat or collect your order from your vehicle.",
+      "Our counter is known for crispy dosas — masala, cheese and paneer — alongside classics like chola bhatura. The restaurant offers both dine-in seating and a drive-through, so you can sit and eat or collect your order from your vehicle.",
     "about.p3":
       "The green walls, brass lights and painted arches in our photos are the dining room you will sit in. Everything on this page comes from our own photographs and our Google listing — nothing is invented.",
     "about.p4":
@@ -353,14 +364,14 @@ window.DP_I18N = {
     "about.facTitle": "Facilities at Dairy Park",
     "about.dineDesc": "Take a seat at the restaurant and enjoy your food fresh from the counter.",
     "about.driveDesc": "On the road through Kolaghat? Order and collect without leaving your vehicle.",
-    "about.foodDesc": "The two menu highlights listed for Dairy Park on Google.",
+    "about.foodDesc": "Our dosas are the plates most people order — ask for today’s dosa price at the counter.",
     "about.vegDesc": "A pure vegetarian kitchen, from the counter snacks to the paneer plates.",
     "about.pricesTitle": "Prices on the page",
     "about.pricesDesc": "The printed menu card is on the website, dish by dish — so you know the bill before you sit down.",
     "about.exploreEyebrow": "Explore",
     "about.exploreTitle": "What you can explore at Dairy Park",
     "about.ex1Title": "The food counter",
-    "about.ex1Desc": "Dahi Vada, Steam Momo and whatever else is fresh today — ask for the full list.",
+    "about.ex1Desc": "Masala dosa, cheese dosa and whatever else is fresh today — ask for the full list.",
     "about.ex2Title": "A place to sit",
     "about.ex2Desc": "Dine-in seating for a relaxed break on the Kolaghat road.",
     "about.ex3Title": "The drive-through",
@@ -408,9 +419,10 @@ window.DP_I18N = {
     "closing.eyebrow": "Hungry?",
     "closing.title": "Stop by Dairy Park today.",
     "closing.sub":
-      "Dine in, or drive through on the Kolaghat – Jashar Road. Dahi Vada and Steam Momo are waiting.",
+      "Dine in, drive through on the Kolaghat – Jashar Road, or order on the Delico app. Our crispy dosas are waiting.",
     "closing.call": "Call Now",
     "closing.directions": "Get Directions",
+    "closing.delico": "Order on Delico",
 
     /* ---------- footer ---------- */
     "footer.about":
@@ -420,10 +432,12 @@ window.DP_I18N = {
     "footer.hoursTitle": "Hours",
     "footer.rights": "All rights reserved.",
     "footer.privacy": "Privacy note",
+    "footer.delico": "Order on the Delico app",
 
     /* ---------- sticky bar ---------- */
     "sticky.call": "Call Now",
     "sticky.directions": "Get Directions",
+    "sticky.delico": "Delico",
 
     /* ---------- consent ---------- */
     "consent.title": "Analytics choice",
@@ -443,18 +457,18 @@ window.DP_I18N = {
 
   bn: {
     /* ---------- shared meta ---------- */
-    "meta.title": "ডেয়ারি পার্ক কোলাঘাট | পারিবারিক রেস্তোরাঁ – দই বড়া ও স্টিম মোমো",
+    "meta.title": "ডেয়ারি পার্ক কোলাঘাট | মসলা দোসা ও নিরামিষ পারিবারিক রেস্তোরাঁ",
     "meta.desc":
-      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ একটি পারিবারিক রেস্তোরাঁ। সবুজ দেওয়ালের খাওয়ার ঘর, ডাইন-ইন ও ড্রাইভ-থ্রু সুবিধা। দই বড়া ও স্টিম মোমো। ফোন +91 99324 52124।",
-    "meta.home.title": "ডেয়ারি পার্ক কোলাঘাট | নিরামিষ রেস্তোরাঁ – মেনু, দাম ও আইসক্রিম",
+      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১৩৪-এ একিটি পারিবারিক রেস্তোরাঁ। মচমচে মসলা দোসা। ফোন +91 99324 52124।",
+    "meta.home.title": "ডেয়ারি পার্ক কোলাঘাট | মসলা দোসা, মেনু, দাম ও আইসক্রিম",
     "meta.home.desc":
-      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ ১০০% নিরামিষ পারিবারিক রেস্তোরাঁ। দই বড়া ₹৮০, ছোলা ভাটুরা ₹১২০, ₹৯ থেকে রুটি, কাউন্টারে আইসক্রিম। ডাইন-ইন ও ড্রাইভ-থ্রু। ফোন +91 99324 52124।",
+      "ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১৩৪-এ 100% নিরামিষ পারিবারিক রেস্তোরাঁ। মচমচে মসলা ও চিজ দোসা, ছোলা ভাটুরা ₹১২০, রুটি থেকে ₹৯। কাউন্টারে আইসক্রিম। ডাইন-ইন ও ড্রাইভ-থ্রু সুভিধা। ফোন +91 99324 52124।",
     "meta.food.title": "মেনু ও দাম | ডেয়ারি পার্ক কোলাঘাট – নিরামিষ রেস্তোরাঁ",
     "meta.food.desc":
-      "ডেয়ারি পার্কের মেনু ও দাম: দই বড়া ₹৮০, ছোলা ভাটুরা ₹১২০, পনির, চাইনিজ, পিজ্জা, শেক আর ₹১৫ থেকে চা। কোলাঘাট–যশোর রোডে ১০০% নিরামিষ রেস্তোরাঁ। ফোন +91 99324 52124।",
+      "ডেয়ারি পার্ক— মেনু ও দাম: দোসা, দই বড়া ₹৮০, ছোলা ভাটুরা ₹১২০, পনির, চাইনিজ, পিজ্জা, শেক ও ₹১৫ থেকে চা। কোলাঘাট–যশোর রোডে 100% নিরামিষ রেস্তোরাঁ। ফোন +91 99324 52124।",
     "meta.about.title": "আমাদের কথা | ডেয়ারি পার্ক – কোলাঘাটের পারিবারিক রেস্তোরাঁ",
     "meta.about.desc":
-      "ডেয়ারি পার্ক সম্পর্কে জানুন — কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১১৩৪-এ অবস্থিত পারিবারিক রেস্তোরাঁ। ডাইন-ইন ও ড্রাইভ-থ্রু, দই বড়া ও স্টিম মোমো।",
+      "ডেয়ারি পার্ক সম্পর্কে জানুন — কোলাঘাট–যশোর রোড, কোলাঘাট ৭২১৩৪-এ পারিবারিক রেস্তোরাঁ। ডাইন-ইন ও ড্রাইভ-থ্রু, আমাদের মসলা দোসা।",
     "meta.gallery.title": "ফটো গ্যালারি | ডেয়ারি পার্ক কোলাঘাট – রেস্তোরাঁ ও খাবারের ছবি",
     "meta.gallery.desc":
       "কোলাঘাটের ডেয়ারি পার্কের ছবি — রেস্তোরাঁর বাইরের দৃশ্য, ভিতরের দৃশ্য, খাবার ও পণ্য। কোলাঘাট–যশোর রোডের আমাদের পারিবারিক রেস্তোরাঁর আসল ছবি।",
@@ -498,28 +512,38 @@ window.DP_I18N = {
     "nav.visit": "ভিজিট",
     "nav.contact": "যোগাযোগ",
     "nav.call": "কল করুন",
+    "nav.delico": "ডেলিকো অ্যাপ",
+
+    /* ---------- Delico app (online ordering partner) ---------- */
+    "app.eyebrow": "অনলাইনে অর্ডার করুন",
+    "app.title": "ডেয়ারি পার্ক ডেলিকো অ্যাপে আছে",
+    "app.lead":
+      "ডেলিকো অ্যাপে পুরো মেনু দেখুন, দাম জেনে অর্ডার করুন — তারপর কাউন্টারে থেকে বা ড্রাইভ-থ্রু থেকে নিয়ে নিন, কোলাঘাট–যশোর রোডে।",
+    "app.cta": "ডেলিকো অ্যাপ খুলুন",
+    "app.note": "delicoapp.com নতুন ট্যাবে খুলবে",
+    "app.aria": "ডেলিকো অ্যাপ ওয়বেসাইট নতুন ট্যাবে খুলবে",
+    "app.stripTitle": "টেকঅভে অর্ডার? ডেলিকো অ্যাপ ব্যবহার করুন।",
+    "app.stripSub": "অ্যাপে পুরো মেনু ও দাম — কাউন্টারে থেকে নিয়ে নিন।",
+    "app.stripCta": "ডেলিকো খুলুন",
 
     "lang.en": "English",
     "lang.bn": "বাংলা",
 
     /* ---------- hero ---------- */
     "hero.eyebrow": "পারিবারিক রেস্তোরাঁ · কোলাঘাট, পশ্চিমবঙ্গ",
-    "hero.title1": "দই বড়া আর স্টিম মোমো,",
+    "hero.title1": "মচমচে মসলা দোসা,",
     "hero.title2": "কোলাঘাট–যশোর রোডেই।",
     "hero.sub":
-      "কোলাঘাটে একটি পারিবারিক রেস্তোরাঁ — গাঢ় সবুজ দেওয়াল আর আঁকা খিলানে সাজানো খাওয়ার ঘর। বসে খান, ড্রাইভ-থ্রু নিন, অথবা আসার আগে ফোন করে নিন।",
+      "কোলাঘাট–যশোর রোডে একিটি পারিবারিক রেস্তোরাঁ। মচমচে মসলা দোসা ও চিজ দোসা। বসে খান, ড্রাইভ-থ্রু নিন, অথবা ডেলিকো অ্যাপে অর্ডার করুন।",
     "hero.ctaCall": "এখনই কল করুন",
     "hero.ctaMenu": "আমাদের খাবার দেখুন",
     "hero.ctaDirections": "পথনির্দেশ পান",
+    "hero.ctaDelico": "ডেলিকোতে অর্ডার করুন",
     "hero.ratingLabel": "গুগল রেটিং",
     "hero.reviews": "{count}টি রিভিউ",
     "hero.chipDine": "ডাইন-ইন",
     "hero.chipDrive": "ড্রাইভ-থ্রু",
     "hero.bgAlt": "কোলাঘাট–যশোর রোডে ডেয়ারি পার্কের দোকানের সামনের অংশ",
-    "hero.photoAlt": "কোলাঘাটের রেস্তোরাঁয় ডেয়ারি পার্কের মালিক",
-    "hero.photoSoon": "ছবি আপলোড করা হলে মালিকের ছবি এখানে দেখা যাবে",
-    "hero.ownerKicker": "মালিকের সাথে পরিচিত হন",
-    "hero.ownerRole": "মালিক, ডেয়ারি পার্ক",
     "hero.scroll": "নিচে স্ক্রল করুন",
     "hero.picksLabel": "চেখে দেখুন",
     "hero.picksAria": "মেনুর জনপ্রিয় পদ দেখুন",
@@ -538,17 +562,17 @@ window.DP_I18N = {
     "trust.ways": "আসার উপায় — ডাইন-ইন ও ড্রাইভ-থ্রু",
     "trust.items": "মেনুতে পদ সংখ্যা",
     "trust.from": "মেনুর সবচেয়ে কম দাম",
-
-    "dish.dahiVada": "দই বড়া",
-    "dish.steamMomo": "স্টিম মোমো",
+    "dish.masalaDosa": "মসলা দোসা",
+    "dish.plainDosa": "প্লেন দোসা",
+    "dish.cheeseDosa": "চিজ দোসা",
     "reviews.word": "রিভিউ",
     "why.perPerson": "প্রতি জন",
     "footer.analytics": "অ্যানালিটিক্স সেটিংস",
 
     "strip.1": "১০০% নিরামিষ",
     "strip.2": "ডাইন-ইন ও ড্রাইভ-থ্রু",
-    "strip.3": "দই বড়া",
-    "strip.4": "ছোলা ভাটুরা · রুটি · আইসক্রিম কাউন্টার",
+    "strip.3": "মসলা দোসা",
+    "strip.4": "চিজ ও পনির দোসাও",
     "strip.5": "কোলাঘাট – যশোর রোড",
 
     /* ---------- welcome (home) ---------- */
@@ -560,8 +584,8 @@ window.DP_I18N = {
     "welcome.placeDesc": "কোলাঘাট, পশ্চিমবঙ্গ ৭২১১৩৪-এ আমাদের খুঁজে নিন — ঠিক মূল রোডে।",
     "welcome.dineDesc": "রেস্তোরাঁয় বসে খাবার উপভোগ করুন।",
     "welcome.driveDesc": "গাড়ি থেকেই অর্ডার করে নিয়ে যান।",
-    "welcome.highlightsTitle": "দই বড়া ও স্টিম মোমো",
-    "welcome.highlightsDesc": "আমাদের তালিকাভুক্ত জনপ্রিয় পদ — আজকের পুরো মেনু কাউন্টারে জেনে নিন।",
+    "welcome.highlightsTitle": "মসলা দোসা ও চিজ দোসা",
+    "welcome.highlightsDesc": "আমাদের দোসা কাউন্টারে থেকে আজকরের দোসা দাম জেনে নিন।",
     "welcome.vegTitle": "১০০% নিরামিষ",
     "welcome.vegDesc": "সাইনবোর্ডে লেখা নিরামিষ, ছাপা মেনুতেও তাই।",
 
@@ -569,7 +593,7 @@ window.DP_I18N = {
     "menu.eyebrow": "আমাদের মেনু কার্ড থেকে",
     "menu.title": "ডেয়ারি পার্কে মানুষ যা অর্ডার করেন",
     "menu.lead":
-      "যে ছয়টি পদ বারবার কাউন্টার থেকে বেরিয়ে যায় — প্রতিটির সাথে আমাদের মেনু কার্ডে ছাপা দাম।",
+      "মসলা দোসা আগে চলে। ছয়টি পদ কাউন্টারে থেকে দেখুন।",
     "menu.highlight": "জনপ্রিয় পদ",
     "menu.priceAsk": "আজকের দাম জানতে কল করুন",
     "menu.available": "পাওয়া যায়",
@@ -582,7 +606,7 @@ window.DP_I18N = {
     "menu.exploreFull": "পুরো মেনু দেখুন",
     "menu.noscriptTitle": "মেনুর জনপ্রিয় পদ",
     "menu.noscript":
-      "দই বড়া ₹৮০, ছোলা ভাটুরা ₹১২০, ₹৯ থেকে রুটি আরও নব্বইটি পদ। আজকের দাম জানতে ফোন করুন +91 99324 52124।",
+      "মসলা দোসা ও আর পদ রুটি থেকে ₹৯। ফোন +91 99324 52124। আজকরের দোসা দাম জেনে নিন।",
 
     "menu.boardCta": "সব দাম দেখুন",
     "menu.vegNote": "এই মেনুর সব পদ নিরামিষ।",
@@ -621,7 +645,7 @@ window.DP_I18N = {
     "foodPage.eyebrow": "খাবার ও মেনু",
     "foodPage.title": "ডেয়ারি পার্কে কী ভালো, জেনে নিন।",
     "foodPage.lead":
-      "পুরো মেনু কার্ড, দাম সহ — ₹৯-এর রুটি থেকে আমাদের সিগনেচার দই বড়া। কোলাঘাট–যশোর রোডে নিরামিষ, অর্ডার পেয়ে তৈরি।",
+      "আমাদের পুরো মেনু দাম ও রুটি থেকে ₹৯ থেকে মচমচে মসলা দোসা — কোলাঘাট–যশোর রোডে নিরামিষ কাউন্টারে।",
     "foodPage.callEnquire": "জানতে কল করুন",
     "foodPage.featuredEyebrow": "পছন্দের পদ",
     "foodPage.featuredTitle": "মেনুর জনপ্রিয় পদ",
@@ -655,7 +679,7 @@ window.DP_I18N = {
     "why.eyebrow": "কেন ডেয়ারি পার্কে আসবেন",
     "why.title": "কোলাঘাটের রাস্তার ধারে সহজ এক থামা",
     "why.lead":
-      "নিরামিষ রান্নাঘর, সবুজ খাওয়ার ঘর আর ₹৯ থেকে শুরু হওয়া দাম — ডেয়ারি পার্কে এটুকুই পাবেন।",
+      "নিরামিষ রান্নঘর, সবুজ দেয়াল ও ₹৯ থেকে দাম — মচমচে দোসা।",
     "fact.dine.title": "ডাইন-ইন",
     "fact.dine.desc": "ডাইন-ইন সুবিধা তালিকাভুক্ত রয়েছে।",
     "fact.drive.title": "ড্রাইভ-থ্রু",
@@ -775,7 +799,7 @@ window.DP_I18N = {
     "about.introEyebrow": "ডেয়ারি পার্ক সম্পর্কে",
     "about.introTitle": "কোলাঘাটের রোডের ধারে একটা রেস্তোরাঁ",
     "about.p2":
-      "আমাদের গুগল লিস্টিংয়ে দই বড়া ও স্টিম মোমো মেনুর জনপ্রিয় পদ হিসেবে তালিকাভুক্ত। রেস্তোরাঁয় বসে খাওয়ার আসন আর ড্রাইভ-থ্রু দুটোই আছে — আপনি বসে খান, কিংবা গাড়ি থেকেই অর্ডার নিয়ে যান।",
+      "আমাদের কাউন্টারে মচমচে দোসা — মসলা, চিজ ও পনির — আর ছোলা ভাটুরা থেকে জেনে নিন। ডাইন-ইন ও ড্রাইভ-থ্রু সুভিধা আর।",
     "about.p3":
       "আমাদের ছবিতে যে সবুজ দেওয়াল, পিতলের আলো আর আঁকা খিলান দেখছেন, সেটিই আপনার বসে খাওয়ার ঘর। এই পাতার সব তথ্য আমাদের নিজেদের ছবি ও গুগল লিস্টিং থেকে — কিছুই বানানো নয়।",
     "about.p4":
@@ -786,14 +810,14 @@ window.DP_I18N = {
     "about.facTitle": "ডেয়ারি পার্কের সুবিধা",
     "about.dineDesc": "রেস্তোরাঁয় বসে কাউন্টার থেকে তাজা খাবার উপভোগ করুন।",
     "about.driveDesc": "কোলাঘাট ধরে যাচ্ছেন? গাড়ি না নামিয়েই অর্ডার করে নিয়ে যান।",
-    "about.foodDesc": "গুগলে ডেয়ারি পার্কের জন্য তালিকাভুক্ত দুটি জনপ্রিয় পদ।",
+    "about.foodDesc": "আমাদের দোসা কাউন্টারে থেকে আজকরের দোসা দাম জেনে নিন।",
     "about.vegDesc": "কাউন্টারের স্ন্যাকস থেকে পনিরের পদ — পুরোটাই নিরামিষ রান্নাঘর।",
     "about.pricesTitle": "দাম ওয়েবসাইটে",
     "about.pricesDesc": "ছাপা মেনু কার্ডটি পদে পদে ওয়েবসাইটে আছে — বসার আগেই বিলটা জানা হয়ে যাবে।",
     "about.exploreEyebrow": "দেখুন",
     "about.exploreTitle": "ডেয়ারি পার্কে আপনি যা যা দেখতে পাবেন",
     "about.ex1Title": "ফুড কাউন্টার",
-    "about.ex1Desc": "দই বড়া, স্টিম মোমো আর আজ যা তাজা — পুরো তালিকা জেনে নিন।",
+    "about.ex1Desc": "মসলা দোসা, চিজ দোসা ও আজকরের তাজা আর পুরো মেনু জেনে নিন।",
     "about.ex2Title": "বসার জায়গা",
     "about.ex2Desc": "কোলাঘাটের রোডে আরামদায়ক বিরতির জন্য ডাইন-ইন আসন।",
     "about.ex3Title": "ড্রাইভ-থ্রু",
@@ -841,9 +865,10 @@ window.DP_I18N = {
     "closing.eyebrow": "খিদে পেয়েছে?",
     "closing.title": "আজই ডেয়ারি পার্কে হাজির হোন।",
     "closing.sub":
-      "কোলাঘাট–যশোর রোডে বসে খান, কিংবা ড্রাইভ-থ্রু ব্যবহার করুন। দই বড়া আর স্টিম মোমো অপেক্ষা করছে।",
+      "বসে খান, কোলাঘাট–যশোর রোডে ড্রাইভ-থ্রু, অথবা ডেলিকো অ্যাপ থেকে অর্ডার করুন।",
     "closing.call": "এখনই কল করুন",
     "closing.directions": "পথনির্দেশ পান",
+    "closing.delico": "ডেলিকোতে অর্ডার করুন",
 
     /* ---------- footer ---------- */
     "footer.about":
@@ -853,10 +878,12 @@ window.DP_I18N = {
     "footer.hoursTitle": "সময়",
     "footer.rights": "সর্বস্বত্ব সংরক্ষিত।",
     "footer.privacy": "প্রাইভেসি নোট",
+    "footer.delico": "ডেলিকো অ্যাপ থেকে অর্ডার করুন",
 
     /* ---------- sticky bar ---------- */
     "sticky.call": "কল করুন",
     "sticky.directions": "পথনির্দেশ",
+    "sticky.delico": "ডেলিকো",
 
     /* ---------- consent ---------- */
     "consent.title": "অ্যানালিটিক্স পছন্দ",

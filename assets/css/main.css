@@ -242,6 +242,7 @@ button { font: inherit; color: inherit; }
 }
 html[lang="bn"] .eyebrow { letter-spacing: .06em; font-size: .8rem; }
 .eyebrow--light { color: var(--gold); }
+.eyebrow--dark { color: var(--brand-deep); }
 .eyebrow__dot {
   width: 7px; height: 7px;
   border-radius: 50%;
@@ -335,6 +336,25 @@ html[lang="bn"] .section-title {
   border-color: var(--line-strong);
 }
 .btn--outline:hover { color: var(--brand); border-color: var(--brand); }
+
+/* Gold — the Delico app CTA: stands out on dark green and on the hero photo */
+.btn--gold {
+  background-image: linear-gradient(135deg, #f6dcab 0%, var(--gold) 45%, #d7a44c 100%);
+  color: #241300;
+  box-shadow: 0 10px 26px -12px rgba(183, 138, 52, .75), inset 0 1px 0 rgba(255, 255, 255, .55);
+}
+.btn--gold:hover {
+  background-image: linear-gradient(135deg, #ffe9c4 0%, #ecc87f 45%, #d9a94e 100%);
+  box-shadow: 0 18px 36px -14px rgba(183, 138, 52, .85), inset 0 1px 0 rgba(255, 255, 255, .6);
+}
+
+/* Ink — dark button for the gold Delico promo band */
+.btn--ink {
+  background-image: linear-gradient(135deg, #143222 0%, #0d2419 60%, #081a13 100%);
+  color: var(--cream);
+  box-shadow: 0 12px 26px -14px rgba(8, 26, 19, .9), inset 0 1px 0 rgba(255, 255, 255, .14);
+}
+.btn--ink:hover { box-shadow: 0 18px 36px -16px rgba(8, 26, 19, .95), inset 0 1px 0 rgba(255, 255, 255, .2); }
 
 .btn--sm { min-height: 42px; padding: .5rem 1rem; font-size: .88rem; }
 .btn--lg { min-height: 54px; padding: .95rem 1.55rem; font-size: 1.02rem; }
@@ -481,6 +501,7 @@ html[lang="bn"] .section-title {
 .lang-switch__short { display: inline; }
 
 .header__call { display: none; }
+.header__delico { display: none; }
 
 .nav-toggle {
   display: inline-grid;
@@ -691,76 +712,6 @@ html[lang="bn"] .hero__title {
   margin-top: 1.5rem;
 }
 
-/* Owner portrait — the face of the restaurant, shown large in the hero */
-.hero__owner { display: none; margin: 0; position: relative; z-index: 3; }
-.hero.has-owner .hero__owner {
-  display: block;
-  order: -1;
-  width: min(66vw, 17rem);
-  margin-inline: auto;
-  animation: owner-in .9s var(--ease) both;
-}
-@keyframes owner-in { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
-.hero__owner-frame {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  border-radius: 999px 999px 26px 26px;
-  padding: 6px;
-  background: linear-gradient(160deg, #fff0d2 0%, var(--gold) 45%, var(--gold-deep) 100%);
-  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .9), 0 0 0 10px rgba(230, 189, 114, .1), 0 0 90px rgba(42, 106, 78, .34);
-  overflow: hidden;
-}
-.hero__owner-frame img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 30%;
-  border-radius: 999px 999px 21px 21px;
-  background: #0d2419;
-}
-.hero__owner-cap {
-  position: absolute;
-  left: 50%;
-  bottom: -.9rem;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .1rem;
-  width: max-content;
-  max-width: calc(100% + 1.5rem);
-  padding: .55rem 1.1rem;
-  border-radius: 16px;
-  text-align: center;
-  background: rgba(20, 12, 9, .78);
-  border: 1px solid rgba(230, 189, 114, .55);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .8);
-}
-.hero__owner-kicker {
-  font-size: .62rem;
-  text-transform: uppercase;
-  letter-spacing: .16em;
-  font-weight: 700;
-  color: var(--gold);
-}
-html[lang="bn"] .hero__owner-kicker { letter-spacing: 0; font-size: .75rem; }
-.hero__owner-role { font-family: var(--font-display); font-size: 1.05rem; color: var(--cream); line-height: 1.2; }
-
-/* With the owner photo, the full-bleed background becomes a soft backdrop —
-   unless it is the shopfront shot, which is worth seeing in focus. */
-.hero.has-owner .hero__bg img { filter: blur(26px) saturate(1.15) brightness(.6); }
-.hero.has-owner.has-shopfront .hero__bg img { filter: saturate(1.06) brightness(.92) contrast(1.02); }
-.hero.has-owner .hero__scrim {
-  background:
-    linear-gradient(100deg, rgba(6, 20, 14, .9) 0%, rgba(6, 20, 14, .7) 45%, rgba(6, 20, 14, .5) 100%),
-    linear-gradient(180deg, rgba(6, 20, 14, .6) 0%, rgba(6, 20, 14, .1) 35%, rgba(6, 20, 14, .5) 75%, rgba(6, 20, 14, .95) 100%),
-    radial-gradient(55% 55% at 78% 40%, rgba(230, 189, 114, .26), transparent 70%);
-}
-.hero.has-owner .hero__inner { padding-bottom: 1.2rem; }
-
 /* 3D floating stage (desktop) */
 .hero__stage {
   position: relative;
@@ -942,6 +893,86 @@ html[lang="bn"] .hero__owner-kicker { letter-spacing: 0; font-size: .75rem; }
 }
 .strip__dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(230, 189, 114, .72); }
 @keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
+
+/* DELICO APP PROMO BAND — gold band under the marquee, full advertising */
+.app-promo {
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+  background:
+    radial-gradient(90% 160% at 88% 0%, rgba(255, 255, 255, .5), transparent 55%),
+    linear-gradient(115deg, #f7e3bb 0%, var(--gold) 48%, #d9a44e 100%);
+  color: #241300;
+  border-bottom: 1px solid rgba(124, 34, 9, .25);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .35), 0 24px 50px -30px rgba(124, 34, 9, .45);
+}
+.app-promo__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 90% at 8% 110%, rgba(166, 52, 15, .28), transparent 70%),
+    radial-gradient(30% 70% at 96% -10%, rgba(255, 255, 255, .55), transparent 70%);
+}
+.app-promo__inner {
+  position: relative;
+  display: grid;
+  gap: 1.1rem;
+  align-items: center;
+  padding-block: clamp(1.6rem, 3.4vw, 2.4rem);
+}
+.app-promo__badge {
+  display: none;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  border-radius: 24px;
+  background: rgba(20, 50, 34, .92);
+  color: var(--gold);
+  box-shadow: 0 18px 34px -16px rgba(8, 26, 19, .8);
+  transform: rotate(-6deg);
+}
+.app-promo__badge svg { width: 34px; height: 34px; }
+.app-promo__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.6vw, 2.3rem);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  font-weight: 650;
+  margin: .15rem 0 .45rem;
+}
+.app-promo__lead { max-width: 46rem; font-size: .98rem; line-height: 1.65; color: rgba(36, 19, 0, .82); }
+.app-promo__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; }
+.app-promo__note { font-size: .8rem; font-weight: 600; color: rgba(36, 19, 0, .62); }
+
+/* Slim Delico strip on the Food & Menu page */
+.app-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.2rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(120% 160% at 92% 0%, rgba(230, 189, 114, .28), transparent 60%),
+    linear-gradient(135deg, #2a1a12 0%, #431f0f 55%, #6d2a10 100%);
+  color: var(--cream);
+  border: 1px solid rgba(230, 189, 114, .35);
+  box-shadow: var(--shadow-2);
+}
+.app-strip__title { font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; }
+.app-strip__sub { font-size: .86rem; color: rgba(253, 247, 236, .75); margin-top: .15rem; }
+
+/* Owner switches appPromo off -> every promo element hides */
+[data-app-promo][hidden] { display: none !important; }
+
+@media (min-width: 760px) {
+  .app-promo__inner { grid-template-columns: auto minmax(0, 1fr) auto; gap: 1.8rem; }
+  .app-promo__badge { display: grid; }
+  .app-promo__actions { flex-direction: column; align-items: flex-start; gap: .35rem; }
+}
 
 /* ---------------------------------------------------------------------------
    6. SECTIONS
@@ -1667,6 +1698,15 @@ html[lang="bn"] .fact__title { font-size: 1.1rem; line-height: 1.5; }
   color: #fff8f0;
   box-shadow: 0 8px 18px -10px rgba(148, 37, 10, .9);
 }
+.sticky-bar__btn--delico {
+  flex: 0 1 auto;
+  min-width: 0;
+  padding-inline: .55rem;
+  background-image: linear-gradient(135deg, #f0d49a, var(--gold) 60%, #d7a44c);
+  color: #241300;
+  font-size: .84rem;
+  box-shadow: 0 8px 18px -10px rgba(183, 138, 52, .9);
+}
 .sticky-bar__btn--dir {
   background: rgba(255, 247, 236, .1);
   color: var(--cream);
@@ -1928,6 +1968,7 @@ html:not(.js) .reveal {
   body { padding-bottom: 0; }
 
   .header__call { display: inline-flex; }
+  .header__delico { display: inline-flex; }
 
   .lang-switch__btn { padding: .25rem .7rem; }
   .lang-switch__btn > span:first-child { display: inline; }
@@ -1936,23 +1977,6 @@ html:not(.js) .reveal {
   .hero__inner { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); gap: 1.5rem; }
   .hero__stage { display: block; }
   .hero__badges { margin-top: 1.9rem; }
-
-  /* Owner portrait takes the right-hand column; floating cards orbit it */
-  .hero.has-owner .hero__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .hero.has-owner .hero__content { grid-column: 1; grid-row: 1; }
-  .hero.has-owner .hero__owner,
-  .hero.has-owner .hero__stage { grid-column: 2; grid-row: 1; }
-  .hero.has-owner .hero__owner {
-    order: 0;
-    width: min(100%, 25rem);
-    justify-self: center;
-    margin-bottom: 1.4rem;
-  }
-  .hero.has-owner .hero__stage { pointer-events: none; z-index: 4; min-height: 0; align-self: stretch; }
-  .hero.has-owner .hero__ring { display: none; }
-  .hero.has-owner .float-card--rating { top: 2%; left: -2%; width: 11rem; }
-  .hero.has-owner .float-card--dish { right: -3%; top: auto; bottom: 18%; width: 11.5rem; }
-  .hero.has-owner .float-card--place { display: none; }
 
   .sticky-bar { display: none; }
   .consent { left: 1.2rem; right: 1.2rem; bottom: 1.2rem; max-width: 62rem; margin-inline: auto; }
@@ -2300,6 +2324,7 @@ html:not(.js) .reveal {
   gap: .55rem;
   justify-content: center;
 }
+.pairing__plates:empty { display: none; }
 .pairing__plate {
   position: relative;
   width: clamp(5.4rem, 16vw, 7.2rem);

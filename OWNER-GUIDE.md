@@ -17,12 +17,11 @@ placeholder is shown instead — nothing breaks, and no fake photograph is used.
 | File name | Where it shows |
 | --- | --- |
 | `photos/shop-front.*` | **Supplied** — full-screen homepage hero backdrop |
-| `photos/owner.*` | **Supplied** — owner portrait in the hero frame + About page inset |
 | `photos/interior-room.*` | **Supplied** — dining room (About page + Gallery) |
 | `photos/interior-arches.*`, `interior-booth.*`, `interior-green.*`, `interior-lounge.*`, `interior-night.*` | **Supplied** — dining room, arches and evening frontage (Gallery) |
 | `photos/table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and snacks counter (Gallery) |
-| `photos/dahi-vada.*` | **Supplied** — Dahi Vada cards on Home + Food & Menu, “order both” strip, Gallery |
-| `photos/steam-momo.*` | **Supplied** — Steam Momo cards on Home + Food & Menu, “order both” strip, Gallery |
+| `photos/dahi-vada.*` | **Supplied** — Dahi Vada cards on Food & Menu + Gallery |
+| `photos/steam-momo.*` | **Supplied** — Steam Momo cards on Food & Menu + Gallery |
 | `photos/chola-bhatura.*` | **Supplied** — Chola Bhatura card on Home + Food & Menu, Gallery |
 | `photos/paneer-butter-masala.*` | **Supplied** — Paneer Butter Masala card on Home + Food & Menu, Gallery |
 | `photos/veg-chowmein.*` | **Supplied** — Veg Chowmein card on Home + Food & Menu, Gallery |
@@ -215,6 +214,24 @@ whatsapp: {
 The site never claims a message was delivered before the visitor taps Send, and
 it does not advertise WhatsApp ordering, delivery or payment — only enquiries.
 
+## 7b. Delico app buttons (`content.js → appPromo`)
+
+Every “Delico” button on the site (header, hero, gold promo band on the home
+page, the dosa pairing strip, the Food & Menu banner, the sticky mobile bar,
+the drawer, the footer, the closing CTA and the 404 page) opens one link in a
+new tab:
+
+```js
+appPromo: {
+  enabled: true,                      // false hides every button everywhere
+  url: "https://delicoapp.com/"       // must be a full https:// URL
+},
+```
+
+The button wording lives in `assets/js/i18n.js` under the `app.*`,
+`nav.delico`, `sticky.delico`, `footer.delico`, `hero.ctaDelico` and
+`closing.delico` keys (English + Bengali).
+
 ## 8. Wording and Bengali translation (`assets/js/i18n.js`)
 
 Every label exists twice: `en` (English) and `bn` (Bengali). Keep both sides in
@@ -249,12 +266,15 @@ Run `npm test` locally if you want to see the same checks before publishing.
 
 ## Before you go live — owner checklist
 
-- [ ] The owner portrait and six gallery photographs are already supplied —
-      add an exterior photo when one is taken (`gallery/` section `exterior`).
+- [ ] The restaurant photographs are already supplied. The owner portrait was
+      removed from the site on purpose — do not re-add `photos/owner.*`.
 - [ ] Confirm the Google rating and review count on the live listing, then set
       `reviews.show = true` only after checking (currently hidden).
-- [ ] Add Dahi Vada / Steam Momo photographs (`photos/dahi-vada.*`,
-      `photos/steam-momo.*`) and their confirmed descriptions.
+- [ ] The site leads with dosas now: add real dosa photographs as
+      `photos/masala-dosa.*` etc. and set `photo:` on the dosa items in
+      `content.js` — until then they show the designed placeholder. Dosa
+      prices stay `null` (“ask for today's price”) until confirmed at the
+      counter; never invent a price.
 - [ ] Confirm the full opening hours and set `hours.verified = true` only then.
 - [ ] Confirm the phone number is still +91 99324 52124.
 - [ ] Check `whatsapp.number` is the phone that has WhatsApp installed — send

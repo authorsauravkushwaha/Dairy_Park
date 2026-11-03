@@ -58,7 +58,7 @@ function restaurantNode(C, siteUrl) {
     name: b.name,
     alternateName: b.nameBn,
     description:
-      'Fast-food restaurant in Kolaghat, West Bengal, with dine-in and drive-through. Menu highlights include Dahi Vada and Steam Momo.',
+      'Pure veg family restaurant in Kolaghat, West Bengal, with dine-in and drive-through. Menu highlights include our crispy masala and cheese dosas.',
     url: siteUrl,
     image: siteUrl + 'assets/img/og-image.png',
     telephone: b.phone && b.phone.tel,
@@ -187,10 +187,10 @@ async function assemblePage(page, ctx) {
     home: homeHref,
     page: page.id,
     bodyClass: page.id === 'home' ? '' : 'subpage',
-    // WebP is the format findPhoto() tries first, so preload that exact file
-    // or the browser downloads the hero twice.
+    // The hero backdrop is the shopfront photograph — preload it in WebP
+    // (the format findPhoto() probes first) so the browser doesn't fetch it twice.
     headExtra: page.id === 'home'
-      ? '  <link rel="preload" href="assets/img/photos/owner.webp" as="image" fetchpriority="high">'
+      ? '  <link rel="preload" href="assets/img/photos/shop-front.webp" as="image" fetchpriority="high">'
       : '',
     jsonld,
     jsonldHash,
