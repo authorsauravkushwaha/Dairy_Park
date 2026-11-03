@@ -51,19 +51,24 @@ async function loadContent() {
 /* ------------------------------------------------------------------ */
 function restaurantNode(C, siteUrl) {
   const b = C.business;
-  const spend = b.spend || {};
+  const prices = (C.menu || []).map((item) => {
+    const match = String(item && item.price || '').match(/(\d+(?:\.\d+)?)/);
+    return match ? Number(match[1]) : null;
+  }).filter((value) => value !== null);
+  const min = prices.length ? Math.min(...prices) : null;
+  const max = prices.length ? Math.max(...prices) : null;
   return {
     '@type': 'Restaurant',
     '@id': siteUrl + '#restaurant',
     name: b.name,
     alternateName: b.nameBn,
     description:
-      'Pure veg family restaurant in Kolaghat, West Bengal, with dine-in and drive-through. Menu highlights include our crispy masala and cheese dosas.',
+      'Pure veg family restaurant in Kolaghat, West Bengal, with dine-in and drive-through. The new menu includes dosa, uttapam, momo, chowmein, paneer, pizza, snacks, shakes and tea. Order requests can be sent through WhatsApp for restaurant confirmation.',
     url: siteUrl,
     image: siteUrl + 'assets/img/og-image.png',
     telephone: b.phone && b.phone.tel,
-    servesCuisine: ['North Indian', 'Chinese', 'Fast Food'],
-    priceRange: (spend.currency || '₹') + spend.min + '–' + spend.max,
+    servesCuisine: ['North Indian', 'South Indian', 'Chinese', 'Fast Food'],
+    priceRange: min !== null && max !== null ? '₹' + min + '–' + max : undefined,
     currenciesAccepted: 'INR',
     address: {
       '@type': 'PostalAddress',
@@ -190,7 +195,7 @@ async function assemblePage(page, ctx) {
     // The hero backdrop is the shopfront photograph — preload it in WebP
     // (the format findPhoto() probes first) so the browser doesn't fetch it twice.
     headExtra: page.id === 'home'
-      ? '  <link rel="preload" href="assets/img/photos/shop-front.webp" as="image" fetchpriority="high">'
+      ? '  <link rel="preload" href="assets/img/photos/inspiration-masala-dosa.webp" as="image" fetchpriority="high">'
       : '',
     jsonld,
     jsonldHash,

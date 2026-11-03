@@ -221,7 +221,7 @@ for (const page of PAGES) {
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = match[1];
     if (/^(https?:|tel:|mailto:|#|data:)/.test(url)) continue;
-    const ref = url.split('?')[0];
+    const ref = url.split('?')[0].split('#')[0];
     localRefs.add(ref);
     const resolved = path.normalize(path.join(pageDir, ref));
     if (!resolved.startsWith(dist)) {

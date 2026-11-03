@@ -1,53 +1,35 @@
-# Owner photos
+# Dairy Park photos
 
-The genuine Dairy Park photographs below are **already uploaded and wired up**
-(hero, About page, Gallery) — the website picks them up automatically.
+This folder contains three kinds of images:
 
-## Single-photo slots (`assets/img/photos/`)
+1. **Owner-supplied restaurant photographs** — shopfront, interior, counter,
+   freezers, six dish photos, and the four new printed-menu pages. These are
+   real Dairy Park photographs.
+2. **`inspiration-*.webp`** — AI-generated serving illustrations created for
+   this website. They are labelled “Serving inspiration” in the UI and are not
+   photographs of the exact dish prepared at Dairy Park.
+3. **`reference-*.webp`** — licensed reference photographs (Pexels and two
+   Wikimedia Commons CC BY-SA images). They are also labelled “Serving
+   inspiration”. Credits and licences are published in
+   `/privacy.html#image-credits`.
 
-File names must match exactly. The photographs currently shipped are **WebP**
-(`.webp`) — the lightest format that every modern phone and browser supports,
-which keeps the whole gallery under a megabyte. A `.avif`, `.jpg`, `.jpeg` or
-`.png` file with the same name works too; the site probes for them in that
-order, so if you re-export as WebP it is picked up automatically.
+## Printed menu pages (supplied 2026-11-03)
 
-| File name        | Where it appears                                  |
-| ---------------- | ------------------------------------------------- |
-| `shop-front.*`   | **Supplied** — full-screen homepage hero backdrop |
-| `interior-room.*` | **Supplied** — dining room (About + Gallery)      |
-| `interior-bench.*` | **Supplied** — home “Inside the dining room” band + Gallery |
-| `interior-glass.*` | **Supplied** — evening room through the glass, home band + Gallery |
-| `interior-arches.*`, `interior-booth.*`, `interior-green.*`, `interior-lounge.*`, `interior-night.*` | **Supplied** — murals, booths and evening frontage (Gallery) |
-| `table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and the snacks counter (Gallery) |
-| `menu-spread-1.*`, `menu-spread-2.*` | **Supplied** — menu boards (Gallery) |
-| `menu-drinks.*`  | **Supplied** — drinks (Gallery)                   |
-| `counter-snacks.*` | **Supplied** — samosas at the counter (Gallery) |
-| `ice-cream-freezer.*` | **Supplied** — ice-cream freezer (Gallery)    |
-| `chocolate-freezer.*` | **Supplied** — chocolate selection (Gallery)  |
-| `dahi-vada.*`    | **Supplied** — Dahi Vada cards + hero peek + "order both" strip + Gallery |
-| `steam-momo.*`   | **Supplied** — Steam Momo cards + hero peek + "order both" strip + Gallery |
-| `chola-bhatura.*` | **Supplied** — Chola Bhatura card + Food & Menu thumbnail + Gallery |
-| `paneer-butter-masala.*` | **Supplied** — Paneer Butter Masala card + Food & Menu thumbnail + Gallery |
-| `veg-chowmein.*` | **Supplied** — Veg Chowmein card + Food & Menu thumbnail + Gallery |
-| `cold-coffee.*`  | **Supplied** — Cold Coffee with Ice Cream card + Food & Menu thumbnail + Gallery |
+| File | Contents |
+| --- | --- |
+| `menu-dosa.webp` | Dosa, uttapam, momo, chowmein/noodles |
+| `menu-spread-1.webp` | Moglai, chaat, chilli, pizza, rice, roti, aloo, dal, tarka, chana, paneer |
+| `menu-spread-2.webp` | Rolls, salad, raita/dahi, papad, beverages |
+| `menu-snacks.webp` | Tea, snacks, puri, pakora, fries, rolls, idli, vada |
 
-## New gallery photographs
+Original uploads are kept in `assets/menu-source/` for provenance.
 
-Drop the file in this folder with any name, then list it in `content.js →
-gallery` with its section (`exterior`, `interior`, `food`, `products`) and
-bilingual alt text — see OWNER-GUIDE.md for the exact snippet. The outside and
-inside sets are framed in arches on the Gallery page.
+## Replacing a dish image
 
-If a file is missing, the site shows a designed placeholder instead — nothing
-breaks, and no fake photograph of Dairy Park is ever used. `npm run check`
-fails the build if `content.js` points at a photograph that is not here, so a
-typo in a file name is caught before the site goes live.
+1. Export a real Dairy Park photo as WebP, about 900×675 or 900×900, quality 80.
+2. Put it in this folder.
+3. In `content.js`, point the dish’s `photo` at the new base name and set
+   `photoKind: "owner"`.
+4. Run `npm run build && npm test`.
 
-For replacements, export **WebP** at about 1400–1600 px on the long edge and
-quality 75–82. The current set is 25 files and about 3.0 MB in total. The
-shopfront is the hero backdrop, so keeping it under ~250 kB matters most.
-
-The home page also uses three of these in its dairy-counter band — `freezer`,
-`shelves` and `counter` are named in `content.js → photos`.
-
-Please upload only genuine photos of the restaurant and the food. (The owner portrait has been removed from the site at the owner's request.)
+The build fails if `content.js` points at a photo that does not exist.

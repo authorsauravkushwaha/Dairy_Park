@@ -4,3 +4,8 @@ dist/
 *.log
 .env
 .env.*
+
+# Local scratch / tooling
+.venv/
+.work/
+image-search/
