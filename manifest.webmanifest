@@ -1,7 +1,7 @@
 {
-  "name": "Dairy Park — Fast Food Restaurant, Kolaghat",
+  "name": "Dairy Park — Pure Veg Restaurant, Kolaghat",
   "short_name": "Dairy Park",
-  "description": "Fast-food restaurant on Kolaghat – Jashar Road with dine-in and drive-through. Dahi Vada and Steam Momo.",
+  "description": "Pure-veg family restaurant on Kolaghat – Jashar Road. Browse the new menu, build an order request and send it on WhatsApp, or call +91 99324 52124.",
   "lang": "en-IN",
   "dir": "ltr",
   "start_url": "./",
@@ -9,11 +9,33 @@
   "display": "standalone",
   "background_color": "#081a13",
   "theme_color": "#0d2419",
-  "categories": ["food", "restaurant"],
+  "categories": [
+    "food",
+    "restaurant"
+  ],
   "icons": [
-    { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
-    { "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+    {
+      "src": "assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
   ]
 }

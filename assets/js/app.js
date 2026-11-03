@@ -180,9 +180,17 @@
   }
 
   function renderSpend() {
-    var spend = (C.business && C.business.spend) || {};
-    var currency = spend.currency || '₹';
-    setText('[data-bind="spend"]', currency + num(spend.min) + '–' + num(spend.max));
+    var spend = C.business && C.business.spend;
+    els('[data-bind="spend"]').forEach(function (node) {
+      var item = closest(node, '.trust__item');
+      if (!spend || spend.min == null || spend.max == null) {
+        if (item) item.hidden = true;
+        node.textContent = '';
+        return;
+      }
+      if (item) item.hidden = false;
+      node.textContent = (spend.currency || '₹') + num(spend.min) + '–' + num(spend.max);
+    });
   }
 
   function renderFacilities() {
@@ -273,8 +281,8 @@
         heroImg.alt = t('hero.bgAlt');
         if (hero) {
           hero.classList.remove('is-nophoto');
-          // The shopfront is a photograph in its own right — keep it sharp.
-          if (photos.hero) hero.classList.add('has-shopfront');
+          // Food-first hero. The image may be a serving illustration.
+          if (photos.hero) hero.classList.add('has-food-hero');
         }
       } else {
         heroImg.src = BASE + 'assets/img/placeholder-hero.svg';
@@ -321,6 +329,10 @@
     els('[data-bind="heroPrice"]').forEach(function (node) {
       node.textContent = min ? tf('hero.priceRibbon', { price: localizeDigits(min) }) : t('menu.priceAsk');
     });
+    var heroDish = ((C.menu) || []).filter(function (item) { return item && item.id === 'masala-dosa'; })[0];
+    els('[data-bind="heroDishPrice"]').forEach(function (node) {
+      node.textContent = heroDish ? localizeDigits(heroDish.price) : '';
+    });
     els('[data-bind="menuPriceNote"]').forEach(function (node) {
       node.textContent = t('menu.priceNote');
     });
@@ -357,7 +369,26 @@
   /* --------------------------------------------------------------------------- */
   function menuAlt(item, hasPhoto) {
     var name = tx(item.name);
-    return hasPhoto ? name : name + ' — ' + t('menu.photoSoon');
+    if (!hasPhoto) return name + ' — ' + t('menu.photoSoon');
+    if (item.photoKind === 'owner') return name + ' — ' + t('menu.photoOwner');
+    return name + ' — ' + t('menu.photoInspiration');
+  }
+
+  function photoNote(item) {
+    if (!item.photo || item.photoKind === 'owner') return '';
+    return t('menu.photoInspiration');
+  }
+
+  function orderButton(item, className) {
+    var available = item.available !== false && priceValue(item) !== null;
+    var btn = el('button', {
+      type: 'button',
+      class: className || 'btn btn--gold btn--sm',
+      'data-order-add': item.id,
+      'aria-label': tf('order.addAria', { name: tx(item.name) }),
+      disabled: available ? null : 'disabled'
+    }, [el('span', { text: t('order.add') })]);
+    return btn;
   }
 
   function dishPriceText(item) {
@@ -411,6 +442,8 @@
     if (item.highlight) {
       media.appendChild(el('span', { class: 'dish__badge', text: t('menu.highlight') }));
     }
+    var note = photoNote(item);
+    if (note) media.appendChild(el('span', { class: 'dish__photo-note', text: note }));
     if (hasPrice) {
       media.appendChild(el('span', { class: 'dish__price', text: localizeDigits(item.price) }));
     }
@@ -461,14 +494,17 @@
     if (!available) meta.appendChild(el('span', { class: 'pill', text: t('menu.unavailable') }));
     bodyEl.appendChild(meta);
 
+    var actions = el('div', { class: 'dish__actions' });
+    actions.appendChild(orderButton(item, 'btn btn--gold btn--sm dish__add'));
     var call = el('a', {
       class: 'dish__cta',
       href: phoneHref(),
       'data-track': 'menu_item_call'
     });
-    call.appendChild(el('span', { text: t('menu.ask') }));
-    call.appendChild(icon('arrow'));
-    bodyEl.appendChild(call);
+    call.appendChild(el('span', { text: t('order.call' ) }));
+    call.appendChild(icon('phone'));
+    actions.appendChild(call);
+    bodyEl.appendChild(actions);
 
     var card = el('article', {
       class: 'dish reveal' + (available ? '' : ' is-unavailable'),
@@ -484,7 +520,7 @@
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', primaryName + ' — ' + t('foodPage.detailsShort'));
       card.addEventListener('click', function (event) {
-        if (closest(event.target, 'a')) return;
+        if (closest(event.target, 'a, button')) return;
         openDishDialog(item);
       });
       card.addEventListener('keydown', function (event) {
@@ -513,7 +549,7 @@
 
   /* A single line of the printed menu: name, tag, dotted leader and price.
      Used for the long list on the Food & Menu page — far easier to scan than
-     ninety photo cards, and it puts every price on screen. */
+     112 photo cards, and it puts every price on screen. */
   function buildDishRow(item, index) {
     var hasPrice = item.price !== null && item.price !== undefined && item.price !== '';
     var available = item.available !== false;
@@ -524,9 +560,6 @@
     var row = el('article', {
       class: 'menu-row reveal' + (available ? '' : ' is-unavailable'),
       'data-dish-id': item.id || 'row-' + index,
-      role: 'button',
-      tabindex: '0',
-      'aria-label': tf('foodPage.rowAria', { name: primaryName, price: priceText }),
       'data-reveal': 'up'
     });
 
@@ -534,6 +567,11 @@
     thumb.appendChild(el('span', { class: 'menu-row__mono', text: monogram(item) }));
     row.appendChild(thumb);
 
+    var details = el('button', {
+      type: 'button',
+      class: 'menu-row__details',
+      'aria-label': tf('foodPage.rowAria', { name: primaryName, price: priceText })
+    });
     var main = el('span', { class: 'menu-row__main' });
     var nameWrap = el('span', { class: 'menu-row__names' });
     nameWrap.appendChild(el('span', { class: 'menu-row__name', text: primaryName }));
@@ -546,23 +584,22 @@
     }
     main.appendChild(nameWrap);
     if (item.tag) main.appendChild(el('span', { class: 'menu-row__tag', text: tx(item.tag) }));
-    row.appendChild(main);
-
-    row.appendChild(el('span', { class: 'menu-row__leader', 'aria-hidden': 'true' }));
-    row.appendChild(el('span', {
+    var note = photoNote(item);
+    if (note) main.appendChild(el('span', { class: 'menu-row__photo-note', text: note }));
+    details.appendChild(main);
+    details.appendChild(el('span', { class: 'menu-row__leader', 'aria-hidden': 'true' }));
+    details.appendChild(el('span', {
       class: 'menu-row__price' + (hasPrice ? '' : ' menu-row__price--ask'),
       text: priceText
     }));
-    row.appendChild(icon('arrow'));
-
-    function open() { openDishDialog(item); }
-    row.addEventListener('click', open);
-    row.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        open();
-      }
+    details.addEventListener('click', function () { openDishDialog(item); });
+    row.addEventListener('click', function (event) {
+      if (closest(event.target, 'button, a')) return;
+      openDishDialog(item);
     });
+    row.appendChild(details);
+
+    row.appendChild(orderButton(item, 'menu-row__add'));
 
     findPhoto(item.photo).then(function (url) {
       if (!url) return;
@@ -602,6 +639,8 @@
       decoding: 'async'
     });
     media.appendChild(img);
+    var dnote = photoNote(item);
+    if (dnote) media.appendChild(el('span', { class: 'dish-dialog__photo-note', text: dnote }));
     findPhoto(item.photo).then(function (url) {
       if (url) { img.src = url; img.alt = menuAlt(item, true); }
       else media.remove();
@@ -636,14 +675,17 @@
 
     info.appendChild(el('p', { class: 'dish-dialog__note', text: t('menu.note') }));
 
+    var dialogActions = el('div', { class: 'dish-dialog__actions' });
+    dialogActions.appendChild(orderButton(item, 'btn btn--gold'));
     var call = el('a', {
       class: 'btn btn--primary',
       href: phoneHref(),
       'data-track': 'menu_item_call'
     });
     call.appendChild(icon('phone'));
-    call.appendChild(el('span', { text: t('foodPage.callEnquire') }));
-    info.appendChild(call);
+    call.appendChild(el('span', { text: t('order.call') }));
+    dialogActions.appendChild(call);
+    info.appendChild(dialogActions);
 
     dishDialogBody.appendChild(media);
     dishDialogBody.appendChild(info);
@@ -716,21 +758,16 @@
   }
 
   function renderPairing() {
-    var strip = $('#pairing');
-    if (!strip) return;
     var data = C.pairing || {};
-
-    strip.hidden = data.show === false;
     setText('[data-bind="pairingEyebrow"]', tx(data.eyebrow));
     setText('[data-bind="pairingTitle"]', tx(data.title));
     setText('[data-bind="pairingDesc"]', tx(data.desc));
     setText('[data-bind="pairingCta"]', tx(data.cta));
 
-    // The two plates follow the menu photos
-    $$('[data-pairing-photo]').forEach(function (img) {
-      var item = ((C.menu) || []).filter(function (entry) {
-        return entry && entry.id === img.dataset.pairingPhoto;
-      })[0];
+    var ids = Array.isArray(data.items) ? data.items : [];
+    $$('[data-pairing-photo]').forEach(function (img, index) {
+      var id = img.dataset.pairingPhoto || ids[index];
+      var item = ((C.menu) || []).filter(function (entry) { return entry && entry.id === id; })[0];
       var plate = closest(img, '.pairing__plate');
       if (!item) { if (plate) plate.remove(); return; }
       findPhoto(item.photo).then(function (url) {
@@ -1526,6 +1563,9 @@
     initFoodPage();
     renderMenuFacts();
     renderPhotoSlots();
+    renderOrderBar();
+    renderOrderLines();
+    updateOrderWhatsApp();
     syncCounters();
 
     var heroImg = $('#heroPhoto');
@@ -1805,6 +1845,193 @@
   }
 
   /* --------------------------------------------------------------------------- */
+  /* Direct order builder — WhatsApp hand-off, no backend, no payment             */
+  /* --------------------------------------------------------------------------- */
+  var ORDER_KEY = 'dp-order';
+  var orderQty = {};
+
+  function loadOrder() {
+    try {
+      var raw = JSON.parse(store.get(ORDER_KEY) || '{}');
+      var valid = {};
+      Object.keys(raw || {}).forEach(function (id) {
+        var item = menuItemById(id);
+        var qty = Math.max(1, Math.min(20, parseInt(raw[id], 10) || 0));
+        if (item && item.available !== false && priceValue(item) !== null && qty > 0) valid[id] = qty;
+      });
+      return valid;
+    } catch (e) { return {}; }
+  }
+
+  function menuItemById(id) {
+    return ((C.menu) || []).filter(function (item) { return item && item.id === id; })[0] || null;
+  }
+
+  function saveOrder() { store.set(ORDER_KEY, JSON.stringify(orderQty)); }
+
+  function orderEntries() {
+    return Object.keys(orderQty).map(function (id) {
+      var item = menuItemById(id);
+      return item ? { item: item, qty: orderQty[id], line: (priceValue(item) || 0) * orderQty[id] } : null;
+    }).filter(Boolean);
+  }
+
+  function orderCount() {
+    return orderEntries().reduce(function (sum, entry) { return sum + entry.qty; }, 0);
+  }
+
+  function orderTotal() {
+    return orderEntries().reduce(function (sum, entry) { return sum + entry.line; }, 0);
+  }
+
+  function addToOrder(id, delta) {
+    var item = menuItemById(id);
+    if (!item || item.available === false || priceValue(item) === null) return;
+    var next = (orderQty[id] || 0) + (delta == null ? 1 : delta);
+    if (next <= 0) delete orderQty[id];
+    else orderQty[id] = Math.min(20, next);
+    saveOrder();
+    renderOrderBar();
+    renderOrderLines();
+    updateOrderWhatsApp();
+    track(delta == null || delta > 0 ? 'order_add' : 'order_remove', { item: id, count: orderCount(), total: orderTotal() });
+  }
+
+  function clearOrder() {
+    orderQty = {};
+    saveOrder();
+    renderOrderBar();
+    renderOrderLines();
+    updateOrderWhatsApp();
+    track('order_clear');
+  }
+
+  function renderOrderBar() {
+    var bar = $('#orderBar');
+    if (!bar) return;
+    var count = orderCount();
+    bar.hidden = count === 0;
+    setText('#orderCount', num(count));
+    setText('#orderTotal', '₹' + num(orderTotal()));
+    var review = $('#orderReview');
+    if (review) review.setAttribute('aria-label', tf('order.reviewAria', { count: num(count), total: '₹' + num(orderTotal()) }));
+  }
+
+  function renderOrderLines() {
+    var wrap = $('#orderLines');
+    if (!wrap) return;
+    wrap.textContent = '';
+    var entries = orderEntries();
+    var empty = $('#orderEmpty');
+    if (empty) empty.hidden = entries.length > 0;
+    entries.forEach(function (entry) {
+      var item = entry.item;
+      var line = el('li', { class: 'order-line', 'data-order-line': item.id });
+      var info = el('div', { class: 'order-line__info' }, [
+        el('span', { class: 'order-line__name', text: tx(item.name) }),
+        el('span', { class: 'order-line__unit', text: dishPriceText(item) + ' × ' + num(entry.qty) })
+      ]);
+      var controls = el('div', { class: 'order-line__controls' });
+      var minus = el('button', { type: 'button', class: 'order-line__btn', 'data-order-dec': item.id, 'aria-label': tf('order.decreaseAria', { name: tx(item.name) }), text: '−' });
+      var qty = el('span', { class: 'order-line__qty', text: num(entry.qty), 'aria-live': 'polite' });
+      var plus = el('button', { type: 'button', class: 'order-line__btn', 'data-order-inc': item.id, 'aria-label': tf('order.increaseAria', { name: tx(item.name) }), text: '+' });
+      controls.appendChild(minus); controls.appendChild(qty); controls.appendChild(plus);
+      var total = el('span', { class: 'order-line__total', text: '₹' + num(entry.line) });
+      line.appendChild(info); line.appendChild(controls); line.appendChild(total);
+      wrap.appendChild(line);
+    });
+    setText('#orderSubtotal', '₹' + num(orderTotal()));
+    var send = $('#orderWhatsApp');
+    if (send) send.classList.toggle('is-disabled', entries.length === 0);
+    if (send) send.setAttribute('aria-disabled', entries.length === 0 ? 'true' : 'false');
+  }
+
+  function orderMessage() {
+    var wa = C.whatsapp || {};
+    var template = (wa.orderTemplate && (wa.orderTemplate[lang] || wa.orderTemplate.en)) || '';
+    var name = ($('#orderName') && $('#orderName').value.trim()) || '';
+    var phone = ($('#orderPhone') && $('#orderPhone').value.trim()) || '';
+    var note = ($('#orderNote') && $('#orderNote').value.trim()) || '';
+    var items = orderEntries().map(function (entry) {
+      return '• ' + entry.item.name.en + ' × ' + entry.qty + ' — ₹' + entry.line;
+    }).join('\n');
+    return template
+      .split('{name}').join(name || '—')
+      .split('{phone}').join(phone || '—')
+      .split('{note}').join(note || '—')
+      .split('{items}').join(items)
+      .split('{total}').join('₹' + orderTotal());
+  }
+
+  function updateOrderWhatsApp() {
+    var send = $('#orderWhatsApp');
+    if (!send) return;
+    if (!whatsappEnabled() || orderCount() === 0) {
+      send.removeAttribute('href');
+      return;
+    }
+    send.setAttribute('href', whatsappUrl(orderMessage()));
+  }
+
+  function openOrderDialog() {
+    var dialog = $('#orderDialog');
+    if (!dialog) return;
+    renderOrderLines();
+    updateOrderWhatsApp();
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    track('order_review_open', { count: orderCount(), total: orderTotal() });
+  }
+
+  function closeOrderDialog() {
+    var dialog = $('#orderDialog');
+    if (!dialog) return;
+    if (typeof dialog.close === 'function') dialog.close();
+    else dialog.removeAttribute('open');
+  }
+
+  function initOrder() {
+    orderQty = loadOrder();
+    renderOrderBar();
+    renderOrderLines();
+    updateOrderWhatsApp();
+
+    document.addEventListener('click', function (event) {
+      var add = closest(event.target, '[data-order-add]');
+      if (add) {
+        event.preventDefault();
+        event.stopPropagation();
+        addToOrder(add.dataset.orderAdd, 1);
+        add.classList.add('is-added');
+        window.setTimeout(function () { add.classList.remove('is-added'); }, 700);
+        return;
+      }
+      var inc = closest(event.target, '[data-order-inc]');
+      if (inc) { addToOrder(inc.dataset.orderInc, 1); return; }
+      var dec = closest(event.target, '[data-order-dec]');
+      if (dec) { addToOrder(dec.dataset.orderDec, -1); return; }
+      if (closest(event.target, '#orderReview')) { openOrderDialog(); return; }
+      if (closest(event.target, '#orderDialogClose')) { closeOrderDialog(); return; }
+      if (closest(event.target, '#orderClear')) { clearOrder(); return; }
+      var send = closest(event.target, '#orderWhatsApp');
+      if (send) {
+        if (orderCount() === 0 || !whatsappEnabled()) { event.preventDefault(); return; }
+        updateOrderWhatsApp();
+        track('order_whatsapp_opened', { count: orderCount(), total: orderTotal() });
+      }
+    });
+
+    var dialog = $('#orderDialog');
+    if (dialog) dialog.addEventListener('click', function (event) { if (event.target === dialog) closeOrderDialog(); });
+    ['orderName', 'orderPhone', 'orderNote'].forEach(function (id) {
+      var input = $('#' + id);
+      if (input) input.addEventListener('input', updateOrderWhatsApp);
+    });
+    var waBlock = $('#orderWhatsAppBlock');
+    if (waBlock) waBlock.hidden = !whatsappEnabled();
+  }
+
+  /* --------------------------------------------------------------------------- */
   /* Analytics + consent                                                         */
   /* --------------------------------------------------------------------------- */
   var analyticsConfig = C.analytics || {};
@@ -1899,6 +2126,7 @@
     initLangSwitch();
     initTracking();
     initDishDialog();
+    initOrder();
 
     applyLang(lang, { silent: true });
     initConsent();

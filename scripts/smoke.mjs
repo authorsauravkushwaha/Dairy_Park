@@ -150,17 +150,16 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelector('#ownerPortrait') === null, 'home: the owner portrait is removed from the hero');
   expect(document.querySelector('.hero.has-owner') === null, 'home: no owner-photo hero state is applied');
   expect(/owner/.test(previewSrcs) === false, 'home: no owner photo anywhere in the gallery preview');
-  expect(/shop-front\.(webp|avif|jpe?g|png)$/.test(document.querySelector('#heroPhoto').getAttribute('src')), 'home: hero background uses the shopfront photo');
-  expect(document.querySelector('.hero__botanical') !== null, 'home: hero carries its botanical line art');
-  expect(document.querySelector('.hero.has-shopfront') !== null, 'home: the shopfront stays sharp behind the headline');
+  expect(/inspiration-masala-dosa\.(webp|avif|jpe?g|png)$/.test(document.querySelector('#heroPhoto').getAttribute('src')), 'home: hero background uses the food-first dosa image');
+  expect(document.querySelector('.hero.has-food-hero') !== null, 'home: the food-first hero state is applied');
   expect(document.querySelector('.closing') !== null, 'home: closing CTA exists');
   expect(/dosa/i.test(document.querySelector('#hero-title').textContent), 'home: hero headline leads with dosa');
   const delicoLinks = [...document.querySelectorAll('a[data-link="delico"]')];
-  expect(delicoLinks.length >= 3, 'home: Delico buttons in hero, promo band, header and closing');
+  expect(delicoLinks.length >= 2, 'home: Delico remains available as an optional external app');
   expect(delicoLinks.every((a) => a.getAttribute('href') === 'https://delicoapp.com/'), 'home: every Delico button points at https://delicoapp.com/');
   expect(delicoLinks.every((a) => a.getAttribute('target') === '_blank' && /noopener/.test(a.getAttribute('rel'))), 'home: Delico buttons open in a new tab with noopener');
   expect(document.querySelector('.app-promo') !== null && document.querySelector('.app-promo').hidden === false, 'home: the Delico app promo band is visible');
-  expect(document.querySelector('.sticky-bar__btn--delico') !== null, 'home: sticky bar carries a Delico button');
+  expect(document.querySelector('.sticky-bar__btn--order') !== null, 'home: sticky bar carries a direct order button');
   expect(document.querySelectorAll('.welcome-card').length === 5, 'home: welcome cards render, including pure veg');
   expect(document.querySelector('.welcome-card--veg') !== null, 'home: the pure-veg card is called out');
 
@@ -197,10 +196,10 @@ async function loadPage(outFile, urlPath) {
 
   // Home page extras added on top of the multi-page build
   expect(document.querySelector('#trust') !== null, 'home: trust band exists');
-  expect(document.querySelectorAll('.trust__item:not([hidden])').length === 4, 'home: trust band hides the unverified rating figures');
+  expect(document.querySelectorAll('.trust__item:not([hidden])').length === 3, 'home: trust band hides unverified ratings and spend');
   // dataset.count is the settled value; .textContent is mid-count-up at this point
   expect(document.querySelector('[data-bind="facilityCount"]').dataset.count === String(FACILITIES.length), 'home: facility count comes from content.js');
-  expect(document.querySelector('[data-bind="spend"]').textContent === '₹1–200', 'home: typical spend renders');
+  expect(document.querySelector('[data-bind="spend"]') === null, 'home: outdated per-person spend is not published');
   expect(document.querySelector('#pairing') !== null, 'home: order-both strip exists');
   expect(document.querySelector('[data-bind="pairingTitle"]').textContent.length > 0, 'home: order-both strip has its headline');
   expect(
@@ -288,7 +287,7 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelector('#menuGrid .menu-row[data-dish-id="dahi-vada"]').textContent.includes('₹80'), 'food: Dahi Vada shows its printed ₹80');
   expect(document.querySelectorAll('.menu-stats .menu-stat:not([hidden])').length === 3, 'food: the menu-in-numbers strip renders');
   expect(document.querySelector('[data-bind="menuCount"]').textContent === String(PRICED.length), 'food: the dish count matches the menu');
-  expect(document.querySelectorAll('.menu-card-band .menu-shot img').length === 3, 'food: the printed menu card photographs are shown');
+  expect(document.querySelectorAll('.menu-card-band .menu-shot img').length === 4, 'food: all four new printed menu photographs are shown');
   expect(
     [...document.querySelectorAll('#menuGrid .menu-group__title')].every((node) => node.textContent.trim().length > 0),
     'food: every price-list group is titled'
@@ -298,7 +297,7 @@ async function loadPage(outFile, urlPath) {
   const dosaChip = cats.find((c) => c.textContent.startsWith('Dosa'));
   expect(dosaChip !== undefined, 'food: the Dosa category chip is offered');
   expect(document.querySelector('#menuGrid .menu-row[data-dish-id="masala-dosa"]') !== null, 'food: Masala Dosa is on the menu');
-  const momoChip = cats.find((c) => c.textContent === 'Momos');
+  const momoChip = cats.find((c) => c.textContent === 'Momo');
   momoChip.click();
   await sleep(40);
   const momoRows = [...document.querySelectorAll('#menuGrid [data-dish-id]')];
@@ -326,6 +325,34 @@ async function loadPage(outFile, urlPath) {
   document.querySelector('#dishDialogClose').click();
   await sleep(40);
   expect(dialog.open === false || !dialog.hasAttribute('open'), 'food: dialog closes');
+
+  // Direct order builder
+  const addBtn = document.querySelector('#menuGrid [data-order-add="masala-dosa"]');
+  expect(addBtn !== null, 'food: dishes have an add-to-order button');
+  addBtn.click();
+  addBtn.click();
+  await sleep(40);
+  expect(document.querySelector('#orderBar').hidden === false, 'food: order bar appears after adding a dish');
+  expect(document.querySelector('#orderCount').textContent === '2', 'food: order count updates');
+  expect(document.querySelector('#orderTotal').textContent === '₹140', 'food: order total uses the new menu price');
+  document.querySelector('#orderReview').click();
+  await sleep(40);
+  const orderDialog = document.querySelector('#orderDialog');
+  expect(orderDialog.open === true || orderDialog.hasAttribute('open'), 'food: order dialog opens');
+  expect(document.querySelectorAll('#orderLines .order-line').length === 1, 'food: order lines render');
+  const wa = document.querySelector('#orderWhatsApp');
+  expect(wa.getAttribute('href').startsWith('https://wa.me/919932452124?text='), 'food: order hand-off uses the owner WhatsApp number');
+  const decoded = decodeURIComponent(wa.getAttribute('href').split('text=')[1]);
+  expect(decoded.includes('Masala Dosa × 2') && decoded.includes('₹140'), 'food: WhatsApp order contains dish, quantity and total');
+  expect(decoded.includes('Please confirm availability'), 'food: order message asks for restaurant confirmation');
+  document.querySelector('[data-order-dec="masala-dosa"]').click();
+  await sleep(40);
+  expect(document.querySelector('#orderSubtotal').textContent === '₹70', 'food: decreasing quantity updates the total');
+  document.querySelector('#orderClear').click();
+  await sleep(40);
+  expect(document.querySelector('#orderBar').hidden === true, 'food: clearing the order hides the order bar');
+  document.querySelector('#orderDialogClose').click();
+  await sleep(40);
 
   // Empty configured categories must not appear
   const chipLabels = [...document.querySelectorAll('.menu-cat')].map((c) => c.textContent);
@@ -412,7 +439,7 @@ async function loadPage(outFile, urlPath) {
   expect(document.querySelectorAll('#facilityList li').length === FACILITIES.length, 'visit: every listed facility appears');
   const hoursText = document.querySelector('[data-bind="hours"]').textContent;
   expect(/confirm|10:30 PM/.test(hoursText), 'visit: hours ask visitors to confirm');
-  expect(document.querySelector('[data-bind="spend"]').textContent.includes('1–200'), 'visit: typical spend shown');
+  expect(document.querySelector('[data-bind="priceFrom"]').textContent.includes('₹9'), 'visit: lowest menu price shown instead of unverified spend');
 }
 
 /* ========================================================================== */
@@ -511,7 +538,8 @@ async function loadPage(outFile, urlPath) {
 {
   const { document, runtimeErrors } = await loadPage('privacy.html', 'privacy.html');
   expect(runtimeErrors.length === 0, `privacy: no runtime errors${runtimeErrors.length ? ': ' + runtimeErrors.join(' | ') : ''}`);
-  expect(document.querySelectorAll('.page__section').length === 2, 'privacy: English + Bengali sections render');
+  expect(document.querySelectorAll('.page__section').length === 3, 'privacy: English, Bengali and image-credit sections render');
+  expect(document.querySelector('#image-credits') !== null, 'privacy: image credits are published');
   expect(document.querySelector('.site-header') !== null, 'privacy: shares the site header');
 }
 

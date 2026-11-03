@@ -4,19 +4,25 @@ Everything routine can be changed without touching the design code.
 You only edit two plain files, and upload photos. Then the website rebuilds
 itself automatically (about a minute).
 
+> **2026-11-03 refresh:** the site now uses the new 112-item printed menu,
+> a WhatsApp order-request builder, and labelled dish imagery. The homepage
+> hero is food-first (`photos.hero`), not the shopfront. Delico is an optional
+> external link, not a verified restaurant-specific ordering channel.
+
 ---
 
 ## 1. Restaurant photos (already supplied)
 
 The genuine photographs you sent over WhatsApp are in `assets/img/photos/` and
-are already wired up — the homepage hero, the About page and all four Gallery
-sections show real photos today. The site picks up `.jpg`, `.jpeg`, `.png`,
+are wired into the About page, Gallery, dining-room band and several dish cards.
+The homepage hero now uses a labelled serving illustration by default; change
+`content.js → photos.hero` to a real restaurant photo if you prefer. The site picks up `.jpg`, `.jpeg`, `.png`,
 `.webp` and `.avif` automatically. If a photo file is ever missing, a designed
 placeholder is shown instead — nothing breaks, and no fake photograph is used.
 
 | File name | Where it shows |
 | --- | --- |
-| `photos/shop-front.*` | **Supplied** — full-screen homepage hero backdrop |
+| `photos/shop-front.*` | **Supplied** — shopfront (Gallery / location); optional hero via `photos.hero` |
 | `photos/interior-room.*` | **Supplied** — dining room (About page + Gallery) |
 | `photos/interior-arches.*`, `interior-booth.*`, `interior-green.*`, `interior-lounge.*`, `interior-night.*` | **Supplied** — dining room, arches and evening frontage (Gallery) |
 | `photos/table-setting.*`, `wall-art.*`, `shop.*` | **Supplied** — tables, framed art and snacks counter (Gallery) |
@@ -26,7 +32,7 @@ placeholder is shown instead — nothing breaks, and no fake photograph is used.
 | `photos/paneer-butter-masala.*` | **Supplied** — Paneer Butter Masala card on Home + Food & Menu, Gallery |
 | `photos/veg-chowmein.*` | **Supplied** — Veg Chowmein card on Home + Food & Menu, Gallery |
 | `photos/cold-coffee.*` | **Supplied** — Cold Coffee with Ice Cream card on Home + Food & Menu, Gallery |
-| `photos/menu-spread-1.*`, `menu-spread-2.*`, `menu-drinks.*` | **Supplied** — printed menu boards (Gallery) |
+| `photos/menu-dosa.*`, `menu-spread-1.*`, `menu-spread-2.*`, `menu-snacks.*` | **Supplied** — the four new printed menu pages (Food & Menu + Gallery) |
 | `photos/counter-snacks.*` | **Supplied** — samosas at the counter (Gallery) |
 | `photos/ice-cream-freezer.*`, `chocolate-freezer.*` | **Supplied** — freezers (Gallery) |
 | `photos/interior-bench.*` | **Supplied** — “Inside the dining room” band on the home page + Gallery |
@@ -73,26 +79,30 @@ Menu items live in `content.js → menu`. Each item looks like this:
   id: "dahi-vada",
   name: { en: "Dahi Vada", bn: "দই বড়া" },
   desc: { en: "Short description", bn: "সংক্ষিপ্ত বিবরণ" },
-  category: "special",    // one of the ids in menuCategories below
-  price: null,            // "₹40" once a price is confirmed
-  veg: null,              // true = Veg, false = Non-veg, null = no label
+  category: "vada",       // one of the ids in menuCategories
+  price: "₹80",           // printed price; null only if truly unconfirmed
+  veg: true,              // true = Veg, false = Non-veg, null = no label
   available: true,        // false shows "Not available right now"
-  highlight: true,        // shows on the home page + featured row
-  photo: "assets/img/photos/dahi-vada"
+  highlight: false,       // true shows on the home page + featured row
+  photo: "assets/img/photos/dahi-vada",
+  photoKind: "owner"      // owner | generated | reference
 }
 ```
 
 - **Add an item:** copy a block (from `{` to `},`) and paste it after the last
   one, then change the values. Keep the commas!
 - **Categories:** the Food & Menu page shows only categories that have at least
-  one item — an empty category never appears. Current ids: `special`, `chaat`,
-  `momos`, `south`, `snacks`, `chinese`, `pizza`, `moglai`, `paneer`, `dal`,
-  `chana`, `aloo`, `rice`, `roti`, `salad`, `papad`, `shakes`, `tea`,
-  `icecream`. Rename the English + Bengali labels freely; keep the ids.
-- **Price:** leave `null` until you have confirmed the price. The site shows
-  “Ask for today’s price” — it never invents a number. Every price currently on
-  the site is copied from the printed menu card in the Gallery, so when the
-  card changes, change it here too.
+  one item — an empty category never appears. Current ids: `dosa`, `uttapam`,
+  `momos`, `noodles`, `rolls`, `salad`, `raita`, `papad`, `beverages`, `moglai`,
+  `chaat`, `chilli`, `pizza`, `rice`, `roti`, `aloo`, `dal`, `tarka`, `chana`,
+  `paneer`, `tea`, `snacks`, `puri`, `pakora`, `fries`, `idli`, `vada`.
+  Rename the English + Bengali labels freely; keep the ids.
+- **Price:** every current item has a printed price from the new menu card.
+  If a price is not confirmed, use `null` and the site shows “Ask for today’s
+  price” — it never invents a number. When the card changes, change it here too.
+- **Photos:** `photoKind: "owner"` means a real Dairy Park photo. `generated`
+  and `reference` are labelled “Serving inspiration” in the UI. Replace them
+  with real dish photos whenever possible and set `photoKind: "owner"`.
 - **Pure veg:** `business.pureVeg: true` turns on the “100% Pure Veg” seal and
   the ribbon in the hero, the pure-veg card on the home page and the 100% stat
   on the Food & Menu page. If the kitchen ever serves non-veg dishes, set it to
@@ -211,15 +221,19 @@ whatsapp: {
 - Set `enabled: false` and the WhatsApp card, buttons and wording disappear and
   the form goes back to pointing visitors at your phone number.
 
-The site never claims a message was delivered before the visitor taps Send, and
-it does not advertise WhatsApp ordering, delivery or payment — only enquiries.
+The site never claims a message was delivered before the visitor taps Send.
+The Food & Menu page can also build an **order request** and hand it to WhatsApp.
+The message asks the restaurant to confirm availability, final price and pickup
+time. There is no online payment, delivery checkout or automatic confirmation.
+The order wording lives in `content.js → whatsapp.orderTemplate`.
 
 ## 7b. Delico app buttons (`content.js → appPromo`)
 
-Every “Delico” button on the site (header, hero, gold promo band on the home
-page, the dosa pairing strip, the Food & Menu banner, the sticky mobile bar,
-the drawer, the footer, the closing CTA and the 404 page) opens one link in a
-new tab:
+Delico is now an **optional external app**, not the primary order path. The
+current URL is the generic Delico website, so the site does not promise that the
+full Dairy Park menu or pickup is available there. If you have a verified
+restaurant-specific Delico link, put it in `url` and update the wording. Buttons
+appear in the header/drawer/footer and the optional promo band:
 
 ```js
 appPromo: {

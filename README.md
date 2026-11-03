@@ -1,61 +1,76 @@
 # Dairy Park — website
 
-Marketing website for **Dairy Park (ডেয়ারি পার্ক)**, a 100% pure veg family
-restaurant on Kolaghat – Jashar Road, Kolaghat, West Bengal 721134, with a
-green-walled dining room of hand-painted arches, a dairy counter (ice cream,
-sweets and snacks) and a printed menu card of about ninety dishes — every price
-of which is on the site.
+Marketing and order-request website for **Dairy Park (ডেয়ারি পার্ক)**, a 100% pure veg
+family restaurant on Kolaghat – Jashar Road, Kolaghat, West Bengal 721134.
 
 - Live site: **https://authorsauravkushwaha.github.io/Dairy_Park/**
-- Phone: +91 99324 52124 · Google rating is hidden until the live listing is re-checked
-- Facilities: dine-in, drive-through · Typical spend ₹1–200 per person
+- Phone / WhatsApp: **+91 99324 52124**
+- Menu: **112 unique dishes** transcribed from the four printed-menu photographs
+  supplied on 2026-11-03. Every menu item has a printed price.
+- Facilities: dine-in, drive-through, pure veg.
+- Ordering: visitors can build a draft order on the Food & Menu page and hand it
+  to WhatsApp, or call the restaurant. **The website does not take payment,
+  guarantee availability, or confirm pickup times.** The restaurant must reply
+  to confirm the order.
 
-The site is a **hand-built multi-page static site** (HTML + one CSS file +
-vanilla JS) with no runtime framework, a small build step that assembles the
-pages from shared templates, and everything the owner needs to edit in plain,
-commented files.
+The site is a hand-built multi-page static site (HTML + one CSS file + vanilla
+JS) with a small build step that assembles pages from shared templates.
 
 ---
+
+## What changed in the 2026 menu refresh
+
+- Replaced the old menu with the new printed menu: dosa, uttapam, momo,
+  chowmein/noodles, rolls, salad, raita/dahi, papad, beverages, moglai, chaat,
+  chilli, pizza, rice/biryani, roti/paratha, aloo, dal, tarka, chana,
+  paneer/veg, tea/coffee, snacks, puri/bhatura, pakora, fries, idli and vada.
+- Normalised obvious printed typos for readability (for example `PLAN DOSA` →
+  `Plain Dosa`, `STRAWERY SHAKE` → `Strawberry Shake`). Unusual printed names
+  such as `Gavy Momo` and `Kachari Sabji` are kept and tagged “As printed”.
+- Removed outdated unpriced dosas, the old ice-cream/dairy menu category, and
+  the unverified ₹1–200 per-person spend figure.
+- Added a direct order builder: add dishes → review quantities and menu total →
+  send the request on WhatsApp or call. The message explicitly asks the
+  restaurant to confirm availability, final price and pickup time.
+- Demoted the generic Delico link to an optional external app. The site no
+  longer claims that the full Dairy Park menu or pickup is available there
+  unless the owner supplies a verified restaurant-specific link.
+- Added dish imagery. Images are labelled:
+  - **Photo from Dairy Park** — supplied restaurant photographs.
+  - **Serving inspiration** — AI-generated illustrations or licensed reference
+    photos. These are not photographs of the exact dish prepared at Dairy Park.
+- Replaced the printed-menu gallery with all four new menu photographs.
+- Updated SEO, structured data, Open Graph image, privacy note and image credits.
 
 ## Pages
 
 | Route | Page | Purpose |
 | --- | --- | --- |
-| `/` | Home | Hero with pure-veg seal + price ribbon, trust figures, welcome, six priced highlights, dining-room band, dairy-counter band, why visit, gallery + reviews preview, location, closing CTA |
-| `/food/` | Food & Menu | The whole menu card with prices: category chips, search, dotted price list grouped by category, featured row, detail popups, printed-card photographs, call-to-enquire |
-| `/about/` | About Us | Restaurant introduction, facilities, what to explore |
-| `/gallery/` | Gallery | Exterior / interior / food / products sections with lightbox |
-| `/offers/` | Special Offers | Owner-approved promos, or a friendly empty state |
-| `/reviews/` | Customer Reviews | Verified Google rating + links to the original reviews |
-| `/visit/` | Visit Us | Address, embedded map, directions, hours, first-visit tips |
-| `/contact/` | Contact Us | Click-to-call, address, map, enquiry form that hands off to the owner's WhatsApp |
-| `/privacy.html` | Privacy note | Plain-language privacy summary |
-
-Every page has its own SEO title/description/canonical, Open Graph tags and
-JSON-LD (Restaurant + WebSite + breadcrumbs), all generated at build time from
-`content.js`. Bilingual (English / বাংলা) with one-tap switching that keeps the
-visitor on the current page.
+| `/` | Home | Food-first hero, order CTA, highlights, pairing, dining room, counter, location |
+| `/food/` | Food & Menu | Full 112-item menu, search, category chips, dish details, add-to-order, WhatsApp order dialog, printed menu photos |
+| `/about/` | About Us | Restaurant introduction and facilities |
+| `/gallery/` | Gallery | Supplied restaurant / food / product photographs |
+| `/offers/` | Special Offers | Owner-approved promos, or an honest empty state |
+| `/reviews/` | Customer Reviews | Hidden until the live Google rating is re-checked |
+| `/visit/` | Visit Us | Address, map, directions, hours-to-confirm |
+| `/contact/` | Contact Us | Call, WhatsApp enquiry form, map |
+| `/privacy.html` | Privacy note | Privacy summary and image credits |
 
 ## Project structure
 
-```
-index.html              the source templates for the pages
-404.html                standalone error page
-content.js              ⭐ owner-editable content: menu, categories, hours,
-                        offers, gallery slots, analytics, WhatsApp number
-templates/layout.html   shared page shell (head, chrome)
+```text
+content.js              ⭐ owner-editable menu, business details, photos, WhatsApp
+assets/js/i18n.js       ⭐ English + Bengali interface strings
+assets/js/app.js        rendering, filters, dialogs, order builder, WhatsApp hand-off
+assets/css/main.css     styles
+assets/img/photos/      restaurant photos, dish illustrations/reference photos, menu cards
+assets/menu-source/     original supplied menu photographs (provenance)
+templates/layout.html   shared page shell
 templates/partials/     header, drawer, footer, sticky bar, consent banner
-templates/pages/        the body of each page + its meta block
-scripts/pages.mjs       ⭐ page registry (routes, nav, priorities)
-scripts/build.mjs       assembles dist/: templates → HTML, bundle, minify,
-                        CSP hashes, JSON-LD, sitemap.xml
-scripts/check.mjs       static quality gate (SEO, links, CSP, a11y, i18n)
-scripts/smoke.mjs       headless jsdom tests for every page
-assets/js/i18n.js       ⭐ owner-editable wording, English + Bengali
-assets/css/main.css     styles (design tokens at the top)
-assets/js/app.js        behaviour: i18n, rendering, filters, lightbox, 3D
-assets/img/             logo, placeholders, social image, photos/
-.github/workflows/      build → check → deploy to GitHub Pages
+templates/pages/        page bodies + meta blocks
+scripts/build.mjs       assembles dist/, bundles JS/CSS, JSON-LD, sitemap
+scripts/check.mjs       static quality gate
+scripts/smoke.mjs       headless jsdom tests
 ```
 
 ## Local development
@@ -67,59 +82,26 @@ npm run dev       # serves dist/ on http://localhost:4173
 npm test          # build + static checks + headless smoke tests
 ```
 
-`npm run check` verifies every page: SEO tags, unique titles, canonical URLs,
-the per-page CSP hash, local links (including `../` references from sub-page
-folders), alt text, duplicate IDs, active-nav markers, sitemap/robots/manifest,
-and that no unverified hours or ratings leak into structured data.
-`npm run smoke` boots each built page in jsdom and tests rendering, the Bengali
-switch, phone links, the mobile drawer, menu filters/search/dialog, the gallery
-lightbox, the offers empty state, and the enquiry form's hand-off to WhatsApp
-(addressing, prefilled name/phone/message, the English and Bengali templates,
-and the call-only fallback when the feature is switched off).
+## Content rules
+
+Only verified information is published. Prices come from the supplied printed
+menu. Hours, ratings, offers and per-person spend are not invented. Dish images
+that are not supplied by the restaurant are labelled as serving inspiration.
+Image credits and licences are listed in `/privacy.html#image-credits`.
+
+## WhatsApp order requests and enquiries
+
+There is no backend and no third-party form service. The order builder and the
+contact form package the visitor’s input into a `https://wa.me/<number>?text=…`
+link addressed to the owner’s WhatsApp number (`content.js → whatsapp.number`).
+The visitor taps **Send** inside WhatsApp. The site itself transmits nothing,
+never claims delivery, and does not take payment. Setting
+`content.js → whatsapp.enabled: false` hides WhatsApp blocks and leaves the
+call-first flow.
 
 ## Deployment
 
-Pushes to `main` run `.github/workflows/deploy.yml`, which builds `dist/`,
-runs both test suites, and publishes the artifact with GitHub Pages
-(Settings → Pages → Source: **GitHub Actions**).
-
-Pages live in folders (`food/index.html` → `/food/`) so direct page visits and
-browser refreshes work on GitHub Pages. All asset URLs are relative, so the
-site also works on a custom domain (`dairypark.com`) or a user-root repository
-without code changes — only `content.js → site.url` needs the new address
-(canonicals, Open Graph URLs and the generated `sitemap.xml` follow it).
-
-See `OWNER-GUIDE.md` for routine content edits and `SECURITY.md` for the
-security posture.
-
-## Content rules
-
-Only verified information is published. Prices, full opening hours, offers,
-gallery photographs and customer quotes are **not** invented — they are either
-absent, marked “call to confirm”, or kept in `content.js` for the owner to fill
-in once confirmed. Every price on the site is copied from the printed menu card
-in the Gallery photographs, and the pure-veg claim comes from the signboard
-outside; the footer asks visitors to confirm prices by phone because they can
-change. The Google rating is **hidden by default** (`reviews.show`)
-until the owner re-checks the live listing; menu descriptions stay blank until
-ingredients are confirmed. Empty menu categories and the offers page degrade to
-honest designed states rather than fake content.
-
-## WhatsApp enquiries
-
-There is no backend and no third-party form service. The Contact page's
-enquiry form packages the visitor's name, phone number and question into a
-`https://wa.me/<number>?text=…` link addressed to the owner's own WhatsApp
-number (`content.js → whatsapp.number`) and opens it. The visitor taps Send
-inside WhatsApp; the site itself transmits nothing, never claims delivery, and
-does not advertise WhatsApp ordering or payment. Setting
-`content.js → whatsapp.enabled: false` removes every WhatsApp block and the
-form falls back to the call-first wording.
-
-Genuine owner-supplied photographs are included: the shopfront (homepage
-hero), shop interior, counter snacks, ice-cream and chocolate freezers, dish
-plates and the printed menu boards wired into the Gallery page. The owner
-portrait has been removed at the owner's request. The site leads with our
-dosas (house special) and advertises the Delico app (`https://delicoapp.com/`)
-through buttons in the header, hero, promo band, food page, sticky bar,
-drawer, footer and closing CTA — all driven by `content.js → appPromo`.
+Pushes to `main` run `.github/workflows/deploy.yml`, which builds `dist/`, runs
+both test suites, and publishes the artifact with GitHub Pages. All asset URLs
+are relative, so the site also works under a custom domain or user-root
+repository by changing `content.js → site.url`.

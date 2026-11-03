@@ -1,7 +1,7 @@
 # Security notes — Dairy Park website
 
 This is a **static marketing website**: no server code, no database, no user
-accounts, no payments and no ordering. The only form is a client-side enquiry
+accounts and no online payments. The contact form and the menu order builder are client-side
 helper that transmits nothing itself: it builds a `wa.me` link addressed to the
 owner's WhatsApp and hands the visitor over to WhatsApp, where they choose to
 press Send. That removes most of the usual attack surface. The remaining risks are handled

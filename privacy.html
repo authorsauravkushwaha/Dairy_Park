@@ -1,82 +1,388 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy note | Dairy Park, Kolaghat</title>
-  <meta name="description" content="How the Dairy Park website handles data: no accounts, no forms, no ordering. Analytics only with your permission.">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#150e0b">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Privacy Note | Dairy Park, Kolaghat</title>
+  <meta name="description" content="How the Dairy Park website handles data: no accounts and no online payment. Analytics only with your permission. Enquiries are handed to WhatsApp only when you tap Send.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0d2419">
+  <meta name="format-detection" content="telephone=yes">
   <link rel="canonical" href="https://authorsauravkushwaha.github.io/Dairy_Park/privacy.html">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-src https://www.google.com https://maps.google.com; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dairy Park">
+  <meta property="og:title" content="Privacy Note | Dairy Park, Kolaghat">
+  <meta property="og:description" content="How the Dairy Park website handles data: no accounts and no online payment. Analytics only with your permission. Enquiries are handed to WhatsApp only when you tap Send.">
+  <meta property="og:url" content="https://authorsauravkushwaha.github.io/Dairy_Park/privacy.html">
+  <meta property="og:image" content="https://authorsauravkushwaha.github.io/Dairy_Park/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dairy Park — pure veg family restaurant in Kolaghat, West Bengal">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:locale:alternate" content="bn_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy Note | Dairy Park, Kolaghat">
+  <meta name="twitter:description" content="How the Dairy Park website handles data: no accounts and no online payment. Analytics only with your permission. Enquiries are handed to WhatsApp only when you tap Send.">
+  <meta name="twitter:image" content="https://authorsauravkushwaha.github.io/Dairy_Park/assets/img/og-image.png">
+
+  <!-- Security: tighten what the page may load. See SECURITY.md -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-g+XGH4qL6y9tC4AwqgjbSE6Y9RB53VgoX/ai0Rw8ZDk=' https://www.googletagmanager.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; frame-src https://www.google.com https://maps.google.com; form-action 'self'; frame-ancestors 'self'; manifest-src 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <link rel="icon" href="assets/img/dairy-park-logo.jpeg" type="image/jpeg">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="stylesheet" href="assets/css/main.min.css">
+  <link rel="manifest" href="manifest.webmanifest">
+
+
+  <link rel="preload" href="assets/fonts/fraunces-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/main.min.css?v=f3761ad4">
+
+  <!-- Local business structured data, generated at build time from content.js.
+       Only verified information is used — no invented ratings or hours. -->
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Restaurant",
+      "@id": "https://authorsauravkushwaha.github.io/Dairy_Park/#restaurant",
+      "name": "Dairy Park",
+      "alternateName": "ডেয়ারি পার্ক",
+      "description": "Pure veg family restaurant in Kolaghat, West Bengal, with dine-in and drive-through. The new menu includes dosa, uttapam, momo, chowmein, paneer, pizza, snacks, shakes and tea. Order requests can be sent through WhatsApp for restaurant confirmation.",
+      "url": "https://authorsauravkushwaha.github.io/Dairy_Park/",
+      "image": "https://authorsauravkushwaha.github.io/Dairy_Park/assets/img/og-image.png",
+      "telephone": "+919932452124",
+      "servesCuisine": [
+        "North Indian",
+        "South Indian",
+        "Chinese",
+        "Fast Food"
+      ],
+      "priceRange": "₹9–310",
+      "currenciesAccepted": "INR",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kolaghat - Jashar Road",
+        "addressLocality": "Kolaghat",
+        "addressRegion": "West Bengal",
+        "postalCode": "721134",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 22.441782,
+        "longitude": 87.8769404
+      },
+      "hasMap": "https://www.google.com/maps/place/Dairy+Park/@22.441782,87.8743655,17z/data=!3m1!4b1!4m6!3m5!1s0x3a0298420419a7f9:0x7076d2125261a325!8m2!3d22.441782!4d87.8769404",
+      "areaServed": {
+        "@type": "City",
+        "name": "Kolaghat"
+      },
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Dine-in",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Drive-through",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Pure veg",
+          "value": true
+        }
+      ],
+      "hasMenu": "https://authorsauravkushwaha.github.io/Dairy_Park/food/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://authorsauravkushwaha.github.io/Dairy_Park/#website",
+      "url": "https://authorsauravkushwaha.github.io/Dairy_Park/",
+      "name": "Dairy Park",
+      "inLanguage": [
+        "en-IN",
+        "bn-IN"
+      ],
+      "publisher": {
+        "@id": "https://authorsauravkushwaha.github.io/Dairy_Park/#restaurant"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://authorsauravkushwaha.github.io/Dairy_Park/privacy.html#webpage",
+      "url": "https://authorsauravkushwaha.github.io/Dairy_Park/privacy.html",
+      "name": "Privacy Note",
+      "isPartOf": {
+        "@id": "https://authorsauravkushwaha.github.io/Dairy_Park/#website"
+      },
+      "about": {
+        "@id": "https://authorsauravkushwaha.github.io/Dairy_Park/#restaurant"
+      },
+      "inLanguage": [
+        "en-IN",
+        "bn-IN"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://authorsauravkushwaha.github.io/Dairy_Park/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Privacy Note",
+          "item": "https://authorsauravkushwaha.github.io/Dairy_Park/privacy.html"
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
-<body class="page">
-  <header class="page__bar">
-    <div class="container page__bar-inner">
-      <a class="brand" href="index.html">
+<body class="subpage" data-page="privacy" data-base="">
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <div class="site-header__inner">
+      <a class="brand" href="./" aria-label="Dairy Park — home">
         <span class="brand__mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48" focusable="false">
-            <rect width="48" height="48" rx="14" fill="url(#pg1)"></rect>
-            <path d="M12.5 24.5h23a11.5 11.5 0 0 1-23 0Z" fill="none" stroke="#FFF7EC" stroke-width="2.6" stroke-linejoin="round"></path>
-            <path d="M18 18.5c0-2 2-2.4 2-4.4M24 18.5c0-2 2-2.4 2-4.4M30 18.5c0-2 2-2.4 2-4.4" fill="none" stroke="#FFF7EC" stroke-width="2.2" stroke-linecap="round"></path>
-            <defs><linearGradient id="pg1" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#F26A2E"></stop><stop offset=".55" stop-color="#D9441C"></stop><stop offset="1" stop-color="#A92C10"></stop></linearGradient></defs>
-          </svg>
+          <img src="assets/img/dairy-park-logo.jpeg" alt="" width="48" height="48" loading="eager" decoding="async">
         </span>
         <span class="brand__text">
           <span class="brand__name">Dairy Park</span>
           <span class="brand__bn" lang="bn">ডেয়ারি পার্ক</span>
         </span>
+        <span class="brand__tag" data-i18n="hero.seal">100% Pure Veg</span>
       </a>
-      <a class="btn btn--ghost btn--sm" href="index.html">← Back to the website</a>
+
+      <nav class="nav" aria-label="Main navigation" data-i18n-aria="a11y.nav">
+        <a class="nav__link" href="./" data-nav="home" data-i18n="nav.home">Home</a>
+        <a class="nav__link" href="food/" data-nav="menu" data-i18n="nav.menu">Food &amp; Menu</a>
+        <a class="nav__link" href="about/" data-nav="about" data-i18n="nav.about">About</a>
+        <a class="nav__link" href="gallery/" data-nav="gallery" data-i18n="nav.gallery">Gallery</a>
+        <a class="nav__link" href="offers/" data-nav="offers" data-i18n="nav.offers">Offers</a>
+        <a class="nav__link" href="reviews/" data-nav="reviews" data-review-link hidden data-i18n="nav.reviews">Reviews</a>
+        <a class="nav__link" href="visit/" data-nav="visit" data-i18n="nav.visit">Visit</a>
+        <a class="nav__link" href="contact/" data-nav="contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <div class="header__actions">
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="a11y.language">
+          <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true" lang="en" aria-label="English"><span data-i18n="lang.en">English</span><span class="lang-switch__short">EN</span></button>
+          <button type="button" class="lang-switch__btn" data-lang="bn" aria-pressed="false" lang="bn" aria-label="বাংলা"><span data-i18n="lang.bn">বাংলা</span><span class="lang-switch__short" aria-hidden="true">বাং</span></button>
+        </div>
+
+        <a class="btn btn--gold btn--sm header__order" href="food/" data-track="menu_cta" data-track-location="header_order">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 8.5h11l-.9 11a1.8 1.8 0 0 1-1.8 1.6H9.2a1.8 1.8 0 0 1-1.8-1.6l-.9-11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <span data-i18n="nav.order">Order</span>
+        </a>
+        <a class="btn btn--ghost btn--sm header__delico" href="https://delicoapp.com/" target="_blank" rel="noopener" data-link="delico" data-track="delico_click" data-track-location="header" data-app-promo data-i18n-aria="app.aria">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 8.5h11l-.9 11a1.8 1.8 0 0 1-1.8 1.6H9.2a1.8 1.8 0 0 1-1.8-1.6l-.9-11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <span data-i18n="nav.delico">Delico App</span>
+        </a>
+
+        <a class="btn btn--primary btn--sm header__call" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="header">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span data-i18n="nav.call">Call Now</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open navigation menu">
+          <span class="nav-toggle__box" aria-hidden="true"><span></span><span></span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main class="container page__main">
-    <h1 class="page__title">Privacy note</h1>
-    <p class="page__intro">Plain-language summary of what this website does — and does not do — with your information.</p>
+  <div class="drawer" id="drawer" hidden>
+    <div class="drawer__inner">
+      <nav class="drawer__nav" aria-label="Mobile navigation" data-i18n-aria="a11y.mobileNav">
+        <a href="./" data-nav="home"><span class="drawer__num" aria-hidden="true">01</span><span data-i18n="nav.home">Home</span></a>
+        <a href="food/" data-nav="menu"><span class="drawer__num" aria-hidden="true">02</span><span data-i18n="nav.menu">Food &amp; Menu</span></a>
+        <a href="about/" data-nav="about"><span class="drawer__num" aria-hidden="true">03</span><span data-i18n="nav.about">About</span></a>
+        <a href="gallery/" data-nav="gallery"><span class="drawer__num" aria-hidden="true">04</span><span data-i18n="nav.gallery">Gallery</span></a>
+        <a href="offers/" data-nav="offers"><span class="drawer__num" aria-hidden="true">05</span><span data-i18n="nav.offers">Offers</span></a>
+        <a href="reviews/" data-nav="reviews" data-review-link hidden><span class="drawer__num" aria-hidden="true">06</span><span data-i18n="nav.reviews">Reviews</span></a>
+        <a href="visit/" data-nav="visit"><span class="drawer__num" aria-hidden="true">07</span><span data-i18n="nav.visit">Visit</span></a>
+        <a href="contact/" data-nav="contact"><span class="drawer__num" aria-hidden="true">08</span><span data-i18n="nav.contact">Contact</span></a>
+      </nav>
+      <div class="drawer__contact">
+        <p class="drawer__label" data-i18n="locate.phoneLabel">Phone</p>
+        <a class="drawer__phone" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="drawer">+91 99324 52124</a>
+        <p class="drawer__addr" data-bind="address">Kolaghat – Jashar Road, Kolaghat, West Bengal 721134</p>
+      </div>
+      <div class="drawer__actions">
+        <a class="btn btn--gold btn--block" href="food/" data-track="menu_cta" data-track-location="drawer_order">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 8.5h11l-.9 11a1.8 1.8 0 0 1-1.8 1.6H9.2a1.8 1.8 0 0 1-1.8-1.6l-.9-11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <span data-i18n="hero.ctaMenu">Build your order</span>
+        </a>
+        <a class="btn btn--ghost btn--block" href="https://delicoapp.com/" target="_blank" rel="noopener" data-link="delico" data-track="delico_click" data-track-location="drawer" data-app-promo data-i18n-aria="app.aria">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 8.5h11l-.9 11a1.8 1.8 0 0 1-1.8 1.6H9.2a1.8 1.8 0 0 1-1.8-1.6l-.9-11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <span data-i18n="nav.delico">Delico App</span>
+        </a>
+        <a class="btn btn--primary btn--block" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="drawer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span data-i18n="sticky.call">Call Now</span>
+        </a>
+        <a class="btn btn--ghost btn--block" href="https://www.google.com/maps/dir/?api=1&amp;destination=22.441782%2C87.8769404" data-link="directions" data-track="directions_click" data-track-location="drawer" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21 3-8.5 18-2-7.5L3 11.5 21 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span data-i18n="sticky.directions">Get Directions</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
-    <section class="page__section" lang="en">
-      <h2>English</h2>
-      <p><strong>Who we are.</strong> Dairy Park, Kolaghat – Jashar Road, Kolaghat, West Bengal 721134. Phone <a href="tel:+919932452124">+91 99324 52124</a>.</p>
-      <p><strong>What this website does not do.</strong> There are no accounts, no login, no online payment, no delivery ordering and no checkout. We do not sell food or take bookings through this website; it exists to help you find us and call us.</p>
-      <p><strong>The enquiry form.</strong> The contact page includes a small form that helps you note your name, phone number and question. The website has no server of its own and stores nothing: when you submit the form, your enquiry is written into a WhatsApp message addressed to the restaurant’s own WhatsApp number. WhatsApp opens on your own phone and nothing is transmitted until you tap Send there. If you never tap Send, we receive nothing.</p>
-      <p><strong>What is stored on your device.</strong> Your language choice (English or Bengali) and, if you make one, your analytics choice. Both are saved in your browser's local storage. They are not sent anywhere and you can clear them at any time in your browser settings.</p>
-      <p><strong>Analytics (only with your permission).</strong> If the restaurant has configured analytics and you tap “Allow analytics”, we may record anonymous events such as taps on “Call Now”, “Get Directions”, menu interest, promotion taps and language selection. This helps us understand which parts of the page are useful. No analytics script loads before you agree. We do not use advertising trackers.</p>
-      <p><strong>Google Maps.</strong> The location section embeds a Google Map and links to our Google Maps listing. When the map loads, Google may receive your IP address and set cookies under Google's own privacy policy. If you prefer not to load it, simply use the “Get Directions” button or call us instead.</p>
-      <p><strong>Links to other websites.</strong> This website links to Google Maps and to WhatsApp. When you continue to WhatsApp, WhatsApp’s own privacy policy applies to that chat and we do not control it. Your enquiry reaches us only because you send it from your own WhatsApp account, so we can see your WhatsApp name and number.</p>
-      <p><strong>Children.</strong> This website is not directed at children and we do not knowingly collect information from anyone.</p>
-      <p><strong>Changes and questions.</strong> If this website changes in a way that affects privacy, this note will be updated. For any question, call <a href="tel:+919932452124">+91 99324 52124</a>.</p>
-      <p class="page__meta">Last updated: 1 November 2026.</p>
-    </section>
 
-    <section class="page__section" lang="bn">
-      <h2>বাংলা</h2>
-      <p><strong>আমরা কারা।</strong> ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট, পশ্চিমবঙ্গ ৭২১১৩৪। ফোন <a href="tel:+919932452124">+91 99324 52124</a>।</p>
-      <p><strong>এই ওয়েবসাইট যা করে না।</strong> এখানে কোনো অ্যাকাউন্ট, লগইন, অনলাইন পেমেন্ট, ডেলিভারি অর্ডার বা চেকআউট নেই। এই সাইট দিয়ে খাবার বিক্রি বা বুকিং হয় না — এটি আমাদের খুঁজে পেতে ও ফোন করতে সাহায্য করে।</p>
-      <p><strong>যোগাযোগের ফর্ম।</strong> যোগাযোগ পাতায় একটি ছোট ফর্ম আছে, যাতে আপনার নাম, ফোন ও প্রশ্নটি লেখা যায়। ওয়েবসাইটের নিজের কোনো সার্ভার নেই এবং কিছুই সংরক্ষণ করে না: ফর্ম জমা দিলে আপনার অনুসন্ধান রেস্তোরাঁর নিজস্ব হোয়াটসঅ্যাপ নম্বরে পাঠানোর জন্য একটি হোয়াটসঅ্যাপ বার্তায় লেখা হয়ে যায়। হোয়াটসঅ্যাপ আপনার নিজের ফোনে খোলে এবং আপনি সেখানে “সেন্ড” না চাপা পর্যন্ত কিছুই পাঠানো হয় না। আপনি না পাঠালে আমরা কিছুই পাই না।</p>
-      <p><strong>আপনার ডিভাইসে কী সংরক্ষিত হয়।</strong> আপনার ভাষার পছন্দ (ইংরেজি বা বাংলা) এবং অ্যানালিটিক্স নিয়ে আপনার সিদ্ধান্ত। দুটোই আপনার ব্রাউজারের লোকাল স্টোরেজে থাকে, কোথাও পাঠানো হয় না এবং ব্রাউজার সেটিংস থেকে যেকোনো সময় মুছে ফেলা যায়।</p>
-      <p><strong>অ্যানালিটিক্স (শুধু আপনার অনুমতিতে)।</strong> রেস্তোরাঁ অ্যানালিটিক্স চালু করেছে এবং আপনি “অ্যানালিটিক্স চালু করুন” চাপলে “কল করুন”, “পথনির্দেশ”, মেনু, অফার ও ভাষা সংক্রান্ত কিছু বেনামি ইভেন্ট রেকর্ড হতে পারে। এতে বোঝা যায় পাতার কোন অংশগুলি কাজে লাগছে। আপনি সম্মতি না দিলে কোনো অ্যানালিটিক্স স্ক্রিপ্ট লোড হয় না। আমরা বিজ্ঞাপন ট্র্যাকার ব্যবহার করি না।</p>
-      <p><strong>গুগল ম্যাপ।</strong> ঠিকানা অংশে গুগল ম্যাপ যুক্ত আছে এবং আমাদের গুগল ম্যাপ লিস্টিংয়ে লিংক আছে। ম্যাপ লোড হলে গুগল আপনার আইপি পেতে পারে এবং গুগলের নিজস্ব প্রাইভেসি নীতি অনুযায়ী কুকি রাখতে পারে। না চাইলে ম্যাপ না খুলে “পথনির্দেশ” বোতাম ব্যবহার করুন বা ফোন করুন।</p>
-      <p><strong>অন্য ওয়েবসাইটের লিংক।</strong> এই সাইট গুগল ম্যাপ ও হোয়াটসঅ্যাপে লিংক করে। হোয়াটসঅ্যাপে গেলে সেই চ্যাটে হোয়াটসঅ্যাপের নিজস্ব প্রাইভেসি নীতি প্রযোজ্য, যা আমাদের নিয়ন্ত্রণে নয়। আপনি নিজের হোয়াটসঅ্যাপ থেকে পাঠান বলেই আপনার অনুসন্ধান আমাদের কাছে পৌঁছায়, তাই আপনার হোয়াটসঅ্যাপের নাম ও নম্বর আমাদের দেখা যায়।</p>
-      <p><strong>শিশুদের বিষয়ে।</strong> এই ওয়েবসাইট শিশুদের জন্য নয় এবং আমরা কারও কাছ থেকে সচেতনভাবে কোনো তথ্য সংগ্রহ করি না।</p>
-      <p><strong>পরিবর্তন ও প্রশ্ন।</strong> প্রাইভেসিতে প্রভাব পড়লে এই নোট হালনাগাদ করা হবে। যেকোনো প্রশ্নে ফোন করুন <a href="tel:+919932452124">+91 99324 52124</a>।</p>
-      <p class="page__meta">সর্বশেষ হালনাগাদ: ১ নভেম্বর ২০২৬।</p>
-    </section>
+  <main id="main">
+    <article class="container prose-page">
+      <h1 class="page__title" data-i18n="privacy.title">Privacy note</h1>
+      <p class="page__intro" data-i18n="privacy.intro">Plain-language summary of what this website does — and does not do — with your information.</p>
+
+      <section class="page__section" lang="en">
+        <h2>English</h2>
+        <p><strong>Who we are.</strong> Dairy Park, Kolaghat – Jashar Road, Kolaghat, West Bengal 721134. Phone <a href="tel:+919932452124">+91 99324 52124</a>.</p>
+        <p><strong>What this website does not do.</strong> There are no accounts, no login, no online payment and no delivery checkout. The menu page lets you build an order request and hand it to WhatsApp. The restaurant must confirm availability, final price and pickup time before the order is accepted.</p>
+        <p><strong>The enquiry form.</strong> The contact page includes a small form that helps you note your name, phone number and question. The website has no server of its own and stores nothing: when you submit the form, your enquiry is written into a WhatsApp message addressed to the restaurant’s own WhatsApp number. WhatsApp opens on your own phone and nothing is transmitted until you tap Send there. If you never tap Send, we receive nothing.</p>
+        <p><strong>What is stored on your device.</strong> Your language choice (English or Bengali), your draft order (dish IDs and quantities), and, if you make one, your analytics choice. Both are saved in your browser’s local storage. They are not sent anywhere and you can clear them at any time in your browser settings.</p>
+        <p><strong>Analytics (only with your permission).</strong> If the restaurant has configured analytics and you tap “Allow analytics”, we may record anonymous events such as taps on “Call Now”, “Get Directions”, menu interest, promotion taps and language selection. This helps us understand which parts of the page are useful. No analytics script loads before you agree. We do not use advertising trackers.</p>
+        <p><strong>Google Maps.</strong> The visit and contact pages embed a Google Map and link to our Google Maps listing. When the map loads, Google may receive your IP address and set cookies under Google’s own privacy policy. If you prefer not to load it, simply use the “Get Directions” button or call us instead.</p>
+        <p><strong>Links to other websites.</strong> This website links to Google Maps and to WhatsApp. When you continue to WhatsApp, WhatsApp’s own privacy policy applies to that chat and we do not control it. Your enquiry reaches us only because you send it from your own WhatsApp account, so we can see your WhatsApp name and number.</p>
+        <p><strong>Children.</strong> This website is not directed at children and we do not knowingly collect information from anyone.</p>
+        <p><strong>Changes and questions.</strong> If this website changes in a way that affects privacy, this note will be updated. For any question, call <a href="tel:+919932452124">+91 99324 52124</a>.</p>
+        <p class="page__meta">Last updated: 3 November 2026.</p>
+      </section>
+
+      <section class="page__section" lang="bn">
+        <h2>বাংলা</h2>
+        <p><strong>আমরা কারা।</strong> ডেয়ারি পার্ক, কোলাঘাট–যশোর রোড, কোলাঘাট, পশ্চিমবঙ্গ ৭২১১৩৪। ফোন <a href="tel:+919932452124">+91 99324 52124</a>।</p>
+        <p><strong>এই ওয়েবসাইট যা করে না।</strong> এখানে কোনো অ্যাকাউন্ট, লগইন, অনলাইন পেমেন্ট বা ডেলিভারি চেকআউট নেই। মেনু পাতায় আপনি অর্ডারের অনুরোধ তৈরি করে হোয়াটসঅ্যাপে পাঠাতে পারেন। অর্ডার গ্রহণের আগে রেস্তোরাঁকে প্রাপ্যতা, চূড়ান্ত দাম ও পিকআপের সময় নিশ্চিত করতে হয়।</p>
+        <p><strong>যোগাযোগের ফর্ম।</strong> যোগাযোগ পাতায় একটি ছোট ফর্ম আছে, যাতে আপনার নাম, ফোন ও প্রশ্নটি লেখা যায়। ওয়েবসাইটের নিজের কোনো সার্ভার নেই এবং কিছুই সংরক্ষণ করে না: ফর্ম জমা দিলে আপনার অনুসন্ধান রেস্তোরাঁর নিজস্ব হোয়াটসঅ্যাপ নম্বরে পাঠানোর জন্য একটি হোয়াটসঅ্যাপ বার্তায় লেখা হয়ে যায়। হোয়াটসঅ্যাপ আপনার নিজের ফোনে খোলে এবং আপনি সেখানে “সেন্ড” না চাপা পর্যন্ত কিছুই পাঠানো হয় না। আপনি না পাঠালে আমরা কিছুই পাই না।</p>
+        <p><strong>আপনার ডিভাইসে কী সংরক্ষিত হয়।</strong> আপনার ভাষার পছন্দ (ইংরেজি বা বাংলা), খসড়া অর্ডার (পদের আইডি ও সংখ্যা), এবং অ্যানালিটিক্স নিয়ে আপনার সিদ্ধান্ত। দুটোই আপনার ব্রাউজারের লোকাল স্টোরেজে থাকে, কোথাও পাঠানো হয় না এবং ব্রাউজার সেটিংস থেকে যেকোনো সময় মুছে ফেলা যায়।</p>
+        <p><strong>অ্যানালিটিক্স (শুধু আপনার অনুমতিতে)।</strong> রেস্তোরাঁ অ্যানালিটিক্স চালু করেছে এবং আপনি “অ্যানালিটিক্স চালু করুন” চাপলে “কল করুন”, “পথনির্দেশ”, মেনু, অফার ও ভাষা সংক্রান্ত কিছু বেনামি ইভেন্ট রেকর্ড হতে পারে। এতে বোঝা যায় পাতার কোন অংশগুলি কাজে লাগছে। আপনি সম্মতি না দিলে কোনো অ্যানালিটিক্স স্ক্রিপ্ট লোড হয় না। আমরা বিজ্ঞাপন ট্র্যাকার ব্যবহার করি না।</p>
+        <p><strong>গুগল ম্যাপ।</strong> ভিজিট ও যোগাযোগ পাতায় গুগল ম্যাপ যুক্ত আছে এবং আমাদের গুগল ম্যাপ লিস্টিংয়ে লিংক আছে। ম্যাপ লোড হলে গুগল আপনার আইপি পেতে পারে এবং গুগলের নিজস্ব প্রাইভেসি নীতি অনুযায়ী কুকি রাখতে পারে। না চাইলে ম্যাপ না খুলে “পথনির্দেশ” বোতাম ব্যবহার করুন বা ফোন করুন।</p>
+        <p><strong>অন্য ওয়েবসাইটের লিংক।</strong> এই সাইট গুগল ম্যাপ ও হোয়াটসঅ্যাপে লিংক করে। হোয়াটসঅ্যাপে গেলে সেই চ্যাটে হোয়াটসঅ্যাপের নিজস্ব প্রাইভেসি নীতি প্রযোজ্য, যা আমাদের নিয়ন্ত্রণে নয়। আপনি নিজের হোয়াটসঅ্যাপ থেকে পাঠান বলেই আপনার অনুসন্ধান আমাদের কাছে পৌঁছায়, তাই আপনার হোয়াটসঅ্যাপের নাম ও নম্বর আমাদের দেখা যায়।</p>
+        <p><strong>শিশুদের বিষয়ে।</strong> এই ওয়েবসাইট শিশুদের জন্য নয় এবং আমরা কারও কাছ থেকে সচেতনভাবে কোনো তথ্য সংগ্রহ করি না।</p>
+        <p><strong>পরিবর্তন ও প্রশ্ন।</strong> প্রাইভেসিতে প্রভাব পড়লে এই নোট হালনাগাদ করা হবে। যেকোনো প্রশ্নে ফোন করুন <a href="tel:+919932452124">+91 99324 52124</a>।</p>
+        <p class="page__meta">সর্বশেষ হালনাগাদ: ৩ নভেম্বর ২০২৬।</p>
+      </section>
+
+      <section class="page__section" id="image-credits">
+        <h2>Image credits / ছবির কৃতিত্ব</h2>
+        <p>Dish images on the menu are labelled. “Photo from Dairy Park” means a photograph supplied by the restaurant. “Serving inspiration” means an AI-generated illustration or a licensed reference photo; it is not a photograph of the exact dish prepared at Dairy Park. Presentation, portion and garnish may vary.</p>
+        <p>মেনুর পদের ছবিতে লেবেল দেওয়া আছে। “ডেয়ারি পার্কের ছবি” মানে রেস্তোরাঁর দেওয়া ছবি। “পরিবেশনের উদাহরণ” মানে AI-তৈরি চিত্র বা লাইসেন্সপ্রাপ্ত রেফারেন্স ছবি; এটি ডেয়ারি পার্কে তৈরি exact পদের ছবি নয়। উপস্থাপনা, পরিমাণ ও গার্নিশ ভিন্ন হতে পারে।</p>
+        <ul>
+          <li>Restaurant interior, shopfront, counter and six dish photographs: supplied by Dairy Park.</li>
+          <li>Ten dish illustrations (masala dosa, cheese dosa, uttapam, veg roll, matar paneer, mix veg, aloo dum, puri sabji, veg pakora, veg cutlet): AI-generated serving illustrations created for this website.</li>
+          <li>Reference food photographs: <a href="https://www.pexels.com/license/" target="_blank" rel="noopener">Pexels</a> (free to use under the Pexels License). Sources include masala/dosa, momo, chowmein, salad, raita, papad, milkshakes, lemon soda, chilli paneer/potato, pizza, rice, biryani, roti/paratha, dal, chana, paneer curries, tea, coffee, samosa, fries and idli searches on Pexels.</li>
+          <li>Papdi chaat: <a href="https://commons.wikimedia.org/wiki/File:Bhalla_papdi_chaat.PNG" target="_blank" rel="noopener">“Bhalla papdi chaat”</a> by Akshay Sanjay Agrawal, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Resized/cropped for this site; adapted image remains CC BY-SA 4.0.</li>
+          <li>Paneer do pyaza: <a href="https://commons.wikimedia.org/wiki/File:Paneer_Do-Pyaza.jpg" target="_blank" rel="noopener">“Paneer Do-Pyaza”</a> by Prads2189, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Resized/cropped for this site; adapted image remains CC BY-SA 4.0.</li>
+        </ul>
+      </section>
+    </article>
+
   </main>
 
-  <footer class="page__footer">
-    <div class="container page__footer-inner">
-      <p>© 2026 Dairy Park · ডেয়ারি পার্ক</p>
-      <div class="page__footer-links">
-        <a href="index.html">Home</a>
-        <a href="tel:+919932452124">Call +91 99324 52124</a>
-        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=22.441782%2C87.8769404" target="_blank" rel="noopener">Get Directions</a>
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a class="brand brand--footer" href="./">
+          <span class="brand__mark" aria-hidden="true">
+            <img src="assets/img/dairy-park-logo.jpeg" alt="" width="48" height="48" loading="eager" decoding="async">
+          </span>
+          <span class="brand__text">
+            <span class="brand__name">Dairy Park</span>
+            <span class="brand__bn" lang="bn">ডেয়ারি পার্ক</span>
+          </span>
+          <span class="brand__tag" data-i18n="hero.seal">100% Pure Veg</span>
+        </a>
+        <p class="footer__about" data-i18n="footer.about">Dairy Park is a family restaurant in Kolaghat, West Bengal — a green-walled dining room, dine-in and drive-through.</p>
+        <p class="footer__addr" data-bind="address">Kolaghat – Jashar Road, Kolaghat, West Bengal 721134</p>
+      </div>
+
+      <nav class="footer__col" aria-labelledby="footer-explore">
+        <h2 class="footer__title" id="footer-explore" data-i18n="footer.explore">Explore</h2>
+        <a href="food/" data-nav="menu" data-i18n="nav.menu">Food &amp; Menu</a>
+        <a href="food/" data-track="menu_cta" data-track-location="footer_order" data-i18n="hero.ctaMenu">Build your order</a>
+        <a href="about/" data-nav="about" data-i18n="nav.about">About</a>
+        <a href="gallery/" data-nav="gallery" data-i18n="nav.gallery">Gallery</a>
+        <a href="offers/" data-nav="offers" data-i18n="nav.offers">Offers</a>
+        <a href="reviews/" data-nav="reviews" data-review-link hidden data-i18n="nav.reviews">Reviews</a>
+      </nav>
+
+      <div class="footer__col">
+        <h2 class="footer__title" data-i18n="footer.contact">Contact</h2>
+        <a href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="footer">+91 99324 52124</a>
+        <a href="visit/" data-nav="visit" data-i18n="nav.visit">Visit</a>
+        <a href="contact/" data-nav="contact" data-i18n="nav.contact">Contact</a>
+        <a href="https://www.google.com/maps/place/Dairy+Park/@22.441782,87.8743655,17z/data=!3m1!4b1!4m6!3m5!1s0x3a0298420419a7f9:0x7076d2125261a325!8m2!3d22.441782!4d87.8769404" data-link="maps" data-track="maps_listing_click" target="_blank" rel="noopener" data-i18n="locate.maps">Open Google Maps listing</a>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=22.441782%2C87.8769404" data-link="directions" data-track="directions_click" data-track-location="footer" target="_blank" rel="noopener" data-i18n="locate.directions">Get Directions</a>
+        <a href="https://delicoapp.com/" target="_blank" rel="noopener" data-link="delico" data-track="delico_click" data-track-location="footer" data-app-promo data-i18n="footer.delico">Open Delico app</a>
+      </div>
+
+      <div class="footer__col">
+        <h2 class="footer__title" data-i18n="footer.hoursTitle">Hours</h2>
+        <p class="footer__hours" data-bind="hoursFooter">Please call to confirm today’s timings. Google lists a 10:30 PM closing time.</p>
+        <p class="footer__note" data-bind="footerNote">Menu highlights, facilities and rating are based on our Google Maps listing. Prices and timings can change — please call to confirm.</p>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <p>© <span id="year">2026</span> Dairy Park · ডেয়ারি পার্ক · <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer__legal">
+        <a href="privacy.html" data-i18n="footer.privacy">Privacy note</a>
+        <button type="button" class="footer__consent-btn" id="consentReopen" data-i18n="footer.analytics" hidden>Analytics settings</button>
       </div>
     </div>
   </footer>
+
+  <!-- Sticky mobile action bar -->
+  <div class="sticky-bar" role="group" aria-label="Quick actions" data-i18n-aria="a11y.quickActions">
+    <a class="sticky-bar__btn sticky-bar__btn--call" href="tel:+919932452124" data-link="phone" data-track="call_click" data-track-location="sticky_bar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3h3l1.5 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <span data-i18n="sticky.call">Call Now</span>
+    </a>
+    <a class="sticky-bar__btn sticky-bar__btn--menu" href="food/" data-track="menu_cta" data-track-location="sticky_bar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <span data-i18n="nav.menu">Food &amp; Menu</span>
+    </a>
+    <a class="sticky-bar__btn sticky-bar__btn--order" href="food/" data-track="menu_cta" data-track-location="sticky_bar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 8.5h11l-.9 11a1.8 1.8 0 0 1-1.8 1.6H9.2a1.8 1.8 0 0 1-1.8-1.6l-.9-11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      <span data-i18n="sticky.order">Your order</span>
+    </a>
+    <a class="sticky-bar__btn sticky-bar__btn--dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=22.441782%2C87.8769404" data-link="directions" data-track="directions_click" data-track-location="sticky_bar" target="_blank" rel="noopener">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21 3-8.5 18-2-7.5L3 11.5 21 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <span data-i18n="sticky.directions">Get Directions</span>
+    </a>
+  </div>
+
+  <!-- Analytics consent (only shown when analytics is configured in content.js) -->
+  <section class="consent" id="consent" aria-labelledby="consent-title" hidden>
+    <div class="consent__inner">
+      <div class="consent__text">
+        <h2 class="consent__title" id="consent-title" data-i18n="consent.title">Analytics choice</h2>
+        <p data-i18n="consent.text">With your permission we use analytics to see which parts of this site help visitors. Nothing loads until you choose.</p>
+      </div>
+      <div class="consent__actions">
+        <button type="button" class="btn btn--primary btn--sm" id="consentAccept" data-i18n="consent.accept">Allow analytics</button>
+        <button type="button" class="btn btn--ghost btn--sm" id="consentDecline" data-i18n="consent.decline">No thanks</button>
+        <a class="consent__link" href="privacy.html" data-i18n="consent.privacy">Privacy note</a>
+      </div>
+    </div>
+  </section>
+
+
+  <script src="content.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/app.min.js?v=29b36fba" defer></script>
 </body>
 </html>
