@@ -252,6 +252,7 @@ async function main() {
     logLevel: 'warning'
   });
   const jsBuffer = await readFile(path.join(dist, 'assets/js/app.min.js'));
+  await writeFile(path.join(root, 'assets/js/app.min.js'), jsBuffer);
   const jsVersion = shortHash(jsBuffer);
 
   // --- CSS (transform keeps font url() paths untouched) ---------------------
@@ -265,6 +266,7 @@ async function main() {
   const cssBuffer = Buffer.from(cssResult.outputFiles[0].contents);
   await mkdir(path.join(dist, 'assets/css'), { recursive: true });
   await writeFile(path.join(dist, 'assets/css/main.min.css'), cssBuffer);
+  await writeFile(path.join(root, 'assets/css/main.min.css'), cssBuffer);
   const cssVersion = shortHash(cssBuffer);
 
   // --- Static assets --------------------------------------------------------
@@ -286,22 +288,28 @@ async function main() {
   const ctx = { layout, partials, content, cssVersion, jsVersion };
   for (const page of PAGES) {
     const html = await assemblePage(page, ctx);
-    const outFile = path.join(dist, page.out);
-    await mkdir(path.dirname(outFile), { recursive: true });
-    await writeFile(outFile, html, 'utf8');
+    for (const baseDir of [dist, root]) {
+      const outFile = path.join(baseDir, page.out);
+      await mkdir(path.dirname(outFile), { recursive: true });
+      await writeFile(outFile, html, 'utf8');
+    }
   }
 
   // 404 stays a standalone file — give it the versioned stylesheet too
-  const notFoundPath = path.join(dist, '404.html');
-  const notFound = await readFile(notFoundPath, 'utf8');
-  await writeFile(
-    notFoundPath,
-    notFound.replace(/assets\/css\/main\.min\.css(\?v=[^"]*)?/g, `assets/css/main.min.css?v=${cssVersion}`),
-    'utf8'
+  const notFoundSource = await readFile(path.join(root, '404.html'), 'utf8');
+  const versionedNotFound = notFoundSource.replace(
+    /assets\/css\/main\.min\.css(\?v=[^"]*)?/g,
+    `assets/css/main.min.css?v=${cssVersion}`
   );
+  await writeFile(path.join(dist, '404.html'), versionedNotFound, 'utf8');
+  await writeFile(path.join(root, '404.html'), versionedNotFound, 'utf8');
 
-  // --- Sitemap (generated from the registry, never drifts) ------------------
-  await writeFile(path.join(dist, 'sitemap.xml'), buildSitemap(content), 'utf8');
+  // --- Sitemap & .nojekyll (works for both Actions and branch Pages) --------
+  const sitemapXml = buildSitemap(content);
+  await writeFile(path.join(dist, 'sitemap.xml'), sitemapXml, 'utf8');
+  await writeFile(path.join(root, 'sitemap.xml'), sitemapXml, 'utf8');
+  await writeFile(path.join(dist, '.nojekyll'), '', 'utf8');
+  await writeFile(path.join(root, '.nojekyll'), '', 'utf8');
 
   // --- Report ---------------------------------------------------------------
   const sizes = {

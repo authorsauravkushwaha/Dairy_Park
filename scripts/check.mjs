@@ -343,6 +343,24 @@ for (const shot of C.gallery || []) {
   }
 }
 
+/* Branch-based GitHub Pages compatibility (root static output + .nojekyll) */
+for (const requiredFile of [
+  path.join(dist, '.nojekyll'),
+  path.join(root, '.nojekyll'),
+  path.join(root, 'assets/css/main.min.css'),
+  path.join(root, 'assets/js/app.min.js'),
+  path.join(root, 'sitemap.xml')
+]) {
+  if (!(await exists(requiredFile))) {
+    fail(`missing published static file: ${path.relative(root, requiredFile)}`);
+  }
+}
+for (const page of PAGES) {
+  if (!(await exists(path.join(root, page.out)))) {
+    fail(`missing root page for branch-based GitHub Pages: ${page.out}`);
+  }
+}
+
 /* Report */
 for (const note of notes) console.log(`• ${note}`);
 if (problems.length) {
